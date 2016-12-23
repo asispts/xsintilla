@@ -3,11 +3,9 @@ vpath %.c $(SRCROOT) $(LIBXOJO) $(LIBXSINTILLA)
 vpath %.cpp $(SDKGLUECODEDIR)
 
 
-OBJNAME 			= PluginMain.o main.o \
-#						XojoGraphics.o \
-#						xsintilla-definition.o \
-#						xsintilla-methods.o xsintilla-behavior.o xsintilla-event.o \
-#						xsintilla-properties.o
+OBJNAME 			= PluginMain.o main.o xsintilla.o xsi-behaviour.o xsi-event.o\
+						XojoGraphics.o
+
 
 INCLUDES 			= -I$(SDKINCLUDEDIR) -I$(LIBXOJO) -I$(LIBXSINTILLA) -include $(PREFIXHEADER)
 ifdef PLUGIN_ARCH64
@@ -45,6 +43,4 @@ all: $(PLUGIN)
 
 $(PLUGIN): $(addprefix $(BUILDDIR)/, $(OBJNAME)) $(LEXEROBJS) $(ARSCINTILLA)
 	@echo "----------Building"
-	@echo '$@'
-	@echo '$^'
 	$(CC) $(CFLAGS) $(PLUGINFLAGS) $(SCINTILLAFLAGS) -shared -Wl,--no-undefined -o $@ $^ $(LDLIBS)
