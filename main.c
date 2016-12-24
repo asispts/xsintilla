@@ -10,8 +10,8 @@ REALproperty xsiProperties[] = {
     /*
      * sci-text.h
      */
-    { "", "readonly", "Boolean", REALconsoleSafe, (REALproc)xsip_getReadonly, (REALproc)xsip_setReadonly },
-    { "", "text", "String", REALconsoleSafe, (REALproc)xsip_getText, (REALproc)xsip_setText }
+    { "", "readonly", "Boolean", REALconsoleSafe | REALpropRuntimeOnly, (REALproc)xsip_getReadonly, (REALproc)xsip_setReadonly },
+    { "", "text", "String", REALconsoleSafe  | REALpropRuntimeOnly, (REALproc)xsip_getText, (REALproc)xsip_setText }
 };
 
 //function, setterFunction, declaration, mFlags, attributeCount, attributes

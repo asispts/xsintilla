@@ -1,5 +1,4 @@
 #include "sci-margin.h"
-#include "stdio.h"
 
 void xsim_setMargins(REALcontrolInstance ctl, int margins)
 {
@@ -34,11 +33,9 @@ int xsim_getMarginWidthN(REALcontrolInstance ctl, int margin)
 void xsim_setMarginBackN(REALcontrolInstance ctl, int margin, RBColor back)
 {
     xsi_ssm(xsciObj(ctl), SCI_SETMARGINBACKN, margin, back);
-    fprintf(stderr, "xsim_setMarginBackN\n");
 }
 
 RBColor xsim_getMarginBackN(REALcontrolInstance ctl, int margin)
 {
     return xsi_ssm(xsciObj(ctl), SCI_GETMARGINBACKN, margin, 0);
-    fprintf(stderr, "xsim_getMarginBackN\n");
 }
