@@ -1,15 +1,22 @@
 #include "sci-margin.h"
 
-void xsim_setMargins(REALcontrolInstance ctl, int unused, int margins)
+/*=========================
+ * properties
+ * ========================*/
+void xsip_setMargins(REALcontrolInstance ctl, int unused, int margins)
 {
     xsi_ssm(xsciObj(ctl), SCI_SETMARGINS, margins, 0);
 }
 
-int xsim_getMargins(REALcontrolInstance ctl, int unused)
+int xsip_getMargins(REALcontrolInstance ctl, int unused)
 {
     return xsi_ssm(xsciObj(ctl), SCI_GETMARGINS, 0, 0);
 }
 
+
+/*=========================
+ * methods
+ * ========================*/
 void xsim_setMarginTypeN(REALcontrolInstance ctl, int margin, int marginType)
 {
     xsi_ssm(xsciObj(ctl), SCI_SETMARGINTYPEN, margin, marginType);

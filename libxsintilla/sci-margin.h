@@ -8,8 +8,8 @@
 #include "xsintilla.h"
 
 //properties
-void xsim_setMargins(REALcontrolInstance ctl, int unused, int margins);
-int xsim_getMargins(REALcontrolInstance ctl, int unused);
+void xsip_setMargins(REALcontrolInstance ctl, int unused, int margins);
+int xsip_getMargins(REALcontrolInstance ctl, int unused);
 
 //computed methods
 void xsim_setMarginTypeN(REALcontrolInstance ctl, int margin, int marginType);

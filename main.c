@@ -24,67 +24,67 @@ REALproperty xsiProperties[] = {
      */
     {
         "", "marginCount", "Integer", REALconsoleSafe  | REALpropRuntimeOnly,
-        (REALproc)xsim_getMargins, (REALproc)xsim_setMargins
+        (REALproc)xsip_getMargins, (REALproc)xsip_setMargins
     },
     /*
      * sci-selection.h
      */
     {
         "", "textLength", "Integer", REALconsoleSafe  | REALpropRuntimeOnly,
-        (REALproc)xsim_getTextLength, REALnoImplementation
+        (REALproc)xsip_getTextLength, REALnoImplementation
     },
     {
         "", "length", "Integer", REALconsoleSafe  | REALpropRuntimeOnly,
-        (REALproc)xsim_getLength, REALnoImplementation
+        (REALproc)xsip_getLength, REALnoImplementation
     },
     {
         "", "lineCount", "Integer", REALconsoleSafe  | REALpropRuntimeOnly,
-        (REALproc)xsim_getLineCount, REALnoImplementation
+        (REALproc)xsip_getLineCount, REALnoImplementation
     },
     {
         "", "lineOnScreen", "Integer", REALconsoleSafe  | REALpropRuntimeOnly,
-        (REALproc)xsim_lineOnScreen, REALnoImplementation
+        (REALproc)xsip_lineOnScreen, REALnoImplementation
     },
     {
         "", "modified", "Boolean", REALconsoleSafe  | REALpropRuntimeOnly,
-        (REALproc)xsim_getModify, REALnoImplementation
+        (REALproc)xsip_getModify, REALnoImplementation
     },
     {
         "", "currentPos", "Integer", REALconsoleSafe  | REALpropRuntimeOnly,
-        (REALproc)xsim_getCurrentPos, (REALproc)xsim_setCurrentPos
+        (REALproc)xsip_getCurrentPos, (REALproc)xsip_setCurrentPos
     },
     {
         "", "anchor", "Integer", REALconsoleSafe  | REALpropRuntimeOnly,
-        (REALproc)xsim_getAnchor, (REALproc)xsim_setAnchor
+        (REALproc)xsip_getAnchor, (REALproc)xsip_setAnchor
     },
     {
         "", "selectionStart", "Integer", REALconsoleSafe  | REALpropRuntimeOnly,
-        (REALproc)xsim_getSelectionStart, (REALproc)xsim_setSelectionStart
+        (REALproc)xsip_getSelectionStart, (REALproc)xsip_setSelectionStart
     },
     {
         "", "selectionEnd", "Integer", REALconsoleSafe  | REALpropRuntimeOnly,
-        (REALproc)xsim_getSelectionEnd, (REALproc)xsim_setSelectionEnd
+        (REALproc)xsip_getSelectionEnd, (REALproc)xsip_setSelectionEnd
     },
     {
         "", "hideSelection", "Boolean", REALconsoleSafe  | REALpropRuntimeOnly,
-        REALnoImplementation, (REALproc)xsim_hideSelection
+        REALnoImplementation, (REALproc)xsip_hideSelection
     },
     {
         "", "seltext", "String", REALconsoleSafe  | REALpropRuntimeOnly,
-        (REALproc)xsim_getSeltext, REALnoImplementation
+        (REALproc)xsip_getSeltext, REALnoImplementation
     },
     {
         "", "selectionIsRectangle", "Boolean", REALconsoleSafe  | REALpropRuntimeOnly,
-        (REALproc)xsim_selectionIsRectangle, REALnoImplementation
+        (REALproc)xsip_selectionIsRectangle, REALnoImplementation
     },
 
     {
         "", "selectionMode", "Integer", REALconsoleSafe  | REALpropRuntimeOnly,
-        (REALproc)xsim_getSelectionMode, (REALproc)xsim_setSelectionMode
+        (REALproc)xsip_getSelectionMode, (REALproc)xsip_setSelectionMode
     },
     {
         "", "mouseSelectionRectangularSwitch", "Boolean", REALconsoleSafe  | REALpropRuntimeOnly,
-        (REALproc)xsim_getMouseSelectionRectangularSwitch, (REALproc)xsim_setMouseSelectionRectangularSwitch
+        (REALproc)xsip_getMouseSelectionRectangularSwitch, (REALproc)xsip_setMouseSelectionRectangularSwitch
     },
 };
 

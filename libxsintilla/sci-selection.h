@@ -8,26 +8,26 @@
 #include "xsintilla.h"
 
 //properties
-int xsim_getTextLength(REALcontrolInstance ctl, int unused);
-int xsim_getLength(REALcontrolInstance ctl, int unused);
-int xsim_getLineCount(REALcontrolInstance ctl, int unused);
-int xsim_lineOnScreen(REALcontrolInstance ctl, int unused);
-bool xsim_getModify(REALcontrolInstance ctl, int unused);
-int xsim_getCurrentPos(REALcontrolInstance ctl, int unused);
-void xsim_setCurrentPos(REALcontrolInstance ctl, int unused, int caret);
-int xsim_getAnchor(REALcontrolInstance ctl, int unused);
-void xsim_setAnchor(REALcontrolInstance ctl, int unused, int anchor);
-void xsim_setSelectionStart(REALcontrolInstance ctl, int unused, int anchor);
-int xsim_getSelectionStart(REALcontrolInstance ctl, int unused);
-void xsim_setSelectionEnd(REALcontrolInstance ctl, int unused, int caret);
-int xsim_getSelectionEnd(REALcontrolInstance ctl, int unused);
-void xsim_hideSelection(REALcontrolInstance ctl, int unused, bool hide);
-REALstring xsim_getSeltext(REALcontrolInstance ctl, int unused);
-bool xsim_selectionIsRectangle(REALcontrolInstance ctl, int unused);
-void xsim_setSelectionMode(REALcontrolInstance ctl, int unused, int selectionMode);
-int xsim_getSelectionMode(REALcontrolInstance ctl, int unused);
-void xsim_setMouseSelectionRectangularSwitch(REALcontrolInstance ctl, int unused, bool mouseSwitch);
-bool xsim_getMouseSelectionRectangularSwitch(REALcontrolInstance ctl, int unused);
+int xsip_getTextLength(REALcontrolInstance ctl, int unused);
+int xsip_getLength(REALcontrolInstance ctl, int unused);
+int xsip_getLineCount(REALcontrolInstance ctl, int unused);
+int xsip_lineOnScreen(REALcontrolInstance ctl, int unused);
+bool xsip_getModify(REALcontrolInstance ctl, int unused);
+int xsip_getCurrentPos(REALcontrolInstance ctl, int unused);
+void xsip_setCurrentPos(REALcontrolInstance ctl, int unused, int caret);
+int xsip_getAnchor(REALcontrolInstance ctl, int unused);
+void xsip_setAnchor(REALcontrolInstance ctl, int unused, int anchor);
+void xsip_setSelectionStart(REALcontrolInstance ctl, int unused, int anchor);
+int xsip_getSelectionStart(REALcontrolInstance ctl, int unused);
+void xsip_setSelectionEnd(REALcontrolInstance ctl, int unused, int caret);
+int xsip_getSelectionEnd(REALcontrolInstance ctl, int unused);
+void xsip_hideSelection(REALcontrolInstance ctl, int unused, bool hide);
+REALstring xsip_getSeltext(REALcontrolInstance ctl, int unused);
+bool xsip_selectionIsRectangle(REALcontrolInstance ctl, int unused);
+void xsip_setSelectionMode(REALcontrolInstance ctl, int unused, int selectionMode);
+int xsip_getSelectionMode(REALcontrolInstance ctl, int unused);
+void xsip_setMouseSelectionRectangularSwitch(REALcontrolInstance ctl, int unused, bool mouseSwitch);
+bool xsip_getMouseSelectionRectangularSwitch(REALcontrolInstance ctl, int unused);
 
 
 //methods
