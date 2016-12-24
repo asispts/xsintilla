@@ -1,11 +1,36 @@
 #include "xsintilla.h"
 #include "xsi-behaviour.h"
 #include "xsi-event.h"
+#include "sci-text.h"
 
+// group, name, type, flags, getter, setter, param, editor, enumCount, enumEntries, attributeCount, attributes
 REALproperty xsiProperties[] = {
+    /*
+     * sci-text.h
+     */
+    { "", "readonly", "Boolean", REALconsoleSafe, (REALproc)xsip_getReadonly, (REALproc)xsip_setReadonly },
+    { "", "text", "String", REALconsoleSafe, (REALproc)xsip_getText, (REALproc)xsip_setText }
 };
 
+//function, setterFunction, declaration, mFlags, attributeCount, attributes
 REALmethodDefinition xsiMethods[] = {
+    /*
+     * sci-text.h
+     */
+    { (REALproc) xsim_setSavePoint,             REALnoImplementation, "SetSavePoint()" },
+    { (REALproc) xsim_getLine,                  REALnoImplementation, "GetLineText(lineNum as Integer) as String" },
+    { (REALproc) xsim_replaceSel,               REALnoImplementation, "ReplaceSel(text as String)" },
+    { (REALproc) xsim_allocate,                 REALnoImplementation, "Allocate(bytes as Integer)" },
+    { (REALproc) xsim_addText,                  REALnoImplementation, "AddText(length as Integer, text as String)" },
+    { (REALproc) xsim_appendText,               REALnoImplementation, "AppendText(length as Integer, text as String)" },
+    { (REALproc) xsim_insertText,               REALnoImplementation, "InsertText(pos as Integer, text as String)" },
+    { (REALproc) xsim_clearAll,                 REALnoImplementation, "ClearAll()" },
+    { (REALproc) xsim_deleteRange,              REALnoImplementation, "DeleteRange(start as Integer, lengthDelete as Integer)" },
+    { (REALproc) xsim_clearDocumentStyle,       REALnoImplementation, "ClearDocumentStyle()" },
+    { (REALproc) xsim_getCharAt,                REALnoImplementation, "GetCharAt(pos as Integer) as String" },
+    { (REALproc) xsim_getStyleAt,               REALnoImplementation, "GetStyleAt(pos as Integer) as Integer" },
+    { (REALproc) xsim_releaseAllExtendedStyles, REALnoImplementation, "ReleaseAllExtendedStyle()" },
+    { (REALproc) xsim_allocateExtendedStyles,   REALnoImplementation, "AllocateExtendedStyles(numberStyles as Integer) as Integer" },
 };
 
 REALevent xsiEvents[] = {

@@ -4,7 +4,8 @@ vpath %.cpp $(SDKGLUECODEDIR)
 
 
 OBJNAME 			= PluginMain.o main.o xsintilla.o xsi-behaviour.o xsi-event.o\
-						XojoGraphics.o
+						XojoGraphics.o \
+						sci-text.o
 
 
 INCLUDES 			= -I$(SDKINCLUDEDIR) -I$(LIBXOJO) -I$(LIBXSINTILLA) -include $(PREFIXHEADER)

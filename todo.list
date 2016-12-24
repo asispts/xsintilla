@@ -1,0 +1,908 @@
+=================================
+Text retrieval and modification
+=================================
+SCI_GETTEXT(int length, char *text) → int
+SCI_SETTEXT(<unused>, const char *text)
+SCI_SETSAVEPOINT
+SCI_GETLINE(int line, char *text) → int
+SCI_REPLACESEL(<unused>, const char *text)
+SCI_SETREADONLY(bool readOnly)
+SCI_GETREADONLY → bool
+SCI_GETTEXTRANGE(<unused>, Sci_TextRange *tr) → int
+SCI_ALLOCATE(int bytes)
+SCI_ADDTEXT(int length, const char *text)
+SCI_ADDSTYLEDTEXT(int length, cell *c)
+SCI_APPENDTEXT(int length, const char *text)
+SCI_INSERTTEXT(int pos, const char *text)
+SCI_CHANGEINSERTION(int length, const char *text)
+SCI_CLEARALL
+SCI_DELETERANGE(int start, int lengthDelete)
+SCI_CLEARDOCUMENTSTYLE
+SCI_GETCHARAT(int pos) → int
+SCI_GETSTYLEAT(int pos) → int
+SCI_GETSTYLEDTEXT(<unused>, Sci_TextRange *tr) → int
+SCI_RELEASEALLEXTENDEDSTYLES
+SCI_ALLOCATEEXTENDEDSTYLES(int numberStyles) → int
+SCI_TARGETASUTF8(<unused>, char *s) → int
+SCI_ENCODEDFROMUTF8(const char *utf8, char *encoded) → int
+SCI_SETLENGTHFORENCODE(int bytes)
+
+
+=================================
+Searching
+=================================
+SCI_SETTARGETSTART(int start)
+SCI_GETTARGETSTART → position
+SCI_SETTARGETEND(int end)
+SCI_GETTARGETEND → position
+SCI_SETTARGETRANGE(int start, int end)
+SCI_TARGETFROMSELECTION
+SCI_TARGETWHOLEDOCUMENT
+SCI_SETSEARCHFLAGS(int searchFlags)
+SCI_GETSEARCHFLAGS → int
+SCI_SEARCHINTARGET(int length, const char *text) → int
+SCI_GETTARGETTEXT(<unused>, char *text) → int
+SCI_REPLACETARGET(int length, const char *text) → int
+SCI_REPLACETARGETRE(int length, const char *text) → int
+SCI_GETTAG(int tagNumber, char *tagValue) → int
+
+SCI_FINDTEXT(int searchFlags, Sci_TextToFind *ft) → position
+SCI_SEARCHANCHOR
+SCI_SEARCHNEXT(int searchFlags, const char *text) → int
+SCI_SEARCHPREV(int searchFlags, const char *text) → int
+
+=================================
+Overtype
+=================================
+SCI_SETOVERTYPE(bool overType)
+SCI_GETOVERTYPE → bool
+
+=================================
+Cut, copy and paste
+=================================
+SCI_CUT
+SCI_COPY
+SCI_PASTE
+SCI_CLEAR
+SCI_CANPASTE → bool
+SCI_COPYRANGE(int start, int end)
+SCI_COPYTEXT(int length, const char *text)
+SCI_COPYALLOWLINE
+SCI_SETPASTECONVERTENDINGS(bool convert)
+SCI_GETPASTECONVERTENDINGS → bool
+
+=================================
+Error handling
+=================================
+SCI_SETSTATUS(int status)
+SCI_GETSTATUS → int
+
+=================================
+Undo and Redo
+=================================
+SCI_UNDO
+SCI_CANUNDO → bool
+SCI_EMPTYUNDOBUFFER
+SCI_REDO
+SCI_CANREDO → bool
+SCI_SETUNDOCOLLECTION(bool collectUndo)
+SCI_GETUNDOCOLLECTION → bool
+SCI_BEGINUNDOACTION
+SCI_ENDUNDOACTION
+SCI_ADDUNDOACTION(int token, int flags)
+
+=================================
+Selection and information
+=================================
+SCI_GETTEXTLENGTH → int
+SCI_GETLENGTH → int
+SCI_GETLINECOUNT → int
+SCI_LINESONSCREEN → int
+SCI_GETMODIFY → bool
+SCI_SETSEL(int anchor, int caret)
+SCI_GOTOPOS(int caret)
+SCI_GOTOLINE(int line)
+SCI_SETCURRENTPOS(int caret)
+SCI_GETCURRENTPOS → position
+SCI_SETANCHOR(int anchor)
+SCI_GETANCHOR → position
+SCI_SETSELECTIONSTART(int anchor)
+SCI_GETSELECTIONSTART → position
+SCI_SETSELECTIONEND(int caret)
+SCI_GETSELECTIONEND → position
+SCI_SETEMPTYSELECTION(int caret)
+SCI_SELECTALL
+SCI_LINEFROMPOSITION(int pos) → int
+SCI_POSITIONFROMLINE(int line) → position
+SCI_GETLINEENDPOSITION(int line) → position
+SCI_LINELENGTH(int line) → int
+SCI_GETCOLUMN(int pos) → int
+SCI_FINDCOLUMN(int line, int column) → int
+SCI_POSITIONFROMPOINT(int x, int y) → position
+SCI_POSITIONFROMPOINTCLOSE(int x, int y) → position
+SCI_CHARPOSITIONFROMPOINT(int x, int y) → position
+SCI_CHARPOSITIONFROMPOINTCLOSE(int x, int y) → position
+SCI_POINTXFROMPOSITION(<unused>, int pos) → int
+SCI_POINTYFROMPOSITION(<unused>, int pos) → int
+SCI_HIDESELECTION(bool hide)
+SCI_GETSELTEXT(<unused>, char *text) → int
+SCI_GETCURLINE(int length, char *text) → int
+SCI_SELECTIONISRECTANGLE → bool
+SCI_SETSELECTIONMODE(int selectionMode)
+SCI_GETSELECTIONMODE → int
+SCI_GETLINESELSTARTPOSITION(int line) → position
+SCI_GETLINESELENDPOSITION(int line) → position
+SCI_MOVECARETINSIDEVIEW
+SCI_POSITIONBEFORE(int pos) → position
+SCI_POSITIONAFTER(int pos) → position
+SCI_POSITIONRELATIVE(int pos, int relative) → position
+SCI_COUNTCHARACTERS(int start, int end) → int
+SCI_TEXTWIDTH(int style, const char *text) → int
+SCI_TEXTHEIGHT(int line) → int
+SCI_CHOOSECARETX
+SCI_MOVESELECTEDLINESUP
+SCI_MOVESELECTEDLINESDOWN
+SCI_SETMOUSESELECTIONRECTANGULARSWITCH(bool mouseSelectionRectangularSwitch)
+SCI_GETMOUSESELECTIONRECTANGULARSWITCH → bool
+
+======================================
+Multiple Selection and Virtual Space
+======================================
+SCI_SETMULTIPLESELECTION(bool multipleSelection)
+SCI_GETMULTIPLESELECTION → bool
+SCI_SETADDITIONALSELECTIONTYPING(bool additionalSelectionTyping)
+SCI_GETADDITIONALSELECTIONTYPING → bool
+SCI_SETMULTIPASTE(int multiPaste)
+SCI_GETMULTIPASTE → int
+SCI_SETVIRTUALSPACEOPTIONS(int virtualSpaceOptions)
+SCI_GETVIRTUALSPACEOPTIONS → int
+SCI_SETRECTANGULARSELECTIONMODIFIER(int modifier)
+SCI_GETRECTANGULARSELECTIONMODIFIER → int
+
+SCI_GETSELECTIONS → int
+SCI_GETSELECTIONEMPTY → bool
+SCI_CLEARSELECTIONS
+SCI_SETSELECTION(int caret, int anchor) → int
+SCI_ADDSELECTION(int caret, int anchor) → int
+SCI_DROPSELECTIONN(int selection)
+SCI_SETMAINSELECTION(int selection)
+SCI_GETMAINSELECTION → int
+
+SCI_SETSELECTIONNCARET(int selection, int caret)
+SCI_GETSELECTIONNCARET(int selection) → position
+SCI_SETSELECTIONNCARETVIRTUALSPACE(int selection, int space)
+SCI_GETSELECTIONNCARETVIRTUALSPACE(int selection) → int
+SCI_SETSELECTIONNANCHOR(int selection, int anchor)
+SCI_GETSELECTIONNANCHOR(int selection) → position
+SCI_SETSELECTIONNANCHORVIRTUALSPACE(int selection, int space)
+SCI_GETSELECTIONNANCHORVIRTUALSPACE(int selection) → int
+SCI_SETSELECTIONNSTART(int selection, int anchor)
+SCI_GETSELECTIONNSTART(int selection) → position
+SCI_SETSELECTIONNEND(int selection, int caret)
+SCI_GETSELECTIONNEND(int selection) → position
+
+SCI_SETRECTANGULARSELECTIONCARET(int caret)
+SCI_GETRECTANGULARSELECTIONCARET → position
+SCI_SETRECTANGULARSELECTIONCARETVIRTUALSPACE(int space)
+SCI_GETRECTANGULARSELECTIONCARETVIRTUALSPACE → int
+SCI_SETRECTANGULARSELECTIONANCHOR(int anchor)
+SCI_GETRECTANGULARSELECTIONANCHOR → position
+SCI_SETRECTANGULARSELECTIONANCHORVIRTUALSPACE(int space)
+SCI_GETRECTANGULARSELECTIONANCHORVIRTUALSPACE → int
+
+SCI_SETADDITIONALSELALPHA(alpha alpha)
+SCI_GETADDITIONALSELALPHA → int
+SCI_SETADDITIONALSELFORE(colour fore)
+SCI_SETADDITIONALSELBACK(colour back)
+SCI_SETADDITIONALCARETFORE(colour fore)
+SCI_GETADDITIONALCARETFORE → colour
+SCI_SETADDITIONALCARETSBLINK(bool additionalCaretsBlink)
+SCI_GETADDITIONALCARETSBLINK → bool
+SCI_SETADDITIONALCARETSVISIBLE(bool additionalCaretsVisible)
+SCI_GETADDITIONALCARETSVISIBLE → bool
+
+SCI_SWAPMAINANCHORCARET
+SCI_ROTATESELECTION
+SCI_MULTIPLESELECTADDNEXT
+SCI_MULTIPLESELECTADDEACH
+
+======================================
+Scrolling and automatic scrolling
+======================================
+SCI_SETFIRSTVISIBLELINE(int displayLine)
+SCI_GETFIRSTVISIBLELINE → int
+SCI_SETXOFFSET(int xOffset)
+SCI_GETXOFFSET → int
+SCI_LINESCROLL(int columns, int lines)
+SCI_SCROLLCARET
+SCI_SCROLLRANGE(int secondary, int primary)
+SCI_SETXCARETPOLICY(int caretPolicy, int caretSlop)
+SCI_SETYCARETPOLICY(int caretPolicy, int caretSlop)
+SCI_SETVISIBLEPOLICY(int visiblePolicy, int visibleSlop)
+SCI_SETHSCROLLBAR(bool visible)
+SCI_GETHSCROLLBAR → bool
+SCI_SETVSCROLLBAR(bool visible)
+SCI_GETVSCROLLBAR → bool
+SCI_SETSCROLLWIDTH(int pixelWidth)
+SCI_GETSCROLLWIDTH → int
+SCI_SETSCROLLWIDTHTRACKING(bool tracking)
+SCI_GETSCROLLWIDTHTRACKING → bool
+SCI_SETENDATLASTLINE(bool endAtLastLine)
+SCI_GETENDATLASTLINE → bool
+
+
+======================================
+White space
+======================================
+SCI_SETVIEWWS(int viewWS)
+SCI_GETVIEWWS → int
+SCI_SETWHITESPACEFORE(bool useSetting, colour fore)
+SCI_SETWHITESPACEBACK(bool useSetting, colour back)
+SCI_SETWHITESPACESIZE(int size)
+SCI_GETWHITESPACESIZE → int
+SCI_SETTABDRAWMODE(int tabDrawMode)
+SCI_GETTABDRAWMODE → int
+SCI_SETEXTRAASCENT(int extraAscent)
+SCI_GETEXTRAASCENT → int
+SCI_SETEXTRADESCENT(int extraDescent)
+SCI_GETEXTRADESCENT → int
+
+======================================
+Cursor
+======================================
+SCI_SETCURSOR(int cursorType)
+SCI_GETCURSOR → int
+
+======================================
+Mouse capture
+======================================
+SCI_SETMOUSEDOWNCAPTURES(bool captures)
+SCI_GETMOUSEDOWNCAPTURES → bool
+SCI_SETMOUSEWHEELCAPTURES(bool captures)
+SCI_GETMOUSEWHEELCAPTURES → bool
+
+======================================
+Line endings
+======================================
+SCI_SETEOLMODE(int eolMode)
+SCI_GETEOLMODE → int
+SCI_CONVERTEOLS(int eolMode)
+SCI_SETVIEWEOL(bool visible)
+SCI_GETVIEWEOL → bool
+SCI_GETLINEENDTYPESSUPPORTED → int
+SCI_SETLINEENDTYPESALLOWED(int lineEndBitSet)
+SCI_GETLINEENDTYPESALLOWED → int
+SCI_GETLINEENDTYPESACTIVE → int
+
+======================================
+Words
+======================================
+SCI_WORDENDPOSITION(int pos, bool onlyWordCharacters) → int
+SCI_WORDSTARTPOSITION(int pos, bool onlyWordCharacters) → int
+SCI_ISRANGEWORD(int start, int end) → bool
+SCI_SETWORDCHARS(<unused>, const char *characters)
+SCI_GETWORDCHARS(<unused>, char *characters) → int
+SCI_SETWHITESPACECHARS(<unused>, const char *characters)
+SCI_GETWHITESPACECHARS(<unused>, char *characters) → int
+SCI_SETPUNCTUATIONCHARS(<unused>, const char *characters)
+SCI_GETPUNCTUATIONCHARS(<unused>, char *characters) → int
+SCI_SETCHARSDEFAULT
+
+======================================
+Styling
+======================================
+SCI_GETENDSTYLED → position
+SCI_STARTSTYLING(int start, int unused)
+SCI_SETSTYLING(int length, int style)
+SCI_SETSTYLINGEX(int length, const char *styles)
+SCI_SETIDLESTYLING(int idleStyling)
+SCI_GETIDLESTYLING → int
+SCI_SETLINESTATE(int line, int state)
+SCI_GETLINESTATE(int line) → int
+SCI_GETMAXLINESTATE → int
+
+======================================
+Style definition
+======================================
+SCI_STYLERESETDEFAULT
+SCI_STYLECLEARALL
+SCI_STYLESETFONT(int style, const char *fontName)
+SCI_STYLEGETFONT(int style, char *fontName) → int
+SCI_STYLESETSIZE(int style, int sizePoints)
+SCI_STYLEGETSIZE(int style) → int
+SCI_STYLESETSIZEFRACTIONAL(int style, int sizeHundredthPoints)
+SCI_STYLEGETSIZEFRACTIONAL(int style) → int
+SCI_STYLESETBOLD(int style, bool bold)
+SCI_STYLEGETBOLD(int style) → bool
+SCI_STYLESETWEIGHT(int style, int weight)
+SCI_STYLEGETWEIGHT(int style) → int
+SCI_STYLESETITALIC(int style, bool italic)
+SCI_STYLEGETITALIC(int style) → bool
+SCI_STYLESETUNDERLINE(int style, bool underline)
+SCI_STYLEGETUNDERLINE(int style) → bool
+SCI_STYLESETFORE(int style, colour fore)
+SCI_STYLEGETFORE(int style) → colour
+SCI_STYLESETBACK(int style, colour back)
+SCI_STYLEGETBACK(int style) → colour
+SCI_STYLESETEOLFILLED(int style, bool eolFilled)
+SCI_STYLEGETEOLFILLED(int style) → bool
+SCI_STYLESETCHARACTERSET(int style, int characterSet)
+SCI_STYLEGETCHARACTERSET(int style) → int
+SCI_STYLESETCASE(int style, int caseVisible)
+SCI_STYLEGETCASE(int style) → int
+SCI_STYLESETVISIBLE(int style, bool visible)
+SCI_STYLEGETVISIBLE(int style) → bool
+SCI_STYLESETCHANGEABLE(int style, bool changeable)
+SCI_STYLEGETCHANGEABLE(int style) → bool
+SCI_STYLESETHOTSPOT(int style, bool hotspot)
+SCI_STYLEGETHOTSPOT(int style) → bool
+
+======================================
+Caret, selection, and hotspot styles
+======================================
+SCI_SETSELFORE(bool useSetting, colour fore)
+SCI_SETSELBACK(bool useSetting, colour back)
+SCI_SETSELALPHA(alpha alpha)
+SCI_GETSELALPHA → int
+SCI_SETSELEOLFILLED(bool filled)
+SCI_GETSELEOLFILLED → bool
+SCI_SETCARETFORE(colour fore)
+SCI_GETCARETFORE → colour
+SCI_SETCARETLINEVISIBLE(bool show)
+SCI_GETCARETLINEVISIBLE → bool
+SCI_SETCARETLINEBACK(colour back)
+SCI_GETCARETLINEBACK → colour
+SCI_SETCARETLINEBACKALPHA(alpha alpha)
+SCI_GETCARETLINEBACKALPHA → int
+SCI_SETCARETLINEVISIBLEALWAYS(bool alwaysVisible)
+SCI_GETCARETLINEVISIBLEALWAYS → bool
+SCI_SETCARETPERIOD(int periodMilliseconds)
+SCI_GETCARETPERIOD → int
+SCI_SETCARETSTYLE(int caretStyle)
+SCI_GETCARETSTYLE → int
+SCI_SETCARETWIDTH(int pixelWidth)
+SCI_GETCARETWIDTH → int
+SCI_SETHOTSPOTACTIVEFORE(bool useSetting, colour fore)
+SCI_GETHOTSPOTACTIVEFORE → colour
+SCI_SETHOTSPOTACTIVEBACK(bool useSetting, colour back)
+SCI_GETHOTSPOTACTIVEBACK → colour
+SCI_SETHOTSPOTACTIVEUNDERLINE(bool underline)
+SCI_GETHOTSPOTACTIVEUNDERLINE → bool
+SCI_SETHOTSPOTSINGLELINE(bool singleLine)
+SCI_GETHOTSPOTSINGLELINE → bool
+SCI_SETCARETSTICKY(int useCaretStickyBehaviour)
+SCI_GETCARETSTICKY → int
+SCI_TOGGLECARETSTICKY
+
+======================================
+Character representations
+======================================
+SCI_SETREPRESENTATION(const char *encodedCharacter, const char *representation)
+SCI_GETREPRESENTATION(const char *encodedCharacter, char *representation) → int
+SCI_CLEARREPRESENTATION(const char *encodedCharacter)
+SCI_SETCONTROLCHARSYMBOL(int symbol)
+SCI_GETCONTROLCHARSYMBOL → int
+
+
+======================================
+Margins
+======================================
+SCI_SETMARGINS(int margins)
+SCI_GETMARGINS → int
+SCI_SETMARGINTYPEN(int margin, int marginType)
+SCI_GETMARGINTYPEN(int margin) → int
+SCI_SETMARGINWIDTHN(int margin, int pixelWidth)
+SCI_GETMARGINWIDTHN(int margin) → int
+SCI_SETMARGINMASKN(int margin, int mask)
+SCI_GETMARGINMASKN(int margin) → int
+SCI_SETMARGINSENSITIVEN(int margin, bool sensitive)
+SCI_GETMARGINSENSITIVEN(int margin) → bool
+SCI_SETMARGINCURSORN(int margin, int cursor)
+SCI_GETMARGINCURSORN(int margin) → int
+SCI_SETMARGINBACKN(int margin, colour back)
+SCI_GETMARGINBACKN(int margin) → colour
+SCI_SETMARGINLEFT(<unused>, int pixelWidth)
+SCI_GETMARGINLEFT → int
+SCI_SETMARGINRIGHT(<unused>, int pixelWidth)
+SCI_GETMARGINRIGHT → int
+SCI_SETFOLDMARGINCOLOUR(bool useSetting, colour back)
+SCI_SETFOLDMARGINHICOLOUR(bool useSetting, colour fore)
+SCI_MARGINSETTEXT(int line, const char *text)
+SCI_MARGINGETTEXT(int line, char *text) → int
+SCI_MARGINSETSTYLE(int line, int style)
+SCI_MARGINGETSTYLE(int line) → int
+SCI_MARGINSETSTYLES(int line, const char *styles)
+SCI_MARGINGETSTYLES(int line, char *styles) → int
+SCI_MARGINTEXTCLEARALL
+SCI_MARGINSETSTYLEOFFSET(int style)
+SCI_MARGINGETSTYLEOFFSET → int
+SCI_SETMARGINOPTIONS(int marginOptions)
+SCI_GETMARGINOPTIONS → int
+
+
+======================================
+Annotations
+======================================
+SCI_ANNOTATIONSETTEXT(int line, const char *text)
+SCI_ANNOTATIONGETTEXT(int line, char *text) → int
+SCI_ANNOTATIONSETSTYLE(int line, int style)
+SCI_ANNOTATIONGETSTYLE(int line) → int
+SCI_ANNOTATIONSETSTYLES(int line, const char *styles)
+SCI_ANNOTATIONGETSTYLES(int line, char *styles) → int
+SCI_ANNOTATIONGETLINES(int line) → int
+SCI_ANNOTATIONCLEARALL
+SCI_ANNOTATIONSETVISIBLE(int visible)
+SCI_ANNOTATIONGETVISIBLE → int
+SCI_ANNOTATIONSETSTYLEOFFSET(int style)
+SCI_ANNOTATIONGETSTYLEOFFSET → int
+
+
+======================================
+Other settings
+======================================
+SCI_SETBUFFEREDDRAW(bool buffered)
+SCI_GETBUFFEREDDRAW → bool
+SCI_SETPHASESDRAW(int phases)
+SCI_GETPHASESDRAW → int
+SCI_SETTWOPHASEDRAW(bool twoPhase)
+SCI_GETTWOPHASEDRAW → bool
+SCI_SETTECHNOLOGY(int technology)
+SCI_GETTECHNOLOGY → int
+SCI_SETFONTQUALITY(int fontQuality)
+SCI_GETFONTQUALITY → int
+SCI_SETCODEPAGE(int codePage)
+SCI_GETCODEPAGE → int
+SCI_SETIMEINTERACTION(int imeInteraction)
+SCI_GETIMEINTERACTION → int
+SCI_GRABFOCUS
+SCI_SETFOCUS(bool focus)
+SCI_GETFOCUS → bool
+
+
+======================================
+Brace highlighting
+======================================
+SCI_BRACEHIGHLIGHT(int posA, int posB)
+SCI_BRACEBADLIGHT(int pos)
+SCI_BRACEHIGHLIGHTINDICATOR(bool useSetting, int indicator)
+SCI_BRACEBADLIGHTINDICATOR(bool useSetting, int indicator)
+SCI_BRACEMATCH(int pos, int maxReStyle) → position
+
+======================================
+Tabs and Indentation Guides
+======================================
+SCI_SETTABWIDTH(int tabWidth)
+SCI_GETTABWIDTH → int
+SCI_CLEARTABSTOPS(int line)
+SCI_ADDTABSTOP(int line, int x)
+SCI_GETNEXTTABSTOP(int line, int x) → int
+SCI_SETUSETABS(bool useTabs)
+SCI_GETUSETABS → bool
+SCI_SETINDENT(int indentSize)
+SCI_GETINDENT → int
+SCI_SETTABINDENTS(bool tabIndents)
+SCI_GETTABINDENTS → bool
+SCI_SETBACKSPACEUNINDENTS(bool bsUnIndents)
+SCI_GETBACKSPACEUNINDENTS → bool
+SCI_SETLINEINDENTATION(int line, int indentation)
+SCI_GETLINEINDENTATION(int line) → int
+SCI_GETLINEINDENTPOSITION(int line) → position
+SCI_SETINDENTATIONGUIDES(int indentView)
+SCI_GETINDENTATIONGUIDES → int
+SCI_SETHIGHLIGHTGUIDE(int column)
+SCI_GETHIGHLIGHTGUIDE → int
+
+======================================
+Markers
+======================================
+SCI_MARKERDEFINE(int markerNumber, int markerSymbol)
+SCI_MARKERDEFINEPIXMAP(int markerNumber, const char *pixmap)
+SCI_RGBAIMAGESETWIDTH(int width)
+SCI_RGBAIMAGESETHEIGHT(int height)
+SCI_RGBAIMAGESETSCALE(int scalePercent)
+SCI_MARKERDEFINERGBAIMAGE(int markerNumber, const char *pixels)
+SCI_MARKERSYMBOLDEFINED(int markerNumber) → int
+SCI_MARKERSETFORE(int markerNumber, colour fore)
+SCI_MARKERSETBACK(int markerNumber, colour back)
+SCI_MARKERSETBACKSELECTED(int markerNumber, colour back)
+SCI_MARKERENABLEHIGHLIGHT(bool enabled)
+SCI_MARKERSETALPHA(int markerNumber, alpha alpha)
+SCI_MARKERADD(int line, int markerNumber) → int
+SCI_MARKERADDSET(int line, int markerSet)
+SCI_MARKERDELETE(int line, int markerNumber)
+SCI_MARKERDELETEALL(int markerNumber)
+SCI_MARKERGET(int line) → int
+SCI_MARKERNEXT(int lineStart, int markerMask) → int
+SCI_MARKERPREVIOUS(int lineStart, int markerMask) → int
+SCI_MARKERLINEFROMHANDLE(int markerHandle) → int
+SCI_MARKERDELETEHANDLE(int markerHandle)
+
+======================================
+Indicators
+======================================
+SCI_INDICSETSTYLE(int indicator, int indicatorStyle)
+SCI_INDICGETSTYLE(int indicator) → int
+SCI_INDICSETFORE(int indicator, colour fore)
+SCI_INDICGETFORE(int indicator) → colour
+SCI_INDICSETALPHA(int indicator, alpha alpha)
+SCI_INDICGETALPHA(int indicator) → int
+SCI_INDICSETOUTLINEALPHA(int indicator, alpha alpha)
+SCI_INDICGETOUTLINEALPHA(int indicator) → int
+SCI_INDICSETUNDER(int indicator, bool under)
+SCI_INDICGETUNDER(int indicator) → bool
+SCI_INDICSETHOVERSTYLE(int indicator, int indicatorStyle)
+SCI_INDICGETHOVERSTYLE(int indicator) → int
+SCI_INDICSETHOVERFORE(int indicator, colour fore)
+SCI_INDICGETHOVERFORE(int indicator) → colour
+SCI_INDICSETFLAGS(int indicator, int flags)
+SCI_INDICGETFLAGS(int indicator) → int
+
+SCI_SETINDICATORCURRENT(int indicator)
+SCI_GETINDICATORCURRENT → int
+SCI_SETINDICATORVALUE(int value)
+SCI_GETINDICATORVALUE → int
+SCI_INDICATORFILLRANGE(int start, int lengthFill)
+SCI_INDICATORCLEARRANGE(int start, int lengthClear)
+SCI_INDICATORALLONFOR(int pos) → int
+SCI_INDICATORVALUEAT(int indicator, int pos) → int
+SCI_INDICATORSTART(int indicator, int pos) → int
+SCI_INDICATOREND(int indicator, int pos) → int
+SCI_FINDINDICATORSHOW(int start, int end)
+SCI_FINDINDICATORFLASH(int start, int end)
+SCI_FINDINDICATORHIDE
+
+======================================
+Autocompletion
+======================================
+SCI_AUTOCSHOW(int lengthEntered, const char *itemList)
+SCI_AUTOCCANCEL
+SCI_AUTOCACTIVE → bool
+SCI_AUTOCPOSSTART → position
+SCI_AUTOCCOMPLETE
+SCI_AUTOCSTOPS(<unused>, const char *characterSet)
+SCI_AUTOCSETSEPARATOR(int separatorCharacter)
+SCI_AUTOCGETSEPARATOR → int
+SCI_AUTOCSELECT(<unused>, const char *select)
+SCI_AUTOCGETCURRENT → int
+SCI_AUTOCGETCURRENTTEXT(<unused>, char *text) → int
+SCI_AUTOCSETCANCELATSTART(bool cancel)
+SCI_AUTOCGETCANCELATSTART → bool
+SCI_AUTOCSETFILLUPS(<unused>, const char *characterSet)
+SCI_AUTOCSETCHOOSESINGLE(bool chooseSingle)
+SCI_AUTOCGETCHOOSESINGLE → bool
+SCI_AUTOCSETIGNORECASE(bool ignoreCase)
+SCI_AUTOCGETIGNORECASE → bool
+SCI_AUTOCSETCASEINSENSITIVEBEHAVIOUR(int behaviour)
+SCI_AUTOCGETCASEINSENSITIVEBEHAVIOUR → int
+SCI_AUTOCSETMULTI(int multi)
+SCI_AUTOCGETMULTI → int
+SCI_AUTOCSETORDER(int order)
+SCI_AUTOCGETORDER → int
+SCI_AUTOCSETAUTOHIDE(bool autoHide)
+SCI_AUTOCGETAUTOHIDE → bool
+SCI_AUTOCSETDROPRESTOFWORD(bool dropRestOfWord)
+SCI_AUTOCGETDROPRESTOFWORD → bool
+SCI_REGISTERIMAGE(int type, const char *xpmData)
+SCI_REGISTERRGBAIMAGE(int type, const char *pixels)
+SCI_CLEARREGISTEREDIMAGES
+SCI_AUTOCSETTYPESEPARATOR(int separatorCharacter)
+SCI_AUTOCGETTYPESEPARATOR → int
+SCI_AUTOCSETMAXHEIGHT(int rowCount)
+SCI_AUTOCGETMAXHEIGHT → int
+SCI_AUTOCSETMAXWIDTH(int characterCount)
+SCI_AUTOCGETMAXWIDTH → int
+
+======================================
+User lists
+======================================
+SCI_USERLISTSHOW(int listType, const char *itemList)
+
+======================================
+Call tips
+======================================
+SCI_CALLTIPSHOW(int pos, const char *definition)
+SCI_CALLTIPCANCEL
+SCI_CALLTIPACTIVE → bool
+SCI_CALLTIPPOSSTART → position
+SCI_CALLTIPSETPOSSTART(int posStart)
+SCI_CALLTIPSETHLT(int highlightStart, int highlightEnd)
+SCI_CALLTIPSETBACK(colour back)
+SCI_CALLTIPSETFORE(colour fore)
+SCI_CALLTIPSETFOREHLT(colour fore)
+SCI_CALLTIPUSESTYLE(int tabSize)
+SCI_CALLTIPSETPOSITION(bool above)
+
+======================================
+Keyboard commands
+======================================
+SCI_LINEDOWN
+SCI_LINEUP
+SCI_PARADOWN
+SCI_CHARLEFT
+SCI_CHARRIGHT
+SCI_WORDLEFT
+SCI_WORDLEFTEND
+SCI_WORDPARTLEFT
+SCI_HOME
+SCI_HOMEDISPLAY
+SCI_VCHOME
+SCI_VCHOMEWRAP
+SCI_LINEEND
+SCI_LINEENDDISPLAY
+SCI_DOCUMENTSTART
+SCI_PAGEUP
+SCI_PAGEDOWN
+SCI_STUTTEREDPAGEUP
+SCI_STUTTEREDPAGEDOWN
+SCI_DELETEBACK
+SCI_DELWORDLEFT
+SCI_DELLINELEFT
+SCI_LINECUT
+SCI_LOWERCASE
+SCI_NEWLINE
+SCI_SELECTIONDUPLICATE
+SCI_MOVESELECTEDLINESUP
+SCI_SCROLLTOSTART
+SCI_LINEDOWNEXTEND
+SCI_LINEUPEXTEND
+SCI_PARADOWNEXTEND
+SCI_CHARLEFTEXTEND
+SCI_CHARRIGHTEXTEND
+SCI_WORDLEFTEXTEND
+SCI_WORDLEFTENDEXTEND
+SCI_WORDPARTLEFTEXTEND
+SCI_HOMEEXTEND
+SCI_HOMEDISPLAYEXTEND
+SCI_VCHOMEEXTEND
+SCI_VCHOMEWRAPEXTEND
+SCI_LINEENDEXTEND
+SCI_LINEENDDISPLAYEXTEND
+SCI_DOCUMENTSTARTEXTEND
+SCI_PAGEUPEXTEND
+SCI_PAGEDOWNEXTEND
+SCI_STUTTEREDPAGEUPEXTEND
+SCI_STUTTEREDPAGEDOWNEXTEND
+SCI_DELETEBACKNOTLINE
+SCI_DELWORDRIGHT
+SCI_DELLINERIGHT
+SCI_LINECOPY
+SCI_UPPERCASE
+SCI_FORMFEED
+SCI_VERTICALCENTRECARET
+SCI_MOVESELECTEDLINESDOWN
+SCI_SCROLLTOEND
+SCI_LINEDOWNRECTEXTEND
+SCI_LINEUPRECTEXTEND
+SCI_PARAUP
+SCI_CHARLEFTRECTEXTEND
+SCI_CHARRIGHTRECTEXTEND
+SCI_WORDRIGHT
+SCI_WORDRIGHTEND
+SCI_WORDPARTRIGHT
+SCI_HOMERECTEXTEND
+SCI_HOMEWRAP
+SCI_VCHOMERECTEXTEND
+SCI_VCHOMEDISPLAY
+SCI_LINEENDRECTEXTEND
+SCI_LINEENDWRAP
+SCI_DOCUMENTEND
+SCI_PAGEUPRECTEXTEND
+SCI_PAGEDOWNRECTEXTEND
+SCI_DELWORDRIGHTEND
+SCI_LINEDELETE
+SCI_LINETRANSPOSE
+SCI_CANCEL
+SCI_TAB
+SCI_LINESCROLLDOWN
+SCI_LINESCROLLUP
+SCI_PARAUPEXTEND
+SCI_WORDRIGHTEXTEND
+SCI_WORDRIGHTENDEXTEND
+SCI_WORDPARTRIGHTEXTEND
+SCI_HOMEWRAPEXTEND
+SCI_VCHOMEDISPLAYEXTEND
+SCI_LINEENDWRAPEXTEND
+SCI_DOCUMENTENDEXTEND
+SCI_LINEDUPLICATE
+SCI_EDITTOGGLEOVERTYPE
+SCI_BACKTAB
+
+======================================
+Key bindings
+======================================
+SCI_ASSIGNCMDKEY(int keyDefinition, int sciCommand)
+SCI_CLEARCMDKEY(int keyDefinition)
+SCI_CLEARALLCMDKEYS
+SCI_NULL
+
+======================================
+Popup edit menu
+======================================
+SCI_USEPOPUP(int popUpMode)
+
+======================================
+Macro recording
+======================================
+SCI_STARTRECORD
+SCI_STOPRECORD
+
+======================================
+Printing
+======================================
+SCI_FORMATRANGE(bool draw, Sci_RangeToFormat *fr) → position
+SCI_SETPRINTMAGNIFICATION(int magnification)
+SCI_GETPRINTMAGNIFICATION → int
+SCI_SETPRINTCOLOURMODE(int mode)
+SCI_GETPRINTCOLOURMODE → int
+SCI_SETPRINTWRAPMODE(int wrapMode)
+SCI_GETPRINTWRAPMODE → int
+
+======================================
+Direct access
+======================================
+SCI_GETDIRECTFUNCTION → int
+SCI_GETDIRECTPOINTER → int
+SCI_GETCHARACTERPOINTER → int
+SCI_GETRANGEPOINTER(int start, int lengthRange) → int
+SCI_GETGAPPOSITION → position
+
+======================================
+Multiple views
+======================================
+SCI_GETDOCPOINTER → document *
+SCI_SETDOCPOINTER(<unused>, document *doc)
+SCI_CREATEDOCUMENT → document *
+SCI_ADDREFDOCUMENT(<unused>, document *doc)
+SCI_RELEASEDOCUMENT(<unused>, document *doc)
+
+======================================
+Background loading and saving
+======================================
+SCI_CREATELOADER(int bytes) → int
+
+======================================
+Folding
+======================================
+SCI_VISIBLEFROMDOCLINE(int docLine) → int
+SCI_DOCLINEFROMVISIBLE(int displayLine) → int
+SCI_SHOWLINES(int lineStart, int lineEnd)
+SCI_HIDELINES(int lineStart, int lineEnd)
+SCI_GETLINEVISIBLE(int line) → bool
+SCI_GETALLLINESVISIBLE → bool
+SCI_SETFOLDLEVEL(int line, int level)
+SCI_GETFOLDLEVEL(int line) → int
+SCI_SETAUTOMATICFOLD(int automaticFold)
+SCI_GETAUTOMATICFOLD → int
+SCI_SETFOLDFLAGS(int flags)
+SCI_GETLASTCHILD(int line, int level) → int
+SCI_GETFOLDPARENT(int line) → int
+SCI_SETFOLDEXPANDED(int line, bool expanded)
+SCI_GETFOLDEXPANDED(int line) → bool
+SCI_CONTRACTEDFOLDNEXT(int lineStart) → int
+SCI_TOGGLEFOLD(int line)
+SCI_TOGGLEFOLDSHOWTEXT(int line, const char *text)
+SCI_FOLDDISPLAYTEXTSETSTYLE(int style)
+SCI_FOLDLINE(int line, int action)
+SCI_FOLDCHILDREN(int line, int action)
+SCI_FOLDALL(int action)
+SCI_EXPANDCHILDREN(int line, int level)
+SCI_ENSUREVISIBLE(int line)
+SCI_ENSUREVISIBLEENFORCEPOLICY(int line)
+
+======================================
+Line wrapping
+======================================
+SCI_SETWRAPMODE(int wrapMode)
+SCI_GETWRAPMODE → int
+SCI_SETWRAPVISUALFLAGS(int wrapVisualFlags)
+SCI_GETWRAPVISUALFLAGS → int
+SCI_SETWRAPVISUALFLAGSLOCATION(int wrapVisualFlagsLocation)
+SCI_GETWRAPVISUALFLAGSLOCATION → int
+SCI_SETWRAPINDENTMODE(int wrapIndentMode)
+SCI_GETWRAPINDENTMODE → int
+SCI_SETWRAPSTARTINDENT(int indent)
+SCI_GETWRAPSTARTINDENT → int
+SCI_SETLAYOUTCACHE(int cacheMode)
+SCI_GETLAYOUTCACHE → int
+SCI_SETPOSITIONCACHE(int size)
+SCI_GETPOSITIONCACHE → int
+SCI_LINESSPLIT(int pixelWidth)
+SCI_LINESJOIN
+SCI_WRAPCOUNT(int docLine) → int
+
+======================================
+Zooming
+======================================
+SCI_ZOOMIN
+SCI_ZOOMOUT
+SCI_SETZOOM(int zoomInPoints)
+SCI_GETZOOM → int
+
+======================================
+Long lines
+======================================
+SCI_SETEDGEMODE(int edgeMode)
+SCI_GETEDGEMODE → int
+SCI_SETEDGECOLUMN(int column)
+SCI_GETEDGECOLUMN → int
+SCI_SETEDGECOLOUR(colour edgeColour)
+SCI_GETEDGECOLOUR → colour
+
+SCI_MULTIEDGEADDLINE(int column, colour edgeColour)
+SCI_MULTIEDGECLEARALL
+
+======================================
+Lexer
+======================================
+SCI_SETLEXER(int lexer)
+SCI_GETLEXER → int
+SCI_SETLEXERLANGUAGE(<unused>, const char *language)
+SCI_GETLEXERLANGUAGE(<unused>, char *language) → int
+SCI_LOADLEXERLIBRARY(<unused>, const char *path)
+SCI_COLOURISE(int start, int end)
+SCI_CHANGELEXERSTATE(int start, int end) → int
+SCI_PROPERTYNAMES(<unused>, char *names) → int
+SCI_PROPERTYTYPE(const char *name) → int
+SCI_DESCRIBEPROPERTY(const char *name, char *description) → int
+SCI_SETPROPERTY(const char *key, const char *value)
+SCI_GETPROPERTY(const char *key, char *value) → int
+SCI_GETPROPERTYEXPANDED(const char *key, char *value) → int
+SCI_GETPROPERTYINT(const char *key, int defaultValue) → int
+SCI_DESCRIBEKEYWORDSETS(<unused>, char *descriptions) → int
+SCI_SETKEYWORDS(int keyWordSet, const char *keyWords)
+SCI_GETSUBSTYLEBASES(<unused>, char *styles) → int
+SCI_DISTANCETOSECONDARYSTYLES → int
+SCI_ALLOCATESUBSTYLES(int styleBase, int numberStyles) → int
+SCI_FREESUBSTYLES
+SCI_GETSUBSTYLESSTART(int styleBase) → int
+SCI_GETSUBSTYLESLENGTH(int styleBase) → int
+SCI_GETSTYLEFROMSUBSTYLE(int subStyle) → int
+SCI_GETPRIMARYSTYLEFROMSTYLE(int style) → int
+SCI_SETIDENTIFIERS(int style, const char *identifiers)
+SCI_PRIVATELEXERCALL(int operation, int pointer) → int
+
+======================================
+Notifications
+======================================
+SCN_STYLENEEDED
+SCN_CHARADDED
+SCN_SAVEPOINTREACHED
+SCN_SAVEPOINTLEFT
+SCN_MODIFYATTEMPTRO
+SCN_KEY
+SCN_DOUBLECLICK
+SCN_UPDATEUI
+SCN_MODIFIED
+SCN_MACRORECORD
+SCN_MARGINCLICK
+SCN_NEEDSHOWN
+SCN_PAINTED
+SCN_USERLISTSELECTION
+SCN_URIDROPPED
+SCN_DWELLSTART
+SCN_DWELLEND
+SCN_ZOOM
+SCN_HOTSPOTCLICK
+SCN_HOTSPOTDOUBLECLICK
+SCN_HOTSPOTRELEASECLICK
+SCN_INDICATORCLICK
+SCN_INDICATORRELEASE
+SCN_CALLTIPCLICK
+SCN_AUTOCSELECTION
+SCN_AUTOCCANCELLED
+SCN_AUTOCCHARDELETED
+SCN_FOCUSIN
+SCN_FOCUSOUT
+SCN_AUTOCCOMPLETED
+SCN_MARGINRIGHTCLICK
+
+SCI_SETMODEVENTMASK(int eventMask)
+SCI_GETMODEVENTMASK → int
+SCI_SETMOUSEDWELLTIME(int periodMilliseconds)
+SCI_GETMOUSEDWELLTIME → int
+SCI_SETIDENTIFIER(int identifier)
+SCI_GETIDENTIFIER → int
+
+SCEN_CHANGE
+SCEN_SETFOCUS
+SCEN_KILLFOCUS

@@ -1,0 +1,10 @@
+======================================
+sci-text.h
+======================================
+SCI_CHANGEINSERTION(int length, const char *text)
+SCI_GETTEXTRANGE(<unused>, Sci_TextRange *tr) → int
+SCI_ADDSTYLEDTEXT(int length, cell *c)
+SCI_GETSTYLEDTEXT(<unused>, Sci_TextRange *tr) → int
+SCI_TARGETASUTF8(<unused>, char *s) → int
+SCI_ENCODEDFROMUTF8(const char *utf8, char *encoded) → int
+SCI_SETLENGTHFORENCODE(int bytes)
