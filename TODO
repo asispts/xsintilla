@@ -8,3 +8,25 @@ SCI_GETSTYLEDTEXT(<unused>, Sci_TextRange *tr) → int
 SCI_TARGETASUTF8(<unused>, char *s) → int
 SCI_ENCODEDFROMUTF8(const char *utf8, char *encoded) → int
 SCI_SETLENGTHFORENCODE(int bytes)
+
+======================================
+sci-styledef.h
+======================================
+SCI_STYLESETSIZEFRACTIONAL(int style, int sizeHundredthPoints)
+SCI_STYLEGETSIZEFRACTIONAL(int style) → int
+SCI_STYLESETBOLD(int style, bool bold)
+SCI_STYLEGETBOLD(int style) → bool
+SCI_STYLESETITALIC(int style, bool italic)
+SCI_STYLEGETITALIC(int style) → bool
+SCI_STYLESETUNDERLINE(int style, bool underline)
+SCI_STYLEGETUNDERLINE(int style) → bool
+SCI_STYLESETEOLFILLED(int style, bool eolFilled)
+SCI_STYLEGETEOLFILLED(int style) → bool
+SCI_STYLESETCHARACTERSET(int style, int characterSet)
+SCI_STYLEGETCHARACTERSET(int style) → int
+SCI_STYLESETCASE(int style, int caseVisible)
+SCI_STYLEGETCASE(int style) → int
+SCI_STYLESETCHANGEABLE(int style, bool changeable)
+SCI_STYLEGETCHANGEABLE(int style) → bool
+SCI_STYLESETHOTSPOT(int style, bool hotspot)
+SCI_STYLEGETHOTSPOT(int style) → bool

@@ -2,6 +2,7 @@
 #include "xsi-behaviour.h"
 #include "xsi-event.h"
 #include "sci-text.h"
+#include "sci-styledef.h"
 
 // group, name, type, flags, getter, setter, param, editor, enumCount, enumEntries, attributeCount, attributes
 REALproperty xsiProperties[] = {
@@ -31,6 +32,23 @@ REALmethodDefinition xsiMethods[] = {
     { (REALproc) xsim_getStyleAt,               REALnoImplementation, "GetStyleAt(pos as Integer) as Integer" },
     { (REALproc) xsim_releaseAllExtendedStyles, REALnoImplementation, "ReleaseAllExtendedStyle()" },
     { (REALproc) xsim_allocateExtendedStyles,   REALnoImplementation, "AllocateExtendedStyles(numberStyles as Integer) as Integer" },
+    /*
+     * sci-styledef.h
+     */
+    { (REALproc) xsim_styleResetDefault,        REALnoImplementation, "StyleResetDefault()" },
+    { (REALproc) xsim_styleClearAll,            REALnoImplementation, "StyleClearAll()" },
+    { (REALproc) xsim_styleSetFont,             REALnoImplementation, "StyleSetFont(style as Integer, fontName as String)" },
+    { (REALproc) xsim_styleGetFont,             REALnoImplementation, "StyleGetFont(style as Integer) as String" },
+    { (REALproc) xsim_styleSetSize,             REALnoImplementation, "StyleSetSize(style as Integer, sizePoints as Integer)" },
+    { (REALproc) xsim_styleGetSize,             REALnoImplementation, "StyleGetSize(style as Integer) as Integer" },
+    { (REALproc) xsim_styleSetWeight,           REALnoImplementation, "StyleSetWeight(style as Integer, weight as Integer)" },
+    { (REALproc) xsim_styleGetWeight,           REALnoImplementation, "StyleGetWeight(style as Integer) as Integer" },
+    { (REALproc) xsim_styleSetFore,             REALnoImplementation, "StyleSetForecolor(style as Integer, fore as Color)" },
+    { (REALproc) xsim_styleGetFore,             REALnoImplementation, "StyleGetForecolor(style as Integer) as Color" },
+    { (REALproc) xsim_styleSetBack,             REALnoImplementation, "StyleSetBackcolor(style as Integer, back as Color)" },
+    { (REALproc) xsim_styleGetBack,             REALnoImplementation, "StyleGetBackcolor(style as Integer) as Color" },
+    { (REALproc) xsim_styleSetVisible,          REALnoImplementation, "StyleSetVisible(style as Integer, visible as Boolean)" },
+    { (REALproc) xsim_styleGetVisible,          REALnoImplementation, "StyleGetVisible(style as Integer) as Boolean" },
 };
 
 REALevent xsiEvents[] = {
