@@ -1,31 +1,119 @@
 #include "stdlib.h"
 #include "sci-selection.h"
 
-int xsim_getTextLength(REALcontrolInstance ctl)
+
+/*=========================
+ * properties
+ * ========================*/
+int xsim_getTextLength(REALcontrolInstance ctl, int unused)
 {
     return xsi_ssm(xsciObj(ctl), SCI_GETTEXTLENGTH, 0, 0);
 }
 
-int xsim_getLength(REALcontrolInstance ctl)
+int xsim_getLength(REALcontrolInstance ctl, int unused)
 {
     return xsi_ssm(xsciObj(ctl), SCI_GETLENGTH, 0, 0);
 }
 
-int xsim_getLineCount(REALcontrolInstance ctl)
+int xsim_getLineCount(REALcontrolInstance ctl, int unused)
 {
     return xsi_ssm(xsciObj(ctl), SCI_GETLINECOUNT, 0, 0);
 }
 
-int xsim_lineOnScreen(REALcontrolInstance ctl)
+int xsim_lineOnScreen(REALcontrolInstance ctl, int unused)
 {
     return xsi_ssm(xsciObj(ctl), SCI_LINESONSCREEN, 0, 0);
 }
 
-bool xsim_getModify(REALcontrolInstance ctl)
+bool xsim_getModify(REALcontrolInstance ctl, int unused)
 {
     return xsi_ssm(xsciObj(ctl), SCI_GETMODIFY, 0, 0);
 }
 
+int xsim_getCurrentPos(REALcontrolInstance ctl, int unused)
+{
+    return xsi_ssm(xsciObj(ctl), SCI_GETCURRENTPOS, 0, 0);
+}
+
+void xsim_setCurrentPos(REALcontrolInstance ctl, int unused, int caret)
+{
+    xsi_ssm(xsciObj(ctl), SCI_SETCURRENTPOS, caret, 0);
+}
+
+int xsim_getAnchor(REALcontrolInstance ctl, int unused)
+{
+    return xsi_ssm(xsciObj(ctl), SCI_GETANCHOR, 0, 0);
+}
+
+void xsim_setAnchor(REALcontrolInstance ctl, int unused, int anchor)
+{
+    xsi_ssm(xsciObj(ctl), SCI_SETANCHOR, anchor, 0);
+}
+
+void xsim_setSelectionStart(REALcontrolInstance ctl, int unused, int anchor)
+{
+    xsi_ssm(xsciObj(ctl), SCI_SETSELECTIONSTART, anchor, 0);
+}
+
+int xsim_getSelectionStart(REALcontrolInstance ctl, int unused)
+{
+    return xsi_ssm(xsciObj(ctl), SCI_GETSELECTIONSTART, 0, 0);
+}
+
+void xsim_setSelectionEnd(REALcontrolInstance ctl, int unused, int caret)
+{
+    xsi_ssm(xsciObj(ctl), SCI_SETSELECTIONEND, caret, 0);
+}
+
+int xsim_getSelectionEnd(REALcontrolInstance ctl, int unused)
+{
+    return xsi_ssm(xsciObj(ctl), SCI_GETSELECTIONEND, 0, 0);
+}
+
+void xsim_hideSelection(REALcontrolInstance ctl, int unused, bool hide)
+{
+    xsi_ssm(xsciObj(ctl), SCI_HIDESELECTION, hide, 0);
+}
+
+REALstring xsim_getSeltext(REALcontrolInstance ctl, int unused)
+{
+    char *text = malloc(5*1024);
+    int length = xsi_ssm(xsciObj(ctl), SCI_GETSELTEXT, 0, (sptr_t)text);
+    REALstring txt = REALBuildStringWithEncoding(text, length, kREALTextEncodingUTF8);
+    REALLockString(txt);
+    free(text);
+    return txt;
+}
+
+bool xsim_selectionIsRectangle(REALcontrolInstance ctl, int unused)
+{
+    return xsi_ssm(xsciObj(ctl), SCI_SELECTIONISRECTANGLE, 0, 0);
+}
+
+void xsim_setSelectionMode(REALcontrolInstance ctl, int unused, int mode)
+{
+    xsi_ssm(xsciObj(ctl), SCI_SETSELECTIONMODE, mode, 0);
+}
+
+int xsim_getSelectionMode(REALcontrolInstance ctl, int unused)
+{
+    return xsi_ssm(xsciObj(ctl), SCI_GETSELECTIONMODE, 0, 0);
+}
+
+void xsim_setMouseSelectionRectangularSwitch(REALcontrolInstance ctl, int unused, bool mouseSwitch)
+{
+    xsi_ssm(xsciObj(ctl), SCI_SETMOUSESELECTIONRECTANGULARSWITCH, mouseSwitch, 0);
+}
+
+bool xsim_getMouseSelectionRectangularSwitch(REALcontrolInstance ctl, int unused)
+{
+    return xsi_ssm(xsciObj(ctl), SCI_GETMOUSESELECTIONRECTANGULARSWITCH, 0, 0);
+}
+
+
+/*=========================
+ * methods
+ * ========================*/
 void xsim_setSel(REALcontrolInstance ctl, int anchor, int caret)
 {
     xsi_ssm(xsciObj(ctl), SCI_SETSEL, anchor, caret);
@@ -39,46 +127,6 @@ void xsim_gotoPos(REALcontrolInstance ctl, int caret)
 void xsim_gotoLine(REALcontrolInstance ctl, int line)
 {
     xsi_ssm(xsciObj(ctl), SCI_GOTOLINE, line, 0);
-}
-
-int xsim_getCurrentPos(REALcontrolInstance ctl)
-{
-    return xsi_ssm(xsciObj(ctl), SCI_GETCURRENTPOS, 0, 0);
-}
-
-void xsim_setCurrentPos(REALcontrolInstance ctl, int caret)
-{
-    xsi_ssm(xsciObj(ctl), SCI_SETCURRENTPOS, caret, 0);
-}
-
-int xsim_getAnchor(REALcontrolInstance ctl)
-{
-    return xsi_ssm(xsciObj(ctl), SCI_GETANCHOR, 0, 0);
-}
-
-void xsim_setAnchor(REALcontrolInstance ctl, int anchor)
-{
-    xsi_ssm(xsciObj(ctl), SCI_SETANCHOR, anchor, 0);
-}
-
-void xsim_setSelectionStart(REALcontrolInstance ctl, int anchor)
-{
-    xsi_ssm(xsciObj(ctl), SCI_SETSELECTIONSTART, anchor, 0);
-}
-
-int xsim_getSelectionStart(REALcontrolInstance ctl)
-{
-    return xsi_ssm(xsciObj(ctl), SCI_GETSELECTIONSTART, 0, 0);
-}
-
-void xsim_setSelectionEnd(REALcontrolInstance ctl, int caret)
-{
-    xsi_ssm(xsciObj(ctl), SCI_SETSELECTIONEND, caret, 0);
-}
-
-int xsim_getSelectionEnd(REALcontrolInstance ctl)
-{
-    return xsi_ssm(xsciObj(ctl), SCI_GETSELECTIONEND, 0, 0);
 }
 
 void xsim_setEmptySelection(REALcontrolInstance ctl, int caret)
@@ -151,21 +199,6 @@ int xsim_pointYFromPosition(REALcontrolInstance ctl, int pos)
     return xsi_ssm(xsciObj(ctl), SCI_POINTYFROMPOSITION, pos, 0);
 }
 
-void xsim_hideSelection(REALcontrolInstance ctl, bool hide)
-{
-    xsi_ssm(xsciObj(ctl), SCI_HIDESELECTION, hide, 0);
-}
-
-REALstring xsim_getSeltext(REALcontrolInstance ctl)
-{
-    char *text = malloc(5*1024);
-    int length = xsi_ssm(xsciObj(ctl), SCI_GETSELTEXT, 0, (sptr_t)text);
-    REALstring txt = REALBuildStringWithEncoding(text, length, kREALTextEncodingUTF8);
-    REALLockString(txt);
-    free(text);
-    return txt;
-}
-
 REALstring xsim_getCurLine(REALcontrolInstance ctl, int length)
 {
     char *text = malloc(length+1);
@@ -174,21 +207,6 @@ REALstring xsim_getCurLine(REALcontrolInstance ctl, int length)
     REALLockString(txt);
     free(text);
     return txt;
-}
-
-bool xsim_selectionIsRectangle(REALcontrolInstance ctl)
-{
-    return xsi_ssm(xsciObj(ctl), SCI_SELECTIONISRECTANGLE, 0, 0);
-}
-
-void xsim_setSelectionMode(REALcontrolInstance ctl, int mode)
-{
-    xsi_ssm(xsciObj(ctl), SCI_SETSELECTIONMODE, mode, 0);
-}
-
-int xsim_getSelectionMode(REALcontrolInstance ctl)
-{
-    return xsi_ssm(xsciObj(ctl), SCI_GETSELECTIONMODE, 0, 0);
 }
 
 int xsim_getLineSelStartPosition(REALcontrolInstance ctl, int line)
@@ -249,14 +267,4 @@ void xsim_moveSelectedLinesUp(REALcontrolInstance ctl)
 void xsim_moveSelectedLinesDown(REALcontrolInstance ctl)
 {
     xsi_ssm(xsciObj(ctl), SCI_MOVESELECTEDLINESDOWN, 0, 0);
-}
-
-void xsim_setMouseSelectionRectangularSwitch(REALcontrolInstance ctl, bool mouseSwitch)
-{
-    xsi_ssm(xsciObj(ctl), SCI_SETMOUSESELECTIONRECTANGULARSWITCH, mouseSwitch, 0);
-}
-
-bool xsim_getMouseSelectionRectangularSwitch(REALcontrolInstance ctl)
-{
-    return xsi_ssm(xsciObj(ctl), SCI_GETMOUSESELECTIONRECTANGULARSWITCH, 0, 0);
 }
