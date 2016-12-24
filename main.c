@@ -106,6 +106,9 @@ REALcontrolBehaviour xsiBehavior = {
 };
 //declaration, reserved1, mFlags, attributeCount, attributes
 REALconstant xsiConstants[] = {
+    /*
+     * Margin type
+     */
     {"kMarginTypeSymbol as Integer = 0"},
     {"kMarginTypeNumber as Integer = 1"},
     {"kMarginTypeBackcolor as Integer = 2"},
@@ -113,6 +116,18 @@ REALconstant xsiConstants[] = {
     {"kMarginTypeText as Integer = 4"},
     {"kMarginTypeRText as Integer = 5"},
     {"kMarginTypeColour as Integer = 6"},
+    /*
+     * style definition
+     */
+    {"kStyleDefault as Integer = 32"},
+    {"kStyleLineNumber as Integer = 33"},
+    {"kStyleBraceLight as Integer = 34"},
+    {"kStyleBraceBad as Integer = 34"},
+    {"kStyleControlChar as Integer = 35"},
+    {"kStyleIndentGuide as Integer = 36"},
+    {"kStyleCalltip as Integer = 37"},
+    {"kStyleFoldDisplayText as Integer = 38"},
+    {"kStyleLastPredefined as Integer = 39"},
 };
 
 REALcontrol xsiControl = {
