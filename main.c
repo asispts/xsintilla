@@ -3,6 +3,7 @@
 #include "xsi-event.h"
 #include "sci-text.h"
 #include "sci-styledef.h"
+#include "sci-margin.h"
 
 // group, name, type, flags, getter, setter, param, editor, enumCount, enumEntries, attributeCount, attributes
 REALproperty xsiProperties[] = {
@@ -35,20 +36,31 @@ REALmethodDefinition xsiMethods[] = {
     /*
      * sci-styledef.h
      */
-    { (REALproc) xsim_styleResetDefault,        REALnoImplementation, "StyleResetDefault()" },
-    { (REALproc) xsim_styleClearAll,            REALnoImplementation, "StyleClearAll()" },
-    { (REALproc) xsim_styleSetFont,             REALnoImplementation, "StyleSetFont(style as Integer, fontName as String)" },
-    { (REALproc) xsim_styleGetFont,             REALnoImplementation, "StyleGetFont(style as Integer) as String" },
-    { (REALproc) xsim_styleSetSize,             REALnoImplementation, "StyleSetSize(style as Integer, sizePoints as Integer)" },
-    { (REALproc) xsim_styleGetSize,             REALnoImplementation, "StyleGetSize(style as Integer) as Integer" },
-    { (REALproc) xsim_styleSetWeight,           REALnoImplementation, "StyleSetWeight(style as Integer, weight as Integer)" },
-    { (REALproc) xsim_styleGetWeight,           REALnoImplementation, "StyleGetWeight(style as Integer) as Integer" },
-    { (REALproc) xsim_styleSetFore,             REALnoImplementation, "StyleSetForecolor(style as Integer, fore as Color)" },
-    { (REALproc) xsim_styleGetFore,             REALnoImplementation, "StyleGetForecolor(style as Integer) as Color" },
-    { (REALproc) xsim_styleSetBack,             REALnoImplementation, "StyleSetBackcolor(style as Integer, back as Color)" },
-    { (REALproc) xsim_styleGetBack,             REALnoImplementation, "StyleGetBackcolor(style as Integer) as Color" },
-    { (REALproc) xsim_styleSetVisible,          REALnoImplementation, "StyleSetVisible(style as Integer, visible as Boolean)" },
-    { (REALproc) xsim_styleGetVisible,          REALnoImplementation, "StyleGetVisible(style as Integer) as Boolean" },
+    { (REALproc) xsim_styleResetDefault,    REALnoImplementation, "StyleResetDefault()" },
+    { (REALproc) xsim_styleClearAll,        REALnoImplementation, "StyleClearAll()" },
+    { (REALproc) xsim_styleSetFont,         REALnoImplementation, "StyleSetFont(style as Integer, fontName as String)" },
+    { (REALproc) xsim_styleGetFont,         REALnoImplementation, "StyleGetFont(style as Integer) as String" },
+    { (REALproc) xsim_styleSetSize,         REALnoImplementation, "StyleSetSize(style as Integer, sizePoints as Integer)" },
+    { (REALproc) xsim_styleGetSize,         REALnoImplementation, "StyleGetSize(style as Integer) as Integer" },
+    { (REALproc) xsim_styleSetWeight,       REALnoImplementation, "StyleSetWeight(style as Integer, weight as Integer)" },
+    { (REALproc) xsim_styleGetWeight,       REALnoImplementation, "StyleGetWeight(style as Integer) as Integer" },
+    { (REALproc) xsim_styleSetFore,         REALnoImplementation, "StyleSetForecolor(style as Integer, fore as Color)" },
+    { (REALproc) xsim_styleGetFore,         REALnoImplementation, "StyleGetForecolor(style as Integer) as Color" },
+    { (REALproc) xsim_styleSetBack,         REALnoImplementation, "StyleSetBackcolor(style as Integer, back as Color)" },
+    { (REALproc) xsim_styleGetBack,         REALnoImplementation, "StyleGetBackcolor(style as Integer) as Color" },
+    { (REALproc) xsim_styleSetVisible,      REALnoImplementation, "StyleSetVisible(style as Integer, visible as Boolean)" },
+    { (REALproc) xsim_styleGetVisible,      REALnoImplementation, "StyleGetVisible(style as Integer) as Boolean" },
+    /*
+     * sci-margin.h
+     */
+    { (REALproc) xsim_getMargins,       REALnoImplementation, "Margins() as Integer" },
+    { (REALproc) xsim_setMargins,       REALnoImplementation, "Margins(assigns count as Integer)" },
+    { (REALproc) xsim_getMarginTypeN,   REALnoImplementation, "MarginType(margin as Integer) as Integer" },
+    { (REALproc) xsim_setMarginTypeN,   REALnoImplementation, "MarginType(margin as Integer, assigns marginType as Integer)" },
+    { (REALproc) xsim_getMarginWidthN,  REALnoImplementation, "MarginWidth(margin as Integer) as Integer" },
+    { (REALproc) xsim_setMarginWidthN,  REALnoImplementation, "MarginWidth(margin as Integer, assigns pixelWidth as Integer)" },
+    { (REALproc) xsim_getMarginBackN,   REALnoImplementation, "MarginBackcolor(margin as Integer) as Color" },
+    { (REALproc) xsim_setMarginBackN,   REALnoImplementation, "MarginBackcolor(margin as Integer, assigns back as Color)" },
 };
 
 REALevent xsiEvents[] = {

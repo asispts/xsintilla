@@ -30,3 +30,30 @@ SCI_STYLESETCHANGEABLE(int style, bool changeable)
 SCI_STYLEGETCHANGEABLE(int style) → bool
 SCI_STYLESETHOTSPOT(int style, bool hotspot)
 SCI_STYLEGETHOTSPOT(int style) → bool
+
+======================================
+sci-margin.h
+======================================
+SCI_SETMARGINMASKN(int margin, int mask)
+SCI_GETMARGINMASKN(int margin) → int
+SCI_SETMARGINSENSITIVEN(int margin, bool sensitive)
+SCI_GETMARGINSENSITIVEN(int margin) → bool
+SCI_SETMARGINCURSORN(int margin, int cursor)
+SCI_GETMARGINCURSORN(int margin) → int
+SCI_SETMARGINLEFT(<unused>, int pixelWidth)
+SCI_GETMARGINLEFT → int
+SCI_SETMARGINRIGHT(<unused>, int pixelWidth)
+SCI_GETMARGINRIGHT → int
+SCI_SETFOLDMARGINCOLOUR(bool useSetting, colour back)
+SCI_SETFOLDMARGINHICOLOUR(bool useSetting, colour fore)
+SCI_MARGINSETTEXT(int line, const char *text)
+SCI_MARGINGETTEXT(int line, char *text) → int
+SCI_MARGINSETSTYLE(int line, int style)
+SCI_MARGINGETSTYLE(int line) → int
+SCI_MARGINSETSTYLES(int line, const char *styles)
+SCI_MARGINGETSTYLES(int line, char *styles) → int
+SCI_MARGINTEXTCLEARALL
+SCI_MARGINSETSTYLEOFFSET(int style)
+SCI_MARGINGETSTYLEOFFSET → int
+SCI_SETMARGINOPTIONS(int marginOptions)
+SCI_GETMARGINOPTIONS → int
