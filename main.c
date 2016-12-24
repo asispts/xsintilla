@@ -5,6 +5,7 @@
 #include "sci-styledef.h"
 #include "sci-margin.h"
 #include "sci-selection.h"
+#include "sci-lexer.h"
 
 // group, name, type, flags, getter, setter, param, editor, enumCount, enumEntries, attributeCount, attributes
 REALproperty xsiProperties[] = {
@@ -86,6 +87,17 @@ REALproperty xsiProperties[] = {
         "", "mouseSelectionRectangularSwitch", "Boolean", REALconsoleSafe  | REALpropRuntimeOnly,
         (REALproc)xsip_getMouseSelectionRectangularSwitch, (REALproc)xsip_setMouseSelectionRectangularSwitch
     },
+    /*
+     * sci-selection.h
+     */
+    {
+        "", "lexer", "Sclex", REALconsoleSafe  | REALpropRuntimeOnly,
+        (REALproc)xsip_getLexer, (REALproc)xsip_setLexer
+    },
+    {
+        "", "lexerLanguage", "String", REALconsoleSafe  | REALpropRuntimeOnly,
+        (REALproc)xsip_getLexerLanguage, (REALproc)xsip_setLexerLanguage
+    },
 };
 
 //function, setterFunction, declaration, mFlags, attributeCount, attributes
@@ -166,6 +178,13 @@ REALmethodDefinition xsiMethods[] = {
     { (REALproc) xsim_chooseCaretX,                 REALnoImplementation, "ChooseCaretX()" },
     { (REALproc) xsim_moveSelectedLinesUp,          REALnoImplementation, "MoveSelectedLinesUp()" },
     { (REALproc) xsim_moveSelectedLinesDown,        REALnoImplementation, "MoveSelectedLinesDown()" },
+    /*
+     * sci-lexer.h
+     */
+    { (REALproc) xsim_colourise,   REALnoImplementation, "Colourise(posStart as Integer, posEnd as Integer)" },
+    { (REALproc) xsim_changeLexerState,   REALnoImplementation, "ChangeLexerState(posStart as Integer, posEnd as Integer) as Integer" },
+    { (REALproc) xsim_setKeywords,   REALnoImplementation, "SetKeywords(keywordSet as Integer, keywords as String)" },
+    { (REALproc) xsim_describeKeywordSets,   REALnoImplementation, "DescribeKeywordSets(description as String) as Integer" },
 };
 
 REALevent xsiEvents[] = {
@@ -267,14 +286,161 @@ REALcontrol xsiControl = {
     NULL,                               // delegates
     0,                                  // delegateCount
     NULL,                               // enums
-    0                                   // enumCount
+    0,                                  // enumCount
 #endif
     // end of structure
 };
 
 
 
+const char *EnumSclex[] = {
+    "Container = 0",
+    "Null = 1",
+    "Python = 2",
+    "CPP = 3",
+    "HTML = 4",
+    "XML = 5",
+    "PERL = 6",
+    "SQL = 7",
+    "VB = 8",
+    "Properties = 9",
+    "ErrorList = 10",
+    "Makefile = 11",
+    "Batch = 12",
+    "XCode = 13",
+    "LaTeX = 14",
+    "Lua = 15",
+    "Diff = 16",
+    "Conf = 17",
+    "Pascal = 18",
+    "Ave = 19",
+    "Ada = 20",
+    "Lisp = 21",
+    "Ruby = 22",
+    "Eifel = 23",
+    "EifelKW = 24",
+    "TCL = 25",
+    "nnCronTab = 26",
+    "BullAnt = 27",
+    "VBScript = 28",
+    "Baan = 31",
+    "Matlab = 32",
+    "Scriptol = 33",
+    "ASM = 34",
+    "CPPNoCase = 35",
+    "Fortran = 36",
+    "F77 = 37",
+    "CSS = 38",
+    "POV = 39",
+    "Lout = 40",
+    "eScript = 41",
+    "PS = 42",
+    "NSIS = 43",
+    "MMIXAL = 44",
+    "CLW = 45",
+    "CLWNoCase = 46",
+    "LOT = 47",
+    "YAML = 48",
+    "TEX = 49",
+    "Metapost = 50",
+    "PowerBasic = 51",
+    "Forth = 52",
+    "Erlang = 53",
+    "Octave = 54",
+    "MSSQL = 55",
+    "Verilog = 56",
+    "Kix = 57",
+    "Gui4CLI = 58",
+    "Specman = 59",
+    "AU3 = 60",
+    "APDL = 61",
+    "BASH = 62",
+    "ASN1 = 63",
+    "VHDL = 64",
+    "CAML = 65",
+    "BlitzBasic = 66",
+    "PureBasic = 67",
+    "Haskell = 68",
+    "PHP = 69",
+    "TADS3 = 70",
+    "Rebol = 71",
+    "SmallTalk = 72",
+    "FlagShip = 73",
+    "CSound = 74",
+    "FreeBasic = 75",
+    "InnoSetup = 76",
+    "Opal = 77",
+    "Spice = 78",
+    "D = 79",
+    "CMake = 80",
+    "GAP = 81",
+    "PLM = 82",
+    "Progress = 83",
+    "Abaqus = 84",
+    "Asymptote = 85",
+    "R = 86",
+    "Magik = 87",
+    "PowerShell = 88",
+    "MySQL = 89",
+    "PO = 90",
+    "TAL = 91",
+    "Cobol = 92",
+    "TACL = 93",
+    "Sorcus = 94",
+    "PowerPro = 95",
+    "Nimrod = 96",
+    "SML = 97",
+    "Markdown = 98",
+    "Txt2Tags = 99",
+    "A68K = 100",
+    "Modula = 101",
+    "CoffeScript = 102",
+    "TCMD = 103",
+    "AVS = 104",
+    "ECL = 105",
+    "OSCript = 106",
+    "VisualProlog = 107",
+    "LiterateHaskell = 108",
+    "StTxt = 109",
+    "KVIRC = 110",
+    "RUST = 111",
+    "DMAP = 112",
+    "LexAS = 113",
+    "DMIS = 114",
+    "Registry = 115",
+    "BibTeX = 116",
+    "SREC = 117",
+    "IHex = 118",
+    "TeHex = 119",
+    "JSON = 120",
+    "EdiFact = 121",
+    "Automatic = 1000",
+};
+
+//name, type, mFlags, fields, numFields, attributeCount, attributes
+REALenum xsiEnums[] = {
+    { "Sclex", NULL, REALScopeGlobal, EnumSclex, 103},
+};
+
+
+REALmoduleDefinition modXsintilla = {
+    kCurrentREALControlVersion,         // version
+    "ModXsintilla",                     // name
+    NULL,                               // methods
+    0,                                  // methodCount
+    NULL,                               // constants
+    0,                                  // constantCount
+    NULL,                               // properties
+    0,                                  // propertyCount
+    NULL,                               // structures
+    0,                                  // structureCount
+    xsiEnums,                           // enums
+    sizeof(xsiEnums)/sizeof(REALenum),  // enumCount
+};
+
+
 void PluginEntry()
 {
+    REALRegisterModule(&modXsintilla);
     REALRegisterControl(&xsiControl);
 }
