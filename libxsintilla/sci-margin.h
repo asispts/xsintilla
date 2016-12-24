@@ -7,9 +7,11 @@
 
 #include "xsintilla.h"
 
+//properties
+void xsim_setMargins(REALcontrolInstance ctl, int unused, int margins);
+int xsim_getMargins(REALcontrolInstance ctl, int unused);
+
 //computed methods
-void xsim_setMargins(REALcontrolInstance ctl, int margins);
-int xsim_getMargins(REALcontrolInstance ctl);
 void xsim_setMarginTypeN(REALcontrolInstance ctl, int margin, int marginType);
 int xsim_getMarginTypeN(REALcontrolInstance ctl, int margin);
 void xsim_setMarginWidthN(REALcontrolInstance ctl, int margin, int pixelWidth);

@@ -12,7 +12,11 @@ REALproperty xsiProperties[] = {
      * sci-text.h
      */
     { "", "readonly", "Boolean", REALconsoleSafe | REALpropRuntimeOnly, (REALproc)xsip_getReadonly, (REALproc)xsip_setReadonly },
-    { "", "text", "String", REALconsoleSafe  | REALpropRuntimeOnly, (REALproc)xsip_getText, (REALproc)xsip_setText }
+    { "", "text", "String", REALconsoleSafe  | REALpropRuntimeOnly, (REALproc)xsip_getText, (REALproc)xsip_setText },
+    /*
+     * sci-margin.h
+     */
+    { "", "marginCount", "Integer", REALconsoleSafe  | REALpropRuntimeOnly, (REALproc)xsim_getMargins, (REALproc)xsim_setMargins },
     /*
      * sci-selection.h
      */
@@ -57,8 +61,6 @@ REALmethodDefinition xsiMethods[] = {
     /*
      * sci-margin.h
      */
-    { (REALproc) xsim_getMargins,       REALnoImplementation, "Margins() as Integer" },
-    { (REALproc) xsim_setMargins,       REALnoImplementation, "Margins(assigns count as Integer)" },
     { (REALproc) xsim_getMarginTypeN,   REALnoImplementation, "MarginType(margin as Integer) as Integer" },
     { (REALproc) xsim_setMarginTypeN,   REALnoImplementation, "MarginType(margin as Integer, assigns marginType as Integer)" },
     { (REALproc) xsim_getMarginWidthN,  REALnoImplementation, "MarginWidth(margin as Integer) as Integer" },
