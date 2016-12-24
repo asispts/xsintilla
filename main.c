@@ -4,6 +4,7 @@
 #include "sci-text.h"
 #include "sci-styledef.h"
 #include "sci-margin.h"
+#include "sci-selection.h"
 
 // group, name, type, flags, getter, setter, param, editor, enumCount, enumEntries, attributeCount, attributes
 REALproperty xsiProperties[] = {
@@ -12,6 +13,9 @@ REALproperty xsiProperties[] = {
      */
     { "", "readonly", "Boolean", REALconsoleSafe | REALpropRuntimeOnly, (REALproc)xsip_getReadonly, (REALproc)xsip_setReadonly },
     { "", "text", "String", REALconsoleSafe  | REALpropRuntimeOnly, (REALproc)xsip_getText, (REALproc)xsip_setText }
+    /*
+     * sci-selection.h
+     */
 };
 
 //function, setterFunction, declaration, mFlags, attributeCount, attributes
@@ -61,6 +65,59 @@ REALmethodDefinition xsiMethods[] = {
     { (REALproc) xsim_setMarginWidthN,  REALnoImplementation, "MarginWidth(margin as Integer, assigns pixelWidth as Integer)" },
     { (REALproc) xsim_getMarginBackN,   REALnoImplementation, "MarginBackcolor(margin as Integer) as Color" },
     { (REALproc) xsim_setMarginBackN,   REALnoImplementation, "MarginBackcolor(margin as Integer, assigns back as Color)" },
+    /*
+     * sci-selection.h
+     */
+    { (REALproc) xsim_getTextLength,        REALnoImplementation, "TextLength() as Integer" },
+    { (REALproc) xsim_getLength,            REALnoImplementation, "Length() as Integer" },
+    { (REALproc) xsim_getLineCount,         REALnoImplementation, "LineCount() as Integer" },
+    { (REALproc) xsim_lineOnScreen,         REALnoImplementation, "LineOnScreen() as Integer" },
+    { (REALproc) xsim_getModify,            REALnoImplementation, "Modified() as Boolean" },
+    { (REALproc) xsim_setSel,               REALnoImplementation, "SetSel(anchor as Integer, caret as Integer)" },
+    { (REALproc) xsim_gotoPos,              REALnoImplementation, "GotoPosition(caret as Integer)" },
+    { (REALproc) xsim_gotoLine,       REALnoImplementation, "GotoLine(line as Integer)" },
+    { (REALproc) xsim_getCurrentPos,       REALnoImplementation, "CurrentPos() as Integer" },
+    { (REALproc) xsim_setCurrentPos,       REALnoImplementation, "CurrentPos(assigns caret as Integer)" },
+    { (REALproc) xsim_getAnchor,       REALnoImplementation, "Anchor() as Integer" },
+    { (REALproc) xsim_setAnchor,       REALnoImplementation, "Anchor(assigns anchorPos as Integer)" },
+    { (REALproc) xsim_getSelectionStart,       REALnoImplementation, "SelectionStart() as Integer" },
+    { (REALproc) xsim_setSelectionStart,       REALnoImplementation, "SelectionStart(assigns anchor as Integer)" },
+    { (REALproc) xsim_getSelectionEnd,       REALnoImplementation, "SelectionEnd() as Integer" },
+    { (REALproc) xsim_setSelectionEnd,       REALnoImplementation, "SelectionEnd(assigns caret as Integer)" },
+    { (REALproc) xsim_setEmptySelection,       REALnoImplementation, "EmptySelection(caret as Integer)" },
+    { (REALproc) xsim_selectAll,       REALnoImplementation, "SelectAll()" },
+    { (REALproc) xsim_lineFromPosition,       REALnoImplementation, "LineFromPosition(pos as Integer) as Integer" },
+    { (REALproc) xsim_positionFromLine,       REALnoImplementation, "PositionFromLine(line as Integer) as Integer" },
+    { (REALproc) xsim_getLineEndPosition,       REALnoImplementation, "LineEndPosition(line as Integer) as Integer" },
+    { (REALproc) xsim_lineLength,       REALnoImplementation, "LineLength(line as Integer) as Integer" },
+    { (REALproc) xsim_getColumn,       REALnoImplementation, "GetColumn(pos as Integer) as Integer" },
+    { (REALproc) xsim_findColumn,       REALnoImplementation, "FindColumn(line as Integer, column as Integer) as Integer" },
+    { (REALproc) xsim_positionFromPoint,       REALnoImplementation, "PositionFromPoint(x as Integer, y as Integer) as Integer" },
+    { (REALproc) xsim_positionFromPointClose,       REALnoImplementation, "PositionFromPointClose(x as Integer, y as Integer) as Integer" },
+    { (REALproc) xsim_charPositionFromPoint,       REALnoImplementation, "CharPositionFromPoint(x as Integer, y as Integer) as Integer" },
+    { (REALproc) xsim_charPositionFromPointClose,       REALnoImplementation, "CharPositionFromPointClose(x as Integer, y as Integer) as Integer" },
+    { (REALproc) xsim_pointXFromPosition,       REALnoImplementation, "PointXFromPosition(pos as Integer) as Integer" },
+    { (REALproc) xsim_pointYFromPosition,       REALnoImplementation, "PointYFromPosition(pos as Integer) as Integer" },
+    { (REALproc) xsim_hideSelection,       REALnoImplementation, "HideSelection(hide as Boolean)" },
+    { (REALproc) xsim_getSeltext,       REALnoImplementation, "GetSeltext() as String" },
+    { (REALproc) xsim_getCurLine,       REALnoImplementation, "GetCurLine(length as Integer) as String" },
+    { (REALproc) xsim_selectionIsRectangle,       REALnoImplementation, "SelectionIsRectangle() as Boolean" },
+    { (REALproc) xsim_getSelectionMode,       REALnoImplementation, "SelectionMode() as Integer" },
+    { (REALproc) xsim_setSelectionMode,       REALnoImplementation, "SelectionMode(assigns mode as Integer)" },
+    { (REALproc) xsim_getLineSelStartPosition,       REALnoImplementation, "GetLineSelStartPosition(line as Integer) as Integer" },
+    { (REALproc) xsim_getLineSelEndPosition,       REALnoImplementation, "GetLineSelEndPosition(line as Integer) as Integer" },
+    { (REALproc) xsim_moveCaretInsideView,       REALnoImplementation, "MoveCaretInsideView()" },
+    { (REALproc) xsim_positionBefore,       REALnoImplementation, "PositionBefore(pos as Integer) as Integer" },
+    { (REALproc) xsim_positionAfter,       REALnoImplementation, "PositionAfter(pos as Integer) as Integer" },
+    { (REALproc) xsim_positionRelative,       REALnoImplementation, "PositionRelative(pos as Integer, relative as Integer) as Integer" },
+    { (REALproc) xsim_countCharacters,       REALnoImplementation, "CountCharacters(posStart as Integer, posEnd as Integer) as Integer" },
+    { (REALproc) xsim_textWidth,       REALnoImplementation, "TextWidth(style as Integer, text as String) as Integer" },
+    { (REALproc) xsim_textHeight,       REALnoImplementation, "TextHeight(line as Integer) as Integer" },
+    { (REALproc) xsim_chooseCaretX,       REALnoImplementation, "ChooseCaretX()" },
+    { (REALproc) xsim_moveSelectedLinesUp,       REALnoImplementation, "MoveSelectedLinesUp()" },
+    { (REALproc) xsim_moveSelectedLinesDown,       REALnoImplementation, "MoveSelectedLinesDown()" },
+    { (REALproc) xsim_getMouseSelectionRectangularSwitch,       REALnoImplementation, "TextLength() as Boolean" },
+    { (REALproc) xsim_setMouseSelectionRectangularSwitch,       REALnoImplementation, "TextLength(assigns mouseSwitch as Boolean)" },
 };
 
 REALevent xsiEvents[] = {
