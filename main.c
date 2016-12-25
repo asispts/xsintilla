@@ -9,6 +9,7 @@
 
 #include "modsclex.h"
 #include "modscstyle.h"
+#include "modscmargintype.h"
 
 // group, name, type, flags, getter, setter, param, editor, enumCount, enumEntries, attributeCount, attributes
 REALproperty xsiProperties[] = {
@@ -183,19 +184,6 @@ REALcontrolBehaviour xsiBehavior = {
     NULL                        // reserved3
     // end of struct
 };
-//declaration, reserved1, mFlags, attributeCount, attributes
-REALconstant xsiConstants[] = {
-    /*
-     * Margin type
-     */
-    {"kMarginTypeSymbol as Integer = 0"},
-    {"kMarginTypeNumber as Integer = 1"},
-    {"kMarginTypeBackcolor as Integer = 2"},
-    {"kMarginTypeForecolor as Integer = 3"},
-    {"kMarginTypeText as Integer = 4"},
-    {"kMarginTypeRText as Integer = 5"},
-    {"kMarginTypeColour as Integer = 6"},
-};
 
 REALcontrol xsiControl = {
     kCurrentREALControlVersion,                         // version
@@ -219,8 +207,8 @@ REALcontrol xsiControl = {
     NULL,                               // interfaces
     NULL,                               // attributes
     0,                                  // attributeCount
-    xsiConstants,                                       // constants
-    sizeof(xsiConstants)/sizeof(REALconstant),          // constantCount
+    NULL,                               // constants
+    0,                                  // constantCount
 #if kCurrentREALControlVersion >= 11
     NULL,                               // sharedProperties
     0,                                  // sharedPropertyCount
@@ -238,5 +226,6 @@ void PluginEntry()
 {
     registerSclex();
     registerScstyle();
+    registerScmarginType();
     REALRegisterControl(&xsiControl);
 }
