@@ -12,92 +12,34 @@ REALproperty xsiProperties[] = {
     /*
      * sci-text.h
      */
-    {
-        "", "readonly", "Boolean", REALconsoleSafe | REALpropRuntimeOnly,
-        (REALproc)xsip_getReadonly, (REALproc)xsip_setReadonly
-    },
-    {
-        "", "text", "String", REALconsoleSafe  | REALpropRuntimeOnly,
-        (REALproc)xsip_getText, (REALproc)xsip_setText
-    },
+    { "", "readonly", "Boolean", REALconsoleSafe | REALpropRuntimeOnly, (REALproc)xsip_getReadonly, (REALproc)xsip_setReadonly },
+    { "", "text", "String", REALconsoleSafe  | REALpropRuntimeOnly, (REALproc)xsip_getText, (REALproc)xsip_setText },
     /*
      * sci-margin.h
      */
-    {
-        "", "marginCount", "Integer", REALconsoleSafe  | REALpropRuntimeOnly,
-        (REALproc)xsip_getMargins, (REALproc)xsip_setMargins
-    },
+    { "", "marginCount", "Integer", REALconsoleSafe  | REALpropRuntimeOnly, (REALproc)xsip_getMargins, (REALproc)xsip_setMargins },
     /*
      * sci-selection.h
      */
-    {
-        "", "textLength", "Integer", REALconsoleSafe  | REALpropRuntimeOnly,
-        (REALproc)xsip_getTextLength, REALnoImplementation
-    },
-    {
-        "", "length", "Integer", REALconsoleSafe  | REALpropRuntimeOnly,
-        (REALproc)xsip_getLength, REALnoImplementation
-    },
-    {
-        "", "lineCount", "Integer", REALconsoleSafe  | REALpropRuntimeOnly,
-        (REALproc)xsip_getLineCount, REALnoImplementation
-    },
-    {
-        "", "lineOnScreen", "Integer", REALconsoleSafe  | REALpropRuntimeOnly,
-        (REALproc)xsip_lineOnScreen, REALnoImplementation
-    },
-    {
-        "", "modified", "Boolean", REALconsoleSafe  | REALpropRuntimeOnly,
-        (REALproc)xsip_getModify, REALnoImplementation
-    },
-    {
-        "", "currentPos", "Integer", REALconsoleSafe  | REALpropRuntimeOnly,
-        (REALproc)xsip_getCurrentPos, (REALproc)xsip_setCurrentPos
-    },
-    {
-        "", "anchor", "Integer", REALconsoleSafe  | REALpropRuntimeOnly,
-        (REALproc)xsip_getAnchor, (REALproc)xsip_setAnchor
-    },
-    {
-        "", "selectionStart", "Integer", REALconsoleSafe  | REALpropRuntimeOnly,
-        (REALproc)xsip_getSelectionStart, (REALproc)xsip_setSelectionStart
-    },
-    {
-        "", "selectionEnd", "Integer", REALconsoleSafe  | REALpropRuntimeOnly,
-        (REALproc)xsip_getSelectionEnd, (REALproc)xsip_setSelectionEnd
-    },
-    {
-        "", "hideSelection", "Boolean", REALconsoleSafe  | REALpropRuntimeOnly,
-        REALnoImplementation, (REALproc)xsip_hideSelection
-    },
-    {
-        "", "seltext", "String", REALconsoleSafe  | REALpropRuntimeOnly,
-        (REALproc)xsip_getSeltext, REALnoImplementation
-    },
-    {
-        "", "selectionIsRectangle", "Boolean", REALconsoleSafe  | REALpropRuntimeOnly,
-        (REALproc)xsip_selectionIsRectangle, REALnoImplementation
-    },
-
-    {
-        "", "selectionMode", "Integer", REALconsoleSafe  | REALpropRuntimeOnly,
-        (REALproc)xsip_getSelectionMode, (REALproc)xsip_setSelectionMode
-    },
-    {
-        "", "mouseSelectionRectangularSwitch", "Boolean", REALconsoleSafe  | REALpropRuntimeOnly,
-        (REALproc)xsip_getMouseSelectionRectangularSwitch, (REALproc)xsip_setMouseSelectionRectangularSwitch
-    },
+    { "", "textLength", "Integer", REALconsoleSafe  | REALpropRuntimeOnly, (REALproc)xsip_getTextLength, REALnoImplementation },
+    { "", "length", "Integer", REALconsoleSafe  | REALpropRuntimeOnly, (REALproc)xsip_getLength, REALnoImplementation },
+    { "", "lineCount", "Integer", REALconsoleSafe  | REALpropRuntimeOnly, (REALproc)xsip_getLineCount, REALnoImplementation },
+    { "", "lineOnScreen", "Integer", REALconsoleSafe  | REALpropRuntimeOnly, (REALproc)xsip_lineOnScreen, REALnoImplementation },
+    { "", "modified", "Boolean", REALconsoleSafe  | REALpropRuntimeOnly, (REALproc)xsip_getModify, REALnoImplementation },
+    { "", "currentPos", "Integer", REALconsoleSafe  | REALpropRuntimeOnly, (REALproc)xsip_getCurrentPos, (REALproc)xsip_setCurrentPos },
+    { "", "anchor", "Integer", REALconsoleSafe  | REALpropRuntimeOnly, (REALproc)xsip_getAnchor, (REALproc)xsip_setAnchor },
+    { "", "selectionStart", "Integer", REALconsoleSafe  | REALpropRuntimeOnly, (REALproc)xsip_getSelectionStart, (REALproc)xsip_setSelectionStart },
+    { "", "selectionEnd", "Integer", REALconsoleSafe  | REALpropRuntimeOnly, (REALproc)xsip_getSelectionEnd, (REALproc)xsip_setSelectionEnd },
+    { "", "hideSelection", "Boolean", REALconsoleSafe  | REALpropRuntimeOnly, REALnoImplementation, (REALproc)xsip_hideSelection },
+    { "", "seltext", "String", REALconsoleSafe  | REALpropRuntimeOnly, (REALproc)xsip_getSeltext, REALnoImplementation },
+    { "", "selectionIsRectangle", "Boolean", REALconsoleSafe  | REALpropRuntimeOnly, (REALproc)xsip_selectionIsRectangle, REALnoImplementation },
+    { "", "selectionMode", "Integer", REALconsoleSafe  | REALpropRuntimeOnly, (REALproc)xsip_getSelectionMode, (REALproc)xsip_setSelectionMode },
+    { "", "mouseSelectionRectangularSwitch", "Boolean", REALconsoleSafe  | REALpropRuntimeOnly, (REALproc)xsip_getMouseSelectionRectangularSwitch, (REALproc)xsip_setMouseSelectionRectangularSwitch },
     /*
-     * sci-selection.h
+     * sci-lexer.h
      */
-    {
-        "", "lexer", "Sclex", REALconsoleSafe  | REALpropRuntimeOnly,
-        (REALproc)xsip_getLexer, (REALproc)xsip_setLexer
-    },
-    {
-        "", "lexerLanguage", "String", REALconsoleSafe  | REALpropRuntimeOnly,
-        (REALproc)xsip_getLexerLanguage, (REALproc)xsip_setLexerLanguage
-    },
+    { "", "lexer", "Sclex", REALconsoleSafe  | REALpropRuntimeOnly, (REALproc)xsip_getLexer, (REALproc)xsip_setLexer },
+    { "", "lexerLanguage", "String", REALconsoleSafe  | REALpropRuntimeOnly, (REALproc)xsip_getLexerLanguage, (REALproc)xsip_setLexerLanguage },
 };
 
 //function, setterFunction, declaration, mFlags, attributeCount, attributes
@@ -145,6 +87,8 @@ REALmethodDefinition xsiMethods[] = {
     { (REALproc) xsim_setMarginWidthN,  REALnoImplementation, "MarginWidth(margin as Integer, assigns pixelWidth as Integer)" },
     { (REALproc) xsim_getMarginBackN,   REALnoImplementation, "MarginBackcolor(margin as Integer) as Color" },
     { (REALproc) xsim_setMarginBackN,   REALnoImplementation, "MarginBackcolor(margin as Integer, assigns back as Color)" },
+    { (REALproc) xsim_getMarginMaskN,   REALnoImplementation, "MarginMask(margin as Integer) as Integer" },
+    { (REALproc) xsim_setMarginMaskN,   REALnoImplementation, "MarginMask(margin as Integer, assigns mask as Integer)" },
     /*
      * sci-selection.h
      */
@@ -181,10 +125,18 @@ REALmethodDefinition xsiMethods[] = {
     /*
      * sci-lexer.h
      */
-    { (REALproc) xsim_colourise,   REALnoImplementation, "Colourise(posStart as Integer, posEnd as Integer)" },
-    { (REALproc) xsim_changeLexerState,   REALnoImplementation, "ChangeLexerState(posStart as Integer, posEnd as Integer) as Integer" },
-    { (REALproc) xsim_setKeywords,   REALnoImplementation, "SetKeywords(keywordSet as Integer, keywords as String)" },
-    { (REALproc) xsim_describeKeywordSets,   REALnoImplementation, "DescribeKeywordSets(description as String) as Integer" },
+    { (REALproc) xsim_colourise,            REALnoImplementation, "Colourise(posStart as Integer, posEnd as Integer)" },
+    { (REALproc) xsim_changeLexerState,     REALnoImplementation, "ChangeLexerState(posStart as Integer, posEnd as Integer) as Integer" },
+    { (REALproc) xsim_setKeywords,          REALnoImplementation, "SetKeywords(keywordSet as Integer, keywords as String)" },
+    { (REALproc) xsim_describeKeywordSets,  REALnoImplementation, "DescribeKeywordSets(description as String) as Integer" },
+    { (REALproc) xsim_setProperty,          REALnoImplementation, "SetProperty(key as String, value as String)" },
+    { (REALproc) xsim_getProperty,          REALnoImplementation, "GetProperty(key as String) as String" },
+    { (REALproc) xsim_loadLexerLibrary,     REALnoImplementation, "LoadLexerLibrary(path as String)" },
+    { (REALproc) xsim_propertyNames,        REALnoImplementation, "PropertyNames() as String" },
+    { (REALproc) xsim_propertyType,         REALnoImplementation, "PropertyType(name as String) as Integer" },
+    { (REALproc) xsim_describeProperty,     REALnoImplementation, "DescribeProperty(name as String) as String" },
+    { (REALproc) xsim_getPropertyExpanded,  REALnoImplementation, "GetPropertyExpanded(key as String, value as String) as Integer" },
+    { (REALproc) xsim_getPropertyInt,       REALnoImplementation, "GetPropertyInt(key as String, defaultValue as Integer) as Integer" },
 };
 
 REALevent xsiEvents[] = {

@@ -46,3 +46,13 @@ RBColor xsim_getMarginBackN(REALcontrolInstance ctl, int margin)
 {
     return xsi_invertColor(xsi_ssm(xsciObj(ctl), SCI_GETMARGINBACKN, margin, 0));
 }
+
+void xsim_setMarginMaskN(REALcontrolInstance ctl, int margin, int mask)
+{
+    xsi_ssm(xsciObj(ctl), SCI_SETMARGINMASKN, margin, mask);
+}
+
+int xsim_getMarginMaskN(REALcontrolInstance ctl, int margin)
+{
+    return xsi_ssm(xsciObj(ctl), SCI_GETMARGINMASKN, margin, 0);
+}

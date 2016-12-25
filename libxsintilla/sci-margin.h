@@ -18,5 +18,7 @@ void xsim_setMarginWidthN(REALcontrolInstance ctl, int margin, int pixelWidth);
 int xsim_getMarginWidthN(REALcontrolInstance ctl, int margin);
 void xsim_setMarginBackN(REALcontrolInstance ctl, int margin, RBColor back);
 RBColor xsim_getMarginBackN(REALcontrolInstance ctl, int margin);
+void xsim_setMarginMaskN(REALcontrolInstance ctl, int margin, int mask);
+int xsim_getMarginMaskN(REALcontrolInstance ctl, int margin);
 
 #endif //SCI_MARGIN_H
