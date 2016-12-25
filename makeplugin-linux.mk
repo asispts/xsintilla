@@ -4,7 +4,7 @@ vpath %.cpp $(SDKGLUECODEDIR)
 
 
 OBJNAME 			= PluginMain.o main.o xsintilla.o xsi-behaviour.o xsi-event.o\
-						modsclex.o \
+						modsclex.o modscstyle.o \
 						XojoGraphics.o \
 						sci-text.o sci-styledef.o sci-margin.o sci-selection.o \
 						sci-lexer.o
