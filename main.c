@@ -22,6 +22,10 @@ REALproperty xsiProperties[] = {
      * sci-margin.h
      */
     { "", "marginCount", "Integer", REALconsoleSafe  | REALpropRuntimeOnly, (REALproc)xsip_getMargins, (REALproc)xsip_setMargins },
+    { "", "marginLeft", "Integer", REALconsoleSafe  | REALpropRuntimeOnly, (REALproc)xsip_getMarginLeft, (REALproc)xsip_setMarginLeft },
+    { "", "marginRight", "Integer", REALconsoleSafe  | REALpropRuntimeOnly, (REALproc)xsip_getMarginRight, (REALproc)xsip_setMarginRight },
+    { "", "marginStyleOffset", "Integer", REALconsoleSafe  | REALpropRuntimeOnly, (REALproc)xsip_marginGetStyleOffset, (REALproc)xsip_marginSetStyleOffset },
+    { "", "marginOptions", "Integer", REALconsoleSafe  | REALpropRuntimeOnly, (REALproc)xsip_getMarginOptions, (REALproc)xsip_setMarginOptions },
     /*
      * sci-selection.h
      */
@@ -93,6 +97,20 @@ REALmethodDefinition xsiMethods[] = {
     { (REALproc) xsim_setMarginBackN,   REALnoImplementation, "MarginBackcolor(margin as Integer, assigns back as Color)" },
     { (REALproc) xsim_getMarginMaskN,   REALnoImplementation, "MarginMask(margin as Integer) as Integer" },
     { (REALproc) xsim_setMarginMaskN,   REALnoImplementation, "MarginMask(margin as Integer, assigns mask as Integer)" },
+    { (REALproc) xsim_getMarginSensitiveN,   REALnoImplementation, "MarginSensitive(margin as Integer) as Boolean" },
+    { (REALproc) xsim_setMarginSensitiveN,   REALnoImplementation, "MarginSensitive(margin as Integer, assigns sensitive as Boolean)" },
+    { (REALproc) xsim_getMarginCursorN,   REALnoImplementation, "MarginCursor(margin as Integer) as Integer" },
+    { (REALproc) xsim_setMarginCursorN,   REALnoImplementation, "MarginCursor(margin as Integer, assigns cursor as Integer)" },
+    { (REALproc) xsim_marginGetText,   REALnoImplementation, "MarginText(line as Integer) as String" },
+    { (REALproc) xsim_marginSetText,   REALnoImplementation, "MarginText(line as Integer, assigns text as String)" },
+    { (REALproc) xsim_marginGetStyle,   REALnoImplementation, "MarginStyle(line as Integer) as Integer" },
+    { (REALproc) xsim_marginSetStyle,   REALnoImplementation, "MarginStyle(line as Integer, assigns style as Integer)" },
+    { (REALproc) xsim_marginGetStyles,   REALnoImplementation, "MarginStyleStr(line as Integer) as String" },
+    { (REALproc) xsim_marginSetStyles,   REALnoImplementation, "MarginStyleStr(line as Integer, assigns styles as String)" },
+
+    { (REALproc) xsim_setFoldMarginColour,   REALnoImplementation, "FoldMarginColour(useSetting as Boolean, back as Color)" },
+    { (REALproc) xsim_setFoldMarginHiColour,   REALnoImplementation, "FoldMarginHiColour(useSetting as Boolean, fore as Color)" },
+    { (REALproc) xsim_marginTextClearAll,   REALnoImplementation, "MarginTextClearAll()" },
     /*
      * sci-selection.h
      */
