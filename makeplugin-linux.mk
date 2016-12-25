@@ -1,15 +1,16 @@
 VPATH 				= $(BUILDDIR)
-vpath %.c $(SRCROOT) $(LIBXOJO) $(LIBXSINTILLA)
+vpath %.c $(SRCROOT) $(LIBXOJO) $(LIBXSINTILLA) $(MODULES)
 vpath %.cpp $(SDKGLUECODEDIR)
 
 
 OBJNAME 			= PluginMain.o main.o xsintilla.o xsi-behaviour.o xsi-event.o\
+						modsclex.o \
 						XojoGraphics.o \
 						sci-text.o sci-styledef.o sci-margin.o sci-selection.o \
 						sci-lexer.o
 
 
-INCLUDES 			= -I$(SDKINCLUDEDIR) -I$(LIBXOJO) -I$(LIBXSINTILLA) -include $(PREFIXHEADER)
+INCLUDES 			= -I$(SDKINCLUDEDIR) -I$(LIBXOJO) -I$(LIBXSINTILLA) -I$(MODULES) -include $(PREFIXHEADER)
 ifdef PLUGIN_ARCH64
 ARCH_FLAGS 			= -m64
 else

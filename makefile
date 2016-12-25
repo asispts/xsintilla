@@ -9,6 +9,7 @@ export LIBROOT 			= $(ROOTDIR)/lib
 export SRCROOT 			= $(ROOTDIR)/src
 export LIBXOJO 			= $(ROOTDIR)/libxojo
 export LIBXSINTILLA 	= $(ROOTDIR)/libxsintilla
+export MODULES 			= $(ROOTDIR)/modules
 
 ##
 # plugin directories definition
