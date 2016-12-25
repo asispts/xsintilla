@@ -39,10 +39,10 @@ int xsim_getMarginWidthN(REALcontrolInstance ctl, int margin)
 
 void xsim_setMarginBackN(REALcontrolInstance ctl, int margin, RBColor back)
 {
-    xsi_ssm(xsciObj(ctl), SCI_SETMARGINBACKN, margin, back);
+    xsi_ssm(xsciObj(ctl), SCI_SETMARGINBACKN, margin, xsi_invertColor(back));
 }
 
 RBColor xsim_getMarginBackN(REALcontrolInstance ctl, int margin)
 {
-    return xsi_ssm(xsciObj(ctl), SCI_GETMARGINBACKN, margin, 0);
+    return xsi_invertColor(xsi_ssm(xsciObj(ctl), SCI_GETMARGINBACKN, margin, 0));
 }

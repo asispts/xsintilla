@@ -1,5 +1,6 @@
 #include "stdlib.h"
 #include "sci-styledef.h"
+#include <stdio.h>
 
 void xsim_styleResetDefault(REALcontrolInstance ctl)
 {
@@ -49,22 +50,22 @@ int xsim_styleGetWeight(REALcontrolInstance ctl, int style)
 
 void xsim_styleSetFore(REALcontrolInstance ctl, int style, RBColor fore)
 {
-    xsi_ssm(xsciObj(ctl), SCI_STYLESETFORE, style, fore);
+    xsi_ssm(xsciObj(ctl), SCI_STYLESETFORE, style, xsi_invertColor(fore));
 }
 
 RBColor xsim_styleGetFore(REALcontrolInstance ctl, int style)
 {
-    return xsi_ssm(xsciObj(ctl), SCI_STYLEGETFORE, style, 0);
+    return xsi_invertColor(xsi_ssm(xsciObj(ctl), SCI_STYLEGETFORE, style, 0));
 }
 
 void xsim_styleSetBack(REALcontrolInstance ctl, int style, RBColor back)
 {
-    xsi_ssm(xsciObj(ctl), SCI_STYLESETBACK, style, back);
+    xsi_ssm(xsciObj(ctl), SCI_STYLESETBACK, style, xsi_invertColor(back));
 }
 
 RBColor xsim_styleGetBack(REALcontrolInstance ctl, int style)
 {
-    return xsi_ssm(xsciObj(ctl), SCI_STYLEGETBACK, style, 0);
+    return xsi_invertColor(xsi_ssm(xsciObj(ctl), SCI_STYLEGETBACK, style, 0));
 }
 
 void xsim_styleSetVisible(REALcontrolInstance ctl, int style, bool visible)
