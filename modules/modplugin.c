@@ -9,6 +9,7 @@
 #include "sci-lexer.h"
 #include "sci-marker.h"
 
+
 // group, name, type, flags, getter, setter, param, editor, enumCount, enumEntries, attributeCount, attributes
 REALproperty xsiProperties[] = {
     /*+++++++++++++++++++++++++
@@ -123,7 +124,8 @@ REALproperty xsiProperties[] = {
     {
         "", "mouseSelectionRectangularSwitch", "Boolean",
         REALconsoleSafe  | REALpropRuntimeOnly,
-        (REALproc)xsip_getMouseSelectionRectangularSwitch, (REALproc)xsip_setMouseSelectionRectangularSwitch
+        (REALproc)xsip_getMouseSelectionRectangularSwitch,
+        (REALproc)xsip_setMouseSelectionRectangularSwitch
     },
 
     /*+++++++++++++++++++++++++
@@ -139,8 +141,31 @@ REALproperty xsiProperties[] = {
         REALconsoleSafe  | REALpropRuntimeOnly,
         (REALproc)xsip_getLexerLanguage, (REALproc)xsip_setLexerLanguage
     },
-};
 
+    /*+++++++++++++++++++++++++
+     * sci-marker.h
+     +++++++++++++++++++++++++*/
+    {
+        "", "rgbaImageSetWidth", "Integer",
+        REALconsoleSafe  | REALpropRuntimeOnly,
+        REALnoImplementation, (REALproc)xsip_rgbaImageSetWidth
+    },
+    {
+        "", "rgbaImageSetHeight", "Integer",
+        REALconsoleSafe  | REALpropRuntimeOnly,
+        REALnoImplementation, (REALproc)xsip_rgbaImageSetHeight
+    },
+    {
+        "", "rgbaImageSetScale", "Integer",
+        REALconsoleSafe  | REALpropRuntimeOnly,
+        REALnoImplementation, (REALproc)xsip_rgbaImageSetScale
+    },
+    {
+        "", "markerEnableHighlight", "Boolean",
+        REALconsoleSafe  | REALpropRuntimeOnly,
+        REALnoImplementation, (REALproc)xsip_markerEnableHighlight
+    },
+};
 
 
 //function, setterFunction, declaration, mFlags, attributeCount, attributes
@@ -389,12 +414,12 @@ REALmethodDefinition xsiMethods[] = {
     {
         (REALproc) xsim_setFoldMarginColour,
         REALnoImplementation,
-        "FoldMarginColour(useSetting as Boolean, back as Color)"
+        "FoldMarginColour(useSetting as Boolean, assigns back as Color)"
     },
     {
         (REALproc) xsim_setFoldMarginHiColour,
         REALnoImplementation,
-        "FoldMarginHiColour(useSetting as Boolean, fore as Color)"
+        "FoldMarginHiColour(useSetting as Boolean, assigns fore as Color)"
     },
     {
         (REALproc) xsim_marginTextClearAll,
@@ -625,7 +650,67 @@ REALmethodDefinition xsiMethods[] = {
     {
         (REALproc) xsim_markerDefine,
         REALnoImplementation,
-        "MarkerDefine(markerNumber as Integer, markerSymbol as Integer)"
+        "MarkerDefine(markerNumber as ScMarkNum, markerSymbol as ScMarker)"
+    },
+    {
+        (REALproc) xsim_markerSetFore,
+        REALnoImplementation,
+        "MarkerSetFore(markerNumber as ScMarkNum, assigns fore as Color)"
+    },
+    {
+        (REALproc) xsim_markerSetBack,
+        REALnoImplementation,
+        "MarkerSetBack(markerNumber as ScMarkNum, assigns back as Color)"
+    },
+    {
+        (REALproc) xsim_markerSetBackSelected,
+        REALnoImplementation,
+        "MarkerSetBackSelected(markerNumber as ScMarkNum, assigns back as Color)"
+    },
+    {
+        (REALproc) xsim_markerDefineRgbaImage,
+        REALnoImplementation,
+        "MarkerDefineRgbaImage(markerNumber as ScMarkNum, assigns pixel as String)"
+    },
+    {
+        (REALproc) xsim_markerSymbolDefined,
+        REALnoImplementation,
+        "MarkerSymbolDefined(markerNumber as ScMarkNum) as Integer"
+    },
+    {
+        (REALproc) xsim_markerAdd,
+        REALnoImplementation,
+        "MarkerAdd(line as Integer, markerNumber as ScMarkNum) as Integer"
+    },
+    {
+        (REALproc) xsim_markerAddSet,
+        REALnoImplementation,
+        "MarkerAddSet(line as Integer, markerNumber as ScMarkNum)"
+    },
+    {
+        (REALproc) xsim_markerDelete,
+        REALnoImplementation,
+        "MarkerDelete(line as Integer, markerNumber as ScMarkNum)"
+    },
+    {
+        (REALproc) xsim_markerDeleteAll,
+        REALnoImplementation,
+        "MarkerDeleteAll(markerNumber as ScMarkNum)"
+    },
+    {
+        (REALproc) xsim_markerGet,
+        REALnoImplementation,
+        "MarkerGet(line as Integer) as Integer"
+    },
+    {
+        (REALproc) xsim_markerNext,
+        REALnoImplementation,
+        "MarkerNext(lineStart as Integer, markerMask as Integer) as Integer"
+    },
+    {
+        (REALproc) xsim_markerPrevious,
+        REALnoImplementation,
+        "MarkerPrevious(lineStart as Integer, markerMask as Integer) as Integer"
     },
 };
 
