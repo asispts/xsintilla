@@ -8,10 +8,6 @@ RBInteger getHandle(REALcontrolInstance ctl)
 {
     RBInteger handle = 0;
     REALGetPropValueInteger((REALobject)ctl, "Handle", &handle);
-    if (handle == 0) {
-        fprintf(stderr, "Can't get control handle.\n");
-        return 0;
-    }
     return handle;
 }
 
@@ -57,7 +53,6 @@ void Constructor(REALcontrolInstance ctl)
 
 
     xsi_registerEventFunction(ctl);
-    g_warning("Constructor\n");
 }
 
 void Destructor(REALcontrolInstance ctl)
@@ -72,7 +67,7 @@ void OnOpen(REALcontrolInstance ctl)
 {
     xsiControlData *data = xsi_getControlData(ctl);
     RBInteger handle = getHandle(ctl);
-    if (handle == 0) return;//exit(EXIT_FAILURE);
+    if (handle == 0) return;
 
     data->canvas = (GtkWidget *) handle;
     data->canvasCont = (GtkContainer *) gtk_widget_get_parent(data->canvas);
@@ -91,7 +86,6 @@ void OnOpen(REALcontrolInstance ctl)
 
 void OnDrawOffscreen(REALcontrolInstance ctl, REALgraphics g)
 {
-    g_warning("OnDrawOffscreen\n");
     Rect r = xsi_getRect(ctl);
     int width = r.right - r.left;
     int height = r.bottom - r.top;
