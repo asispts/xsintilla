@@ -63,9 +63,9 @@ void Constructor(REALcontrolInstance ctl)
 void Destructor(REALcontrolInstance ctl)
 {
     xsiControlData *data = xsi_getControlData(ctl);
-    g_object_unref(data->editor);
-    g_object_unref(data->sci);
-    free(data);
+    data->editor = NULL;
+    data->sci = NULL;
+    data = NULL;
 }
 
 void OnOpen(REALcontrolInstance ctl)
