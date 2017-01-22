@@ -4,12 +4,10 @@ vpath %.cpp $(SDKGLUECODEDIR)
 
 
 OBJNAME 			= PluginMain.o main.o xsintilla.o xsi-behaviour.o xsi-event.o\
-						modsclex.o modscstyle.o modscmargintype.o modscmarker.o \
-						modplugin.o \
+						modsclex.o modplugin.o modenums.o modscstyle.o \
 						XojoGraphics.o \
 						sci-text.o sci-styledef.o sci-margin.o sci-selection.o \
 						sci-lexer.o sci-marker.o
-
 
 INCLUDES 			= -I$(SDKINCLUDEDIR) -I$(LIBXOJO) -I$(LIBXSINTILLA) -I$(MODULES) -include $(PREFIXHEADER)
 ifdef PLUGIN_ARCH64
@@ -42,7 +40,7 @@ $(BUILDDIR)/%.o: %.cpp
 
 LEXEROBJS 			= $(wildcard $(SCIBUILD)/Lex*.o)
 ARSCINTILLA 		= $(SCIBUILD)/scintilla.a
-PLUGIN 				= $(addprefix $(LIBDIR)/, $(APPNAME))
+PLUGIN 				= $(addprefix $(LIBDIR)/, $(APPNAME).so)
 
 all: $(PLUGIN)
 

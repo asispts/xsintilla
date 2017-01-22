@@ -3,6 +3,7 @@
 
 //declaration, reserved1, mFlags, attributeCount, attributes
 static REALconstant sclexConstants[] = {
+    // SCLEX_CONTAINER, SCLEX_AUTOMATIC
     {"Container as Integer = 0", 0, REALScopeProtected},
     {"Automatic as Integer = 1000", 0, REALScopeProtected},
 
@@ -194,6 +195,7 @@ static REALconstant sclexConstants[] = {
     //{"DMIS as Integer = 114", 0, REALScopeProtected},
     //{"EdiFact as Integer = 121", 0, REALScopeProtected},
 };
+
 
 static REALmoduleDefinition modSclex = {
     kCurrentREALControlVersion,                     // version
