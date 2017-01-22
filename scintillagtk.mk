@@ -47,15 +47,16 @@ ifdef NO_CXX11_REGEX
 REFLAGS			= -DNO_CXX11_REGEX
 endif
 
-ifdef DEBUG
-ifdef CLANG
-CTFLAGS			= -DDEBUG -g -fsanitize=$(SANITIZE) $(CXXBASEFLAGS) $(THREADFLAGS)
-else
-CTFLAGS			= -DDEBUG -g $(CXXBASEFLAGS) $(THREADFLAGS)
-endif
-else
+#ifdef DEBUG
+#ifdef CLANG
+#CTFLAGS			= -DDEBUG -g -fsanitize=$(SANITIZE) $(CXXBASEFLAGS) $(THREADFLAGS)
+#else
+#CTFLAGS			= -DDEBUG -g $(CXXBASEFLAGS) $(THREADFLAGS)
+#endif
+#else
+#CTFLAGS			= -DNDEBUG -Os $(CXXBASEFLAGS) $(THREADFLAGS)
+#endif
 CTFLAGS			= -DNDEBUG -Os $(CXXBASEFLAGS) $(THREADFLAGS)
-endif
 #--std=gnu++0x
 CXXTFLAGS:=--std=c++0x $(CTFLAGS) $(REFLAGS)
 CONFIGFLAGS:=$(shell pkg-config --cflags $(GTKVERSION))
