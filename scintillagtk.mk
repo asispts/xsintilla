@@ -56,8 +56,8 @@ endif
 else
 CTFLAGS			= -DNDEBUG -Os $(CXXBASEFLAGS) $(THREADFLAGS)
 endif
-
-CXXTFLAGS:=--std=gnu++0x $(CTFLAGS) $(REFLAGS)
+#--std=gnu++0x
+CXXTFLAGS:=--std=c++0x $(CTFLAGS) $(REFLAGS)
 CONFIGFLAGS:=$(shell pkg-config --cflags $(GTKVERSION))
 
 ifdef PLUGIN_ARCH64

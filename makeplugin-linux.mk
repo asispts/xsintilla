@@ -4,10 +4,10 @@ vpath %.cpp $(SDKGLUECODEDIR)
 
 
 OBJNAME 			= PluginMain.o main.o xsintilla.o xsi-behaviour.o xsi-event.o\
-						modsclex.o modscstyle.o modscmargintype.o \
+						modsclex.o modscstyle.o modscmargintype.o modscmarker.o \
 						XojoGraphics.o \
 						sci-text.o sci-styledef.o sci-margin.o sci-selection.o \
-						sci-lexer.o
+						sci-lexer.o sci-marker.o
 
 
 INCLUDES 			= -I$(SDKINCLUDEDIR) -I$(LIBXOJO) -I$(LIBXSINTILLA) -I$(MODULES) -include $(PREFIXHEADER)
@@ -28,8 +28,9 @@ PLUGINFLAGS 		= -DIGNOREQT -D__INTEL__ -DLINUX=1 -D__GCC__
 CC 					= codelite-cc gcc
 CXX 				= codelite-cc g++
 CFLAGS 				= -Wall -g -O0 $(ARCH_FLAGS) $(PICFLAGS) $(INCLUDES) $(DEPRECATED)
-CXXFLAGS 			= -Wall -g -O0 $(ARCH_FLAGS) $(PICFLAGS) $(INCLUDES) $(DEPRECATED)
+CXXFLAGS 			= --std=c++0x -Wall -g -O0 $(ARCH_FLAGS) $(PICFLAGS) $(INCLUDES) $(DEPRECATED)
 LDLIBS 				= -lstdc++ -lm -lgmodule-2.0 `pkg-config --libs gtk+-2.0`
+
 $(BUILDDIR)/%.o: %.c
 	@echo "----------Compiling $*"
 	$(CC) $(CFLAGS) $(PLUGINFLAGS) $(SCINTILLAFLAGS) -c $< -o $@

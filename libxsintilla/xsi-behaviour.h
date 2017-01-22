@@ -8,5 +8,4 @@ void Destructor(REALcontrolInstance ctl);
 void OnOpen(REALcontrolInstance ctl);
 void OnDrawOffscreen(REALcontrolInstance ctl, REALgraphics g);
 void OnStateChanged(REALcontrolInstance, uint32_t changedField);
-
 #endif //XSINTILLA_BEHAVIOUR_H

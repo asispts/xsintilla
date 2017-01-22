@@ -6,10 +6,12 @@
 #include "sci-margin.h"
 #include "sci-selection.h"
 #include "sci-lexer.h"
+#include "sci-marker.h"
 
 #include "modsclex.h"
 #include "modscstyle.h"
 #include "modscmargintype.h"
+#include "modscmarker.h"
 
 // group, name, type, flags, getter, setter, param, editor, enumCount, enumEntries, attributeCount, attributes
 REALproperty xsiProperties[] = {
@@ -159,6 +161,10 @@ REALmethodDefinition xsiMethods[] = {
     { (REALproc) xsim_describeProperty,     REALnoImplementation, "DescribeProperty(name as String) as String" },
     { (REALproc) xsim_getPropertyExpanded,  REALnoImplementation, "GetPropertyExpanded(key as String, value as String) as Integer" },
     { (REALproc) xsim_getPropertyInt,       REALnoImplementation, "GetPropertyInt(key as String, defaultValue as Integer) as Integer" },
+    /*
+     * sci-marker.h
+     */
+    { (REALproc) xsim_markerDefine, REALnoImplementation, "MarkerDefine(markerNumber as Integer, markerSymbol as Integer)" },
 };
 
 REALevent xsiEvents[] = {
@@ -245,5 +251,6 @@ void PluginEntry()
     registerSclex();
     registerScstyle();
     registerScmarginType();
+    registerScmarker();
     REALRegisterControl(&xsiControl);
 }

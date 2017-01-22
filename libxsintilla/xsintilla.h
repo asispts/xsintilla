@@ -11,9 +11,10 @@
 REALcontrol xsiControl;
 
 typedef struct {
-    GtkWidget* editor;
-    ScintillaObject* sci;
+    GtkWidget *editor;
+    ScintillaObject *sci;
     GtkContainer *canvasCont;
+    GtkWidget *canvas;
 } xsiControlData;
 
 xsiControlData *xsi_getControlData(REALcontrolInstance ctl);
@@ -21,5 +22,6 @@ Rect xsi_getRect(REALcontrolInstance ctl);
 sptr_t xsi_ssm(ScintillaObject *, unsigned int, uptr_t, sptr_t);
 ScintillaObject *xsciObj(REALcontrolInstance ctl);
 RBColor xsi_invertColor(RBColor color);
+char *widgetType(GtkWidget *widget);
 
 #endif //XSINTILLA_CONTROL_H

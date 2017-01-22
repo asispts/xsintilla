@@ -47,3 +47,29 @@ SCI_GETSTYLEFROMSUBSTYLE(int subStyle) → int
 SCI_GETPRIMARYSTYLEFROMSTYLE(int style) → int
 SCI_SETIDENTIFIERS(int style, const char *identifiers)
 SCI_PRIVATELEXERCALL(int operation, int pointer) → int
+
+
+======================================
+sci-marker.h
+======================================
+SCI_MARKERDEFINE(int markerNumber, int markerSymbol)
+SCI_MARKERDEFINEPIXMAP(int markerNumber, const char *pixmap)
+SCI_RGBAIMAGESETWIDTH(int width)
+SCI_RGBAIMAGESETHEIGHT(int height)
+SCI_RGBAIMAGESETSCALE(int scalePercent)
+SCI_MARKERDEFINERGBAIMAGE(int markerNumber, const char *pixels)
+SCI_MARKERSYMBOLDEFINED(int markerNumber) → int
+SCI_MARKERSETFORE(int markerNumber, colour fore)
+SCI_MARKERSETBACK(int markerNumber, colour back)
+SCI_MARKERSETBACKSELECTED(int markerNumber, colour back)
+SCI_MARKERENABLEHIGHLIGHT(bool enabled)
+SCI_MARKERSETALPHA(int markerNumber, alpha alpha)
+SCI_MARKERADD(int line, int markerNumber) → int
+SCI_MARKERADDSET(int line, int markerSet)
+SCI_MARKERDELETE(int line, int markerNumber)
+SCI_MARKERDELETEALL(int markerNumber)
+SCI_MARKERGET(int line) → int
+SCI_MARKERNEXT(int lineStart, int markerMask) → int
+SCI_MARKERPREVIOUS(int lineStart, int markerMask) → int
+SCI_MARKERLINEFROMHANDLE(int markerHandle) → int
+SCI_MARKERDELETEHANDLE(int markerHandle)
