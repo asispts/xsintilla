@@ -803,8 +803,27 @@ REALmethodDefinition xsiMethods[] = {
 
 REALevent xsiEvents[] = {
     // declaration, forSystemUse, attributeCount, attributes
-    {"StyleNeeded()"},
-    {"CharAdded(keyCode as Integer)"},
+    {"AutocCompleted(ch as Integer, listCompletionMethod as Integer)"},
+    {"AutocSelection(position as Integer, ch as Integer, listCompletionMethod as Integer)"},
+    {"CallTipClick(position as Integer)"},
+    {"CharAdded(ch as Integer)"},
+    {"DoubleClick(position as Integer, modifiers as Integer)"},
+    {"DwellEnd(position as Integer, x as Integer, y as Integer)"},
+    {"DwellStart(position as Integer, x as Integer, y as Integer)"},
+    {"HotspotClick(position as Integer, modifiers as Integer)"},
+    {"HotspotDoubleClick(position as Integer, modifiers as Integer)"},
+    {"HotspotReleaseClick(position as Integer, modifiers as Integer)"},
+    {"IndicatorClick(position as Integer, modifiers as Integer)"},
+    {"IndicatorRelease(position as Integer, modifiers as Integer)"},
+    {"ScnKey(ch as Integer)"},
+    {"MacroRecord(message as Integer, wParam as Integer, lParam as Integer)"},
+    {"MarginClick(position as Integer, margin as Integer)"},
+    {"Modified(position as Integer, modificationType as Integer, text as String, length as Integer, linesAdded as Integer, line as Integer, foldLevelNow as Integer, foldLevelPrev as Integer, token as Integer, annotationLinesAdded as Integer)"},
+    {"NeedShown(position as Integer)"},
+    {"StyleNeeded(position as Integer)"},
+    {"UpdateUI(updated as Integer)"},
+    {"UriDropped(text as String)"},
+    {"UserListSelection(position as Integer, ch as Integer, text as String, listType as Integer, listCompletionMethod as Integer)"},
 };
 
 REALcontrolBehaviour xsiBehavior = {
