@@ -48,11 +48,6 @@ void Constructor(REALcontrolInstance ctl)
     xsiControlData *data = xsi_getControlData(ctl);
     data->editor = scintilla_new();
     data->sci = SCINTILLA(data->editor);
-    g_signal_connect(data->sci, SCINTILLA_NOTIFY,
-                     G_CALLBACK(sci_eventHandler), NULL);
-
-
-    xsi_registerEventFunction(ctl);
 }
 
 void Destructor(REALcontrolInstance ctl)
@@ -82,6 +77,10 @@ void OnOpen(REALcontrolInstance ctl)
     gtk_widget_show_all(data->editor);
     gtk_widget_grab_focus(data->editor);
     xsi_ssm(data->sci, SCI_STYLECLEARALL, 0, 0);
+
+    g_signal_connect(data->sci, SCINTILLA_NOTIFY,
+                     G_CALLBACK(sci_eventHandler), NULL);
+    xsi_registerEventFunction(ctl);
 }
 
 void OnDrawOffscreen(REALcontrolInstance ctl, REALgraphics g)
@@ -99,7 +98,6 @@ void OnDrawOffscreen(REALcontrolInstance ctl, REALgraphics g)
 
 void OnStateChanged(REALcontrolInstance ctl, uint32_t changedField)
 {
-    printf("OnStateChanged: changedField = %ul\n", changedField);
     if (changedField == kBoundsChanged || changedField == kEnabledChanged) {
         resizeControl(ctl);
     }

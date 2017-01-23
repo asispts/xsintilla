@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "xsi-event.h"
 
 static REALcontrolInstance me;
@@ -9,7 +10,6 @@ void xsi_registerEventFunction(REALcontrolInstance ctl)
     me = ctl;
     RaiseStyleNeeded = (fpVoidEvent) REALGetEventInstance(ctl, &xsiControl.events[xse_StyleNeeded]);
     RaiseCharAdded = (fpVoidEventInt) REALGetEventInstance(ctl, &xsiControl.events[xse_CharAdded]);
-
 }
 
 void sci_eventHandler(ScintillaObject *sci, gint controlID,
@@ -18,6 +18,7 @@ void sci_eventHandler(ScintillaObject *sci, gint controlID,
     (void) *sci;
     (void) controlID;
     (void) userData;
+
 
     switch (scinotify->nmhdr.code) {
     case SCN_STYLENEEDED:
@@ -30,13 +31,18 @@ void sci_eventHandler(ScintillaObject *sci, gint controlID,
     case SCN_CHARADDED:
         if(RaiseCharAdded) RaiseCharAdded(me, scinotify->ch);
         break;
+
+        // ignore reporting these events
+    case SCN_MODIFIED:
+    case SCN_SAVEPOINTLEFT:
+    case SCN_FOCUSIN:
+    case SCN_FOCUSOUT:
+    case SCN_KEY:
+        break;
         // Others
     case SCN_SAVEPOINTREACHED:
-    case SCN_SAVEPOINTLEFT:
     case SCN_MODIFYATTEMPTRO:
-    case SCN_KEY:
     case SCN_DOUBLECLICK:
-    case SCN_MODIFIED:
     case SCN_MACRORECORD:
     case SCN_MARGINCLICK:
     case SCN_NEEDSHOWN:
@@ -54,8 +60,6 @@ void sci_eventHandler(ScintillaObject *sci, gint controlID,
     case SCN_AUTOCCANCELLED:
     case SCN_AUTOCCHARDELETED:
     case SCN_HOTSPOTRELEASECLICK:
-    case SCN_FOCUSIN:
-    case SCN_FOCUSOUT:
     case SCN_AUTOCCOMPLETED:
         //break;
     default:

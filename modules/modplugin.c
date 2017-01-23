@@ -8,6 +8,7 @@
 #include "sci-selection.h"
 #include "sci-lexer.h"
 #include "sci-marker.h"
+#include "sci-autoc.h"
 
 
 // group, name, type, flags, getter, setter, param, editor, enumCount, enumEntries, attributeCount, attributes
@@ -164,6 +165,58 @@ REALproperty xsiProperties[] = {
         "", "markerEnableHighlight", "Boolean",
         REALconsoleSafe  | REALpropRuntimeOnly,
         REALnoImplementation, (REALproc)xsip_markerEnableHighlight
+    },
+
+    /*+++++++++++++++++++++++++
+     * sci-autoc.h
+     +++++++++++++++++++++++++*/
+    {
+        "", "autocIgnoreCase", "Boolean", REALconsoleSafe | REALpropRuntimeOnly,
+        (REALproc)xsip_autocGetIgnoreCase, (REALproc)xsip_autocSetIgnoreCase
+    },
+    {
+        "", "autocSeparator", "Integer", REALconsoleSafe | REALpropRuntimeOnly,
+        (REALproc)xsip_autocGetSeparator, (REALproc)xsip_autocSetSeparator
+    },
+    {
+        "", "autocCancelAtStart", "Boolean", REALconsoleSafe | REALpropRuntimeOnly,
+        (REALproc)xsip_autocGetCancelAtStart, (REALproc)xsip_autocSetCancelAtStart
+    },
+    {
+        "", "autocChooseSingle", "Boolean", REALconsoleSafe | REALpropRuntimeOnly,
+        (REALproc)xsip_autocGetChooseSingle, (REALproc)xsip_autocSetChooseSingle
+    },
+    {
+        "", "autocCaseInsensitiveBehaviour", "Integer", REALconsoleSafe | REALpropRuntimeOnly,
+        (REALproc)xsip_autocGetCaseInsensitiveBehaviour, (REALproc)xsip_autocSetCaseInsensitiveBehaviour
+    },
+    {
+        "", "autocMulti", "Integer", REALconsoleSafe | REALpropRuntimeOnly,
+        (REALproc)xsip_autocGetMulti, (REALproc)xsip_autocSetMulti
+    },
+    {
+        "", "autocOrder", "Integer", REALconsoleSafe | REALpropRuntimeOnly,
+        (REALproc)xsip_autocGetOrder, (REALproc)xsip_autocSetOrder
+    },
+    {
+        "", "autocAutoHide", "Boolean", REALconsoleSafe | REALpropRuntimeOnly,
+        (REALproc)xsip_autocGetAutoHide, (REALproc)xsip_autocSetAutoHide
+    },
+    {
+        "", "autocDropRestOfWord", "Boolean", REALconsoleSafe | REALpropRuntimeOnly,
+        (REALproc)xsip_autocGetDropRestOfWord, (REALproc)xsip_autocSetDropRestOfWord
+    },
+    {
+        "", "autocTypeSeparator", "Integer", REALconsoleSafe | REALpropRuntimeOnly,
+        (REALproc)xsip_autocGetTypeSeparator, (REALproc)xsip_autocSetTypeSeparator
+    },
+    {
+        "", "autocMaxHeight", "Integer", REALconsoleSafe | REALpropRuntimeOnly,
+        (REALproc)xsip_autocGetMaxHeight, (REALproc)xsip_autocSetMaxHeight
+    },
+    {
+        "", "autocMaxWidth", "Integer", REALconsoleSafe | REALpropRuntimeOnly,
+        (REALproc)xsip_autocGetMaxWidth, (REALproc)xsip_autocSetMaxWidth
     },
 };
 
@@ -711,6 +764,40 @@ REALmethodDefinition xsiMethods[] = {
         (REALproc) xsim_markerPrevious,
         REALnoImplementation,
         "MarkerPrevious(lineStart as Integer, markerMask as Integer) as Integer"
+    },
+
+    /*+++++++++++++++++++++++++
+     * sci-autoc.h
+     +++++++++++++++++++++++++*/
+    {
+        (REALproc) xsim_autocShow,
+        REALnoImplementation,
+        "AutocShow(lengthEntered as Integer, itemList as String)"
+    },
+    { (REALproc) xsim_autocCancel, REALnoImplementation, "AutocCancel()" },
+    { (REALproc) xsim_autocActive, REALnoImplementation, "AutocActive() as Boolean" },
+    { (REALproc) xsim_autocComplete, REALnoImplementation, "AutocComplete()" },
+    { (REALproc) xsim_autocPosStart, REALnoImplementation, "AutocPosStart() as Integer"},
+    {
+        (REALproc) xsim_autocStops,
+        REALnoImplementation,
+        "AutocStops(characterSet as String)"
+    },
+    {
+        (REALproc) xsim_autocSelect,
+        REALnoImplementation,
+        "AutocSelect(selectText as String)"
+    },
+    { (REALproc) xsim_autocGetCurrent, REALnoImplementation, "AutocGetCurrent()" },
+    {
+        (REALproc) xsim_autocGetCurrentText,
+        REALnoImplementation,
+        "AutocGetCurrentText(text as String) as Integer"
+    },
+    {
+        (REALproc) xsim_autocSetFillUps,
+        REALnoImplementation,
+        "AutocSetFillUps(characterSet as String)"
     },
 };
 
