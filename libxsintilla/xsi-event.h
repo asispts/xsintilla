@@ -29,7 +29,7 @@ typedef void (*fpStyleNeeded)(REALcontrolInstance, Sci_Position);
 typedef void (*fpUpdateUI)(REALcontrolInstance, int);
 typedef void (*fpUriDropped)(REALcontrolInstance, REALstring);
 typedef void (*fpUserListSelection)(REALcontrolInstance, Sci_Position, int, REALstring, int, int);
-
+typedef void (*fpEvent)(REALcontrolInstance);
 
 // Events definition
 enum xsi_events {
@@ -54,6 +54,17 @@ enum xsi_events {
     xse_UpdateUI,
     xse_UriDropped,
     xse_UserListSelection,
+    xse_SavePointReached,
+    xse_SavePointLeft,
+    xse_ModifyAtTempTro,
+    xse_Zoom,
+    xse_AutocCancelled,
+    xse_AutocCharDeleted,
+    xse_FocusIn,
+    xse_FocusOut,
+    xse_MarginRightClick,
+    xse_painted
 };
+
 
 #endif //XSINTILLA_EVENT_H

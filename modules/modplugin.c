@@ -824,6 +824,16 @@ REALevent xsiEvents[] = {
     {"UpdateUI(updated as Integer)"},
     {"UriDropped(text as String)"},
     {"UserListSelection(position as Integer, ch as Integer, text as String, listType as Integer, listCompletionMethod as Integer)"},
+    {"SavePointReached()"},
+    {"SavePointLeft()"},
+    {"ModifyAtTempTro()"},
+    {"Zoom()"},
+    {"AutocCancelled()"},
+    {"AutocCharDeleted()"},
+    {"FocusIn()"},
+    {"FocusOut()"},
+    {"MarginRightClick()"},
+    {"Painted()"},
 };
 
 REALcontrolBehaviour xsiBehavior = {

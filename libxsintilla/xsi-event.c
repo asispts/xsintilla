@@ -25,6 +25,16 @@ static fpUpdateUI RaiseUpdateUI = NULL;
 static fpUriDropped RaiseUriDropped = NULL;
 static fpUserListSelection RaiseUserListSelection = NULL;
 
+static fpEvent RaiseSavePointReached = NULL;
+static fpEvent RaiseSavePointLeft = NULL;
+static fpEvent RaiseModifyAtTempTro = NULL;
+static fpEvent RaiseZoom = NULL;
+static fpEvent RaiseAutocCancelled = NULL;
+static fpEvent RaiseAutocCharDeleted = NULL;
+static fpEvent RaiseFocusIn = NULL;
+static fpEvent RaiseFocusOut = NULL;
+static fpEvent RaiseMarginRightClick = NULL;
+static fpEvent RaisePainted = NULL;
 
 
 void xsi_registerEventFunction(REALcontrolInstance ctl)
@@ -51,6 +61,17 @@ void xsi_registerEventFunction(REALcontrolInstance ctl)
     RaiseUpdateUI = (fpUpdateUI)REALGetEventInstance(ctl, &xsiControl.events[xse_UpdateUI]);
     RaiseUriDropped = (fpUriDropped)REALGetEventInstance(ctl, &xsiControl.events[xse_UriDropped]);
     RaiseUserListSelection = (fpUserListSelection)REALGetEventInstance(ctl, &xsiControl.events[xse_UserListSelection]);
+
+    RaiseSavePointReached = (fpEvent)REALGetEventInstance(ctl, &xsiControl.events[xse_SavePointReached]);
+    RaiseSavePointLeft = (fpEvent)REALGetEventInstance(ctl, &xsiControl.events[xse_SavePointLeft]);
+    RaiseModifyAtTempTro = (fpEvent)REALGetEventInstance(ctl, &xsiControl.events[xse_ModifyAtTempTro]);
+    RaiseZoom = (fpEvent)REALGetEventInstance(ctl, &xsiControl.events[xse_Zoom]);
+    RaiseAutocCancelled = (fpEvent)REALGetEventInstance(ctl, &xsiControl.events[xse_AutocCancelled]);
+    RaiseAutocCharDeleted = (fpEvent)REALGetEventInstance(ctl, &xsiControl.events[xse_AutocCharDeleted]);
+    RaiseFocusIn = (fpEvent)REALGetEventInstance(ctl, &xsiControl.events[xse_FocusIn]);
+    RaiseFocusOut = (fpEvent)REALGetEventInstance(ctl, &xsiControl.events[xse_FocusOut]);
+    RaiseMarginRightClick = (fpEvent)REALGetEventInstance(ctl, &xsiControl.events[xse_MarginRightClick]);
+    RaisePainted = (fpEvent)REALGetEventInstance(ctl, &xsiControl.events[xse_painted]);
 }
 
 void sci_eventHandler(ScintillaObject *sci, gint controlID,
@@ -59,7 +80,6 @@ void sci_eventHandler(ScintillaObject *sci, gint controlID,
     (void) *sci;
     (void) controlID;
     (void) userData;
-
 
     switch (notif->nmhdr.code) {
     case SCN_AUTOCCOMPLETED:
@@ -138,9 +158,39 @@ void sci_eventHandler(ScintillaObject *sci, gint controlID,
             RaiseUserListSelection(me, notif->position, notif->ch, txt, notif->listType, notif->listCompletionMethod);
         }
         break;
+
+    case SCN_SAVEPOINTREACHED:
+        if (RaiseSavePointReached) RaiseSavePointReached(me);
+        break;
+    case SCN_SAVEPOINTLEFT:
+        if (RaiseSavePointLeft) RaiseSavePointLeft(me);
+        break;
+    case SCN_MODIFYATTEMPTRO:
+        if (RaiseModifyAtTempTro) RaiseModifyAtTempTro(me);
+        break;
+    case SCN_ZOOM:
+        if (RaiseZoom) RaiseZoom(me);
+        break;
+    case SCN_AUTOCCANCELLED:
+        if (RaiseAutocCancelled) RaiseAutocCancelled(me);
+        break;
+    case SCN_AUTOCCHARDELETED:
+        if (RaiseAutocCharDeleted) RaiseAutocCharDeleted(me);
+        break;
+    case SCN_FOCUSIN:
+        if (RaiseFocusIn) RaiseFocusIn(me);
+        break;
+    case SCN_FOCUSOUT:
+        if (RaiseFocusOut) RaiseFocusOut(me);
+        break;
+    case SCN_MARGINRIGHTCLICK:
+        if (RaiseMarginRightClick) RaiseMarginRightClick(me);
+        break;
+    case SCN_PAINTED:
+        if (RaisePainted) RaisePainted(me);
+        break;
     default:
         return;
         break;
     }
-
 }

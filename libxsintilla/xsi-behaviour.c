@@ -73,7 +73,7 @@ void OnOpen(REALcontrolInstance ctl)
 
     gtk_fixed_put(GTK_FIXED(data->canvasCont), data->editor, r.left, r.top);
     gtk_widget_set_size_request(data->editor, width, height);
-    scintilla_set_id(data->sci, 0);
+    //scintilla_set_id(data->sci, 0);
     gtk_widget_show_all(data->editor);
     gtk_widget_grab_focus(data->editor);
     xsi_ssm(data->sci, SCI_STYLECLEARALL, 0, 0);
