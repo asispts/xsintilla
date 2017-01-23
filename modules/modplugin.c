@@ -9,6 +9,7 @@
 #include "sci-lexer.h"
 #include "sci-marker.h"
 #include "sci-autoc.h"
+#include "sci-styling.h"
 
 
 // group, name, type, flags, getter, setter, param, editor, enumCount, enumEntries, attributeCount, attributes
@@ -798,6 +799,25 @@ REALmethodDefinition xsiMethods[] = {
         (REALproc) xsim_autocSetFillUps,
         REALnoImplementation,
         "AutocSetFillUps(characterSet as String)"
+    },
+
+    /*+++++++++++++++++++++++++
+     * sci-styling.h
+     +++++++++++++++++++++++++*/
+    {
+        (REALproc) xsim_getEndStyled,
+        REALnoImplementation,
+        "GetEndStyled() as Integer"
+    },
+    {
+        (REALproc) xsim_startStyling,
+        REALnoImplementation,
+        "StartStyling(start as Integer)"
+    },
+    {
+        (REALproc) xsim_setStyling,
+        REALnoImplementation,
+        "SetStyling(length as Integer, style as Integer)"
     },
 };
 

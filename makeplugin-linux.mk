@@ -7,7 +7,7 @@ OBJNAME 			= PluginMain.o main.o xsintilla.o xsi-behaviour.o xsi-event.o\
 						modsclex.o modplugin.o modenums.o modscstyle.o \
 						XojoGraphics.o \
 						sci-text.o sci-styledef.o sci-margin.o sci-selection.o \
-						sci-lexer.o sci-marker.o sci-autoc.o
+						sci-lexer.o sci-marker.o sci-autoc.o sci-styling.o
 
 INCLUDES 			= -I$(SDKINCLUDEDIR) -I$(LIBXOJO) -I$(LIBXSINTILLA) -I$(MODULES) -include $(PREFIXHEADER)
 ifdef PLUGIN_ARCH64
