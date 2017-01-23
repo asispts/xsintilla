@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include "sci-autoc.h"
 
 /*=========================
@@ -160,10 +161,14 @@ int xsim_autocGetCurrent(REALcontrolInstance ctl)
     return xsi_ssm(xsciObj(ctl), SCI_AUTOCGETCURRENT, 0, 0);
 }
 
-int xsim_autocGetCurrentText(REALcontrolInstance ctl, REALstring text)
+REALstring xsim_autocGetCurrentText(REALcontrolInstance ctl)
 {
-    char *chrText = REALGetStringContents(text, NULL);
-    return xsi_ssm(xsciObj(ctl), SCI_AUTOCGETCURRENTTEXT, 0, (sptr_t)chrText);
+    char *txtBuffer = malloc(1024);
+    int txtLength = xsi_ssm(xsciObj(ctl), SCI_AUTOCGETCURRENTTEXT, 1024, (sptr_t)txtBuffer);
+    REALstring curText = REALBuildStringWithEncoding(txtBuffer, txtLength, kREALTextEncodingUTF8);
+    REALLockString(curText);
+    free(txtBuffer);
+    return curText;
 }
 
 void xsim_autocSetFillUps(REALcontrolInstance ctl, REALstring characterSet)

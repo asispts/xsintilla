@@ -50,7 +50,7 @@ int xsim_autocPosStart(REALcontrolInstance ctl);
 void xsim_autocStops(REALcontrolInstance ctl, REALstring characterSet);
 void xsim_autocSelect(REALcontrolInstance ctl, REALstring select);
 int xsim_autocGetCurrent(REALcontrolInstance ctl);
-int xsim_autocGetCurrentText(REALcontrolInstance ctl, REALstring text);
+REALstring xsim_autocGetCurrentText(REALcontrolInstance ctl);
 void xsim_autocSetFillUps(REALcontrolInstance ctl, REALstring characterSet);
 
 #endif //SCI_AUTOC_H

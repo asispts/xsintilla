@@ -792,7 +792,7 @@ REALmethodDefinition xsiMethods[] = {
     {
         (REALproc) xsim_autocGetCurrentText,
         REALnoImplementation,
-        "AutocGetCurrentText(text as String) as Integer"
+        "AutocGetCurrentText() as String"
     },
     {
         (REALproc) xsim_autocSetFillUps,
