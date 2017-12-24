@@ -451,7 +451,7 @@ void ScintillaEditBase::DrawImeIndicator(int indicator, int len)
 	if (indicator < 8 || indicator > INDIC_MAX) {
 		return;
 	}
-	sqt->pdoc->decorations.SetCurrentIndicator(indicator);
+	sqt->pdoc->DecorationSetCurrentIndicator(indicator);
 	for (size_t r=0; r< sqt-> sel.Count(); r++) {
 		int positionInsert = sqt->sel.Range(r).Start().Position();
 		sqt->pdoc->DecorationFillRange(positionInsert - len, 1, len);
@@ -525,12 +525,13 @@ void ScintillaEditBase::inputMethodEvent(QInputMethodEvent *event)
 		return;
 	}
 
+	bool initialCompose = false;
 	if (sqt->pdoc->TentativeActive()) {
 		sqt->pdoc->TentativeUndo();
 	} else {
 		// No tentative undo means start of this composition so
 		// Fill in any virtual spaces.
-		sqt->ClearBeforeTentativeStart();
+		initialCompose = true;
 	}
 
 	sqt->view.imeCaretBlockOverride = false;
@@ -557,6 +558,8 @@ void ScintillaEditBase::inputMethodEvent(QInputMethodEvent *event)
 			return;
 		}
 
+		if (initialCompose)
+			sqt->ClearBeforeTentativeStart();
 		sqt->pdoc->TentativeStart(); // TentativeActive() from now on.
 
 		std::vector<int> imeIndicator = MapImeIndicators(event);
