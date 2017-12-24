@@ -10,7 +10,8 @@
 #include "sci-marker.h"
 #include "sci-autoc.h"
 #include "sci-styling.h"
-
+#include "sci-words.h"
+#include "sci-errorhandling.h"
 
 // group, name, type, flags, getter, setter, param, editor, enumCount, enumEntries, attributeCount, attributes
 REALproperty xsiProperties[] = {
@@ -218,6 +219,14 @@ REALproperty xsiProperties[] = {
     {
         "", "autocMaxWidth", "Integer", REALconsoleSafe | REALpropRuntimeOnly,
         (REALproc)xsip_autocGetMaxWidth, (REALproc)xsip_autocSetMaxWidth
+    },
+
+    /*+++++++++++++++++++++++++
+     * sci-errorhandling.h
+     +++++++++++++++++++++++++*/
+    {
+        "", "errorStatus", "Integer", REALconsoleSafe | REALpropRuntimeOnly,
+        (REALproc)xsip_getStatus, (REALproc)xsip_SetStatus
     },
 };
 
@@ -818,6 +827,15 @@ REALmethodDefinition xsiMethods[] = {
         (REALproc) xsim_setStyling,
         REALnoImplementation,
         "SetStyling(length as Integer, style as Integer)"
+    },
+
+    /*+++++++++++++++++++++++++
+     * sci-words.h
+     +++++++++++++++++++++++++*/
+    {
+        (REALproc) xsim_wordStartPosition,
+        REALnoImplementation,
+        "WordStartPosition(pos as Integer, onlyWordCharacters as Boolean) as Integer"
     },
 };
 
