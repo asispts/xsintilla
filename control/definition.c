@@ -21,7 +21,6 @@
 ////#include "sci-marker.h"
 ////#include "sci-styledef.h"
 ////#include "sci-styling.h"
-////#include "sci-text.h"
 ////#include "sci-words.h"
 
 // group, name, type, flags, getter, setter, param, editor, enumCount, enumEntries, attributeCount, attributes
@@ -394,7 +393,7 @@ REALcontrolBehaviour xsiBehavior = {
     NULL,             // mouseEnterFunction
     NULL,             // mouseExitFunction
     NULL,             // mouseMoveFunction
-    OnStateChanged,   // stateChangedFunction
+    NULL,             // stateChangedFunction
     NULL,             // actionEventFunction
     NULL,             // controlHandleGetter
     NULL,             // mouseWheelFunction

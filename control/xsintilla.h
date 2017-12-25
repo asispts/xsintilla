@@ -13,8 +13,6 @@ REALcontrol xsiControl;
 typedef struct {
     GtkWidget* editor;
     ScintillaObject* sci;
-    GtkContainer* canvasCont;
-    GtkWidget* canvas;
 } xsiControlData;
 
 xsiControlData* xsi_getControlData(REALcontrolInstance ctl);
