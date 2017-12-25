@@ -1,12 +1,14 @@
-#include "modplugin.h"
-#include "modsclex.h"
-#include "modenums.h"
-#include "modscstyle.h"
+//#include "modenums.h"
+//#include "modplugin.h"
+//#include "modsclex.h"
+//#include "modscstyle.h"
+
+#include "definition.h"
 
 void PluginEntry()
 {
-    registerSclex();
-    registerEnums();
-    registerScstyle();
+    // registerSclex();
+    // registerEnums();
+    // registerScstyle();
     registerPlugin();
 }

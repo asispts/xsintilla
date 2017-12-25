@@ -1,13 +1,13 @@
 //=================================
-//Error handling
+// Text retrieval and modification
 //=================================
 
-#ifndef SCI_ERROR_HANDLING_H
-#define SCI_ERROR_HANDLING_H
+#ifndef PROPERTIES_ERROR_H
+#define PROPERTIES_ERROR_H
 
 #include "xsintilla.h"
 
 void xsip_SetStatus(REALcontrolInstance ctl, int status);
 int xsip_getStatus(REALcontrolInstance ctl);
 
-#endif //SCI_ERROR_HANDLING_H
+#endif  // PROPERTIES_ERROR_H

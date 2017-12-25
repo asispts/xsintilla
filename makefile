@@ -8,8 +8,12 @@ export BUILDROOT 		= $(ROOTDIR)/build
 export LIBROOT 			= $(ROOTDIR)/build-output
 export SRCROOT 			= $(ROOTDIR)/src
 export LIBXOJO 			= $(ROOTDIR)/libxojo
-export LIBXSINTILLA 	= $(ROOTDIR)/libxsintilla
-export MODULES 			= $(ROOTDIR)/modules
+export CONTROLDIR		= $(ROOTDIR)/control
+export PROPERTIESDIR	= $(ROOTDIR)/properties
+export METHODDIR		= $(ROOTDIR)/methods
+
+#export LIBXSINTILLA 	= $(ROOTDIR)/libxsintilla
+#export MODULES 			= $(ROOTDIR)/modules
 
 ##
 # plugin directories definition

@@ -1,16 +1,19 @@
 VPATH 				= $(BUILDDIR)
-vpath %.c $(SRCROOT) $(LIBXOJO) $(LIBXSINTILLA) $(MODULES)
+vpath %.c $(SRCROOT) $(LIBXOJO) $(CONTROLDIR) $(PROPERTIESDIR) $(METHODDIR)
 vpath %.cpp $(SDKGLUECODEDIR)
 
 
-OBJNAME 			= PluginMain.o main.o xsintilla.o xsi-behaviour.o xsi-event.o\
-						modsclex.o modplugin.o modenums.o modscstyle.o \
-						XojoGraphics.o \
-						sci-text.o sci-styledef.o sci-margin.o sci-selection.o \
-						sci-lexer.o sci-marker.o sci-autoc.o sci-styling.o \
-						sci-words.o sci-errorhandling.o
+OBJNAME 			= 	PluginMain.o main.o XojoGraphics.o \
+						xsintilla.o behaviour.o event.o definition.o \
+						text-properties.o text-method.o \
+						error-properties.o \
+#						xsi-behaviour.o xsi-event.o\
+#						modsclex.o modplugin.o modenums.o modscstyle.o \
+#						sci-text.o sci-styledef.o sci-margin.o sci-selection.o \
+#						sci-lexer.o sci-marker.o sci-autoc.o sci-styling.o \
+#						sci-words.o sci-errorhandling.o
 
-INCLUDES 			= -I$(SDKINCLUDEDIR) -I$(LIBXOJO) -I$(LIBXSINTILLA) -I$(MODULES) -include $(PREFIXHEADER)
+INCLUDES 			= -include $(PREFIXHEADER) -I$(SDKINCLUDEDIR) -I$(LIBXOJO) -I$(CONTROLDIR) -I$(PROPERTIESDIR) -I$(METHODDIR)
 ifdef PLUGIN_ARCH64
 ARCH_FLAGS 			= -m64
 else

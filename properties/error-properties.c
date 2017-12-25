@@ -1,4 +1,4 @@
-#include "sci-errorhandling.h"
+#include "error-properties.h"
 
 void xsip_SetStatus(REALcontrolInstance ctl, int status)
 {

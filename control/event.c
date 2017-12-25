@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include "xsi-event.h"
+#include "event.h"
 
 static REALcontrolInstance me;
 static fpAutocCompleted RaiseAutocCompleted = NULL;
@@ -36,7 +36,6 @@ static fpEvent RaiseFocusOut = NULL;
 static fpEvent RaiseMarginRightClick = NULL;
 static fpEvent RaisePainted = NULL;
 
-
 void xsi_registerEventFunction(REALcontrolInstance ctl)
 {
     me = ctl;
@@ -48,8 +47,10 @@ void xsi_registerEventFunction(REALcontrolInstance ctl)
     RaiseDwellEnd = (fpDwellEnd)REALGetEventInstance(ctl, &xsiControl.events[xse_DwellEnd]);
     RaiseDwellStart = (fpDwellStart)REALGetEventInstance(ctl, &xsiControl.events[xse_DwellStart]);
     RaiseHotspotClick = (fpHotspotClick)REALGetEventInstance(ctl, &xsiControl.events[xse_HotspotClick]);
-    RaiseHotspotDoubleClick = (fpHotspotDoubleClick)REALGetEventInstance(ctl, &xsiControl.events[xse_HotspotDoubleClick]);
-    RaiseHotspotReleaseClick = (fpHotspotReleaseClick)REALGetEventInstance(ctl, &xsiControl.events[xse_HotspotReleaseClick]);
+    RaiseHotspotDoubleClick =
+        (fpHotspotDoubleClick)REALGetEventInstance(ctl, &xsiControl.events[xse_HotspotDoubleClick]);
+    RaiseHotspotReleaseClick =
+        (fpHotspotReleaseClick)REALGetEventInstance(ctl, &xsiControl.events[xse_HotspotReleaseClick]);
     RaiseIndicatorClick = (fpIndicatorClick)REALGetEventInstance(ctl, &xsiControl.events[xse_IndicatorClick]);
     RaiseIndicatorRelease = (fpIndicatorRelease)REALGetEventInstance(ctl, &xsiControl.events[xse_IndicatorRelease]);
     RaiseScnKey = (fpScnKey)REALGetEventInstance(ctl, &xsiControl.events[xse_ScnKey]);
@@ -74,120 +75,151 @@ void xsi_registerEventFunction(REALcontrolInstance ctl)
     RaisePainted = (fpEvent)REALGetEventInstance(ctl, &xsiControl.events[xse_painted]);
 }
 
-void sci_eventHandler(ScintillaObject *sci, gint controlID,
-                      SCNotification *notif, gpointer userData)
+void sci_eventHandler(ScintillaObject* sci, gint controlID, SCNotification* notif, gpointer userData)
 {
-    (void) *sci;
-    (void) controlID;
-    (void) userData;
+    (void)*sci;
+    (void)controlID;
+    (void)userData;
 
-    switch (notif->nmhdr.code) {
+    switch(notif->nmhdr.code) {
     case SCN_AUTOCCOMPLETED:
-        if (RaiseAutocCompleted) RaiseAutocCompleted(me, notif->ch, notif->listCompletionMethod);
+        if(RaiseAutocCompleted)
+            RaiseAutocCompleted(me, notif->ch, notif->listCompletionMethod);
         break;
     case SCN_AUTOCSELECTION:
-        if (RaiseAutocSelection) RaiseAutocSelection(me, notif->position, notif->ch, notif->listCompletionMethod);
+        if(RaiseAutocSelection)
+            RaiseAutocSelection(me, notif->position, notif->ch, notif->listCompletionMethod);
         break;
     case SCN_CALLTIPCLICK:
-        if (RaiseCallTipClick) RaiseCallTipClick(me, notif->position);
+        if(RaiseCallTipClick)
+            RaiseCallTipClick(me, notif->position);
         break;
     case SCN_CHARADDED:
-        if (RaiseCharAdded) RaiseCharAdded(me, notif->ch);
+        if(RaiseCharAdded)
+            RaiseCharAdded(me, notif->ch);
         break;
     case SCN_DOUBLECLICK:
-        if (RaiseDoubleClick) RaiseDoubleClick(me, notif->position, notif->modifiers);
+        if(RaiseDoubleClick)
+            RaiseDoubleClick(me, notif->position, notif->modifiers);
         break;
     case SCN_DWELLEND:
-        if (RaiseDwellEnd) RaiseDwellEnd(me, notif->position, notif->x, notif->y);
+        if(RaiseDwellEnd)
+            RaiseDwellEnd(me, notif->position, notif->x, notif->y);
         break;
     case SCN_DWELLSTART:
-        if (RaiseDwellStart) RaiseDwellStart(me, notif->position, notif->x, notif->y);
+        if(RaiseDwellStart)
+            RaiseDwellStart(me, notif->position, notif->x, notif->y);
         break;
     case SCN_HOTSPOTCLICK:
-        if (RaiseHotspotClick) RaiseHotspotClick(me, notif->position, notif->modifiers);
+        if(RaiseHotspotClick)
+            RaiseHotspotClick(me, notif->position, notif->modifiers);
         break;
     case SCN_HOTSPOTDOUBLECLICK:
-        if (RaiseHotspotDoubleClick) RaiseHotspotDoubleClick(me, notif->position, notif->modifiers);
+        if(RaiseHotspotDoubleClick)
+            RaiseHotspotDoubleClick(me, notif->position, notif->modifiers);
         break;
     case SCN_HOTSPOTRELEASECLICK:
-        if (RaiseHotspotReleaseClick) RaiseHotspotReleaseClick(me, notif->position, notif->modifiers);
+        if(RaiseHotspotReleaseClick)
+            RaiseHotspotReleaseClick(me, notif->position, notif->modifiers);
         break;
     case SCN_INDICATORCLICK:
-        if (RaiseIndicatorClick) RaiseIndicatorClick(me, notif->position, notif->modifiers);
+        if(RaiseIndicatorClick)
+            RaiseIndicatorClick(me, notif->position, notif->modifiers);
         break;
     case SCN_INDICATORRELEASE:
-        if (RaiseIndicatorRelease) RaiseIndicatorRelease(me, notif->position, notif->modifiers);
+        if(RaiseIndicatorRelease)
+            RaiseIndicatorRelease(me, notif->position, notif->modifiers);
         break;
     case SCN_KEY:
-        if (RaiseScnKey) RaiseScnKey(me, notif->ch);
+        if(RaiseScnKey)
+            RaiseScnKey(me, notif->ch);
         break;
     case SCN_MACRORECORD:
-        if (RaiseMacroRecord) RaiseMacroRecord(me, notif->message, notif->wParam, notif->lParam);
+        if(RaiseMacroRecord)
+            RaiseMacroRecord(me, notif->message, notif->wParam, notif->lParam);
         break;
     case SCN_MARGINCLICK:
-        if (RaiseMarginClick) RaiseMarginClick(me, notif->position, notif->margin);
+        if(RaiseMarginClick)
+            RaiseMarginClick(me, notif->position, notif->margin);
         break;
     case SCN_MODIFIED:
-        if (RaiseModified) {
+        if(RaiseModified) {
             REALstring txt = REALBuildStringWithEncoding(notif->text, notif->length, kREALTextEncodingUTF8);
-            RaiseModified(me, notif->position, notif->modificationType, txt, notif->length, notif->linesAdded, notif->line, notif->foldLevelNow, notif->foldLevelPrev, notif->token, notif->annotationLinesAdded);
+            RaiseModified(me, notif->position, notif->modificationType, txt, notif->length, notif->linesAdded,
+                          notif->line, notif->foldLevelNow, notif->foldLevelPrev, notif->token,
+                          notif->annotationLinesAdded);
         }
         break;
     case SCN_NEEDSHOWN:
-        if (RaiseNeedShown) RaiseNeedShown(me, notif->position);
+        if(RaiseNeedShown)
+            RaiseNeedShown(me, notif->position);
         break;
     case SCN_STYLENEEDED:
-        if (RaiseStyleNeeded) RaiseStyleNeeded(me, notif->position);
+        if(RaiseStyleNeeded)
+            RaiseStyleNeeded(me, notif->position);
         break;
     case SCN_UPDATEUI:
-        if (RaiseUpdateUI) RaiseUpdateUI(me, notif->updated);
+        if(RaiseUpdateUI)
+            RaiseUpdateUI(me, notif->updated);
         break;
     case SCN_URIDROPPED:
-        if (RaiseUriDropped) {
+        if(RaiseUriDropped) {
             int len = notif->length;
-            if (len <= 0) len = strlen(notif->text);
+            if(len <= 0)
+                len = strlen(notif->text);
             REALstring txt = REALBuildStringWithEncoding(notif->text, len, kREALTextEncodingUTF8);
             RaiseUriDropped(me, txt);
         }
         break;
     case SCN_USERLISTSELECTION:
-        if (RaiseUserListSelection) {
+        if(RaiseUserListSelection) {
             int len = notif->length;
-            if (len <= 0) len = strlen(notif->text);
+            if(len <= 0)
+                len = strlen(notif->text);
             REALstring txt = REALBuildStringWithEncoding(notif->text, len, kREALTextEncodingUTF8);
             RaiseUserListSelection(me, notif->position, notif->ch, txt, notif->listType, notif->listCompletionMethod);
         }
         break;
 
     case SCN_SAVEPOINTREACHED:
-        if (RaiseSavePointReached) RaiseSavePointReached(me);
+        if(RaiseSavePointReached)
+            RaiseSavePointReached(me);
         break;
     case SCN_SAVEPOINTLEFT:
-        if (RaiseSavePointLeft) RaiseSavePointLeft(me);
+        if(RaiseSavePointLeft)
+            RaiseSavePointLeft(me);
         break;
     case SCN_MODIFYATTEMPTRO:
-        if (RaiseModifyAtTempTro) RaiseModifyAtTempTro(me);
+        if(RaiseModifyAtTempTro)
+            RaiseModifyAtTempTro(me);
         break;
     case SCN_ZOOM:
-        if (RaiseZoom) RaiseZoom(me);
+        if(RaiseZoom)
+            RaiseZoom(me);
         break;
     case SCN_AUTOCCANCELLED:
-        if (RaiseAutocCancelled) RaiseAutocCancelled(me);
+        if(RaiseAutocCancelled)
+            RaiseAutocCancelled(me);
         break;
     case SCN_AUTOCCHARDELETED:
-        if (RaiseAutocCharDeleted) RaiseAutocCharDeleted(me);
+        if(RaiseAutocCharDeleted)
+            RaiseAutocCharDeleted(me);
         break;
     case SCN_FOCUSIN:
-        if (RaiseFocusIn) RaiseFocusIn(me);
+        if(RaiseFocusIn)
+            RaiseFocusIn(me);
         break;
     case SCN_FOCUSOUT:
-        if (RaiseFocusOut) RaiseFocusOut(me);
+        if(RaiseFocusOut)
+            RaiseFocusOut(me);
         break;
     case SCN_MARGINRIGHTCLICK:
-        if (RaiseMarginRightClick) RaiseMarginRightClick(me);
+        if(RaiseMarginRightClick)
+            RaiseMarginRightClick(me);
         break;
     case SCN_PAINTED:
-        if (RaisePainted) RaisePainted(me);
+        if(RaisePainted)
+            RaisePainted(me);
         break;
     default:
         return;

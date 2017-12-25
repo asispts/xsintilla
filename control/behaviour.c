@@ -1,8 +1,8 @@
-#include "xsi-behaviour.h"
-#include "xsi-event.h"
-#include "XojoGraphics.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "XojoGraphics.h"
+#include "behaviour.h"
+#include "event.h"
 
 RBInteger getHandle(REALcontrolInstance ctl)
 {
@@ -13,12 +13,13 @@ RBInteger getHandle(REALcontrolInstance ctl)
 
 void resizeControl(REALcontrolInstance ctl)
 {
-    xsiControlData *data = xsi_getControlData(ctl);
+    xsiControlData* data = xsi_getControlData(ctl);
 
     Rect r = xsi_getRect(ctl);
     int width = r.right - r.left;
     int height = r.bottom - r.top;
-    if (width <= 0 || height <= 0) return;
+    if(width <= 0 || height <= 0)
+        return;
 
     GtkAllocation alCont;
     GtkAllocation alCanvas;
@@ -28,15 +29,17 @@ void resizeControl(REALcontrolInstance ctl)
 
     int xx = 0;
     int yy = 0;
-    if ((alCanvas.x == -1) && (alCanvas.width == 1)) {
+    if((alCanvas.x == -1) && (alCanvas.width == 1)) {
         xx = r.left;
         yy = r.top;
     } else {
         xx = alCanvas.x - alCont.x;
         yy = alCanvas.y - alCont.y;
 
-        if (alCanvas.x < alCont.x) xx = alCanvas.x;
-        if (alCanvas.y < alCont.y) yy = alCanvas.y;
+        if(alCanvas.x < alCont.x)
+            xx = alCanvas.x;
+        if(alCanvas.y < alCont.y)
+            yy = alCanvas.y;
     }
 
     gtk_fixed_move(GTK_FIXED(data->canvasCont), data->editor, xx, yy);
@@ -45,14 +48,14 @@ void resizeControl(REALcontrolInstance ctl)
 
 void Constructor(REALcontrolInstance ctl)
 {
-    xsiControlData *data = xsi_getControlData(ctl);
+    xsiControlData* data = xsi_getControlData(ctl);
     data->editor = scintilla_new();
     data->sci = SCINTILLA(data->editor);
 }
 
 void Destructor(REALcontrolInstance ctl)
 {
-    xsiControlData *data = xsi_getControlData(ctl);
+    xsiControlData* data = xsi_getControlData(ctl);
     data->editor = NULL;
     data->sci = NULL;
     data = NULL;
@@ -60,12 +63,13 @@ void Destructor(REALcontrolInstance ctl)
 
 void OnOpen(REALcontrolInstance ctl)
 {
-    xsiControlData *data = xsi_getControlData(ctl);
+    xsiControlData* data = xsi_getControlData(ctl);
     RBInteger handle = getHandle(ctl);
-    if (handle == 0) return;
+    if(handle == 0)
+        return;
 
-    data->canvas = (GtkWidget *) handle;
-    data->canvasCont = (GtkContainer *) gtk_widget_get_parent(data->canvas);
+    data->canvas = (GtkWidget*)handle;
+    data->canvasCont = (GtkContainer*)gtk_widget_get_parent(data->canvas);
 
     Rect r = xsi_getRect(ctl);
     int width = r.right - r.left;
@@ -73,13 +77,12 @@ void OnOpen(REALcontrolInstance ctl)
 
     gtk_fixed_put(GTK_FIXED(data->canvasCont), data->editor, r.left, r.top);
     gtk_widget_set_size_request(data->editor, width, height);
-    //scintilla_set_id(data->sci, 0);
+    // scintilla_set_id(data->sci, 0);
     gtk_widget_show_all(data->editor);
     gtk_widget_grab_focus(data->editor);
     xsi_ssm(data->sci, SCI_STYLECLEARALL, 0, 0);
 
-    g_signal_connect(data->sci, SCINTILLA_NOTIFY,
-                     G_CALLBACK(sci_eventHandler), NULL);
+    g_signal_connect(data->sci, SCINTILLA_NOTIFY, G_CALLBACK(sci_eventHandler), NULL);
     xsi_registerEventFunction(ctl);
 }
 
@@ -88,7 +91,8 @@ void OnDrawOffscreen(REALcontrolInstance ctl, REALgraphics g)
     Rect r = xsi_getRect(ctl);
     int width = r.right - r.left;
     int height = r.bottom - r.top;
-    if (width <= 0 || height <= 0) return;
+    if(width <= 0 || height <= 0)
+        return;
 
     graphics_SetForeColor(g, 0xFFFFFF);
     graphics_FillRect(g, r.left, r.top, width, height);
@@ -98,7 +102,7 @@ void OnDrawOffscreen(REALcontrolInstance ctl, REALgraphics g)
 
 void OnStateChanged(REALcontrolInstance ctl, uint32_t changedField)
 {
-    if (changedField == kBoundsChanged || changedField == kEnabledChanged) {
+    if(changedField == kBoundsChanged || changedField == kEnabledChanged) {
         resizeControl(ctl);
     }
 }

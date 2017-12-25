@@ -1,7 +1,7 @@
 #include "modsclex.h"
 #include "rb_plugin.h"
 
-//declaration, reserved1, mFlags, attributeCount, attributes
+// declaration, reserved1, mFlags, attributeCount, attributes
 static REALconstant sclexConstants[] = {
     // SCLEX_CONTAINER, SCLEX_AUTOMATIC
     {"Container as Integer = 0", 0, REALScopeProtected},
@@ -196,14 +196,13 @@ static REALconstant sclexConstants[] = {
     //{"EdiFact as Integer = 121", 0, REALScopeProtected},
 };
 
-
 static REALmoduleDefinition modSclex = {
     kCurrentREALControlVersion,                     // version
-    "ScLex",                                      // name
+    "ScLex",                                        // name
     NULL,                                           // methods
     0,                                              // methodCount
     sclexConstants,                                 // constants
-    sizeof(sclexConstants)/sizeof(REALconstant),    // constantCount
+    sizeof(sclexConstants) / sizeof(REALconstant),  // constantCount
     NULL,                                           // properties
     0,                                              // propertyCount
     NULL,                                           // structures
@@ -211,7 +210,6 @@ static REALmoduleDefinition modSclex = {
     NULL,                                           // enums
     0,                                              // enumCount
 };
-
 
 void registerSclex()
 {
