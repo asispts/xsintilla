@@ -10,18 +10,11 @@ REALstring xsim_getLine(REALcontrolInstance ctl, int line)
 {
     int len = xsi_ssm(xsciObj(ctl), SCI_LINELENGTH, line, 0);
 
-    char* txtBuffer = malloc(len + 1);
-    len = xsi_ssm(xsciObj(ctl), SCI_GETLINE, (uptr_t)line, (sptr_t)txtBuffer);
+    char* buffer = malloc(len + 1);
+    len = xsi_ssm(xsciObj(ctl), SCI_GETLINE, (uptr_t)line, (sptr_t)buffer);
 
-    if(len == 0) {
-        free(txtBuffer);
-        return NULL;
-    }
-
-    REALstring txt = REALBuildStringWithEncoding(txtBuffer, len, kREALTextEncodingUTF8);
-    REALLockString(txt);
-    free(txtBuffer);
-    return txt;
+    // The buffer is not terminated by a 0 character
+    return xsi_toREALstring(buffer, len, false);
 }
 
 void xsim_replaceSel(REALcontrolInstance ctl, REALstring text)
@@ -120,15 +113,9 @@ REALstring xsim_getTextRange(REALcontrolInstance ctl, Sci_PositionCR cpMin, Sci_
 
     tr.lpstrText = malloc(numBytes + 1);
     long numChars = xsi_ssm(xsciObj(ctl), SCI_GETTEXTRANGE, 0, (sptr_t)&tr);
-    if(numChars < 1) {
-        free(tr.lpstrText);
-        return NULL;
-    }
 
-    REALstring text = REALBuildStringWithEncoding(tr.lpstrText, numChars, kREALTextEncodingUTF8);
-    REALLockString(text);
-    free(tr.lpstrText);
-    return text;
+    // returned text not including terminating 0
+    return xsi_toREALstring(tr.lpstrText, numChars, false);
 }
 
 REALstring xsim_targetAsUtf8(REALcontrolInstance ctl)
@@ -137,17 +124,10 @@ REALstring xsim_targetAsUtf8(REALcontrolInstance ctl)
     if(len <= 0)
         return NULL;
 
-    char* tmp = malloc(len + 1);
-    len = xsi_ssm(xsciObj(ctl), SCI_TARGETASUTF8, 0, (sptr_t)tmp);
-    if(len == 0) {
-        free(tmp);
-        return NULL;
-    }
+    char* buffer = malloc(len + 1);
+    len = xsi_ssm(xsciObj(ctl), SCI_TARGETASUTF8, 0, (sptr_t)buffer);
 
-    REALstring text = REALBuildStringWithEncoding(tmp, len, kREALTextEncodingUTF8);
-    REALLockString(text);
-    free(tmp);
-    return text;
+    return xsi_toREALstring(buffer, len, false);
 }
 
 REALstring xsim_encodeFromUtf8(REALcontrolInstance ctl, int length, REALstring utf8)
@@ -159,16 +139,18 @@ REALstring xsim_encodeFromUtf8(REALcontrolInstance ctl, int length, REALstring u
     if(len == 0)
         return NULL;
 
-    char* tmp = malloc(len + 1);
-    len = xsi_ssm(xsciObj(ctl), SCI_ENCODEDFROMUTF8, (uptr_t)txt, (sptr_t)tmp);
+    char* buffer = malloc(len + 1);
+    len = xsi_ssm(xsciObj(ctl), SCI_ENCODEDFROMUTF8, (uptr_t)txt, (sptr_t)buffer);
+
+    // let this code
     if(len == 0) {
-        free(tmp);
+        free(buffer);
         return NULL;
     }
 
-    REALstring text = REALBuildStringWithEncoding(tmp, len, kREALTextEncodingUTF8);
+    REALstring text = REALBuildStringWithEncoding(buffer, len, kREALTextEncodingUTF8);
     REALLockString(text);
-    free(tmp);
+    free(buffer);
     return text;
 }
 
@@ -207,6 +189,8 @@ REALstring xsim_getStyledText(REALcontrolInstance ctl, Sci_PositionCR cpMin, Sci
 
     tr.lpstrText = malloc(numBytes + 2);  // termintated with 00
     long numChars = xsi_ssm(xsciObj(ctl), SCI_GETSTYLEDTEXT, 0, (sptr_t)&tr);
+
+    // let this code
     if(numChars < 1) {
         free(tr.lpstrText);
         return NULL;

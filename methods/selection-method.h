@@ -1,36 +1,8 @@
-//=================================
-//Selection and information
-//=================================
-
-#ifndef SCI_SELECTION_H
-#define SCI_SELECTION_H
+#ifndef METHOD_SELECTION_H
+#define METHOD_SELECTION_H
 
 #include "xsintilla.h"
 
-//properties
-int xsip_getTextLength(REALcontrolInstance ctl, int unused);
-int xsip_getLength(REALcontrolInstance ctl, int unused);
-int xsip_getLineCount(REALcontrolInstance ctl, int unused);
-int xsip_lineOnScreen(REALcontrolInstance ctl, int unused);
-bool xsip_getModify(REALcontrolInstance ctl, int unused);
-int xsip_getCurrentPos(REALcontrolInstance ctl, int unused);
-void xsip_setCurrentPos(REALcontrolInstance ctl, int unused, int caret);
-int xsip_getAnchor(REALcontrolInstance ctl, int unused);
-void xsip_setAnchor(REALcontrolInstance ctl, int unused, int anchor);
-void xsip_setSelectionStart(REALcontrolInstance ctl, int unused, int anchor);
-int xsip_getSelectionStart(REALcontrolInstance ctl, int unused);
-void xsip_setSelectionEnd(REALcontrolInstance ctl, int unused, int caret);
-int xsip_getSelectionEnd(REALcontrolInstance ctl, int unused);
-void xsip_hideSelection(REALcontrolInstance ctl, int unused, bool hide);
-REALstring xsip_getSeltext(REALcontrolInstance ctl, int unused);
-bool xsip_selectionIsRectangle(REALcontrolInstance ctl, int unused);
-void xsip_setSelectionMode(REALcontrolInstance ctl, int unused, int selectionMode);
-int xsip_getSelectionMode(REALcontrolInstance ctl, int unused);
-void xsip_setMouseSelectionRectangularSwitch(REALcontrolInstance ctl, int unused, bool mouseSwitch);
-bool xsip_getMouseSelectionRectangularSwitch(REALcontrolInstance ctl, int unused);
-
-
-//methods
 void xsim_setSel(REALcontrolInstance ctl, int anchor, int caret);
 void xsim_gotoPos(REALcontrolInstance ctl, int caret);
 void xsim_gotoLine(REALcontrolInstance ctl, int line);
@@ -48,7 +20,7 @@ int xsim_charPositionFromPoint(REALcontrolInstance ctl, int x, int y);
 int xsim_charPositionFromPointClose(REALcontrolInstance ctl, int x, int y);
 int xsim_pointXFromPosition(REALcontrolInstance ctl, int pos);
 int xsim_pointYFromPosition(REALcontrolInstance ctl, int pos);
-REALstring xsim_getCurLine(REALcontrolInstance ctl, int length);
+REALstring xsim_getCurLine(REALcontrolInstance ctl);
 int xsim_getLineSelStartPosition(REALcontrolInstance ctl, int line);
 int xsim_getLineSelEndPosition(REALcontrolInstance ctl, int line);
 void xsim_moveCaretInsideView(REALcontrolInstance ctl);
@@ -62,5 +34,4 @@ void xsim_chooseCaretX(REALcontrolInstance ctl);
 void xsim_moveSelectedLinesUp(REALcontrolInstance ctl);
 void xsim_moveSelectedLinesDown(REALcontrolInstance ctl);
 
-
-#endif //SCI_SELECTION_H
+#endif  // METHOD_SELECTION_H

@@ -22,6 +22,6 @@ Rect xsi_getRect(REALcontrolInstance ctl);
 sptr_t xsi_ssm(ScintillaObject*, unsigned int, uptr_t, sptr_t);
 ScintillaObject* xsciObj(REALcontrolInstance ctl);
 RBColor xsi_invertColor(RBColor color);
-char* JoinString(const char* dest, const char* source);
+REALstring xsi_toREALstring(char* buffer, int length, bool nullTerminated);
 
 #endif  // CONTROL_XSINTILLA_H

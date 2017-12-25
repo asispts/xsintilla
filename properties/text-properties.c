@@ -14,13 +14,14 @@ bool xsip_getReadonly(REALcontrolInstance ctl, int unused)
 
 REALstring xsip_getText(REALcontrolInstance ctl, int unused)
 {
-    int length = xsi_ssm(xsciObj(ctl), SCI_GETTEXTLENGTH, 0, 0);
-    char* txtBuffer = malloc(length + 1);
-    int txtLength = xsi_ssm(xsciObj(ctl), SCI_GETTEXT, length + 1, (sptr_t)txtBuffer);
-    REALstring txt = REALBuildStringWithEncoding(txtBuffer, txtLength, kREALTextEncodingUTF8);
-    REALLockString(txt);
-    free(txtBuffer);
-    return txt;
+    int len = xsi_ssm(xsciObj(ctl), SCI_GETTEXTLENGTH, 0, 0);
+    if(len <= 0)
+        return NULL;
+
+    char* buffer = malloc(len + 1);
+    len = xsi_ssm(xsciObj(ctl), SCI_GETTEXT, (uptr_t)len + 1, (sptr_t)buffer);
+
+    return xsi_toREALstring(buffer, len, false);
 }
 
 void xsip_setText(REALcontrolInstance ctl, int unused, REALstring text)

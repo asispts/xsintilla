@@ -6,9 +6,11 @@
 
 // Properties headers
 #include "error-properties.h"
+#include "selection-properties.h"
 #include "text-properties.h"
 
 // Method headers
+#include "selection-method.h"
 #include "text-method.h"
 
 // Enum headers
@@ -17,7 +19,6 @@
 ////#include "sci-lexer.h"
 ////#include "sci-margin.h"
 ////#include "sci-marker.h"
-////#include "sci-selection.h"
 ////#include "sci-styledef.h"
 ////#include "sci-styling.h"
 ////#include "sci-text.h"
@@ -28,114 +29,101 @@ REALproperty xsiProperties[] = {
     /*+++++++++++++++++++++++++
      * text-properties.h
      +++++++++++++++++++++++++*/
-    {"", "readonly", "Boolean", REALconsoleSafe | REALpropRuntimeOnly, (REALproc)xsip_getReadonly,
-     (REALproc)xsip_setReadonly},
-    {"", "text", "String", REALconsoleSafe | REALpropRuntimeOnly, (REALproc)xsip_getText, (REALproc)xsip_setText},
+    {"", "readonly", "Boolean", REALpropRuntimeOnly, (REALproc)xsip_getReadonly, (REALproc)xsip_setReadonly},
+    {"", "text", "String", REALpropRuntimeOnly, (REALproc)xsip_getText, (REALproc)xsip_setText},
 
     /*+++++++++++++++++++++++++
      * error-properties.h
      +++++++++++++++++++++++++*/
-    {"", "status", "Integer", REALconsoleSafe | REALpropRuntimeOnly, (REALproc)xsip_getStatus,
-     (REALproc)xsip_SetStatus},
+    {"", "status", "Integer", REALpropRuntimeOnly, (REALproc)xsip_getStatus, (REALproc)xsip_SetStatus},
+
+    /*+++++++++++++++++++++++++
+     * selection-properties.h
+     +++++++++++++++++++++++++*/
+    {"", "textLength", "Integer", REALpropRuntimeOnly, (REALproc)xsip_getTextLength, REALnoImplementation},
+    {"", "length", "Integer", REALpropRuntimeOnly, (REALproc)xsip_getLength, REALnoImplementation},
+    {"", "lineCount", "Integer", REALpropRuntimeOnly, (REALproc)xsip_getLineCount, REALnoImplementation},
+    {"", "lineOnScreen", "Integer", REALpropRuntimeOnly, (REALproc)xsip_lineOnScreen, REALnoImplementation},
+    {"", "modified", "Boolean", REALpropRuntimeOnly, (REALproc)xsip_getModify, REALnoImplementation},
+    {"", "currentPos", "Integer", REALpropRuntimeOnly, (REALproc)xsip_getCurrentPos, (REALproc)xsip_setCurrentPos},
+    {"", "anchor", "Integer", REALpropRuntimeOnly, (REALproc)xsip_getAnchor, (REALproc)xsip_setAnchor},
+    {"", "selectionStart", "Integer", REALpropRuntimeOnly, (REALproc)xsip_getSelectionStart,
+     (REALproc)xsip_setSelectionStart},
+    {"", "selectionEnd", "Integer", REALpropRuntimeOnly, (REALproc)xsip_getSelectionEnd,
+     (REALproc)xsip_setSelectionEnd},
+    {"", "hideSelection", "Boolean", REALpropRuntimeOnly, REALnoImplementation, (REALproc)xsip_hideSelection},
+    {"", "seltext", "String", REALpropRuntimeOnly, (REALproc)xsip_getSeltext, REALnoImplementation},
+    {"", "selectionIsRectangle", "Boolean", REALpropRuntimeOnly, (REALproc)xsip_selectionIsRectangle,
+     REALnoImplementation},
+    {"", "selectionMode", "Integer", REALpropRuntimeOnly, (REALproc)xsip_getSelectionMode,
+     (REALproc)xsip_setSelectionMode},
+    {"", "mouseSelectionRectangularSwitch", "Boolean", REALpropRuntimeOnly,
+     (REALproc)xsip_getMouseSelectionRectangularSwitch, (REALproc)xsip_setMouseSelectionRectangularSwitch},
 
     //    /*+++++++++++++++++++++++++
     //     * sci-margin.h
     //     +++++++++++++++++++++++++*/
-    //    {"", "marginCount", "Integer", REALconsoleSafe | REALpropRuntimeOnly, (REALproc)xsip_getMargins,
+    //    {"", "marginCount", "Integer", REALpropRuntimeOnly, (REALproc)xsip_getMargins,
     //     (REALproc)xsip_setMargins},
-    //    {"", "marginLeft", "Integer", REALconsoleSafe | REALpropRuntimeOnly, (REALproc)xsip_getMarginLeft,
+    //    {"", "marginLeft", "Integer", REALpropRuntimeOnly, (REALproc)xsip_getMarginLeft,
     //     (REALproc)xsip_setMarginLeft},
-    //    {"", "marginRight", "Integer", REALconsoleSafe | REALpropRuntimeOnly, (REALproc)xsip_getMarginRight,
+    //    {"", "marginRight", "Integer", REALpropRuntimeOnly, (REALproc)xsip_getMarginRight,
     //     (REALproc)xsip_setMarginRight},
-    //    {"", "marginStyleOffset", "Integer", REALconsoleSafe | REALpropRuntimeOnly,
+    //    {"", "marginStyleOffset", "Integer", REALpropRuntimeOnly,
     //    (REALproc)xsip_marginGetStyleOffset,
     //     (REALproc)xsip_marginSetStyleOffset},
-    //    {"", "marginOptions", "Integer", REALconsoleSafe | REALpropRuntimeOnly, (REALproc)xsip_getMarginOptions,
+    //    {"", "marginOptions", "Integer", REALpropRuntimeOnly, (REALproc)xsip_getMarginOptions,
     //     (REALproc)xsip_setMarginOptions},
-    //
-    //    /*+++++++++++++++++++++++++
-    //     * sci-selection.h
-    //     +++++++++++++++++++++++++*/
-    //    {"", "textLength", "Integer", REALconsoleSafe | REALpropRuntimeOnly, (REALproc)xsip_getTextLength,
-    //     REALnoImplementation},
-    //    {"", "length", "Integer", REALconsoleSafe | REALpropRuntimeOnly, (REALproc)xsip_getLength,
-    //    REALnoImplementation},
-    //    {"", "lineCount", "Integer", REALconsoleSafe | REALpropRuntimeOnly, (REALproc)xsip_getLineCount,
-    //     REALnoImplementation},
-    //    {"", "lineOnScreen", "Integer", REALconsoleSafe | REALpropRuntimeOnly, (REALproc)xsip_lineOnScreen,
-    //     REALnoImplementation},
-    //    {"", "modified", "Boolean", REALconsoleSafe | REALpropRuntimeOnly, (REALproc)xsip_getModify,
-    //    REALnoImplementation},
-    //    {"", "currentPos", "Integer", REALconsoleSafe | REALpropRuntimeOnly, (REALproc)xsip_getCurrentPos,
-    //     (REALproc)xsip_setCurrentPos},
-    //    {"", "anchor", "Integer", REALconsoleSafe | REALpropRuntimeOnly, (REALproc)xsip_getAnchor,
-    //     (REALproc)xsip_setAnchor},
-    //    {"", "selectionStart", "Integer", REALconsoleSafe | REALpropRuntimeOnly, (REALproc)xsip_getSelectionStart,
-    //     (REALproc)xsip_setSelectionStart},
-    //    {"", "selectionEnd", "Integer", REALconsoleSafe | REALpropRuntimeOnly, (REALproc)xsip_getSelectionEnd,
-    //     (REALproc)xsip_setSelectionEnd},
-    //    {"", "hideSelection", "Boolean", REALconsoleSafe | REALpropRuntimeOnly, REALnoImplementation,
-    //     (REALproc)xsip_hideSelection},
-    //    {"", "seltext", "String", REALconsoleSafe | REALpropRuntimeOnly, (REALproc)xsip_getSeltext,
-    //    REALnoImplementation},
-    //    {"", "selectionIsRectangle", "Boolean", REALconsoleSafe | REALpropRuntimeOnly,
-    //    (REALproc)xsip_selectionIsRectangle,
-    //     REALnoImplementation},
-    //    {"", "selectionMode", "Integer", REALconsoleSafe | REALpropRuntimeOnly, (REALproc)xsip_getSelectionMode,
-    //     (REALproc)xsip_setSelectionMode},
-    //    {"", "mouseSelectionRectangularSwitch", "Boolean", REALconsoleSafe | REALpropRuntimeOnly,
-    //     (REALproc)xsip_getMouseSelectionRectangularSwitch, (REALproc)xsip_setMouseSelectionRectangularSwitch},
-    //
     //    /*+++++++++++++++++++++++++
     //     * sci-lexer.h
     //     +++++++++++++++++++++++++*/
-    //    {"", "lexer", "Integer", REALconsoleSafe | REALpropRuntimeOnly, (REALproc)xsip_getLexer,
+    //    {"", "lexer", "Integer", REALpropRuntimeOnly, (REALproc)xsip_getLexer,
     //    (REALproc)xsip_setLexer},
-    //    {"", "lexerLanguage", "String", REALconsoleSafe | REALpropRuntimeOnly, (REALproc)xsip_getLexerLanguage,
+    //    {"", "lexerLanguage", "String", REALpropRuntimeOnly, (REALproc)xsip_getLexerLanguage,
     //     (REALproc)xsip_setLexerLanguage},
     //
     //    /*+++++++++++++++++++++++++
     //     * sci-marker.h
     //     +++++++++++++++++++++++++*/
-    //    {"", "rgbaImageSetWidth", "Integer", REALconsoleSafe | REALpropRuntimeOnly, REALnoImplementation,
+    //    {"", "rgbaImageSetWidth", "Integer", REALpropRuntimeOnly, REALnoImplementation,
     //     (REALproc)xsip_rgbaImageSetWidth},
-    //    {"", "rgbaImageSetHeight", "Integer", REALconsoleSafe | REALpropRuntimeOnly, REALnoImplementation,
+    //    {"", "rgbaImageSetHeight", "Integer", REALpropRuntimeOnly, REALnoImplementation,
     //     (REALproc)xsip_rgbaImageSetHeight},
-    //    {"", "rgbaImageSetScale", "Integer", REALconsoleSafe | REALpropRuntimeOnly, REALnoImplementation,
+    //    {"", "rgbaImageSetScale", "Integer", REALpropRuntimeOnly, REALnoImplementation,
     //     (REALproc)xsip_rgbaImageSetScale},
-    //    {"", "markerEnableHighlight", "Boolean", REALconsoleSafe | REALpropRuntimeOnly, REALnoImplementation,
+    //    {"", "markerEnableHighlight", "Boolean", REALpropRuntimeOnly, REALnoImplementation,
     //     (REALproc)xsip_markerEnableHighlight},
     //
     //    /*+++++++++++++++++++++++++
     //     * sci-autoc.h
     //     +++++++++++++++++++++++++*/
-    //    {"", "autocIgnoreCase", "Boolean", REALconsoleSafe | REALpropRuntimeOnly, (REALproc)xsip_autocGetIgnoreCase,
+    //    {"", "autocIgnoreCase", "Boolean", REALpropRuntimeOnly, (REALproc)xsip_autocGetIgnoreCase,
     //     (REALproc)xsip_autocSetIgnoreCase},
-    //    {"", "autocSeparator", "Integer", REALconsoleSafe | REALpropRuntimeOnly, (REALproc)xsip_autocGetSeparator,
+    //    {"", "autocSeparator", "Integer", REALpropRuntimeOnly, (REALproc)xsip_autocGetSeparator,
     //     (REALproc)xsip_autocSetSeparator},
-    //    {"", "autocCancelAtStart", "Boolean", REALconsoleSafe | REALpropRuntimeOnly,
+    //    {"", "autocCancelAtStart", "Boolean", REALpropRuntimeOnly,
     //    (REALproc)xsip_autocGetCancelAtStart,
     //     (REALproc)xsip_autocSetCancelAtStart},
-    //    {"", "autocChooseSingle", "Boolean", REALconsoleSafe | REALpropRuntimeOnly,
+    //    {"", "autocChooseSingle", "Boolean", REALpropRuntimeOnly,
     //    (REALproc)xsip_autocGetChooseSingle,
     //     (REALproc)xsip_autocSetChooseSingle},
-    //    {"", "autocCaseInsensitiveBehaviour", "Integer", REALconsoleSafe | REALpropRuntimeOnly,
+    //    {"", "autocCaseInsensitiveBehaviour", "Integer", REALpropRuntimeOnly,
     //     (REALproc)xsip_autocGetCaseInsensitiveBehaviour, (REALproc)xsip_autocSetCaseInsensitiveBehaviour},
-    //    {"", "autocMulti", "Integer", REALconsoleSafe | REALpropRuntimeOnly, (REALproc)xsip_autocGetMulti,
+    //    {"", "autocMulti", "Integer", REALpropRuntimeOnly, (REALproc)xsip_autocGetMulti,
     //     (REALproc)xsip_autocSetMulti},
-    //    {"", "autocOrder", "Integer", REALconsoleSafe | REALpropRuntimeOnly, (REALproc)xsip_autocGetOrder,
+    //    {"", "autocOrder", "Integer", REALpropRuntimeOnly, (REALproc)xsip_autocGetOrder,
     //     (REALproc)xsip_autocSetOrder},
-    //    {"", "autocAutoHide", "Boolean", REALconsoleSafe | REALpropRuntimeOnly, (REALproc)xsip_autocGetAutoHide,
+    //    {"", "autocAutoHide", "Boolean", REALpropRuntimeOnly, (REALproc)xsip_autocGetAutoHide,
     //     (REALproc)xsip_autocSetAutoHide},
-    //    {"", "autocDropRestOfWord", "Boolean", REALconsoleSafe | REALpropRuntimeOnly,
+    //    {"", "autocDropRestOfWord", "Boolean", REALpropRuntimeOnly,
     //    (REALproc)xsip_autocGetDropRestOfWord,
     //     (REALproc)xsip_autocSetDropRestOfWord},
-    //    {"", "autocTypeSeparator", "Integer", REALconsoleSafe | REALpropRuntimeOnly,
+    //    {"", "autocTypeSeparator", "Integer", REALpropRuntimeOnly,
     //    (REALproc)xsip_autocGetTypeSeparator,
     //     (REALproc)xsip_autocSetTypeSeparator},
-    //    {"", "autocMaxHeight", "Integer", REALconsoleSafe | REALpropRuntimeOnly, (REALproc)xsip_autocGetMaxHeight,
+    //    {"", "autocMaxHeight", "Integer", REALpropRuntimeOnly, (REALproc)xsip_autocGetMaxHeight,
     //     (REALproc)xsip_autocSetMaxHeight},
-    //    {"", "autocMaxWidth", "Integer", REALconsoleSafe | REALpropRuntimeOnly, (REALproc)xsip_autocGetMaxWidth,
+    //    {"", "autocMaxWidth", "Integer", REALpropRuntimeOnly, (REALproc)xsip_autocGetMaxWidth,
     //     (REALproc)xsip_autocSetMaxWidth},
 };
 
@@ -168,13 +156,55 @@ REALmethodDefinition xsiMethods[] = {
      "GetStyledText(startPos as Integer, endPos as Integer) as String"},
     {(REALproc)xsim_changeInsertion, REALnoImplementation, "ChangeInsertion(length as Integer, text as String)"},
 
+    /*+++++++++++++++++++++++++
+     * selection-method.h
+     +++++++++++++++++++++++++*/
+    {(REALproc)xsim_setSel, REALnoImplementation, "SetSel(anchor as Integer, caret as Integer)"},
+    {(REALproc)xsim_gotoPos, REALnoImplementation, "GotoPos(caret as Integer)"},
+    {(REALproc)xsim_gotoLine, REALnoImplementation, "GotoLine(line as Integer)"},
+    {(REALproc)xsim_setEmptySelection, REALnoImplementation, "SetEmptySelection(caret as Integer)"},
+    {(REALproc)xsim_selectAll, REALnoImplementation, "SelectAll()"},
+    {(REALproc)xsim_lineFromPosition, REALnoImplementation, "LineFromPosition(pos as Integer) as Integer"},
+    {(REALproc)xsim_positionFromLine, REALnoImplementation, "PositionFromLine(line as Integer) as Integer"},
+    {(REALproc)xsim_getLineEndPosition, REALnoImplementation, "GetLineEndPosition(line as Integer) as Integer"},
+    {(REALproc)xsim_lineLength, REALnoImplementation, "LineLength(line as Integer) as Integer"},
+    {(REALproc)xsim_getColumn, REALnoImplementation, "GetColumn(pos as Integer) as Integer"},
+    {(REALproc)xsim_findColumn, REALnoImplementation, "FindColumn(line as Integer, column as Integer) as Integer "},
+    {(REALproc)xsim_positionFromPoint, REALnoImplementation,
+     "PositionFromPoint(x as Integer, y as Integer) as Integer"},
+    {(REALproc)xsim_positionFromPointClose, REALnoImplementation,
+     "PositionFromPointClose(x as Integer, y as Integer) as Integer"},
+    {(REALproc)xsim_charPositionFromPoint, REALnoImplementation,
+     "CharPositionFromPoint(x as Integer, y as Integer) as Integer"},
+    {(REALproc)xsim_charPositionFromPointClose, REALnoImplementation,
+     "CharPositionFromPointClose(x as Integer, y as Integer) as Integer"},
+    {(REALproc)xsim_pointXFromPosition, REALnoImplementation, "PointXFromPosition(pos as Integer) as Integer"},
+    {(REALproc)xsim_pointYFromPosition, REALnoImplementation, "PointYFromPosition(pos as Integer) as Integer"},
+    {(REALproc)xsim_getCurLine, REALnoImplementation, "GetCurLine() as String"},
+    {(REALproc)xsim_getLineSelStartPosition, REALnoImplementation,
+     "GetLineSelStartPosition(line as Integer) as Integer"},
+    {(REALproc)xsim_getLineSelEndPosition, REALnoImplementation, "GetLineSelEndPosition(line as Integer) as Integer "},
+    {(REALproc)xsim_moveCaretInsideView, REALnoImplementation, "MoveCaretInsideView()"},
+    {(REALproc)xsim_positionBefore, REALnoImplementation, "PositionBefore(pos as Integer) as Integer"},
+    {(REALproc)xsim_positionAfter, REALnoImplementation, "PositionAfter(pos as Integer) as Integer"},
+    {(REALproc)xsim_positionRelative, REALnoImplementation,
+     "PositionRelative(pos as Integer, relative as Integer) as Integer"},
+    {(REALproc)xsim_countCharacters, REALnoImplementation,
+     "CountCharacters(posStart as Integer, posEnd as Integer) as Integer"},
+    {(REALproc)xsim_textWidth, REALnoImplementation, "TextWidth(style as Integer, text as String) as Integer"},
+    {(REALproc)xsim_textHeight, REALnoImplementation, "TextHeight(line as Integer) as Integer"},
+    {(REALproc)xsim_chooseCaretX, REALnoImplementation, "ChooseCaretX()"},
+    {(REALproc)xsim_moveSelectedLinesUp, REALnoImplementation, "MoveSelectedLinesUp()"},
+    {(REALproc)xsim_moveSelectedLinesDown, REALnoImplementation, "MoveSelectedLinesDown()"},
+
     //    /*+++++++++++++++++++++++++
     //    * sci-styledef.h
     //    +++++++++++++++++++++++++*/
     //    {(REALproc)xsim_styleResetDefault, REALnoImplementation, "StyleResetDefault()"},
     //    {(REALproc)xsim_styleClearAll, REALnoImplementation, "StyleClearAll()"},
     //    {(REALproc)xsim_styleGetFont, REALnoImplementation, "Font(style as Integer) as String"},
-    //    {(REALproc)xsim_styleSetFont, REALnoImplementation, "Font(style as Integer, assigns fontName as String)"},
+    //    {(REALproc)xsim_styleSetFont, REALnoImplementation, "Font(style as Integer, assigns fontName as
+    //    String)"},
     //    {(REALproc)xsim_styleGetSize, REALnoImplementation, "FontSize(style as Integer) as Integer"},
     //    {(REALproc)xsim_styleSetSize, REALnoImplementation, "FontSize(style as Integer, assigns sizePoints as
     //    Integer)"},
@@ -182,9 +212,11 @@ REALmethodDefinition xsiMethods[] = {
     //    {(REALproc)xsim_styleSetWeight, REALnoImplementation, "FontWeight(style as Integer, assigns weight as
     //    Integer)"},
     //    {(REALproc)xsim_styleGetFore, REALnoImplementation, "Forecolor(style as Integer) as Color"},
-    //    {(REALproc)xsim_styleSetFore, REALnoImplementation, "Forecolor(style as Integer, assigns fore as Color)"},
+    //    {(REALproc)xsim_styleSetFore, REALnoImplementation, "Forecolor(style as Integer, assigns fore as
+    //    Color)"},
     //    {(REALproc)xsim_styleGetBack, REALnoImplementation, "Backcolor(style as Integer) as Color"},
-    //    {(REALproc)xsim_styleSetBack, REALnoImplementation, "Backcolor(style as Integer, assigns back as Color)"},
+    //    {(REALproc)xsim_styleSetBack, REALnoImplementation, "Backcolor(style as Integer, assigns back as
+    //    Color)"},
     //    {(REALproc)xsim_styleGetVisible, REALnoImplementation, "StyleVisible(style as Integer) as Boolean"},
     //    {(REALproc)xsim_styleSetVisible, REALnoImplementation,
     //     "StyleVisible(style as Integer, assigns visible as Boolean)"},
@@ -204,14 +236,16 @@ REALmethodDefinition xsiMethods[] = {
     //    {(REALproc)xsim_getMarginMaskN, REALnoImplementation, "MarginMask(margin as Integer) as Integer"},
     //    {(REALproc)xsim_setMarginMaskN, REALnoImplementation, "MarginMask(margin as Integer, assigns mask as
     //    Integer)"},
-    //    {(REALproc)xsim_getMarginSensitiveN, REALnoImplementation, "MarginSensitive(margin as Integer) as Boolean"},
+    //    {(REALproc)xsim_getMarginSensitiveN, REALnoImplementation, "MarginSensitive(margin as Integer) as
+    //    Boolean"},
     //    {(REALproc)xsim_setMarginSensitiveN, REALnoImplementation,
     //     "MarginSensitive(margin as Integer, assigns sensitive as Boolean)"},
     //    {(REALproc)xsim_getMarginCursorN, REALnoImplementation, "MarginCursor(margin as Integer) as Integer"},
     //    {(REALproc)xsim_setMarginCursorN, REALnoImplementation,
     //     "MarginCursor(margin as Integer, assigns cursor as Integer)"},
     //    {(REALproc)xsim_marginGetText, REALnoImplementation, "MarginText(line as Integer) as String"},
-    //    {(REALproc)xsim_marginSetText, REALnoImplementation, "MarginText(line as Integer, assigns text as String)"},
+    //    {(REALproc)xsim_marginSetText, REALnoImplementation, "MarginText(line as Integer, assigns text as
+    //    String)"},
     //    {(REALproc)xsim_marginGetStyle, REALnoImplementation, "MarginStyle(line as Integer) as Integer"},
     //    {(REALproc)xsim_marginSetStyle, REALnoImplementation, "MarginStyle(line as Integer, assigns style as
     //    Integer)"},
@@ -225,55 +259,13 @@ REALmethodDefinition xsiMethods[] = {
     //    {(REALproc)xsim_marginTextClearAll, REALnoImplementation, "MarginTextClearAll()"},
     //
     //    /*+++++++++++++++++++++++++
-    //     * sci-selection.h
-    //     +++++++++++++++++++++++++*/
-    //    {(REALproc)xsim_setSel, REALnoImplementation, "SetSel(anchor as Integer, caret as Integer)"},
-    //    {(REALproc)xsim_gotoPos, REALnoImplementation, "GotoPosition(caret as Integer)"},
-    //    {(REALproc)xsim_gotoLine, REALnoImplementation, "GotoLine(line as Integer)"},
-    //    {(REALproc)xsim_setEmptySelection, REALnoImplementation, "EmptySelection(caret as Integer)"},
-    //    {(REALproc)xsim_selectAll, REALnoImplementation, "SelectAll()"},
-    //    {(REALproc)xsim_lineFromPosition, REALnoImplementation, "LineFromPosition(pos as Integer) as Integer"},
-    //    {(REALproc)xsim_positionFromLine, REALnoImplementation, "PositionFromLine(line as Integer) as Integer"},
-    //    {(REALproc)xsim_getLineEndPosition, REALnoImplementation, "LineEndPosition(line as Integer) as Integer"},
-    //    {(REALproc)xsim_lineLength, REALnoImplementation, "LineLength(line as Integer) as Integer"},
-    //    {(REALproc)xsim_getColumn, REALnoImplementation, "GetColumn(pos as Integer) as Integer"},
-    //    {(REALproc)xsim_findColumn, REALnoImplementation, "FindColumn(line as Integer, column as Integer) as
-    //    Integer"},
-    //    {(REALproc)xsim_positionFromPoint, REALnoImplementation,
-    //     "PositionFromPoint(x as Integer, y as Integer) as Integer"},
-    //    {(REALproc)xsim_positionFromPointClose, REALnoImplementation,
-    //     "PositionFromPointClose(x as Integer, y as Integer) as Integer"},
-    //    {(REALproc)xsim_charPositionFromPoint, REALnoImplementation,
-    //     "CharPositionFromPoint(x as Integer, y as Integer) as Integer"},
-    //    {(REALproc)xsim_charPositionFromPointClose, REALnoImplementation,
-    //     "CharPositionFromPointClose(x as Integer, y as Integer) as Integer"},
-    //    {(REALproc)xsim_pointXFromPosition, REALnoImplementation, "PointXFromPosition(pos as Integer) as Integer"},
-    //    {(REALproc)xsim_pointYFromPosition, REALnoImplementation, "PointYFromPosition(pos as Integer) as Integer"},
-    //    {(REALproc)xsim_getCurLine, REALnoImplementation, "GetCurLineText(length as Integer) as String"},
-    //    {(REALproc)xsim_getLineSelStartPosition, REALnoImplementation,
-    //     "GetLineSelStartPosition(line as Integer) as Integer"},
-    //    {(REALproc)xsim_getLineSelEndPosition, REALnoImplementation, "GetLineSelEndPosition(line as Integer) as
-    //    Integer"},
-    //    {(REALproc)xsim_moveCaretInsideView, REALnoImplementation, "MoveCaretInsideView()"},
-    //    {(REALproc)xsim_positionBefore, REALnoImplementation, "PositionBefore(pos as Integer) as Integer"},
-    //    {(REALproc)xsim_positionAfter, REALnoImplementation, "PositionAfter(pos as Integer) as Integer"},
-    //    {(REALproc)xsim_positionRelative, REALnoImplementation,
-    //     "PositionRelative(pos as Integer, relative as Integer) as Integer"},
-    //    {(REALproc)xsim_countCharacters, REALnoImplementation,
-    //     "CountCharacters(posStart as Integer, posEnd as Integer) as Integer"},
-    //    {(REALproc)xsim_textWidth, REALnoImplementation, "TextWidth(style as Integer, text as String) as Integer"},
-    //    {(REALproc)xsim_textHeight, REALnoImplementation, "TextHeight(line as Integer) as Integer"},
-    //    {(REALproc)xsim_chooseCaretX, REALnoImplementation, "ChooseCaretX()"},
-    //    {(REALproc)xsim_moveSelectedLinesUp, REALnoImplementation, "MoveSelectedLinesUp()"},
-    //    {(REALproc)xsim_moveSelectedLinesDown, REALnoImplementation, "MoveSelectedLinesDown()"},
-    //
-    //    /*+++++++++++++++++++++++++
     //     * sci-lexer.h
     //     +++++++++++++++++++++++++*/
     //    {(REALproc)xsim_colourise, REALnoImplementation, "Colourise(posStart as Integer, posEnd as Integer)"},
     //    {(REALproc)xsim_changeLexerState, REALnoImplementation,
     //     "ChangeLexerState(posStart as Integer, posEnd as Integer) as Integer"},
-    //    {(REALproc)xsim_setKeywords, REALnoImplementation, "SetKeywords(keywordSet as Integer, keywords as String)"},
+    //    {(REALproc)xsim_setKeywords, REALnoImplementation, "SetKeywords(keywordSet as Integer, keywords as
+    //    String)"},
     //    {(REALproc)xsim_describeKeywordSets, REALnoImplementation, "DescribeKeywordSets(description as String) as
     //    Integer"},
     //    {(REALproc)xsim_setProperty, REALnoImplementation, "SetProperty(key as String, value as String)"},
@@ -318,7 +310,8 @@ REALmethodDefinition xsiMethods[] = {
     //    /*+++++++++++++++++++++++++
     //     * sci-autoc.h
     //     +++++++++++++++++++++++++*/
-    //    {(REALproc)xsim_autocShow, REALnoImplementation, "AutocShow(lengthEntered as Integer, itemList as String)"},
+    //    {(REALproc)xsim_autocShow, REALnoImplementation, "AutocShow(lengthEntered as Integer, itemList as
+    //    String)"},
     //    {(REALproc)xsim_autocCancel, REALnoImplementation, "AutocCancel()"},
     //    {(REALproc)xsim_autocActive, REALnoImplementation, "AutocActive() as Boolean"},
     //    {(REALproc)xsim_autocComplete, REALnoImplementation, "AutocComplete()"},

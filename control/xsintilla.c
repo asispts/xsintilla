@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include "xsintilla.h"
 
 xsiControlData* xsi_getControlData(REALcontrolInstance ctl)
@@ -34,4 +35,20 @@ RBColor xsi_invertColor(RBColor color)
 
     // based on scintilla documentation
     return r | (g << 8) | (b << 16);
+}
+
+REALstring xsi_toREALstring(char* buffer, int length, bool nullTerminated)
+{
+    if(length <= 0) {
+        free(buffer);
+        return NULL;
+    }
+
+    if(nullTerminated == false)
+        length = length + 1;
+
+    REALstring text = REALBuildStringWithEncoding(buffer, length - 1, kREALTextEncodingUTF8);
+    REALLockString(text);
+    free(buffer);
+    return text;
 }
