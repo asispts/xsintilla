@@ -29,22 +29,26 @@ void Destructor(REALcontrolInstance ctl)
 void OnOpen(REALcontrolInstance ctl)
 {
     xsiControlData* data = xsi_getControlData(ctl);
+
     RBInteger handle = getHandle(ctl);
     if(handle == 0)
         return;
 
     GtkWidget* canvas = (GtkWidget*)handle;
-    GtkContainer* canvasCont = (GtkContainer*)gtk_widget_get_parent(canvas);
+    GtkWidget* fixed = (GtkWidget*)gtk_widget_get_parent(canvas);
+    gtk_fixed_put(GTK_FIXED(fixed), data->editor, 0, 0);
 
-    // @TODO: Fix this x and y values
-    gtk_fixed_put(GTK_FIXED(canvasCont), data->editor, 0, 0);
-
-    // g_signal_connect(G_OBJECT(canvas), "size-request", G_CALLBACK(CanvasSizeRequest), data->editor);
     g_signal_connect(G_OBJECT(canvas), "size-allocate", G_CALLBACK(CanvasSizeAllocate), data);
 
-    g_signal_connect(G_OBJECT(data->editor), "size-allocate", G_CALLBACK(ScintillaSizeAllocate), NULL);
-    g_signal_connect(G_OBJECT(canvasCont), "size-allocate", G_CALLBACK(FixedSizeAllocate), NULL);
-
+    GtkWidget* eventBox = (GtkWidget*)gtk_widget_get_parent(canvas);
+    while(gtk_widget_is_toplevel(eventBox) == false) {
+        if(GTK_IS_EVENT_BOX(eventBox) == true) {
+            // listen to size-allocate event
+            g_signal_connect(G_OBJECT(eventBox), "size-allocate", G_CALLBACK(EventBoxSizeAllocate), NULL);
+            break;
+        }
+        eventBox = (GtkWidget*)gtk_widget_get_parent(eventBox);
+    }
     g_signal_connect(data->sci, SCINTILLA_NOTIFY, G_CALLBACK(sci_eventHandler), NULL);
 
     gtk_widget_show_all(data->editor);
@@ -75,8 +79,6 @@ void CanvasSizeAllocate(GtkWidget* widget, GdkRectangle* allocation, gpointer us
     int y = allocation->y;
     int w = allocation->width;
     int h = allocation->height;
-    const gchar* typename = G_OBJECT_TYPE_NAME(widget);
-
     int parentX = GTK_WIDGET(canvasCont)->allocation.x;
     int parentY = GTK_WIDGET(canvasCont)->allocation.y;
 
@@ -93,77 +95,14 @@ void CanvasSizeAllocate(GtkWidget* widget, GdkRectangle* allocation, gpointer us
     if(y == 0)
         relY = 0;
 
-    printf("x = %d, y = %d, w = %d, h = %d, name = %s, parentX = %d, parentY = %d; [Canvas]\n", x, y, w, h, typename,
-           parentX, parentY);
-
-    // GtkWidget* editor = (GtkWidget*)user_data;
-
     gtk_widget_set_size_request(data->editor, w, h);
     gtk_fixed_move(GTK_FIXED(canvasCont), data->editor, relX, relY);
-    // gtk_widget_size_allocate(data->editor, allocation);
-
-    // gtk_fixed_put(GTK_FIXED(canvasCont), data->editor, x, y);
-    // gtk_widget_set_size_request(data->editor, w, h);
-    // gtk_widget_size_allocate(data->editor, allocation);
-
-    // GtkAllocation* sciAlloc;
-
-    // sciAlloc->x = allocation->x;
-    // sciAlloc->y = allocation->y;
-    // sciAlloc->width = allocation->width;
-    // sciAlloc->height = allocation->height;
-
-    // gtk_widget_set_size_request(editor, w, h);
-    // gtk_widget_size_allocate(editor, allocation);
-
-    // gtk_fixed_move(GTK_FIXED(canvasCont), editor, x, y);
 }
 
-void ScintillaSizeAllocate(GtkWidget* widget, GdkRectangle* allocation, gpointer user_data)
+void EventBoxSizeAllocate(GtkWidget* widget, GdkRectangle* allocation, gpointer user_data)
 {
-    int x = allocation->x;
-    int y = allocation->y;
-    int w = allocation->width;
-    int h = allocation->height;
-    const gchar* typename = G_OBJECT_TYPE_NAME(widget);
-
-    printf("x = %d, y = %d, w = %d, h = %d, name = %s; [Scintilla]\n", x, y, w, h, typename);
-}
-
-void FixedSizeAllocate(GtkWidget* widget, GdkRectangle* allocation, gpointer user_data)
-{
-    int x = allocation->x;
-    int y = allocation->y;
-    int w = allocation->width;
-    int h = allocation->height;
-    const gchar* typename = G_OBJECT_TYPE_NAME(widget);
-
-    printf("x = %d, y = %d, w = %d, h = %d, name = %s; [Fixed]\n", x, y, w, h, typename);
-}
-
-void CanvasSizeRequest(GtkWidget* widget, GtkRequisition* requisition, gpointer user_data)
-{
-    // GtkContainer* canvasCont = (GtkContainer*)gtk_widget_get_parent(widget);
-    // GtkWidget* editor = (GtkWidget*)user_data;
-
-    // int x = allocation->x;
-    // int y = allocation->y;
-    // int w = allocation->width;
-    // int h = allocation->height;
-    // const gchar* typename = G_OBJECT_CLASS_NAME(widget);
-    // const gchar* parent = G_OBJECT_TYPE_NAME(canvasCont);
-
-    // printf("x = %d, y = %d, w = %d, h = %d, name = %s, parent = %s; [Canvas]\n", x, y, w, h, typename, parent);
-
-    // GtkAllocation* sciAlloc;
-
-    // sciAlloc->x = allocation->x;
-    // sciAlloc->y = allocation->y;
-    // sciAlloc->width = allocation->width;
-    // sciAlloc->height = allocation->height;
-
-    // gtk_widget_set_size_request(editor, w, h);
-    // gtk_widget_size_allocate(editor, allocation);
-
-    // gtk_fixed_move(GTK_FIXED(canvasCont), editor, x, y);
+    if((allocation->x != 0) || (allocation->y != 0)) {
+        GtkWidget* parent = (GtkWidget*)gtk_widget_get_parent(widget);
+        gtk_fixed_move(GTK_FIXED(parent), widget, 0, 0);
+    }
 }
