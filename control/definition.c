@@ -23,6 +23,9 @@
 ////#include "sci-styling.h"
 ////#include "sci-words.h"
 
+//+++++++++++++++++++++++++++++++++
+// Properties
+//+++++++++++++++++++++++++++++++++
 // group, name, type, flags, getter, setter, param, editor, enumCount, enumEntries, attributeCount, attributes
 REALproperty xsiProperties[] = {
     /*+++++++++++++++++++++++++
@@ -126,6 +129,9 @@ REALproperty xsiProperties[] = {
     //     (REALproc)xsip_autocSetMaxWidth},
 };
 
+//+++++++++++++++++++++++++++++++++
+// Methods
+//+++++++++++++++++++++++++++++++++
 // function, setterFunction, declaration, mFlags, attributeCount, attributes
 REALmethodDefinition xsiMethods[] = {
     /*+++++++++++++++++++++++++
@@ -335,6 +341,9 @@ REALmethodDefinition xsiMethods[] = {
     //     "WordStartPosition(pos as Integer, onlyWordCharacters as Boolean) as Integer"},
 };
 
+//+++++++++++++++++++++++++++++++++
+// Events
+//+++++++++++++++++++++++++++++++++
 REALevent xsiEvents[] = {
     // declaration, forSystemUse, attributeCount, attributes
     {"AutocCompleted(ch as Integer, listCompletionMethod as Integer)"},
@@ -373,6 +382,9 @@ REALevent xsiEvents[] = {
     {"Painted()"},
 };
 
+//+++++++++++++++++++++++++++++++++
+// Behaviour
+//+++++++++++++++++++++++++++++++++
 REALcontrolBehaviour xsiBehavior = {
     Constructor,      // constructorFunction
     Destructor,       // destructorFunction
@@ -409,6 +421,9 @@ REALcontrolBehaviour xsiBehavior = {
     // end of struct
 };
 
+//+++++++++++++++++++++++++++++++++
+// Constants
+//+++++++++++++++++++++++++++++++++
 REALconstant xsiConstant[] = {
     {"StyleMax as Integer = 255"},           // STYLE_MAX 255
     {"MarginMax as Integer = 4"},            // SC_MAX_MARGIN 4
@@ -416,6 +431,24 @@ REALconstant xsiConstant[] = {
     {"MaskFolder as Integer = &hFE000000"},  // SC_MASK_FOLDERS 0xFE000000
 };
 
+//+++++++++++++++++++++++++++++++++
+// Enumerations
+//+++++++++++++++++++++++++++++++++
+static const char* enumSelection[] = {
+    "STREAM = 0",     // SC_SEL_STREAM=0
+    "RECTANGLE = 1",  // SC_SEL_RECTANGLE=1
+    "LINES = 2",      // SC_SEL_LINES=2
+    "THIN = 3",       // SC_SEL_THIN=3
+};
+
+REALenum xsiEnums[] = {
+    // name, type, mFlags, fields, numFields, attributeCount, attributes
+    {"eSelection", "Int8", REALScopePublic, enumSelection, 4},
+};
+
+//+++++++++++++++++++++++++++++++++
+// xsintilla Control
+//+++++++++++++++++++++++++++++++++
 REALcontrol xsiControl = {
     kCurrentREALControlVersion,                         // version
     "xsintilla",                                        // name
@@ -447,8 +480,8 @@ REALcontrol xsiControl = {
     0,                                                  // sharedMethodCount
     NULL,                                               // delegates
     0,                                                  // delegateCount
-    NULL,                                               // enums
-    0,                                                  // enumCount
+    xsiEnums,                                           // enums
+    sizeof(xsiEnums) / sizeof(REALenum),                // enumCount
 #endif
     // end of structure
 };
