@@ -7,13 +7,17 @@
 #include "rb_plugin.h"
 #define PLAT_GTK 1
 #include "ScintillaWidget.h"
+#include "margin.h"
 
 REALcontrol xsiControl;
 
 typedef struct {
     GtkWidget* editor;
     ScintillaObject* sci;
+    REALobject margin;
 } xsiControlData;
+
+REALobject xsi_getMarginObject(REALcontrolInstance ctl);
 
 xsiControlData* xsi_getControlData(REALcontrolInstance ctl);
 Rect xsi_getRect(REALcontrolInstance ctl);

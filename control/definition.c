@@ -17,7 +17,6 @@
 
 ////#include "sci-autoc.h"
 ////#include "sci-lexer.h"
-////#include "sci-margin.h"
 ////#include "sci-marker.h"
 ////#include "sci-styledef.h"
 ////#include "sci-styling.h"
@@ -28,6 +27,7 @@
 //+++++++++++++++++++++++++++++++++
 // group, name, type, flags, getter, setter, param, editor, enumCount, enumEntries, attributeCount, attributes
 REALproperty xsiProperties[] = {
+    {"", "margin", "xsiMargin", REALpropRuntimeOnly, (REALproc)xsi_getMarginObject, REALnoImplementation},
     /*+++++++++++++++++++++++++
      * text-properties.h
      +++++++++++++++++++++++++*/
@@ -62,20 +62,6 @@ REALproperty xsiProperties[] = {
     {"", "mouseSelectionRectangularSwitch", "Boolean", REALpropRuntimeOnly,
      (REALproc)xsip_getMouseSelectionRectangularSwitch, (REALproc)xsip_setMouseSelectionRectangularSwitch},
 
-    //    /*+++++++++++++++++++++++++
-    //     * sci-margin.h
-    //     +++++++++++++++++++++++++*/
-    //    {"", "marginCount", "Integer", REALpropRuntimeOnly, (REALproc)xsip_getMargins,
-    //     (REALproc)xsip_setMargins},
-    //    {"", "marginLeft", "Integer", REALpropRuntimeOnly, (REALproc)xsip_getMarginLeft,
-    //     (REALproc)xsip_setMarginLeft},
-    //    {"", "marginRight", "Integer", REALpropRuntimeOnly, (REALproc)xsip_getMarginRight,
-    //     (REALproc)xsip_setMarginRight},
-    //    {"", "marginStyleOffset", "Integer", REALpropRuntimeOnly,
-    //    (REALproc)xsip_marginGetStyleOffset,
-    //     (REALproc)xsip_marginSetStyleOffset},
-    //    {"", "marginOptions", "Integer", REALpropRuntimeOnly, (REALproc)xsip_getMarginOptions,
-    //     (REALproc)xsip_setMarginOptions},
     //    /*+++++++++++++++++++++++++
     //     * sci-lexer.h
     //     +++++++++++++++++++++++++*/
@@ -134,6 +120,7 @@ REALproperty xsiProperties[] = {
 //+++++++++++++++++++++++++++++++++
 // function, setterFunction, declaration, mFlags, attributeCount, attributes
 REALmethodDefinition xsiMethods[] = {
+    //{(REALproc)xsi_getMarginObject, REALnoImplementation, "margin() as xsiMargin"},
     /*+++++++++++++++++++++++++
      * text-method.h
      +++++++++++++++++++++++++*/
@@ -225,44 +212,6 @@ REALmethodDefinition xsiMethods[] = {
     //    {(REALproc)xsim_styleGetVisible, REALnoImplementation, "StyleVisible(style as Integer) as Boolean"},
     //    {(REALproc)xsim_styleSetVisible, REALnoImplementation,
     //     "StyleVisible(style as Integer, assigns visible as Boolean)"},
-    //
-    //    /*+++++++++++++++++++++++++
-    //     * sci-margin.h
-    //     +++++++++++++++++++++++++*/
-    //    {(REALproc)xsim_getMarginTypeN, REALnoImplementation, "MarginType(margin as Integer) as ScMarginType"},
-    //    {(REALproc)xsim_setMarginTypeN, REALnoImplementation,
-    //     "MarginType(margin as Integer, assigns marginType as ScMarginType)"},
-    //    {(REALproc)xsim_getMarginWidthN, REALnoImplementation, "MarginWidth(margin as Integer) as Integer"},
-    //    {(REALproc)xsim_setMarginWidthN, REALnoImplementation,
-    //     "MarginWidth(margin as Integer, assigns pixelWidth as Integer)"},
-    //    {(REALproc)xsim_getMarginBackN, REALnoImplementation, "MarginBackcolor(margin as Integer) as Color"},
-    //    {(REALproc)xsim_setMarginBackN, REALnoImplementation, "MarginBackcolor(margin as Integer, assigns back as
-    //    Color)"},
-    //    {(REALproc)xsim_getMarginMaskN, REALnoImplementation, "MarginMask(margin as Integer) as Integer"},
-    //    {(REALproc)xsim_setMarginMaskN, REALnoImplementation, "MarginMask(margin as Integer, assigns mask as
-    //    Integer)"},
-    //    {(REALproc)xsim_getMarginSensitiveN, REALnoImplementation, "MarginSensitive(margin as Integer) as
-    //    Boolean"},
-    //    {(REALproc)xsim_setMarginSensitiveN, REALnoImplementation,
-    //     "MarginSensitive(margin as Integer, assigns sensitive as Boolean)"},
-    //    {(REALproc)xsim_getMarginCursorN, REALnoImplementation, "MarginCursor(margin as Integer) as Integer"},
-    //    {(REALproc)xsim_setMarginCursorN, REALnoImplementation,
-    //     "MarginCursor(margin as Integer, assigns cursor as Integer)"},
-    //    {(REALproc)xsim_marginGetText, REALnoImplementation, "MarginText(line as Integer) as String"},
-    //    {(REALproc)xsim_marginSetText, REALnoImplementation, "MarginText(line as Integer, assigns text as
-    //    String)"},
-    //    {(REALproc)xsim_marginGetStyle, REALnoImplementation, "MarginStyle(line as Integer) as Integer"},
-    //    {(REALproc)xsim_marginSetStyle, REALnoImplementation, "MarginStyle(line as Integer, assigns style as
-    //    Integer)"},
-    //    {(REALproc)xsim_marginGetStyles, REALnoImplementation, "MarginStyleStr(line as Integer) as String"},
-    //    {(REALproc)xsim_marginSetStyles, REALnoImplementation, "MarginStyleStr(line as Integer, assigns styles as
-    //    String)"},
-    //    {(REALproc)xsim_setFoldMarginColour, REALnoImplementation,
-    //     "FoldMarginColour(useSetting as Boolean, assigns back as Color)"},
-    //    {(REALproc)xsim_setFoldMarginHiColour, REALnoImplementation,
-    //     "FoldMarginHiColour(useSetting as Boolean, assigns fore as Color)"},
-    //    {(REALproc)xsim_marginTextClearAll, REALnoImplementation, "MarginTextClearAll()"},
-    //
     //    /*+++++++++++++++++++++++++
     //     * sci-lexer.h
     //     +++++++++++++++++++++++++*/
@@ -426,7 +375,6 @@ REALcontrolBehaviour xsiBehavior = {
 //+++++++++++++++++++++++++++++++++
 REALconstant xsiConstant[] = {
     {"StyleMax as Integer = 255"},           // STYLE_MAX 255
-    {"MarginMax as Integer = 4"},            // SC_MAX_MARGIN 4
     {"MarkerMax as Integer = 31"},           // MARKER_MAX 31
     {"MaskFolder as Integer = &hFE000000"},  // SC_MASK_FOLDERS 0xFE000000
 };
@@ -441,7 +389,7 @@ static const char* enumSelection[] = {
     "THIN = 3",       // SC_SEL_THIN=3
 };
 
-REALenum xsiEnums[] = {
+REALenum EnumDef[] = {
     // name, type, mFlags, fields, numFields, attributeCount, attributes
     {"eSelection", "Int8", REALScopePublic, enumSelection, 4},
 };
@@ -453,7 +401,7 @@ REALcontrol xsiControl = {
     kCurrentREALControlVersion,                         // version
     "xsintilla",                                        // name
     sizeof(xsiControlData),                             // dataSize
-    0,                                                  // flags
+    REALdontEraseBackground,                            // flags
     0,                                                  // toolbarPICT
     0,                                                  // toolbarDownPICT
     100,                                                // defaultWidth
@@ -480,8 +428,8 @@ REALcontrol xsiControl = {
     0,                                                  // sharedMethodCount
     NULL,                                               // delegates
     0,                                                  // delegateCount
-    xsiEnums,                                           // enums
-    sizeof(xsiEnums) / sizeof(REALenum),                // enumCount
+    EnumDef,                                            // enums
+    sizeof(EnumDef) / sizeof(REALenum),                 // enumCount
 #endif
     // end of structure
 };

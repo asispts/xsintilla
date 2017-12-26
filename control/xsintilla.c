@@ -52,3 +52,10 @@ REALstring xsi_toREALstring(char* buffer, int length, bool nullTerminated)
     free(buffer);
     return text;
 }
+
+REALobject xsi_getMarginObject(REALcontrolInstance ctl)
+{
+    xsiControlData* data = xsi_getControlData(ctl);
+    REALLockObject(data->margin);
+    return data->margin;
+}

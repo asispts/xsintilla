@@ -3,6 +3,7 @@
 #include "XojoGraphics.h"
 #include "behaviour.h"
 #include "event.h"
+#include "margin.h"
 
 RBInteger getHandle(REALcontrolInstance ctl)
 {
@@ -16,6 +17,8 @@ void Constructor(REALcontrolInstance ctl)
     xsiControlData* data = xsi_getControlData(ctl);
     data->editor = scintilla_new();
     data->sci = SCINTILLA(data->editor);
+    data->margin = REALnewInstanceWithClass(REALGetClassRef("xsiMargin"));
+    margin_setcontrol(data->margin, ctl);
 }
 
 void Destructor(REALcontrolInstance ctl)
@@ -23,6 +26,7 @@ void Destructor(REALcontrolInstance ctl)
     xsiControlData* data = xsi_getControlData(ctl);
     data->editor = NULL;
     data->sci = NULL;
+    data->margin = NULL;
     data = NULL;
 }
 

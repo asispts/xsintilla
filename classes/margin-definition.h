@@ -1,0 +1,6 @@
+#ifndef CLASSES_MARGIN_DEFINITION_H
+#define CLASSES_MARGIN_DEFINITION_H
+
+void registerClassMargin(void);
+
+#endif  // CLASSES_MARGIN_DEFINITION_H

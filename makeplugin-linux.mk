@@ -1,5 +1,5 @@
 VPATH 				= $(BUILDDIR)
-vpath %.c $(SRCROOT) $(LIBXOJO) $(CONTROLDIR) $(PROPERTIESDIR) $(METHODDIR)
+vpath %.c $(SRCROOT) $(LIBXOJO) $(CONTROLDIR) $(PROPERTIESDIR) $(METHODDIR) $(CLASSESDIR)
 vpath %.cpp $(SDKGLUECODEDIR)
 
 
@@ -8,13 +8,14 @@ OBJNAME 			= 	PluginMain.o main.o XojoGraphics.o \
 						text-properties.o text-method.o \
 						error-properties.o \
 						selection-properties.o selection-method.o \
+						margin-definition.o margin.o \
 #						xsi-behaviour.o xsi-event.o\
 #						modsclex.o modplugin.o modenums.o modscstyle.o \
 #						sci-styledef.o sci-margin.o \
 #						sci-lexer.o sci-marker.o sci-autoc.o sci-styling.o \
 #						sci-words.o
 
-INCLUDES 			= -include $(PREFIXHEADER) -I$(SDKINCLUDEDIR) -I$(LIBXOJO) -I$(CONTROLDIR) -I$(PROPERTIESDIR) -I$(METHODDIR)
+INCLUDES 			= -include $(PREFIXHEADER) -I$(SDKINCLUDEDIR) -I$(LIBXOJO) -I$(CONTROLDIR) -I$(PROPERTIESDIR) -I$(METHODDIR) -I$(CLASSESDIR)
 ifdef PLUGIN_ARCH64
 ARCH_FLAGS 			= -m64
 else
