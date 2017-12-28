@@ -27,7 +27,12 @@
 //+++++++++++++++++++++++++++++++++
 // group, name, type, flags, getter, setter, param, editor, enumCount, enumEntries, attributeCount, attributes
 REALproperty xsiProperties[] = {
+    /*+++++++++++++++++++++++++
+     * CLASSES
+     +++++++++++++++++++++++++*/
     {"", "margin", "xsiMargin", REALpropRuntimeOnly, (REALproc)xsi_getMarginObject, REALnoImplementation},
+    {"", "lexer", "xsiLexer", REALpropRuntimeOnly, (REALproc)xsi_getLexerObject, REALnoImplementation},
+
     /*+++++++++++++++++++++++++
      * text-properties.h
      +++++++++++++++++++++++++*/
@@ -62,14 +67,6 @@ REALproperty xsiProperties[] = {
     {"", "mouseSelectionRectangularSwitch", "Boolean", REALpropRuntimeOnly,
      (REALproc)xsip_getMouseSelectionRectangularSwitch, (REALproc)xsip_setMouseSelectionRectangularSwitch},
 
-    //    /*+++++++++++++++++++++++++
-    //     * sci-lexer.h
-    //     +++++++++++++++++++++++++*/
-    //    {"", "lexer", "Integer", REALpropRuntimeOnly, (REALproc)xsip_getLexer,
-    //    (REALproc)xsip_setLexer},
-    //    {"", "lexerLanguage", "String", REALpropRuntimeOnly, (REALproc)xsip_getLexerLanguage,
-    //     (REALproc)xsip_setLexerLanguage},
-    //
     //    /*+++++++++++++++++++++++++
     //     * sci-marker.h
     //     +++++++++++++++++++++++++*/
@@ -212,26 +209,6 @@ REALmethodDefinition xsiMethods[] = {
     //    {(REALproc)xsim_styleGetVisible, REALnoImplementation, "StyleVisible(style as Integer) as Boolean"},
     //    {(REALproc)xsim_styleSetVisible, REALnoImplementation,
     //     "StyleVisible(style as Integer, assigns visible as Boolean)"},
-    //    /*+++++++++++++++++++++++++
-    //     * sci-lexer.h
-    //     +++++++++++++++++++++++++*/
-    //    {(REALproc)xsim_colourise, REALnoImplementation, "Colourise(posStart as Integer, posEnd as Integer)"},
-    //    {(REALproc)xsim_changeLexerState, REALnoImplementation,
-    //     "ChangeLexerState(posStart as Integer, posEnd as Integer) as Integer"},
-    //    {(REALproc)xsim_setKeywords, REALnoImplementation, "SetKeywords(keywordSet as Integer, keywords as
-    //    String)"},
-    //    {(REALproc)xsim_describeKeywordSets, REALnoImplementation, "DescribeKeywordSets(description as String) as
-    //    Integer"},
-    //    {(REALproc)xsim_setProperty, REALnoImplementation, "SetProperty(key as String, value as String)"},
-    //    {(REALproc)xsim_getProperty, REALnoImplementation, "GetProperty(key as String) as String"},
-    //    {(REALproc)xsim_loadLexerLibrary, REALnoImplementation, "LoadLexerLibrary(path as String)"},
-    //    {(REALproc)xsim_propertyNames, REALnoImplementation, "PropertyNames() as String"},
-    //    {(REALproc)xsim_propertyType, REALnoImplementation, "PropertyType(name as String) as Integer"},
-    //    {(REALproc)xsim_describeProperty, REALnoImplementation, "DescribeProperty(name as String) as String"},
-    //    {(REALproc)xsim_getPropertyExpanded, REALnoImplementation,
-    //     "GetPropertyExpanded(key as String, value as String) as Integer"},
-    //    {(REALproc)xsim_getPropertyInt, REALnoImplementation,
-    //     "GetPropertyInt(key as String, defaultValue as Integer) as Integer"},
     //
     //    /*+++++++++++++++++++++++++
     //     * sci-marker.h

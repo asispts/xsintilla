@@ -1,0 +1,38 @@
+#ifndef CLASSES_LEXER_H
+#define CLASSES_LEXER_H
+
+#include "xsintilla.h"
+
+REALclassDefinition xsiLexerDef;
+
+typedef struct {
+    REALcontrolInstance ctl;
+} xsiLexerData;
+
+void lexer_setcontrol(REALobject instance, REALcontrolInstance ctl);
+
+//+++++++++++++++++++++++++++++++++
+// Properties
+//+++++++++++++++++++++++++++++++++
+int lexer_getLexer(REALobject instance);
+void lexer_setLexer(REALobject instance, long rbUnused, int lexer);
+REALstring lexer_getLexerLanguage(REALobject instance);
+void lexer_setLexerLanguage(REALobject instance, long rbUnused, REALstring language);
+
+//+++++++++++++++++++++++++++++++++
+// Methods
+//+++++++++++++++++++++++++++++++++
+void lexer_colourise(REALobject instance, int posStart, int posEnd);
+int lexer_changeLexerState(REALobject instance, int posStart, int posEnd);
+void lexer_setKeywords(REALobject instance, int keywordSet, REALstring keywords);
+int lexer_describeKeywordSets(REALobject instance, REALstring description);
+void lexer_setProperty(REALobject instance, REALstring key, REALstring value);
+REALstring lexer_getProperty(REALobject instance, REALstring key);
+void lexer_loadLexerLibrary(REALobject instance, REALstring path);
+REALstring lexer_propertyNames(REALobject instance);
+int lexer_propertyType(REALobject instance, REALstring name);
+REALstring lexer_describeProperty(REALobject instance, REALstring name);
+int lexer_getPropertyExpanded(REALobject instance, REALstring key, REALstring value);
+int lexer_getPropertyInt(REALobject instance, REALstring key, int defaultValue);
+
+#endif  // CLASSES_LEXER_H

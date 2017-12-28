@@ -9,11 +9,7 @@ OBJNAME 			= 	PluginMain.o main.o XojoGraphics.o \
 						error-properties.o \
 						selection-properties.o selection-method.o \
 						margin-definition.o margin.o \
-#						xsi-behaviour.o xsi-event.o\
-#						modsclex.o modplugin.o modenums.o modscstyle.o \
-#						sci-styledef.o sci-margin.o \
-#						sci-lexer.o sci-marker.o sci-autoc.o sci-styling.o \
-#						sci-words.o
+						lexer-definition.o lexer.o \
 
 INCLUDES 			= -include $(PREFIXHEADER) -I$(SDKINCLUDEDIR) -I$(LIBXOJO) -I$(CONTROLDIR) -I$(PROPERTIESDIR) -I$(METHODDIR) -I$(CLASSESDIR)
 ifdef PLUGIN_ARCH64

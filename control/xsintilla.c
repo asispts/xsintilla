@@ -59,3 +59,10 @@ REALobject xsi_getMarginObject(REALcontrolInstance ctl)
     REALLockObject(data->margin);
     return data->margin;
 }
+
+REALobject xsi_getLexerObject(REALcontrolInstance ctl)
+{
+    xsiControlData* data = xsi_getControlData(ctl);
+    REALLockObject(data->lexer);
+    return data->lexer;
+}
