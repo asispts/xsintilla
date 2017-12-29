@@ -1,18 +1,18 @@
 #include <stdlib.h>
 #include "text-properties.h"
 
-void xsip_setReadonly(REALcontrolInstance ctl, int unused, bool readOnly)
+void xsip_setReadonly(REALcontrolInstance ctl, long rbUnused, bool readOnly)
 {
     xsiControlData* data = xsi_getControlData(ctl);
     xsi_ssm(data->sci, SCI_SETREADONLY, readOnly, 0);
 }
 
-bool xsip_getReadonly(REALcontrolInstance ctl, int unused)
+bool xsip_getReadonly(REALcontrolInstance ctl)
 {
     return xsi_ssm(xsciObj(ctl), SCI_GETREADONLY, 0, 0);
 }
 
-REALstring xsip_getText(REALcontrolInstance ctl, int unused)
+REALstring xsip_getText(REALcontrolInstance ctl)
 {
     int len = xsi_ssm(xsciObj(ctl), SCI_GETTEXTLENGTH, 0, 0);
     if(len <= 0)
@@ -24,7 +24,7 @@ REALstring xsip_getText(REALcontrolInstance ctl, int unused)
     return xsi_toREALstring(buffer, len, false);
 }
 
-void xsip_setText(REALcontrolInstance ctl, int unused, REALstring text)
+void xsip_setText(REALcontrolInstance ctl, long rbUnused, REALstring text)
 {
     char* txt = REALGetStringContents(text, NULL);
     xsi_ssm(xsciObj(ctl), SCI_SETTEXT, 0, (sptr_t)txt);
