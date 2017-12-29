@@ -10,6 +10,7 @@ OBJNAME 			= 	PluginMain.o main.o XojoGraphics.o \
 						selection-properties.o selection-method.o \
 						margin-definition.o margin.o \
 						lexer-definition.o lexer.o \
+						style-definition.o style.o \
 
 INCLUDES 			= -include $(PREFIXHEADER) -I$(SDKINCLUDEDIR) -I$(LIBXOJO) -I$(CONTROLDIR) -I$(PROPERTIESDIR) -I$(METHODDIR) -I$(CLASSESDIR)
 ifdef PLUGIN_ARCH64

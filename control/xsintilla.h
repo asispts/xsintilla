@@ -15,6 +15,7 @@ typedef struct {
     ScintillaObject* sci;
     REALobject margin;
     REALobject lexer;
+    REALobject style;
 } xsiControlData;
 
 xsiControlData* xsi_getControlData(REALcontrolInstance ctl);
@@ -26,5 +27,6 @@ REALstring xsi_toREALstring(char* buffer, int length, bool nullTerminated);
 
 REALobject xsi_getMarginObject(REALcontrolInstance ctl);
 REALobject xsi_getLexerObject(REALcontrolInstance ctl);
+REALobject xsi_getStyleObject(REALcontrolInstance ctl);
 
 #endif  // CONTROL_XSINTILLA_H

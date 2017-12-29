@@ -66,3 +66,10 @@ REALobject xsi_getLexerObject(REALcontrolInstance ctl)
     REALLockObject(data->lexer);
     return data->lexer;
 }
+
+REALobject xsi_getStyleObject(REALcontrolInstance ctl)
+{
+    xsiControlData* data = xsi_getControlData(ctl);
+    REALLockObject(data->style);
+    return data->style;
+}

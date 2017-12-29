@@ -18,7 +18,6 @@
 ////#include "sci-autoc.h"
 ////#include "sci-lexer.h"
 ////#include "sci-marker.h"
-////#include "sci-styledef.h"
 ////#include "sci-styling.h"
 ////#include "sci-words.h"
 
@@ -32,6 +31,7 @@ REALproperty xsiProperties[] = {
      +++++++++++++++++++++++++*/
     {"", "margin", "xsiMargin", REALpropRuntimeOnly, (REALproc)xsi_getMarginObject, REALnoImplementation},
     {"", "lexer", "xsiLexer", REALpropRuntimeOnly, (REALproc)xsi_getLexerObject, REALnoImplementation},
+    {"", "style", "xsiStyle", REALpropRuntimeOnly, (REALproc)xsi_getStyleObject, REALnoImplementation},
 
     /*+++++++++++++++++++++++++
      * text-properties.h
@@ -189,26 +189,7 @@ REALmethodDefinition xsiMethods[] = {
     //    /*+++++++++++++++++++++++++
     //    * sci-styledef.h
     //    +++++++++++++++++++++++++*/
-    //    {(REALproc)xsim_styleResetDefault, REALnoImplementation, "StyleResetDefault()"},
-    //    {(REALproc)xsim_styleClearAll, REALnoImplementation, "StyleClearAll()"},
-    //    {(REALproc)xsim_styleGetFont, REALnoImplementation, "Font(style as Integer) as String"},
-    //    {(REALproc)xsim_styleSetFont, REALnoImplementation, "Font(style as Integer, assigns fontName as
-    //    String)"},
-    //    {(REALproc)xsim_styleGetSize, REALnoImplementation, "FontSize(style as Integer) as Integer"},
-    //    {(REALproc)xsim_styleSetSize, REALnoImplementation, "FontSize(style as Integer, assigns sizePoints as
-    //    Integer)"},
-    //    {(REALproc)xsim_styleGetWeight, REALnoImplementation, "FontWeight(style as Integer) as Integer"},
-    //    {(REALproc)xsim_styleSetWeight, REALnoImplementation, "FontWeight(style as Integer, assigns weight as
-    //    Integer)"},
-    //    {(REALproc)xsim_styleGetFore, REALnoImplementation, "Forecolor(style as Integer) as Color"},
-    //    {(REALproc)xsim_styleSetFore, REALnoImplementation, "Forecolor(style as Integer, assigns fore as
-    //    Color)"},
-    //    {(REALproc)xsim_styleGetBack, REALnoImplementation, "Backcolor(style as Integer) as Color"},
-    //    {(REALproc)xsim_styleSetBack, REALnoImplementation, "Backcolor(style as Integer, assigns back as
-    //    Color)"},
-    //    {(REALproc)xsim_styleGetVisible, REALnoImplementation, "StyleVisible(style as Integer) as Boolean"},
-    //    {(REALproc)xsim_styleSetVisible, REALnoImplementation,
-    //     "StyleVisible(style as Integer, assigns visible as Boolean)"},
+
     //
     //    /*+++++++++++++++++++++++++
     //     * sci-marker.h

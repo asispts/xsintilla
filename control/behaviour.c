@@ -7,6 +7,7 @@
 // classes
 #include "lexer.h"
 #include "margin.h"
+#include "style.h"
 
 RBInteger getHandle(REALcontrolInstance ctl)
 {
@@ -28,6 +29,10 @@ void Constructor(REALcontrolInstance ctl)
     // init lexer class
     data->lexer = REALnewInstanceWithClass(REALGetClassRef(xsiLexerDef.name));
     lexer_setcontrol(data->lexer, ctl);
+
+    // init styledef class
+    data->style = REALnewInstanceWithClass(REALGetClassRef(xsiStyleDef.name));
+    style_setcontrol(data->style, ctl);
 }
 
 void Destructor(REALcontrolInstance ctl)
