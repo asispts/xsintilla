@@ -6,6 +6,7 @@
 
 // Properties headers
 #include "error-properties.h"
+#include "event-properties.h"
 #include "selection-properties.h"
 #include "text-properties.h"
 
@@ -13,19 +14,11 @@
 #include "selection-method.h"
 #include "text-method.h"
 
-// Enum headers
-
-////#include "sci-autoc.h"
-////#include "sci-lexer.h"
-////#include "sci-marker.h"
-////#include "sci-styling.h"
-////#include "sci-words.h"
-
 //+++++++++++++++++++++++++++++++++
 // Properties
 //+++++++++++++++++++++++++++++++++
-// group, name, type, flags, getter, setter, param, editor, enumCount, enumEntries, attributeCount, attributes
 REALproperty xsiProperties[] = {
+    // group, name, type, flags, getter, setter, param, editor, enumCount, enumEntries, attributeCount, attributes
     /*+++++++++++++++++++++++++
      * CLASSES
      +++++++++++++++++++++++++*/
@@ -43,6 +36,15 @@ REALproperty xsiProperties[] = {
      * error-properties.h
      +++++++++++++++++++++++++*/
     {"", "status", "Integer", REALpropRuntimeOnly, (REALproc)xsip_getStatus, (REALproc)xsip_SetStatus},
+
+    /*+++++++++++++++++++++++++
+     * event-properties.h
+     +++++++++++++++++++++++++*/
+    {"", "modeEventMask", "Integer", REALpropRuntimeOnly, (REALproc)xsip_getModeEventMask,
+     (REALproc)xsip_setModeEventMask},
+    {"", "mouseDwellTime", "Integer", REALpropRuntimeOnly, (REALproc)xsip_getMouseDwellTime,
+     (REALproc)xsip_setMouseDwellTime},
+    {"", "identifier", "Integer", REALpropRuntimeOnly, (REALproc)xsip_getIdentifier, (REALproc)xsip_setIdentifier},
 
     /*+++++++++++++++++++++++++
      * selection-properties.h
@@ -115,9 +117,8 @@ REALproperty xsiProperties[] = {
 //+++++++++++++++++++++++++++++++++
 // Methods
 //+++++++++++++++++++++++++++++++++
-// function, setterFunction, declaration, mFlags, attributeCount, attributes
 REALmethodDefinition xsiMethods[] = {
-    //{(REALproc)xsi_getMarginObject, REALnoImplementation, "margin() as xsiMargin"},
+    // function, setterFunction, declaration, mFlags, attributeCount, attributes
     /*+++++++++++++++++++++++++
      * text-method.h
      +++++++++++++++++++++++++*/
@@ -186,10 +187,6 @@ REALmethodDefinition xsiMethods[] = {
     {(REALproc)xsim_moveSelectedLinesUp, REALnoImplementation, "MoveSelectedLinesUp()"},
     {(REALproc)xsim_moveSelectedLinesDown, REALnoImplementation, "MoveSelectedLinesDown()"},
 
-    //    /*+++++++++++++++++++++++++
-    //    * sci-styledef.h
-    //    +++++++++++++++++++++++++*/
-
     //
     //    /*+++++++++++++++++++++++++
     //     * sci-marker.h
@@ -233,14 +230,6 @@ REALmethodDefinition xsiMethods[] = {
     //    {(REALproc)xsim_autocGetCurrent, REALnoImplementation, "AutocGetCurrent()"},
     //    {(REALproc)xsim_autocGetCurrentText, REALnoImplementation, "AutocGetCurrentText() as String"},
     //    {(REALproc)xsim_autocSetFillUps, REALnoImplementation, "AutocSetFillUps(characterSet as String)"},
-    //
-    //    /*+++++++++++++++++++++++++
-    //     * sci-styling.h
-    //     +++++++++++++++++++++++++*/
-    //    {(REALproc)xsim_getEndStyled, REALnoImplementation, "GetEndStyled() as Integer"},
-    //    {(REALproc)xsim_startStyling, REALnoImplementation, "StartStyling(start as Integer)"},
-    //    {(REALproc)xsim_setStyling, REALnoImplementation, "SetStyling(length as Integer, style as Integer)"},
-    //
     //    /*+++++++++++++++++++++++++
     //     * sci-words.h
     //     +++++++++++++++++++++++++*/
@@ -253,40 +242,39 @@ REALmethodDefinition xsiMethods[] = {
 //+++++++++++++++++++++++++++++++++
 REALevent xsiEvents[] = {
     // declaration, forSystemUse, attributeCount, attributes
-    {"OnAutocCompleted(ch as Integer, listCompletionMethod as Integer)"},
-    {"OnAutocSelection(position as Integer, ch as Integer, listCompletionMethod as Integer)"},
-    {"OnCallTipClick(position as Integer)"},
-    {"OnCharAdded(ch as Integer)"},
-    {"OnDoubleClick(position as Integer, modifiers as Integer)"},
-    {"OnDwellEnd(position as Integer, x as Integer, y as Integer)"},
-    {"OnDwellStart(position as Integer, x as Integer, y as Integer)"},
-    {"OnHotspotClick(position as Integer, modifiers as Integer)"},
-    {"OnHotspotDoubleClick(position as Integer, modifiers as Integer)"},
-    {"OnHotspotReleaseClick(position as Integer, modifiers as Integer)"},
-    {"OnIndicatorClick(position as Integer, modifiers as Integer)"},
-    {"OnIndicatorRelease(position as Integer, modifiers as Integer)"},
-    {"OnScnKey(ch as Integer)"},
-    {"OnMacroRecord(message as Integer, wParam as Integer, lParam as Integer)"},
-    {"OnMarginClick(position as Integer, margin as Integer)"},
-    {"OnModified(position as Integer, modificationType as Integer, text as String, length as Integer, linesAdded as "
-     "Integer, line as Integer, foldLevelNow as Integer, foldLevelPrev as Integer, token as Integer, "
-     "annotationLinesAdded as Integer)"},
-    {"OnNeedShown(position as Integer)"},
     {"OnStyleNeeded(position as Integer)"},
-    {"OnUpdateUI(updated as Integer)"},
-    {"OnUriDropped(text as String)"},
-    {"OnUserListSelection(position as Integer, ch as Integer, text as String, listType as Integer, "
-     "listCompletionMethod as Integer)"},
+    {"OnCharAdded(ch as Integer)"},
     {"OnSavePointReached()"},
     {"OnSavePointLeft()"},
     {"OnModifyAtTempTro()"},
+    {"OnScnKey(ch as Integer)"},
+    {"OnDoubleClick(position as Integer, modifiers as Integer)"},
+    {"OnUpdateUI(updated as Integer)"},
+    {"OnModified(pos as Integer, type as Integer, text as String, length as Integer, linesAdded as Integer, "
+     "line as Integer, foldNow as Integer, foldPrev as Integer, token as Integer, changeAnnot as Integer)"},
+    {"OnMacroRecord(message as Integer, wParam as Integer, lParam as Integer)"},
+    {"OnMarginClick(position as Integer, margin as Integer)"},
+    {"OnNeedShown(position as Integer)"},
+    {"OnPainted()"},
+    {"OnUserListSelection(position as Integer, ch as Integer, text as String, listType as Integer, "
+     "listCompletionMethod as Integer)"},
+    {"OnUriDropped(text as String)"},
+    {"OnDwellStart(position as Integer, x as Integer, y as Integer)"},
+    {"OnDwellEnd(position as Integer, x as Integer, y as Integer)"},
     {"OnZoom()"},
+    {"OnHotspotClick(position as Integer, modifiers as Integer)"},
+    {"OnHotspotDoubleClick(position as Integer, modifiers as Integer)"},
+    {"OnCallTipClick(position as Integer)"},
+    {"OnAutocSelection(position as Integer, ch as Integer, listCompletionMethod as Integer)"},
+    {"OnIndicatorClick(position as Integer, modifiers as Integer)"},
+    {"OnIndicatorRelease(position as Integer, modifiers as Integer)"},
     {"OnAutocCancelled()"},
     {"OnAutocCharDeleted()"},
+    {"OnHotspotReleaseClick(position as Integer, modifiers as Integer)"},
     {"OnFocusIn()"},
     {"OnFocusOut()"},
+    {"OnAutocCompleted(ch as Integer, listCompletionMethod as Integer)"},
     {"OnMarginRightClick()"},
-    {"OnPainted()"},
 };
 
 //+++++++++++++++++++++++++++++++++

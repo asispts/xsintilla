@@ -1,7 +1,3 @@
-//=================================
-// Text retrieval and modification
-//=================================
-
 #ifndef PROPERTIES_TEXT_H
 #define PROPERTIES_TEXT_H
 

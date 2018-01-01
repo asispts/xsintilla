@@ -6,7 +6,7 @@ vpath %.cpp $(SDKGLUECODEDIR)
 OBJNAME 			= 	PluginMain.o main.o XojoGraphics.o \
 						xsintilla.o behaviour.o event.o definition.o \
 						text-properties.o text-method.o \
-						error-properties.o \
+						error-properties.o event-properties.o \
 						selection-properties.o selection-method.o \
 						margin-definition.o margin.o \
 						lexer-definition.o lexer.o \
