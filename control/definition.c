@@ -293,38 +293,38 @@ REALevent xsiEvents[] = {
 // Behaviour
 //+++++++++++++++++++++++++++++++++
 REALcontrolBehaviour xsiBehavior = {
-    Constructor,      // constructorFunction
-    Destructor,       // destructorFunction
-    NULL,             // redrawFunction
-    NULL,             // clickFunction
-    NULL,             // mouseDragFunction
-    NULL,             // mouseUpFunction
-    NULL,             // gainedFocusFunction
-    NULL,             // lostFocusFunction
-    NULL,             // keyDownFunction
-    OnOpen,           // openFunction
-    NULL,             // closeFunction
-    NULL,             // backgroundIdleFunction
-    OnDrawOffscreen,  // drawOffscreenFunction
-    NULL,             // setSpecialBackground
-    NULL,             // constantChanging
-    NULL,             // droppedNewInstance
-    NULL,             // mouseEnterFunction
-    NULL,             // mouseExitFunction
-    NULL,             // mouseMoveFunction
-    NULL,             // stateChangedFunction
-    NULL,             // actionEventFunction
-    NULL,             // controlHandleGetter
-    NULL,             // mouseWheelFunction
-    NULL,             // enableMenuItemsFunction
-    NULL,             // menuItemActionFunction
-    NULL,             // controlAcceptFocus
-    NULL,             // keyUpFunction
-    NULL,             // redrawWithRectsFunction
-    NULL,             // unfilteredKeyDownFunction
-    NULL,             // scaleFactorChangedFunction
-    NULL,             // reserved2
-    NULL              // reserved3
+    Constructor,            // constructorFunction
+    NULL,                   // destructorFunction
+    NULL,                   // redrawFunction
+    NULL,                   // clickFunction
+    NULL,                   // mouseDragFunction
+    NULL,                   // mouseUpFunction
+    NULL,                   // gainedFocusFunction
+    NULL,                   // lostFocusFunction
+    NULL,                   // keyDownFunction
+    OnOpen,                 // openFunction
+    OnClose,                // closeFunction
+    NULL,                   // backgroundIdleFunction
+    OnDrawOffscreen,        // drawOffscreenFunction
+    NULL,                   // setSpecialBackground
+    NULL,                   // constantChanging
+    NULL,                   // droppedNewInstance
+    NULL,                   // mouseEnterFunction
+    NULL,                   // mouseExitFunction
+    NULL,                   // mouseMoveFunction
+    NULL,                   // stateChangedFunction
+    NULL,                   // actionEventFunction
+    OnControlHandleGetter,  // controlHandleGetter
+    NULL,                   // mouseWheelFunction
+    NULL,                   // enableMenuItemsFunction
+    NULL,                   // menuItemActionFunction
+    NULL,                   // controlAcceptFocus
+    NULL,                   // keyUpFunction
+    NULL,                   // redrawWithRectsFunction
+    NULL,                   // unfilteredKeyDownFunction
+    NULL,                   // scaleFactorChangedFunction
+    NULL,                   // reserved2
+    NULL                    // reserved3
     // end of struct
 };
 
@@ -359,7 +359,7 @@ REALcontrol xsiControl = {
     kCurrentREALControlVersion,                         // version
     "xsintilla",                                        // name
     sizeof(xsiControlData),                             // dataSize
-    REALdontEraseBackground,                            // flags
+    REALcontrolAcceptFocus | REALdontEraseBackground,   // flags
     0,                                                  // toolbarPICT
     0,                                                  // toolbarDownPICT
     100,                                                // defaultWidth

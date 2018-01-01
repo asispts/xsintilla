@@ -3,11 +3,15 @@
 
 #include "xsintilla.h"
 
+#define XSINTILLA_DEBUG 1
+
 void Constructor(REALcontrolInstance ctl);
-void Destructor(REALcontrolInstance ctl);
 void OnOpen(REALcontrolInstance ctl);
+void OnClose(REALcontrolInstance ctl);
 void OnDrawOffscreen(REALcontrolInstance ctl, REALgraphics g);
-void CanvasSizeAllocate(GtkWidget* widget, GdkRectangle* allocation, gpointer user_data);
+void* OnControlHandleGetter(REALcontrolInstance ctl);
+
+// GTK callback
 void EventBoxSizeAllocate(GtkWidget* widget, GdkRectangle* allocation, gpointer user_data);
 
 #endif  // CONTROL_BEHAVIOUR_H
