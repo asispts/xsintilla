@@ -3,6 +3,16 @@
 #include "xsintilla.h"
 
 //+++++++++++++++++++++++++++++++++
+// Properties
+//+++++++++++++++++++++++++++++++++
+REALproperty StylePropDef[] = {
+    {"", "endStyledPos", "Integer", REALpropRuntimeOnly, (REALproc)styling_getEndStyled, REALnoImplementation},
+    {"", "idleStyling", "Integer", REALpropRuntimeOnly, (REALproc)styling_getIdleStyling,
+     (REALproc)styling_setIdleStyling},
+    {"", "maxLineState", "Integer", REALpropRuntimeOnly, (REALproc)styling_getMaxLineState, REALnoImplementation},
+};
+
+//+++++++++++++++++++++++++++++++++
 // Methods
 //+++++++++++++++++++++++++++++++++
 REALmethodDefinition StyleMethodDef[] = {
@@ -42,6 +52,13 @@ REALmethodDefinition StyleMethodDef[] = {
      "Changeable(style as Integer, Assigns changeable as Boolean)"},
     {(REALproc)style_styleGetHotspot, REALnoImplementation, "Hotspot(style as Integer) as Boolean"},
     {(REALproc)style_styleSetHotspot, REALnoImplementation, "Hotspot(style as Integer, Assigns hotspot as Boolean)"},
+
+    // styling
+    {(REALproc)styling_startStyling, REALnoImplementation, "StartStyling(start as Integer)"},
+    {(REALproc)styling_setStyling, REALnoImplementation, "SetStyling(length as Integer, style as Integer)"},
+    {(REALproc)styling_setStylingEx, REALnoImplementation, "SetStylingEx(length as Integer, styles as String)"},
+    {(REALproc)styling_getLineState, REALnoImplementation, "LineState(line as Integer) as Integer"},
+    {(REALproc)styling_setLineState, REALnoImplementation, "LineState(line as Integer, Assigns state as Integer)"},
 };
 
 //+++++++++++++++++++++++++++++++++
@@ -55,8 +72,8 @@ REALclassDefinition xsiStyleDef = {
     0,                                                      // forSystemUse
     NULL,                                                   // constructor
     NULL,                                                   // destructor
-    NULL,                                                   // properties
-    0,                                                      // propertyCount
+    StylePropDef,                                           // properties
+    sizeof(StylePropDef) / sizeof(REALproperty),            // propertyCount
     StyleMethodDef,                                         // methods
     sizeof(StyleMethodDef) / sizeof(REALmethodDefinition),  // methodCount
     NULL,                                                   // events

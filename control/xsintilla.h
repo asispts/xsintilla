@@ -11,6 +11,7 @@
 REALcontrol xsiControl;
 
 typedef struct {
+    bool isRegistered;
     GtkWidget* editor;
     ScintillaObject* sci;
     REALobject margin;

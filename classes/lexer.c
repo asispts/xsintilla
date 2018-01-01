@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <stdlib.h>
 #include "lexer.h"
 
@@ -41,7 +40,6 @@ void lexer_setLexerLanguage(REALobject instance, long rbUnused, REALstring langu
 {
     xsiLexerData* self = REALGetClassData(instance, &xsiLexerDef);
     char* lang = REALGetStringContents(language, NULL);
-    printf("lexer_setLexerLanguage::lang = %s\n", lang);
     xsi_ssm(xsciObj(self->ctl), SCI_SETLEXERLANGUAGE, 0, (sptr_t)lang);
 }
 

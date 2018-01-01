@@ -7,6 +7,36 @@ void style_setcontrol(REALobject instance, REALcontrolInstance ctl)
     self->ctl = ctl;
 }
 
+//+++++++++++++++++++++++++++++++++
+// Properties
+//+++++++++++++++++++++++++++++++++
+int styling_getEndStyled(REALobject instance)
+{
+    xsiStyleData* self = REALGetClassData(instance, &xsiStyleDef);
+    return xsi_ssm(xsciObj(self->ctl), SCI_GETENDSTYLED, 0, 0);
+}
+
+void styling_setIdleStyling(REALobject instance, long rbUnused, int idleStyling)
+{
+    xsiStyleData* self = REALGetClassData(instance, &xsiStyleDef);
+    xsi_ssm(xsciObj(self->ctl), SCI_SETIDLESTYLING, (uptr_t)idleStyling, 0);
+}
+
+int styling_getIdleStyling(REALobject instance)
+{
+    xsiStyleData* self = REALGetClassData(instance, &xsiStyleDef);
+    return xsi_ssm(xsciObj(self->ctl), SCI_GETIDLESTYLING, 0, 0);
+}
+
+int styling_getMaxLineState(REALobject instance)
+{
+    xsiStyleData* self = REALGetClassData(instance, &xsiStyleDef);
+    return xsi_ssm(xsciObj(self->ctl), SCI_GETMAXLINESTATE, 0, 0);
+}
+
+//+++++++++++++++++++++++++++++++++
+// Methods
+//+++++++++++++++++++++++++++++++++
 void style_styleResetDefault(REALobject instance)
 {
     xsiStyleData* self = REALGetClassData(instance, &xsiStyleDef);
@@ -207,4 +237,35 @@ bool style_styleGetHotspot(REALobject instance, int style)
 {
     xsiStyleData* self = REALGetClassData(instance, &xsiStyleDef);
     return xsi_ssm(xsciObj(self->ctl), SCI_STYLEGETHOTSPOT, (uptr_t)style, 0);
+}
+
+void styling_startStyling(REALobject instance, int start)
+{
+    xsiStyleData* self = REALGetClassData(instance, &xsiStyleDef);
+    xsi_ssm(xsciObj(self->ctl), SCI_STARTSTYLING, (uptr_t)start, 0);
+}
+void styling_setStyling(REALobject instance, int start, int style)
+{
+    xsiStyleData* self = REALGetClassData(instance, &xsiStyleDef);
+    xsi_ssm(xsciObj(self->ctl), SCI_SETSTYLING, (uptr_t)start, (sptr_t)style);
+}
+
+void styling_setStylingEx(REALobject instance, int length, REALstring styles)
+{
+    xsiStyleData* self = REALGetClassData(instance, &xsiStyleDef);
+
+    char* value = REALGetStringContents(styles, NULL);
+    xsi_ssm(xsciObj(self->ctl), SCI_SETSTYLINGEX, (uptr_t)length, (sptr_t)value);
+}
+
+void styling_setLineState(REALobject instance, int line, int state)
+{
+    xsiStyleData* self = REALGetClassData(instance, &xsiStyleDef);
+    xsi_ssm(xsciObj(self->ctl), SCI_SETLINESTATE, (uptr_t)line, (sptr_t)state);
+}
+
+int styling_getLineState(REALobject instance, int line)
+{
+    xsiStyleData* self = REALGetClassData(instance, &xsiStyleDef);
+    return xsi_ssm(xsciObj(self->ctl), SCI_GETLINESTATE, (uptr_t)line, 0);
 }

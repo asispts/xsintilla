@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include "XojoGraphics.h"
 #include "behaviour.h"
@@ -8,16 +9,10 @@
 #include "margin.h"
 #include "style.h"
 
-RBInteger getName(REALcontrolInstance ctl)
-{
-    RBInteger handle = 0;
-    REALGetPropValueInteger((REALobject)ctl, "Handle", &handle);
-    return handle;
-}
-
 void Constructor(REALcontrolInstance ctl)
 {
     xsiControlData* data = xsi_getControlData(ctl);
+
     data->editor = scintilla_new();
     data->sci = SCINTILLA(data->editor);
 
@@ -34,14 +29,15 @@ void Constructor(REALcontrolInstance ctl)
     style_setcontrol(data->style, ctl);
 
     g_signal_connect(data->sci, SCINTILLA_NOTIFY, G_CALLBACK(sci_eventHandler), NULL);
-
-    xsi_ssm(data->sci, SCI_STYLECLEARALL, 0, 0);
-    xsi_registerEventFunction(ctl);
 }
 
 void OnOpen(REALcontrolInstance ctl)
 {
     xsiControlData* data = xsi_getControlData(ctl);
+
+    xsi_registerEventFunction(ctl);
+    data->isRegistered = true;
+    xsi_ssm(data->sci, SCI_STYLECLEARALL, 0, 0);
 
     GtkWidget* parent = (GtkWidget*)gtk_widget_get_parent(data->editor);
     while(parent != NULL && gtk_widget_is_toplevel(parent) == false) {
