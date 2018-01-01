@@ -14,9 +14,9 @@ OBJNAME 			= 	PluginMain.o main.o XojoGraphics.o \
 
 INCLUDES 			= -include $(PREFIXHEADER) -I$(SDKINCLUDEDIR) -I$(LIBXOJO) -I$(CONTROLDIR) -I$(PROPERTIESDIR) -I$(METHODDIR) -I$(CLASSESDIR)
 ifdef PLUGIN_ARCH64
-ARCH_FLAGS 			= -m64
+ARCH_FLAGS 			= -m64 -ggdb
 else
-ARCH_FLAGS 			= -m32 -I/usr/lib32/glib-2.0/include
+ARCH_FLAGS 			= -m32 -I/usr/lib32/glib-2.0/include -ggdb
 endif
 # Enable Position Independent Code except on Windows where it is the default so the flag produces a warning
 ifndef windir

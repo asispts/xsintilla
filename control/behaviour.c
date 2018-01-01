@@ -46,7 +46,14 @@ void OnOpen(REALcontrolInstance ctl)
     GtkWidget* parent = (GtkWidget*)gtk_widget_get_parent(data->editor);
     while(parent != NULL && gtk_widget_is_toplevel(parent) == false) {
         if(GTK_IS_EVENT_BOX(parent)) {
-            g_signal_connect(G_OBJECT(parent), "size-allocate", G_CALLBACK(EventBoxSizeAllocate), NULL);
+            GtkWidget* notebook = (GtkWidget*)gtk_widget_get_parent(parent);
+            while(notebook != NULL && gtk_widget_is_toplevel(notebook) == false) {
+                if(GTK_IS_NOTEBOOK(notebook)) {
+                    g_signal_connect(G_OBJECT(parent), "size-allocate", G_CALLBACK(EventBoxSizeAllocate), NULL);
+                    break;
+                }
+                notebook = (GtkWidget*)gtk_widget_get_parent(notebook);
+            }
             break;
         }
         parent = (GtkWidget*)gtk_widget_get_parent(parent);
