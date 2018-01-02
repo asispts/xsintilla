@@ -30,6 +30,20 @@ REALmethodDefinition LexerMethodDef[] = {
      "GetPropertyExpanded(key as String, value as String) as Integer"},
     {(REALproc)lexer_getPropertyInt, REALnoImplementation,
      "GetPropertyInt(key as String, defaultValue as Integer) as Integer"},
+    {(REALproc)lexer_getSubstyleBases, REALnoImplementation, "GetSubstyleBases() as String"},
+    {(REALproc)lexer_distanceToSecondaryStyles, REALnoImplementation, "DistanceToSecondaryStyles() as Integer"},
+    {(REALproc)lexer_allocateSubstyles, REALnoImplementation,
+     "AllocateSubstyles(styleBase as Integer, numStyles as Integer) as Integer"},
+    {(REALproc)lexer_freeSubstyles, REALnoImplementation, "FreeSubstyles()"},
+    {(REALproc)lexer_getSubstylesStart, REALnoImplementation, "GetSubstylesStart(styleBase as Integer) as Integer"},
+    {(REALproc)lexer_getSubstylesLength, REALnoImplementation, "GetSubstylesLength(styleBase as Integer) as Integer"},
+    {(REALproc)lexer_getStyleFromSubstyle, REALnoImplementation,
+     "GetStyleFromSubstyle(subStyle as Integer) as Integer"},
+    {(REALproc)lexer_getPrimaryStyleFromStyle, REALnoImplementation,
+     "GetPrimaryStyleFromStyle(style as Integer) as Integer"},
+    {(REALproc)lexer_setIdentifiers, REALnoImplementation, "SetIdentifiers(style as Integer, id as Integer)"},
+    {(REALproc)lexer_privateLexerCall, REALnoImplementation,
+     "PrivateLexerCall(operation as Integer, pointer as Integer) as Integer"},
 };
 
 //+++++++++++++++++++++++++++++++++

@@ -152,3 +152,72 @@ int lexer_getPropertyInt(REALobject instance, REALstring key, int defaultValue)
     char* ckey = REALGetStringContents(key, NULL);
     return xsi_ssm(xsciObj(self->ctl), SCI_GETPROPERTYINT, (sptr_t)ckey, (uptr_t)defaultValue);
 }
+
+REALstring lexer_getSubstyleBases(REALobject instance)
+{
+    xsiLexerData* self = REALGetClassData(instance, &xsiLexerDef);
+
+    int len = xsi_ssm(xsciObj(self->ctl), SCI_GETSUBSTYLEBASES, 0, 0);
+    if(len <= 0)
+        return NULL;
+
+    char* buffer = malloc(len + 1);
+    len = xsi_ssm(xsciObj(self->ctl), SCI_DESCRIBEPROPERTY, 0, (sptr_t)buffer);
+
+    return xsi_toREALstring(buffer, len, false);
+}
+
+int lexer_distanceToSecondaryStyles(REALobject instance)
+{
+    xsiLexerData* self = REALGetClassData(instance, &xsiLexerDef);
+    return xsi_ssm(xsciObj(self->ctl), SCI_DISTANCETOSECONDARYSTYLES, 0, 0);
+}
+
+int lexer_allocateSubstyles(REALobject instance, int styleBase, int numberStyles)
+{
+    xsiLexerData* self = REALGetClassData(instance, &xsiLexerDef);
+    return xsi_ssm(xsciObj(self->ctl), SCI_ALLOCATESUBSTYLES, (uptr_t)styleBase, (sptr_t)numberStyles);
+}
+
+void lexer_freeSubstyles(REALobject instance)
+{
+    xsiLexerData* self = REALGetClassData(instance, &xsiLexerDef);
+    xsi_ssm(xsciObj(self->ctl), SCI_FREESUBSTYLES, 0, 0);
+}
+
+int lexer_getSubstylesStart(REALobject instance, int styleBase)
+{
+    xsiLexerData* self = REALGetClassData(instance, &xsiLexerDef);
+    return xsi_ssm(xsciObj(self->ctl), SCI_GETSUBSTYLESSTART, (uptr_t)styleBase, 0);
+}
+
+int lexer_getSubstylesLength(REALobject instance, int styleBase)
+{
+    xsiLexerData* self = REALGetClassData(instance, &xsiLexerDef);
+    return xsi_ssm(xsciObj(self->ctl), SCI_GETSUBSTYLESLENGTH, (uptr_t)styleBase, 0);
+}
+
+int lexer_getStyleFromSubstyle(REALobject instance, int subStyle)
+{
+    xsiLexerData* self = REALGetClassData(instance, &xsiLexerDef);
+    return xsi_ssm(xsciObj(self->ctl), SCI_GETSTYLEFROMSUBSTYLE, (uptr_t)subStyle, 0);
+}
+
+int lexer_getPrimaryStyleFromStyle(REALobject instance, int style)
+{
+    xsiLexerData* self = REALGetClassData(instance, &xsiLexerDef);
+    return xsi_ssm(xsciObj(self->ctl), SCI_GETPRIMARYSTYLEFROMSTYLE, (uptr_t)style, 0);
+}
+
+void lexer_setIdentifiers(REALobject instance, int style, REALstring identifiers)
+{
+    xsiLexerData* self = REALGetClassData(instance, &xsiLexerDef);
+    char* id = REALGetStringContents(identifiers, NULL);
+    xsi_ssm(xsciObj(self->ctl), SCI_SETIDENTIFIERS, (uptr_t)style, (sptr_t)id);
+}
+
+int lexer_privateLexerCall(REALobject instance, int operation, int pointer)
+{
+    xsiLexerData* self = REALGetClassData(instance, &xsiLexerDef);
+    return xsi_ssm(xsciObj(self->ctl), SCI_PRIVATELEXERCALL, (uptr_t)operation, (sptr_t)pointer);
+}
