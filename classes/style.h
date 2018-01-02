@@ -16,10 +16,8 @@ void style_setcontrol(REALobject instance, REALcontrolInstance ctl);
 //+++++++++++++++++++++++++++++++++
 // Properties
 //+++++++++++++++++++++++++++++++++
-int styling_getEndStyled(REALobject instance);
 void styling_setIdleStyling(REALobject instance, long rbUnused, int idleStyling);
 int styling_getIdleStyling(REALobject instance);
-int styling_getMaxLineState(REALobject instance);
 
 //+++++++++++++++++++++++++++++++++
 // Methods
@@ -72,6 +70,8 @@ bool style_styleGetChangeable(REALobject instance, int style);
 void style_styleSetHotspot(REALobject instance, int style, bool hotspot);
 bool style_styleGetHotspot(REALobject instance, int style);
 
+int styling_getEndStyled(REALobject instance);
+int styling_getMaxLineState(REALobject instance);
 void styling_startStyling(REALobject instance, int start);
 void styling_setStyling(REALobject instance, int start, int style);
 void styling_setStylingEx(REALobject instance, int length, REALstring styles);

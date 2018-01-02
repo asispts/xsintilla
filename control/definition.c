@@ -35,7 +35,7 @@ REALproperty xsiProperties[] = {
     /*+++++++++++++++++++++++++
      * error-properties.h
      +++++++++++++++++++++++++*/
-    {"", "status", "Integer", REALpropRuntimeOnly, (REALproc)xsip_getStatus, (REALproc)xsip_SetStatus},
+    {"", "status", "Integer", REALpropRuntimeOnly, (REALproc)xsip_getStatus, (REALproc)xsip_setStatus},
 
     /*+++++++++++++++++++++++++
      * event-properties.h

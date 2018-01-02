@@ -6,10 +6,8 @@
 // Properties
 //+++++++++++++++++++++++++++++++++
 REALproperty StylePropDef[] = {
-    {"", "endStyledPos", "Integer", REALpropRuntimeOnly, (REALproc)styling_getEndStyled, REALnoImplementation},
     {"", "idleStyling", "Integer", REALpropRuntimeOnly, (REALproc)styling_getIdleStyling,
      (REALproc)styling_setIdleStyling},
-    {"", "maxLineState", "Integer", REALpropRuntimeOnly, (REALproc)styling_getMaxLineState, REALnoImplementation},
 };
 
 //+++++++++++++++++++++++++++++++++
@@ -54,6 +52,8 @@ REALmethodDefinition StyleMethodDef[] = {
     {(REALproc)style_styleSetHotspot, REALnoImplementation, "Hotspot(style as Integer, Assigns hotspot as Boolean)"},
 
     // styling
+    {(REALproc)styling_getEndStyled, REALnoImplementation, "GetEndStyled() as Integer"},
+    {(REALproc)styling_getMaxLineState, REALnoImplementation, "GetMaxLineState() as Integer"},
     {(REALproc)styling_startStyling, REALnoImplementation, "StartStyling(start as Integer)"},
     {(REALproc)styling_setStyling, REALnoImplementation, "SetStyling(length as Integer, style as Integer)"},
     {(REALproc)styling_setStylingEx, REALnoImplementation, "SetStylingEx(length as Integer, styles as String)"},

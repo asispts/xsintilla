@@ -3,6 +3,14 @@
 
 #include "xsintilla.h"
 
+int xsip_getTextLength(REALcontrolInstance ctl);
+int xsip_getLength(REALcontrolInstance ctl);
+int xsip_getLineCount(REALcontrolInstance ctl);
+int xsip_lineOnScreen(REALcontrolInstance ctl);
+bool xsip_getModify(REALcontrolInstance ctl);
+void xsip_hideSelection(REALcontrolInstance ctl, long rbUnused, bool hide);
+REALstring xsip_getSeltext(REALcontrolInstance ctl);
+bool xsip_selectionIsRectangle(REALcontrolInstance ctl);
 void xsim_setSel(REALcontrolInstance ctl, int anchor, int caret);
 void xsim_gotoPos(REALcontrolInstance ctl, int caret);
 void xsim_gotoLine(REALcontrolInstance ctl, int line);

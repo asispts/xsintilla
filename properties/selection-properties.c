@@ -1,31 +1,6 @@
 #include <stdlib.h>
 #include "selection-properties.h"
 
-int xsip_getTextLength(REALcontrolInstance ctl)
-{
-    return xsi_ssm(xsciObj(ctl), SCI_GETTEXTLENGTH, 0, 0);
-}
-
-int xsip_getLength(REALcontrolInstance ctl)
-{
-    return xsi_ssm(xsciObj(ctl), SCI_GETLENGTH, 0, 0);
-}
-
-int xsip_getLineCount(REALcontrolInstance ctl)
-{
-    return xsi_ssm(xsciObj(ctl), SCI_GETLINECOUNT, 0, 0);
-}
-
-int xsip_lineOnScreen(REALcontrolInstance ctl)
-{
-    return xsi_ssm(xsciObj(ctl), SCI_LINESONSCREEN, 0, 0);
-}
-
-bool xsip_getModify(REALcontrolInstance ctl)
-{
-    return xsi_ssm(xsciObj(ctl), SCI_GETMODIFY, 0, 0);
-}
-
 int xsip_getCurrentPos(REALcontrolInstance ctl)
 {
     return xsi_ssm(xsciObj(ctl), SCI_GETCURRENTPOS, 0, 0);
@@ -64,29 +39,6 @@ void xsip_setSelectionEnd(REALcontrolInstance ctl, long rbUnused, int caret)
 int xsip_getSelectionEnd(REALcontrolInstance ctl)
 {
     return xsi_ssm(xsciObj(ctl), SCI_GETSELECTIONEND, 0, 0);
-}
-
-void xsip_hideSelection(REALcontrolInstance ctl, long rbUnused, bool hide)
-{
-    xsi_ssm(xsciObj(ctl), SCI_HIDESELECTION, (uptr_t)hide, 0);
-}
-
-REALstring xsip_getSeltext(REALcontrolInstance ctl)
-{
-    int len = xsi_ssm(xsciObj(ctl), SCI_GETSELTEXT, 0, 0);
-    if(len <= 0)
-        return NULL;
-
-    char* buffer = malloc(len + 1);
-    len = xsi_ssm(xsciObj(ctl), SCI_GETSELTEXT, 0, (sptr_t)buffer);
-
-    // has a terminated NULL character
-    return xsi_toREALstring(buffer, len, true);
-}
-
-bool xsip_selectionIsRectangle(REALcontrolInstance ctl)
-{
-    return xsi_ssm(xsciObj(ctl), SCI_SELECTIONISRECTANGLE, 0, 0);
 }
 
 void xsip_setSelectionMode(REALcontrolInstance ctl, long rbUnused, int mode)

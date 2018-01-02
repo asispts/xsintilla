@@ -1,6 +1,6 @@
 #include "error-properties.h"
 
-void xsip_SetStatus(REALcontrolInstance ctl, long rbUnused, int status)
+void xsip_setStatus(REALcontrolInstance ctl, long rbUnused, int status)
 {
     xsi_ssm(xsciObj(ctl), SCI_SETSTATUS, status, 0);
 }
