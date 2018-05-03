@@ -62,6 +62,21 @@ REALmethodDefinition StyleMethodDef[] = {
 };
 
 //+++++++++++++++++++++++++++++++++
+// Constants
+//+++++++++++++++++++++++++++++++++
+REALconstant xsiStyleConstDef[] = {
+    {"STYLE_DEFAULT as Integer = 32"},          //
+    {"STYLE_LINENUMBER as Integer = 33"},       //
+    {"STYLE_BRACELIGHT as Integer = 34"},       //
+    {"STYLE_BRACEBAD as Integer = 35"},         //
+    {"STYLE_CONTROLCHAR as Integer = 36"},      //
+    {"STYLE_INDENTGUIDE as Integer = 37"},      //
+    {"STYLE_CALLTIP as Integer = 38"},          //
+    {"STYLE_FOLDDISPLAYTEXT as Integer = 39"},  //
+    {"STYLE_MAX as Integer = 255"},             //
+};
+
+//+++++++++++++++++++++++++++++++++
 // Class Definition
 //+++++++++++++++++++++++++++++++++
 REALclassDefinition xsiStyleDef = {
@@ -83,8 +98,8 @@ REALclassDefinition xsiStyleDef = {
     NULL,                                                   // interfaces
     NULL,                                                   // attributes
     0,                                                      // attributeCount
-    NULL,                                                   // constants
-    0,                                                      // constantCount
+    xsiStyleConstDef,                                       // constants
+    sizeof(xsiStyleConstDef) / sizeof(REALconstant),        // constantCount
     0,                                                      // mFlags
     NULL,                                                   // sharedProperties
     0,                                                      // sharedPropertyCount

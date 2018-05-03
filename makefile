@@ -12,6 +12,7 @@ export CONTROLDIR		= $(ROOTDIR)/control
 export PROPERTIESDIR	= $(ROOTDIR)/properties
 export METHODDIR		= $(ROOTDIR)/methods
 export CLASSESDIR		= $(ROOTDIR)/classes
+export CONSTANTSDIR		= $(ROOTDIR)/constants
 
 #export LIBXSINTILLA 	= $(ROOTDIR)/libxsintilla
 #export MODULES 			= $(ROOTDIR)/modules

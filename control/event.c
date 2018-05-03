@@ -1,5 +1,5 @@
-#include <string.h>
 #include "event.h"
+#include <string.h>
 
 static REALcontrolInstance me;
 static fpStyleNeeded RaiseStyleNeeded = NULL;

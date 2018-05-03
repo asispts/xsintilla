@@ -50,7 +50,8 @@ REALmethodDefinition MarginMethodDef[] = {
 // Constants
 //+++++++++++++++++++++++++++++++++
 REALconstant xsiMarginConstantDef[] = {
-    {"MAX_MARGIN as Integer = 4"},  // SC_MAX_MARGIN 4
+    {"MAX_MARGIN as Integer = 4"},             // SC_MAX_MARGIN 4
+    {"MASK_FOLDERS as Integer = &hFE000000"},  // SC_MASK_FOLDERS 0xFE000000
 };
 
 //+++++++++++++++++++++++++++++++++

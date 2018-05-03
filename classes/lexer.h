@@ -25,7 +25,7 @@ void lexer_setLexerLanguage(REALobject instance, long rbUnused, REALstring langu
 void lexer_colourise(REALobject instance, int posStart, int posEnd);
 int lexer_changeLexerState(REALobject instance, int posStart, int posEnd);
 void lexer_setKeywords(REALobject instance, int keywordSet, REALstring keywords);
-int lexer_describeKeywordSets(REALobject instance, REALstring description);
+REALstring lexer_describeKeywordSets(REALobject instance);
 void lexer_setProperty(REALobject instance, REALstring key, REALstring value);
 REALstring lexer_getProperty(REALobject instance, REALstring key);
 void lexer_loadLexerLibrary(REALobject instance, REALstring path);
@@ -45,4 +45,4 @@ int lexer_getPrimaryStyleFromStyle(REALobject instance, int style);
 void lexer_setIdentifiers(REALobject instance, int style, REALstring identifiers);
 int lexer_privateLexerCall(REALobject instance, int operation, int pointer);
 
-#endif  // CLASSES_LEXER_H
+#endif // CLASSES_LEXER_H

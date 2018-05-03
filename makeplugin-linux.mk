@@ -1,5 +1,5 @@
 VPATH 				= $(BUILDDIR)
-vpath %.c $(SRCROOT) $(LIBXOJO) $(CONTROLDIR) $(PROPERTIESDIR) $(METHODDIR) $(CLASSESDIR)
+vpath %.c $(SRCROOT) $(LIBXOJO) $(CONTROLDIR) $(PROPERTIESDIR) $(METHODDIR) $(CLASSESDIR) $(CONSTANTSDIR)
 vpath %.cpp $(SDKGLUECODEDIR)
 
 
@@ -11,8 +11,9 @@ OBJNAME 			= 	PluginMain.o main.o XojoGraphics.o \
 						margin-definition.o margin.o \
 						lexer-definition.o lexer.o \
 						style-definition.o style.o \
+						style-html-def.o \
 
-INCLUDES 			= -include $(PREFIXHEADER) -I$(SDKINCLUDEDIR) -I$(LIBXOJO) -I$(CONTROLDIR) -I$(PROPERTIESDIR) -I$(METHODDIR) -I$(CLASSESDIR)
+INCLUDES 			= -include $(PREFIXHEADER) -I$(SDKINCLUDEDIR) -I$(LIBXOJO) -I$(CONTROLDIR) -I$(PROPERTIESDIR) -I$(METHODDIR) -I$(CLASSESDIR) -I$(CONSTANTSDIR)
 DEBUGGING_FLAGS		= -g -O0
 ifdef PLUGIN_ARCH64
 ARCH_FLAGS 			= -m64
@@ -28,8 +29,8 @@ SCININCLUDEDIRS 	= -I$(SCIDIR)/include
 SCINTILLAFLAGS 		= -DGTK -DSCI_LEXER `pkg-config --cflags gtk+-2.0` $(SCININCLUDEDIRS)
 PLUGINFLAGS 		= -DIGNOREQT -D__INTEL__ -DLINUX=1 -D__GCC__
 
-CC 					= codelite-cc gcc
-CXX 				= codelite-cc g++
+CC 					= gcc
+CXX 				= g++
 CFLAGS 				= -Wall $(DEBUGGING_FLAGS) $(ARCH_FLAGS) $(PICFLAGS) $(INCLUDES) $(DEPRECATED)
 CXXFLAGS 			= --std=c++0x -Wall $(DEBUGGING_FLAGS) $(ARCH_FLAGS) $(PICFLAGS) $(INCLUDES) $(DEPRECATED)
 LDLIBS 				= -lstdc++ -lm -lgmodule-2.0 `pkg-config --libs gtk+-2.0`

@@ -1,17 +1,16 @@
 #ifndef CONTROL_XSINTILLA_H
 #define CONTROL_XSINTILLA_H
 
-#include <gtk/gtk.h>
 #include "SciLexer.h"
 #include "Scintilla.h"
 #include "rb_plugin.h"
+#include <gtk/gtk.h>
 #define PLAT_GTK 1
 #include "ScintillaWidget.h"
 
 REALcontrol xsiControl;
 
 typedef struct {
-    bool isRegistered;
     GtkWidget* editor;
     ScintillaObject* sci;
     REALobject margin;
@@ -30,4 +29,4 @@ REALobject xsi_getMarginObject(REALcontrolInstance ctl);
 REALobject xsi_getLexerObject(REALcontrolInstance ctl);
 REALobject xsi_getStyleObject(REALcontrolInstance ctl);
 
-#endif  // CONTROL_XSINTILLA_H
+#endif // CONTROL_XSINTILLA_H

@@ -1,5 +1,5 @@
-#include <stdlib.h>
 #include "lexer.h"
+#include <stdlib.h>
 
 void lexer_setcontrol(REALobject instance, REALcontrolInstance ctl)
 {
@@ -65,11 +65,18 @@ void lexer_setKeywords(REALobject instance, int keywordSet, REALstring keywords)
     xsi_ssm(xsciObj(self->ctl), SCI_SETKEYWORDS, (uptr_t)keywordSet, (sptr_t)keys);
 }
 
-int lexer_describeKeywordSets(REALobject instance, REALstring description)
+REALstring lexer_describeKeywordSets(REALobject instance)
 {
     xsiLexerData* self = REALGetClassData(instance, &xsiLexerDef);
-    char* desc = REALGetStringContents(description, NULL);
-    return xsi_ssm(xsciObj(self->ctl), SCI_DESCRIBEKEYWORDSETS, 0, (sptr_t)desc);
+
+    int len = xsi_ssm(xsciObj(self->ctl), SCI_DESCRIBEKEYWORDSETS, 0, 0);
+    if(len <= 0)
+        return NULL;
+
+    char* buffer = malloc(len + 1);
+    len = xsi_ssm(xsciObj(self->ctl), SCI_DESCRIBEKEYWORDSETS, 0, (sptr_t)buffer);
+
+    return xsi_toREALstring(buffer, len, false);
 }
 
 void lexer_setProperty(REALobject instance, REALstring key, REALstring value)

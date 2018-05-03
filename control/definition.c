@@ -281,38 +281,38 @@ REALevent xsiEvents[] = {
 // Behaviour
 //+++++++++++++++++++++++++++++++++
 REALcontrolBehaviour xsiBehavior = {
-    Constructor,            // constructorFunction
-    NULL,                   // destructorFunction
-    NULL,                   // redrawFunction
-    NULL,                   // clickFunction
-    NULL,                   // mouseDragFunction
-    NULL,                   // mouseUpFunction
-    NULL,                   // gainedFocusFunction
-    NULL,                   // lostFocusFunction
-    NULL,                   // keyDownFunction
-    OnOpen,                 // openFunction
-    OnClose,                // closeFunction
-    NULL,                   // backgroundIdleFunction
-    OnDrawOffscreen,        // drawOffscreenFunction
-    NULL,                   // setSpecialBackground
-    NULL,                   // constantChanging
-    NULL,                   // droppedNewInstance
-    NULL,                   // mouseEnterFunction
-    NULL,                   // mouseExitFunction
-    NULL,                   // mouseMoveFunction
-    NULL,                   // stateChangedFunction
-    NULL,                   // actionEventFunction
-    OnControlHandleGetter,  // controlHandleGetter
-    NULL,                   // mouseWheelFunction
-    NULL,                   // enableMenuItemsFunction
-    NULL,                   // menuItemActionFunction
-    NULL,                   // controlAcceptFocus
-    NULL,                   // keyUpFunction
-    NULL,                   // redrawWithRectsFunction
-    NULL,                   // unfilteredKeyDownFunction
-    NULL,                   // scaleFactorChangedFunction
-    NULL,                   // reserved2
-    NULL                    // reserved3
+    Constructor,           // constructorFunction
+    NULL,                  // destructorFunction
+    NULL,                  // redrawFunction
+    NULL,                  // clickFunction
+    NULL,                  // mouseDragFunction
+    NULL,                  // mouseUpFunction
+    NULL,                  // gainedFocusFunction
+    NULL,                  // lostFocusFunction
+    OnKeyDownFunction,     // keyDownFunction
+    OnOpen,                // openFunction
+    OnClose,               // closeFunction
+    NULL,                  // backgroundIdleFunction
+    OnDrawOffscreen,       // drawOffscreenFunction
+    NULL,                  // setSpecialBackground
+    NULL,                  // constantChanging
+    NULL,                  // droppedNewInstance
+    NULL,                  // mouseEnterFunction
+    NULL,                  // mouseExitFunction
+    NULL,                  // mouseMoveFunction
+    NULL,                  // stateChangedFunction
+    NULL,                  // actionEventFunction
+    OnControlHandleGetter, // controlHandleGetter
+    NULL,                  // mouseWheelFunction
+    NULL,                  // enableMenuItemsFunction
+    NULL,                  // menuItemActionFunction
+    NULL,                  // controlAcceptFocus
+    NULL,                  // keyUpFunction
+    NULL,                  // redrawWithRectsFunction
+    NULL,                  // unfilteredKeyDownFunction
+    NULL,                  // scaleFactorChangedFunction
+    NULL,                  // reserved2
+    NULL                   // reserved3
     // end of struct
 };
 
@@ -320,19 +320,19 @@ REALcontrolBehaviour xsiBehavior = {
 // Constants
 //+++++++++++++++++++++++++++++++++
 REALconstant xsiConstant[] = {
-    {"StyleMax as Integer = 255"},           // STYLE_MAX 255
-    {"MarkerMax as Integer = 31"},           // MARKER_MAX 31
-    {"MaskFolder as Integer = &hFE000000"},  // SC_MASK_FOLDERS 0xFE000000
+    {"StyleMax as Integer = 255"},          // STYLE_MAX 255
+    {"MarkerMax as Integer = 31"},          // MARKER_MAX 31
+    {"MaskFolder as Integer = &hFE000000"}, // SC_MASK_FOLDERS 0xFE000000
 };
 
 //+++++++++++++++++++++++++++++++++
 // Enumerations
 //+++++++++++++++++++++++++++++++++
 static const char* enumSelection[] = {
-    "STREAM = 0",     // SC_SEL_STREAM=0
-    "RECTANGLE = 1",  // SC_SEL_RECTANGLE=1
-    "LINES = 2",      // SC_SEL_LINES=2
-    "THIN = 3",       // SC_SEL_THIN=3
+    "STREAM = 0",    // SC_SEL_STREAM=0
+    "RECTANGLE = 1", // SC_SEL_RECTANGLE=1
+    "LINES = 2",     // SC_SEL_LINES=2
+    "THIN = 3",      // SC_SEL_THIN=3
 };
 
 REALenum EnumDef[] = {
@@ -344,38 +344,39 @@ REALenum EnumDef[] = {
 // xsintilla Control
 //+++++++++++++++++++++++++++++++++
 REALcontrol xsiControl = {
-    kCurrentREALControlVersion,                         // version
-    "xsintilla",                                        // name
-    sizeof(xsiControlData),                             // dataSize
-    REALcontrolAcceptFocus | REALdontEraseBackground,   // flags
-    0,                                                  // toolbarPICT
-    0,                                                  // toolbarDownPICT
-    100,                                                // defaultWidth
-    100,                                                // defaultHeight
-    xsiProperties,                                      // properties
-    sizeof(xsiProperties) / sizeof(REALproperty),       // propertyCount
-    xsiMethods,                                         // methods
-    sizeof(xsiMethods) / sizeof(REALmethodDefinition),  // methodCount
-    xsiEvents,                                          // events
-    sizeof(xsiEvents) / sizeof(REALevent),              // eventCount
-    &xsiBehavior,                                       // behaviour
-    0,                                                  // forSystemUse, always zero
-    NULL,                                               // eventInstances
-    0,                                                  // eventInstanceCount
-    NULL,                                               // interfaces
-    NULL,                                               // attributes
-    0,                                                  // attributeCount
-    xsiConstant,                                        // constants
-    sizeof(xsiConstant) / sizeof(REALconstant),         // constantCount
-#if kCurrentREALControlVersion >= 11                    // since Xojo 2013R1
-    NULL,                                               // sharedProperties
-    0,                                                  // sharedPropertyCount
-    NULL,                                               // sharedMethods
-    0,                                                  // sharedMethodCount
-    NULL,                                               // delegates
-    0,                                                  // delegateCount
-    EnumDef,                                            // enums
-    sizeof(EnumDef) / sizeof(REALenum),                 // enumCount
+    kCurrentREALControlVersion, // version
+    "xsintilla",                // name
+    sizeof(xsiControlData),     // dataSize
+    // REALdontEraseBackground | REALcontrolHandlesTabKey | REALcontrolAcceptFocus, // flags
+    REALdontEraseBackground | REALcontrolAcceptFocus,
+    128,                                               // toolbarPICT
+    128,                                               // toolbarDownPICT
+    100,                                               // defaultWidth
+    100,                                               // defaultHeight
+    xsiProperties,                                     // properties
+    sizeof(xsiProperties) / sizeof(REALproperty),      // propertyCount
+    xsiMethods,                                        // methods
+    sizeof(xsiMethods) / sizeof(REALmethodDefinition), // methodCount
+    xsiEvents,                                         // events
+    sizeof(xsiEvents) / sizeof(REALevent),             // eventCount
+    &xsiBehavior,                                      // behaviour
+    0,                                                 // forSystemUse, always zero
+    NULL,                                              // eventInstances
+    0,                                                 // eventInstanceCount
+    NULL,                                              // interfaces
+    NULL,                                              // attributes
+    0,                                                 // attributeCount
+    xsiConstant,                                       // constants
+    sizeof(xsiConstant) / sizeof(REALconstant),        // constantCount
+#if kCurrentREALControlVersion >= 11                   // since Xojo 2013R1
+    NULL,                                              // sharedProperties
+    0,                                                 // sharedPropertyCount
+    NULL,                                              // sharedMethods
+    0,                                                 // sharedMethodCount
+    NULL,                                              // delegates
+    0,                                                 // delegateCount
+    EnumDef,                                           // enums
+    sizeof(EnumDef) / sizeof(REALenum),                // enumCount
 #endif
     // end of structure
 };

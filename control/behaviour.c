@@ -1,8 +1,8 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "XojoGraphics.h"
 #include "behaviour.h"
 #include "event.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 // classes
 #include "lexer.h"
@@ -15,6 +15,7 @@ void Constructor(REALcontrolInstance ctl)
 
     data->editor = scintilla_new();
     data->sci = SCINTILLA(data->editor);
+    scintilla_set_id(data->sci, 0);
 
     // init margin class
     data->margin = REALnewInstanceWithClass(REALGetClassRef(xsiMarginDef.name));
@@ -36,7 +37,6 @@ void OnOpen(REALcontrolInstance ctl)
     xsiControlData* data = xsi_getControlData(ctl);
 
     xsi_registerEventFunction(ctl);
-    data->isRegistered = true;
     xsi_ssm(data->sci, SCI_STYLECLEARALL, 0, 0);
 
     GtkWidget* parent = (GtkWidget*)gtk_widget_get_parent(data->editor);
@@ -93,4 +93,13 @@ void EventBoxSizeAllocate(GtkWidget* widget, GdkRectangle* allocation, gpointer 
             gtk_fixed_move(GTK_FIXED(parent), widget, 0, 0);
         }
     }
+}
+
+RBBoolean OnKeyDownFunction(REALcontrolInstance ctl, int charCode, int keyCode, int modifiers)
+{
+    if(keyCode == SCK_TAB) {
+        xsi_ssm(xsciObj(ctl), SCI_TAB, 0, 0);
+        return true;
+    }
+    return false;
 }
