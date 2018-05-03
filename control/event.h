@@ -3,50 +3,8 @@
 
 #include "xsintilla.h"
 
-void xsi_registerEventFunction(REALcontrolInstance ctl);
+// void xsi_registerEventFunction(REALcontrolInstance ctl);
 void sci_eventHandler(ScintillaObject* sci, gint controlID, SCNotification* scinotify, REALcontrolInstance ctl);
-typedef RBBoolean (*fpMouseDown)(REALcontrolInstance, int, int);
-
-//+++++++++++++++++++++++++++++++++
-// Control Events
-//+++++++++++++++++++++++++++++++++
-// used for
-// SCN_SAVEPOINTREACHED, SCN_SAVEPOINTLEFT, SCN_MODIFYATTEMPTRO
-// SCN_PAINTED, SCN_ZOOM, SCN_AUTOCCANCELLED, SCN_AUTOCCHARDELETED
-// SCN_FOCUSIN, SCN_FOCUSOUT, SCN_MARGINRIGHTCLICK
-typedef void (*fpEvent)(REALcontrolInstance);
-
-typedef void (*fpStyleNeeded)(REALcontrolInstance, Sci_Position);
-typedef void (*fpCharAdded)(REALcontrolInstance, int);
-typedef void (*fpScnKey)(REALcontrolInstance, int);
-typedef void (*fpDoubleClick)(REALcontrolInstance, Sci_Position, int);
-typedef void (*fpUpdateUI)(REALcontrolInstance, int);
-typedef void (*fpModified)(REALcontrolInstance,
-                           Sci_Position,
-                           int,
-                           REALstring,
-                           Sci_Position,
-                           Sci_Position,
-                           Sci_Position,
-                           int,
-                           int,
-                           int,
-                           Sci_Position);
-typedef void (*fpMacroRecord)(REALcontrolInstance, int, int, int);
-typedef void (*fpMarginClick)(REALcontrolInstance, Sci_Position, int);
-typedef void (*fpNeedShown)(REALcontrolInstance, Sci_Position);
-typedef void (*fpUserListSelection)(REALcontrolInstance, Sci_Position, int, REALstring, int, int);
-typedef void (*fpUriDropped)(REALcontrolInstance, REALstring);
-typedef void (*fpDwellStart)(REALcontrolInstance, Sci_Position, int, int);
-typedef void (*fpDwellEnd)(REALcontrolInstance, Sci_Position, int, int);
-typedef void (*fpHotspotClick)(REALcontrolInstance, Sci_Position, int);
-typedef void (*fpHotspotDoubleClick)(REALcontrolInstance, Sci_Position, int);
-typedef void (*fpCallTipClick)(REALcontrolInstance, Sci_Position);
-typedef void (*fpAutocSelection)(REALcontrolInstance, Sci_Position, int, int);
-typedef void (*fpIndicatorClick)(REALcontrolInstance, Sci_Position, int);
-typedef void (*fpIndicatorRelease)(REALcontrolInstance, Sci_Position, int);
-typedef void (*fpHotspotReleaseClick)(REALcontrolInstance, Sci_Position, int);
-typedef void (*fpAutocCompleted)(REALcontrolInstance, int, int);
 
 // Events definition
 enum xsi_events {

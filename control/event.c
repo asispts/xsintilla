@@ -1,250 +1,251 @@
 #include "event.h"
 #include <string.h>
 
-static fpStyleNeeded RaiseStyleNeeded = NULL;
-static fpCharAdded RaiseCharAdded = NULL;
-static fpEvent RaiseSavePointReached = NULL;
-static fpEvent RaiseSavePointLeft = NULL;
-static fpEvent RaiseModifyAtTempTro = NULL;
-static fpScnKey RaiseScnKey = NULL;
-static fpDoubleClick RaiseDoubleClick = NULL;
-static fpUpdateUI RaiseUpdateUI = NULL;
-static fpModified RaiseModified = NULL;
-static fpMacroRecord RaiseMacroRecord = NULL;
-static fpMarginClick RaiseMarginClick = NULL;
-static fpNeedShown RaiseNeedShown = NULL;
-static fpEvent RaisePainted = NULL;
-static fpUserListSelection RaiseUserListSelection = NULL;
-static fpUriDropped RaiseUriDropped = NULL;
-static fpDwellStart RaiseDwellStart = NULL;
-static fpDwellEnd RaiseDwellEnd = NULL;
-static fpEvent RaiseZoom = NULL;
-static fpHotspotClick RaiseHotspotClick = NULL;
-static fpHotspotDoubleClick RaiseHotspotDoubleClick = NULL;
-static fpCallTipClick RaiseCallTipClick = NULL;
-static fpAutocSelection RaiseAutocSelection = NULL;
-static fpIndicatorClick RaiseIndicatorClick = NULL;
-static fpIndicatorRelease RaiseIndicatorRelease = NULL;
-static fpEvent RaiseAutocCancelled = NULL;
-static fpEvent RaiseAutocCharDeleted = NULL;
-static fpHotspotReleaseClick RaiseHotspotReleaseClick = NULL;
-static fpEvent RaiseFocusIn = NULL;
-static fpEvent RaiseFocusOut = NULL;
-static fpAutocCompleted RaiseAutocCompleted = NULL;
-static fpEvent RaiseMarginRightClick = NULL;
-
-void xsi_registerEventFunction(REALcontrolInstance ctl)
-{
-    RaiseStyleNeeded = (fpStyleNeeded)REALGetEventInstance(ctl, &xsiControl.events[scn_StyleNeeded]);
-    RaiseCharAdded = (fpCharAdded)REALGetEventInstance(ctl, &xsiControl.events[scn_CharAdded]);
-    RaiseSavePointReached = (fpEvent)REALGetEventInstance(ctl, &xsiControl.events[scn_SavePointReached]);
-    RaiseSavePointLeft = (fpEvent)REALGetEventInstance(ctl, &xsiControl.events[scn_SavePointLeft]);
-    RaiseModifyAtTempTro = (fpEvent)REALGetEventInstance(ctl, &xsiControl.events[scn_ModifyAtTempTro]);
-    RaiseScnKey = (fpScnKey)REALGetEventInstance(ctl, &xsiControl.events[scn_ScnKey]);
-    RaiseDoubleClick = (fpDoubleClick)REALGetEventInstance(ctl, &xsiControl.events[scn_DoubleClick]);
-    RaiseUpdateUI = (fpUpdateUI)REALGetEventInstance(ctl, &xsiControl.events[scn_UpdateUI]);
-    RaiseModified = (fpModified)REALGetEventInstance(ctl, &xsiControl.events[scn_Modified]);
-    RaiseMacroRecord = (fpMacroRecord)REALGetEventInstance(ctl, &xsiControl.events[scn_MacroRecord]);
-    RaiseMarginClick = (fpMarginClick)REALGetEventInstance(ctl, &xsiControl.events[scn_MarginClick]);
-    RaiseNeedShown = (fpNeedShown)REALGetEventInstance(ctl, &xsiControl.events[scn_NeedShown]);
-    RaisePainted = (fpEvent)REALGetEventInstance(ctl, &xsiControl.events[scn_painted]);
-    RaiseUserListSelection = (fpUserListSelection)REALGetEventInstance(ctl, &xsiControl.events[scn_UserListSelection]);
-    RaiseUriDropped = (fpUriDropped)REALGetEventInstance(ctl, &xsiControl.events[scn_UriDropped]);
-    RaiseDwellStart = (fpDwellStart)REALGetEventInstance(ctl, &xsiControl.events[scn_DwellStart]);
-    RaiseDwellEnd = (fpDwellEnd)REALGetEventInstance(ctl, &xsiControl.events[scn_DwellEnd]);
-    RaiseZoom = (fpEvent)REALGetEventInstance(ctl, &xsiControl.events[scn_Zoom]);
-    RaiseHotspotClick = (fpHotspotClick)REALGetEventInstance(ctl, &xsiControl.events[scn_HotspotClick]);
-    RaiseHotspotDoubleClick =
-        (fpHotspotDoubleClick)REALGetEventInstance(ctl, &xsiControl.events[scn_HotspotDoubleClick]);
-    RaiseCallTipClick = (fpCallTipClick)REALGetEventInstance(ctl, &xsiControl.events[scn_CallTipClick]);
-    RaiseAutocSelection = (fpAutocSelection)REALGetEventInstance(ctl, &xsiControl.events[scn_AutocSelection]);
-    RaiseIndicatorClick = (fpIndicatorClick)REALGetEventInstance(ctl, &xsiControl.events[scn_IndicatorClick]);
-    RaiseIndicatorRelease = (fpIndicatorRelease)REALGetEventInstance(ctl, &xsiControl.events[scn_IndicatorRelease]);
-    RaiseAutocCancelled = (fpEvent)REALGetEventInstance(ctl, &xsiControl.events[scn_AutocCancelled]);
-    RaiseAutocCharDeleted = (fpEvent)REALGetEventInstance(ctl, &xsiControl.events[scn_AutocCharDeleted]);
-    RaiseHotspotReleaseClick =
-        (fpHotspotReleaseClick)REALGetEventInstance(ctl, &xsiControl.events[scn_HotspotReleaseClick]);
-    RaiseFocusIn = (fpEvent)REALGetEventInstance(ctl, &xsiControl.events[scn_FocusIn]);
-    RaiseFocusOut = (fpEvent)REALGetEventInstance(ctl, &xsiControl.events[scn_FocusOut]);
-    RaiseAutocCompleted = (fpAutocCompleted)REALGetEventInstance(ctl, &xsiControl.events[scn_AutocCompleted]);
-    RaiseMarginRightClick = (fpEvent)REALGetEventInstance(ctl, &xsiControl.events[scn_MarginRightClick]);
-}
+typedef void (*fpCtl)(REALcontrolInstance);
+typedef void (*fpCtli)(REALcontrolInstance, int);
+typedef void (*fpCtlii)(REALcontrolInstance, int, int);
+typedef void (*fpCtliii)(REALcontrolInstance, int, int, int);
+typedef void (*fpUriDropped)(REALcontrolInstance, REALstring);
+typedef void (*fpUserListSelection)(REALcontrolInstance, Sci_Position, int, REALstring, int, int);
+typedef void (*fpModified)(REALcontrolInstance, int, int, REALstring, int, int, int, int, int, int, int);
 
 void sci_eventHandler(ScintillaObject* sci, gint controlID, SCNotification* notif, REALcontrolInstance ctl)
 {
     switch(notif->nmhdr.code) {
-    case SCN_STYLENEEDED:
-        if(RaiseStyleNeeded) {
-            RaiseStyleNeeded(ctl, notif->position);
+    case SCN_STYLENEEDED: {
+        fpCtli styleNeeded = (fpCtli)REALGetEventInstance(ctl, &xsiControl.events[scn_StyleNeeded]);
+        if(styleNeeded)
+            styleNeeded(ctl, (int)notif->position);
+        break;
+    }
+
+    case SCN_CHARADDED: {
+        fpCtli charAdded = (fpCtli)REALGetEventInstance(ctl, &xsiControl.events[scn_CharAdded]);
+        if(charAdded)
+            charAdded(ctl, notif->ch);
+        break;
+    }
+
+    case SCN_SAVEPOINTREACHED: {
+        fpCtl savePointReached = (fpCtl)REALGetEventInstance(ctl, &xsiControl.events[scn_SavePointReached]);
+        if(savePointReached)
+            savePointReached(ctl);
+        break;
+    }
+
+    case SCN_SAVEPOINTLEFT: {
+        fpCtl savePointLeft = (fpCtl)REALGetEventInstance(ctl, &xsiControl.events[scn_SavePointLeft]);
+        if(savePointLeft)
+            savePointLeft(ctl);
+        break;
+    }
+
+    case SCN_MODIFYATTEMPTRO: {
+        fpCtl modifyAtTempTro = (fpCtl)REALGetEventInstance(ctl, &xsiControl.events[scn_ModifyAtTempTro]);
+        if(modifyAtTempTro)
+            modifyAtTempTro(ctl);
+        break;
+    }
+
+    case SCN_KEY: {
+        fpCtli scnKey = (fpCtli)REALGetEventInstance(ctl, &xsiControl.events[scn_ScnKey]);
+        if(scnKey)
+            scnKey(ctl, notif->ch);
+        break;
+    }
+
+    case SCN_DOUBLECLICK: {
+        fpCtlii doubleClick = (fpCtlii)REALGetEventInstance(ctl, &xsiControl.events[scn_DoubleClick]);
+        if(doubleClick)
+            doubleClick(ctl, notif->position, notif->modifiers);
+        break;
+    }
+
+    case SCN_UPDATEUI: {
+        fpCtli updateUI = (fpCtli)REALGetEventInstance(ctl, &xsiControl.events[scn_UpdateUI]);
+        if(updateUI)
+            updateUI(ctl, notif->updated);
+        break;
+    }
+
+    case SCN_MODIFIED: {
+        fpModified modified = (fpModified)REALGetEventInstance(ctl, &xsiControl.events[scn_Modified]);
+        if(modified) {
+            REALstring text = REALBuildStringWithEncoding(notif->text, notif->length, kREALTextEncodingUTF8);
+            REALLockString(text);
+            modified(ctl, notif->position, notif->modificationType, text, notif->length, notif->linesAdded, notif->line,
+                     notif->foldLevelNow, notif->foldLevelPrev, notif->token, notif->annotationLinesAdded);
         }
         break;
+    }
 
-    case SCN_CHARADDED:
-        if(RaiseCharAdded)
-            RaiseCharAdded(ctl, notif->ch);
+    case SCN_MACRORECORD: {
+        fpCtliii macroRecord = (fpCtliii)REALGetEventInstance(ctl, &xsiControl.events[scn_MacroRecord]);
+        if(macroRecord)
+            macroRecord(ctl, notif->message, notif->wParam, notif->lParam);
         break;
+    }
 
-    case SCN_SAVEPOINTREACHED:
-        if(RaiseSavePointReached)
-            RaiseSavePointReached(ctl);
+    case SCN_MARGINCLICK: {
+        fpCtlii marginClick = (fpCtlii)REALGetEventInstance(ctl, &xsiControl.events[scn_MarginClick]);
+        if(marginClick)
+            marginClick(ctl, notif->position, notif->margin);
         break;
+    }
 
-    case SCN_SAVEPOINTLEFT:
-        if(RaiseSavePointLeft)
-            RaiseSavePointLeft(ctl);
+    case SCN_NEEDSHOWN: {
+        fpCtli needShown = (fpCtli)REALGetEventInstance(ctl, &xsiControl.events[scn_NeedShown]);
+        if(needShown)
+            needShown(ctl, notif->position);
         break;
-
-    case SCN_MODIFYATTEMPTRO:
-        if(RaiseModifyAtTempTro)
-            RaiseModifyAtTempTro(ctl);
+    }
+    case SCN_PAINTED: {
+        fpCtl painted = (fpCtl)REALGetEventInstance(ctl, &xsiControl.events[scn_painted]);
+        if(painted)
+            painted(ctl);
         break;
+    }
 
-    case SCN_KEY:
-        if(RaiseScnKey)
-            RaiseScnKey(ctl, notif->ch);
-        break;
-
-    case SCN_DOUBLECLICK:
-        if(RaiseDoubleClick)
-            RaiseDoubleClick(ctl, notif->position, notif->modifiers);
-        break;
-
-    case SCN_UPDATEUI:
-        if(RaiseUpdateUI)
-            RaiseUpdateUI(ctl, notif->updated);
-        break;
-
-    case SCN_MODIFIED:
-        if(RaiseModified) {
-            REALstring txt = REALBuildStringWithEncoding(notif->text, notif->length, kREALTextEncodingUTF8);
-            RaiseModified(ctl, notif->position, notif->modificationType, txt, notif->length, notif->linesAdded,
-                          notif->line, notif->foldLevelNow, notif->foldLevelPrev, notif->token,
-                          notif->annotationLinesAdded);
-        }
-        break;
-
-    case SCN_MACRORECORD:
-        if(RaiseMacroRecord)
-            RaiseMacroRecord(ctl, notif->message, notif->wParam, notif->lParam);
-        break;
-
-    case SCN_MARGINCLICK:
-        if(RaiseMarginClick)
-            RaiseMarginClick(ctl, notif->position, notif->margin);
-        break;
-
-    case SCN_NEEDSHOWN:
-        if(RaiseNeedShown)
-            RaiseNeedShown(ctl, notif->position);
-        break;
-
-    case SCN_PAINTED:
-        if(RaisePainted)
-            RaisePainted(ctl);
-        break;
-
-    case SCN_USERLISTSELECTION:
-        if(RaiseUserListSelection) {
+    case SCN_USERLISTSELECTION: {
+        fpUserListSelection userListSelection =
+            (fpUserListSelection)REALGetEventInstance(ctl, &xsiControl.events[scn_UserListSelection]);
+        if(userListSelection) {
             int len = notif->length;
             if(len <= 0)
                 len = strlen(notif->text);
-            REALstring txt = REALBuildStringWithEncoding(notif->text, len, kREALTextEncodingUTF8);
-            RaiseUserListSelection(ctl, notif->position, notif->ch, txt, notif->listType, notif->listCompletionMethod);
+            REALstring text = REALBuildStringWithEncoding(notif->text, len, kREALTextEncodingUTF8);
+            REALLockString(text);
+            userListSelection(ctl, notif->position, notif->ch, text, notif->listType, notif->listCompletionMethod);
         }
         break;
+    }
 
-    case SCN_URIDROPPED:
-        if(RaiseUriDropped) {
+    case SCN_URIDROPPED: {
+        fpUriDropped uriDropped = (fpUriDropped)REALGetEventInstance(ctl, &xsiControl.events[scn_UriDropped]);
+        if(uriDropped) {
             int len = notif->length;
             if(len <= 0)
                 len = strlen(notif->text);
-            REALstring txt = REALBuildStringWithEncoding(notif->text, len, kREALTextEncodingUTF8);
-            RaiseUriDropped(ctl, txt);
+            REALstring text = REALBuildStringWithEncoding(notif->text, len, kREALTextEncodingUTF8);
+            REALLockString(text);
+            uriDropped(ctl, text);
         }
         break;
+    }
 
-    case SCN_DWELLSTART:
-        if(RaiseDwellStart)
-            RaiseDwellStart(ctl, notif->position, notif->x, notif->y);
+    case SCN_DWELLSTART: {
+        fpCtliii dwellStart = (fpCtliii)REALGetEventInstance(ctl, &xsiControl.events[scn_DwellStart]);
+        if(dwellStart)
+            dwellStart(ctl, notif->position, notif->x, notif->y);
         break;
+    }
 
-    case SCN_DWELLEND:
-        if(RaiseDwellEnd)
-            RaiseDwellEnd(ctl, notif->position, notif->x, notif->y);
+    case SCN_DWELLEND: {
+        fpCtliii dwellEnd = (fpCtliii)REALGetEventInstance(ctl, &xsiControl.events[scn_DwellEnd]);
+        if(dwellEnd)
+            dwellEnd(ctl, notif->position, notif->x, notif->y);
         break;
+    }
 
-    case SCN_ZOOM:
-        if(RaiseZoom)
-            RaiseZoom(ctl);
+    case SCN_ZOOM: {
+        fpCtl zoom = (fpCtl)REALGetEventInstance(ctl, &xsiControl.events[scn_Zoom]);
+        if(zoom)
+            zoom(ctl);
         break;
+    }
 
-    case SCN_HOTSPOTCLICK:
-        if(RaiseHotspotClick)
-            RaiseHotspotClick(ctl, notif->position, notif->modifiers);
+    case SCN_HOTSPOTCLICK: {
+        fpCtlii hotspotClick = (fpCtlii)REALGetEventInstance(ctl, &xsiControl.events[scn_HotspotClick]);
+        if(hotspotClick)
+            hotspotClick(ctl, notif->position, notif->modifiers);
         break;
+    }
 
-    case SCN_HOTSPOTDOUBLECLICK:
-        if(RaiseHotspotDoubleClick)
-            RaiseHotspotDoubleClick(ctl, notif->position, notif->modifiers);
+    case SCN_HOTSPOTDOUBLECLICK: {
+        fpCtlii hotspotDoubleClick = (fpCtlii)REALGetEventInstance(ctl, &xsiControl.events[scn_HotspotDoubleClick]);
+        if(hotspotDoubleClick)
+            hotspotDoubleClick(ctl, notif->position, notif->modifiers);
         break;
+    }
 
-    case SCN_CALLTIPCLICK:
-        if(RaiseCallTipClick)
-            RaiseCallTipClick(ctl, notif->position);
+    case SCN_CALLTIPCLICK: {
+        fpCtli callTipClick = (fpCtli)REALGetEventInstance(ctl, &xsiControl.events[scn_CallTipClick]);
+        if(callTipClick)
+            callTipClick(ctl, notif->position);
         break;
+    }
 
-    case SCN_AUTOCSELECTION:
-        if(RaiseAutocSelection)
-            RaiseAutocSelection(ctl, notif->position, notif->ch, notif->listCompletionMethod);
+    case SCN_AUTOCSELECTION: {
+        fpCtliii autocSelection = (fpCtliii)REALGetEventInstance(ctl, &xsiControl.events[scn_AutocSelection]);
+        if(autocSelection)
+            autocSelection(ctl, notif->position, notif->ch, notif->listCompletionMethod);
         break;
+    }
 
-    case SCN_INDICATORCLICK:
-        if(RaiseIndicatorClick)
-            RaiseIndicatorClick(ctl, notif->position, notif->modifiers);
+    case SCN_INDICATORCLICK: {
+        fpCtlii indicatorClick = (fpCtlii)REALGetEventInstance(ctl, &xsiControl.events[scn_IndicatorClick]);
+        if(indicatorClick)
+            indicatorClick(ctl, notif->position, notif->modifiers);
         break;
+    }
 
-    case SCN_INDICATORRELEASE:
-        if(RaiseIndicatorRelease)
-            RaiseIndicatorRelease(ctl, notif->position, notif->modifiers);
+    case SCN_INDICATORRELEASE: {
+        fpCtlii indicatorRelease = (fpCtlii)REALGetEventInstance(ctl, &xsiControl.events[scn_IndicatorRelease]);
+        if(indicatorRelease)
+            indicatorRelease(ctl, notif->position, notif->modifiers);
         break;
+    }
 
-    case SCN_AUTOCCANCELLED:
-        if(RaiseAutocCancelled)
-            RaiseAutocCancelled(ctl);
+    case SCN_AUTOCCANCELLED: {
+        fpCtl autocCancelled = (fpCtl)REALGetEventInstance(ctl, &xsiControl.events[scn_AutocCancelled]);
+        if(autocCancelled)
+            autocCancelled(ctl);
         break;
+    }
 
-    case SCN_AUTOCCHARDELETED:
-        if(RaiseAutocCharDeleted)
-            RaiseAutocCharDeleted(ctl);
+    case SCN_AUTOCCHARDELETED: {
+        fpCtl autocCharDeleted = (fpCtl)REALGetEventInstance(ctl, &xsiControl.events[scn_AutocCharDeleted]);
+        if(autocCharDeleted)
+            autocCharDeleted(ctl);
         break;
+    }
 
-    case SCN_HOTSPOTRELEASECLICK:
-        if(RaiseHotspotReleaseClick)
-            RaiseHotspotReleaseClick(ctl, notif->position, notif->modifiers);
+    case SCN_HOTSPOTRELEASECLICK: {
+        fpCtlii hotspotReleaseClick = (fpCtlii)REALGetEventInstance(ctl, &xsiControl.events[scn_HotspotReleaseClick]);
+        if(hotspotReleaseClick)
+            hotspotReleaseClick(ctl, notif->position, notif->modifiers);
         break;
+    }
 
-    case SCN_FOCUSIN:
-        if(RaiseFocusIn)
-            RaiseFocusIn(ctl);
+    case SCN_FOCUSIN: {
+        fpCtl focusIn = (fpCtl)REALGetEventInstance(ctl, &xsiControl.events[scn_FocusIn]);
+        if(focusIn)
+            focusIn(ctl);
         break;
+    }
 
-    case SCN_FOCUSOUT:
-        if(RaiseFocusOut)
-            RaiseFocusOut(ctl);
+    case SCN_FOCUSOUT: {
+        fpCtl focusOut = (fpCtl)REALGetEventInstance(ctl, &xsiControl.events[scn_FocusOut]);
+        if(focusOut)
+            focusOut(ctl);
         break;
+    }
 
-    case SCN_AUTOCCOMPLETED:
-        if(RaiseAutocCompleted)
-            RaiseAutocCompleted(ctl, notif->ch, notif->listCompletionMethod);
+    case SCN_AUTOCCOMPLETED: {
+        fpCtlii autocCompleted = (fpCtlii)REALGetEventInstance(ctl, &xsiControl.events[scn_AutocCompleted]);
+        if(autocCompleted)
+            autocCompleted(ctl, notif->ch, notif->listCompletionMethod);
         break;
+    }
 
-    case SCN_MARGINRIGHTCLICK:
-        if(RaiseMarginRightClick)
-            RaiseMarginRightClick(ctl);
+    case SCN_MARGINRIGHTCLICK: {
+        fpCtl marginRightClick = (fpCtl)REALGetEventInstance(ctl, &xsiControl.events[scn_MarginRightClick]);
+        if(marginRightClick)
+            marginRightClick(ctl);
         break;
+    }
 
     default:
         return;
-        break;
     }
 }

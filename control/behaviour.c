@@ -9,6 +9,8 @@
 #include "margin.h"
 #include "style.h"
 
+typedef RBBoolean (*fpMouseDown)(REALcontrolInstance, int, int);
+
 // gtk event to fix position bug inside TabPanel or PagePanel on Linux
 void EventBoxSizeAllocate(GtkWidget* widget, GdkRectangle* allocation, gpointer user_data)
 {
@@ -79,7 +81,7 @@ void OnOpen(REALcontrolInstance ctl)
 {
     xsiControlData* data = xsi_getControlData(ctl);
 
-    xsi_registerEventFunction(ctl);
+    // xsi_registerEventFunction(ctl);
     xsi_ssm(data->sci, SCI_STYLECLEARALL, 0, 0);
 
     GtkWidget* parent = (GtkWidget*)gtk_widget_get_parent(data->editor);
