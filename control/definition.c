@@ -242,6 +242,7 @@ REALmethodDefinition xsiMethods[] = {
 //+++++++++++++++++++++++++++++++++
 REALevent xsiEvents[] = {
     // declaration, forSystemUse, attributeCount, attributes
+    {"MouseDown(x as Integer, y as Integer) as Boolean"},
     {"OnStyleNeeded(position as Integer)"},
     {"OnCharAdded(ch as Integer)"},
     {"OnSavePointReached()"},
@@ -344,11 +345,10 @@ REALenum EnumDef[] = {
 // xsintilla Control
 //+++++++++++++++++++++++++++++++++
 REALcontrol xsiControl = {
-    kCurrentREALControlVersion, // version
-    "xsintilla",                // name
-    sizeof(xsiControlData),     // dataSize
-    // REALdontEraseBackground | REALcontrolHandlesTabKey | REALcontrolAcceptFocus, // flags
-    REALdontEraseBackground | REALcontrolAcceptFocus,
+    kCurrentREALControlVersion,                        // version
+    "xsintilla",                                       // name
+    sizeof(xsiControlData),                            // dataSize
+    REALcontrolAcceptFocus,                            // flags
     128,                                               // toolbarPICT
     128,                                               // toolbarDownPICT
     100,                                               // defaultWidth

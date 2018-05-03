@@ -9,6 +9,39 @@
 #include "margin.h"
 #include "style.h"
 
+// gtk event to fix position bug inside TabPanel or PagePanel on Linux
+void EventBoxSizeAllocate(GtkWidget* widget, GdkRectangle* allocation, gpointer user_data)
+{
+    if((allocation->x != 0) || (allocation->y != 0)) {
+        GtkWidget* parent = (GtkWidget*)gtk_widget_get_parent(widget);
+        if(GTK_IS_FIXED(parent)) {
+            gtk_fixed_move(GTK_FIXED(parent), widget, 0, 0);
+        }
+    }
+}
+
+typedef void (*SetFocusFunc)(REALcontrolInstance);
+void ctlSetFocus(REALcontrolInstance ctl)
+{
+    SetFocusFunc fn = (SetFocusFunc)REALLoadObjectMethod(ctl, "SetFocus()");
+    if(fn)
+        fn(ctl);
+}
+
+// used to raise mousedown event
+gboolean SciEventButtonPress(GtkWidget* widget, GdkEventButton* event, REALcontrolInstance ctl)
+{
+    if(event->button == 1) { // left click
+        ctlSetFocus(ctl);    // required
+        fpMouseDown RaiseMouseDown = (fpMouseDown)REALGetEventInstance(ctl, &xsiControl.events[ctl_MouseDown]);
+
+        if(RaiseMouseDown) {
+            return RaiseMouseDown(ctl, event->x, event->y);
+        }
+    }
+    return false;
+}
+
 void Constructor(REALcontrolInstance ctl)
 {
     xsiControlData* data = xsi_getControlData(ctl);
@@ -29,7 +62,17 @@ void Constructor(REALcontrolInstance ctl)
     data->style = REALnewInstanceWithClass(REALGetClassRef(xsiStyleDef.name));
     style_setcontrol(data->style, ctl);
 
-    g_signal_connect(data->sci, SCINTILLA_NOTIFY, G_CALLBACK(sci_eventHandler), NULL);
+    g_signal_connect(data->sci, SCINTILLA_NOTIFY, G_CALLBACK(sci_eventHandler), ctl);
+    g_signal_connect(G_OBJECT(data->editor), "button-press-event", G_CALLBACK(SciEventButtonPress), ctl);
+}
+
+void OnClose(REALcontrolInstance ctl)
+{
+    xsiControlData* data = xsi_getControlData(ctl);
+
+    free(data->margin);
+    free(data->style);
+    free(data->lexer);
 }
 
 void OnOpen(REALcontrolInstance ctl)
@@ -54,15 +97,8 @@ void OnOpen(REALcontrolInstance ctl)
         }
         parent = (GtkWidget*)gtk_widget_get_parent(parent);
     }
-}
 
-void OnClose(REALcontrolInstance ctl)
-{
-    xsiControlData* data = xsi_getControlData(ctl);
-
-    free(data->margin);
-    free(data->style);
-    free(data->lexer);
+    ctlSetFocus(ctl); // required
 }
 
 void OnDrawOffscreen(REALcontrolInstance ctl, REALgraphics g)
@@ -83,16 +119,6 @@ void* OnControlHandleGetter(REALcontrolInstance ctl)
 {
     xsiControlData* data = xsi_getControlData(ctl);
     return (void*)data->editor;
-}
-
-void EventBoxSizeAllocate(GtkWidget* widget, GdkRectangle* allocation, gpointer user_data)
-{
-    if((allocation->x != 0) || (allocation->y != 0)) {
-        GtkWidget* parent = (GtkWidget*)gtk_widget_get_parent(widget);
-        if(GTK_IS_FIXED(parent)) {
-            gtk_fixed_move(GTK_FIXED(parent), widget, 0, 0);
-        }
-    }
 }
 
 RBBoolean OnKeyDownFunction(REALcontrolInstance ctl, int charCode, int keyCode, int modifiers)

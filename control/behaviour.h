@@ -11,14 +11,6 @@ void OnClose(REALcontrolInstance ctl);
 void OnDrawOffscreen(REALcontrolInstance ctl, REALgraphics g);
 void* OnControlHandleGetter(REALcontrolInstance ctl);
 
-void OnGainedFocusFunction(REALcontrolInstance ctl);
-RBBoolean OnControlAcceptFocus(REALcontrolInstance ctl);
-
-RBBoolean OnClickFunction(REALcontrolInstance ctl, int x, int y, int modifiers);
-
 RBBoolean OnKeyDownFunction(REALcontrolInstance ctl, int charCode, int keyCode, int modifiers);
-
-// GTK callback
-void EventBoxSizeAllocate(GtkWidget* widget, GdkRectangle* allocation, gpointer user_data);
 
 #endif // CONTROL_BEHAVIOUR_H
