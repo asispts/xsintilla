@@ -247,7 +247,7 @@ REALevent xsiEvents[] = {
     {"CharAdded(ch as Integer)"},
     {"SavePointReached()"},
     {"SavePointLeft()"},
-    {"ModifyAtTempTro()"},
+    {"ModifyAttempt()"},
     {"ScnKey(ch as Integer)"},
     {"DoubleClick(position as Integer, modifiers as Integer)"},
     {"UpdateUI(updated as Integer)"},
