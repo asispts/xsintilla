@@ -1,5 +1,5 @@
-#include <stdlib.h>
 #include "xsintilla.h"
+#include <stdlib.h>
 
 xsiControlData* xsi_getControlData(REALcontrolInstance ctl)
 {
@@ -51,25 +51,4 @@ REALstring xsi_toREALstring(char* buffer, int length, bool nullTerminated)
     REALLockString(text);
     free(buffer);
     return text;
-}
-
-REALobject xsi_getMarginObject(REALcontrolInstance ctl)
-{
-    xsiControlData* data = xsi_getControlData(ctl);
-    REALLockObject(data->margin);
-    return data->margin;
-}
-
-REALobject xsi_getLexerObject(REALcontrolInstance ctl)
-{
-    xsiControlData* data = xsi_getControlData(ctl);
-    REALLockObject(data->lexer);
-    return data->lexer;
-}
-
-REALobject xsi_getStyleObject(REALcontrolInstance ctl)
-{
-    xsiControlData* data = xsi_getControlData(ctl);
-    REALLockObject(data->style);
-    return data->style;
 }

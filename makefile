@@ -9,9 +9,7 @@ export LIBROOT 			= $(ROOTDIR)/build-output
 export SRCROOT 			= $(ROOTDIR)/src
 export LIBXOJO 			= $(ROOTDIR)/libxojo
 export CONTROLDIR		= $(ROOTDIR)/control
-export PROPERTIESDIR	= $(ROOTDIR)/properties
-export METHODDIR		= $(ROOTDIR)/methods
-export CLASSESDIR		= $(ROOTDIR)/classes
+export APIDIR			= $(ROOTDIR)/api
 export CONSTANTSDIR		= $(ROOTDIR)/constants
 
 #export LIBXSINTILLA 	= $(ROOTDIR)/libxsintilla

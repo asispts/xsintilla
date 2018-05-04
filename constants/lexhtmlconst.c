@@ -1,9 +1,9 @@
-#include "style-html-def.h"
+#include "lexhtmlconst.h"
 
 //+++++++++++++++++++++++++++++++++
 // Constants
 //+++++++++++++++++++++++++++++++++
-REALconstant xsiHTMLConstDef[] = {
+REALconstant LexHTMLConstDef[] = {
     // HTML, XML, and ASP
     {"H_DEFAULT as Integer = 0"},          //
     {"H_TAG as Integer = 1"},              //
@@ -133,9 +133,9 @@ REALconstant xsiHTMLConstDef[] = {
     {"PHP_OPERATOR as Integer = 127"},         //
 };
 
-REALclassDefinition xsiStyleHTMLDef = {
+REALclassDefinition xsiLexHTMLDef = {
     kCurrentREALControlVersion,                     // version
-    "xsiHTML",                                      // name
+    "xsiLexHTML",                                   // name
     NULL,                                           // superName
     0,                                              // dataSize
     0,                                              // forSystemUse
@@ -152,8 +152,8 @@ REALclassDefinition xsiStyleHTMLDef = {
     NULL,                                           // interfaces
     NULL,                                           // attributes
     0,                                              // attributeCount
-    xsiHTMLConstDef,                                // constants
-    sizeof(xsiHTMLConstDef) / sizeof(REALconstant), // constantCount
+    LexHTMLConstDef,                                // constants
+    sizeof(LexHTMLConstDef) / sizeof(REALconstant), // constantCount
     0,                                              // mFlags
     NULL,                                           // sharedProperties
     0,                                              // sharedPropertyCount
@@ -167,7 +167,7 @@ REALclassDefinition xsiStyleHTMLDef = {
 #endif
 };
 
-void registerStyleHTML(void)
+void registerXsiLexHTML(void)
 {
-    REALRegisterClass(&xsiStyleHTMLDef);
+    REALRegisterClass(&xsiLexHTMLDef);
 }

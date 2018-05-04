@@ -4,70 +4,21 @@
 #include "event.h"
 #include "xsintilla.h"
 
-// Properties headers
-#include "error-properties.h"
-#include "event-properties.h"
-#include "selection-properties.h"
-#include "text-properties.h"
-
-// Method headers
-#include "selection-method.h"
-#include "text-method.h"
+// API
+#include "api_error.h"
+#include "api_event.h"
+#include "api_lexer.h"
+#include "api_margin.h"
+#include "api_selection.h"
+#include "api_style.h"
+#include "api_styling.h"
+#include "api_text.h"
 
 //+++++++++++++++++++++++++++++++++
 // Properties
 //+++++++++++++++++++++++++++++++++
 REALproperty xsiProperties[] = {
     // group, name, type, flags, getter, setter, param, editor, enumCount, enumEntries, attributeCount, attributes
-    /*+++++++++++++++++++++++++
-     * CLASSES
-     +++++++++++++++++++++++++*/
-    {"", "margin", "xsiMargin", REALpropRuntimeOnly, (REALproc)xsi_getMarginObject, REALnoImplementation},
-    {"", "lexer", "xsiLexer", REALpropRuntimeOnly, (REALproc)xsi_getLexerObject, REALnoImplementation},
-    {"", "style", "xsiStyle", REALpropRuntimeOnly, (REALproc)xsi_getStyleObject, REALnoImplementation},
-
-    /*+++++++++++++++++++++++++
-     * text-properties.h
-     +++++++++++++++++++++++++*/
-    {"", "readonly", "Boolean", REALpropRuntimeOnly, (REALproc)xsip_getReadonly, (REALproc)xsip_setReadonly},
-    {"", "text", "String", REALpropRuntimeOnly, (REALproc)xsip_getText, (REALproc)xsip_setText},
-
-    /*+++++++++++++++++++++++++
-     * error-properties.h
-     +++++++++++++++++++++++++*/
-    {"", "status", "Integer", REALpropRuntimeOnly, (REALproc)xsip_getStatus, (REALproc)xsip_setStatus},
-
-    /*+++++++++++++++++++++++++
-     * event-properties.h
-     +++++++++++++++++++++++++*/
-    {"", "modeEventMask", "Integer", REALpropRuntimeOnly, (REALproc)xsip_getModeEventMask,
-     (REALproc)xsip_setModeEventMask},
-    {"", "mouseDwellTime", "Integer", REALpropRuntimeOnly, (REALproc)xsip_getMouseDwellTime,
-     (REALproc)xsip_setMouseDwellTime},
-    {"", "identifier", "Integer", REALpropRuntimeOnly, (REALproc)xsip_getIdentifier, (REALproc)xsip_setIdentifier},
-
-    /*+++++++++++++++++++++++++
-     * selection-properties.h
-     +++++++++++++++++++++++++*/
-    {"", "textLength", "Integer", REALpropRuntimeOnly, (REALproc)xsip_getTextLength, REALnoImplementation},
-    {"", "length", "Integer", REALpropRuntimeOnly, (REALproc)xsip_getLength, REALnoImplementation},
-    {"", "lineCount", "Integer", REALpropRuntimeOnly, (REALproc)xsip_getLineCount, REALnoImplementation},
-    {"", "lineOnScreen", "Integer", REALpropRuntimeOnly, (REALproc)xsip_lineOnScreen, REALnoImplementation},
-    {"", "modified", "Boolean", REALpropRuntimeOnly, (REALproc)xsip_getModify, REALnoImplementation},
-    {"", "currentPos", "Integer", REALpropRuntimeOnly, (REALproc)xsip_getCurrentPos, (REALproc)xsip_setCurrentPos},
-    {"", "anchor", "Integer", REALpropRuntimeOnly, (REALproc)xsip_getAnchor, (REALproc)xsip_setAnchor},
-    {"", "selectionStart", "Integer", REALpropRuntimeOnly, (REALproc)xsip_getSelectionStart,
-     (REALproc)xsip_setSelectionStart},
-    {"", "selectionEnd", "Integer", REALpropRuntimeOnly, (REALproc)xsip_getSelectionEnd,
-     (REALproc)xsip_setSelectionEnd},
-    {"", "hideSelection", "Boolean", REALpropRuntimeOnly, REALnoImplementation, (REALproc)xsip_hideSelection},
-    {"", "seltext", "String", REALpropRuntimeOnly, (REALproc)xsip_getSeltext, REALnoImplementation},
-    {"", "selectionIsRectangle", "Boolean", REALpropRuntimeOnly, (REALproc)xsip_selectionIsRectangle,
-     REALnoImplementation},
-    {"", "selectionMode", "Integer", REALpropRuntimeOnly, (REALproc)xsip_getSelectionMode,
-     (REALproc)xsip_setSelectionMode},
-    {"", "mouseSelectionRectangularSwitch", "Boolean", REALpropRuntimeOnly,
-     (REALproc)xsip_getMouseSelectionRectangularSwitch, (REALproc)xsip_setMouseSelectionRectangularSwitch},
 
     //    /*+++++++++++++++++++++++++
     //     * sci-marker.h
@@ -118,74 +69,269 @@ REALproperty xsiProperties[] = {
 // Methods
 //+++++++++++++++++++++++++++++++++
 REALmethodDefinition xsiMethods[] = {
-    // function, setterFunction, declaration, mFlags, attributeCount, attributes
-    /*+++++++++++++++++++++++++
-     * text-method.h
-     +++++++++++++++++++++++++*/
-    {(REALproc)xsim_setSavePoint, REALnoImplementation, "SetSavePoint()"},
-    {(REALproc)xsim_getLine, REALnoImplementation, "GetLine(lineNum as Integer) as String"},
-    {(REALproc)xsim_replaceSel, REALnoImplementation, "ReplaceSel(text as String)"},
-    {(REALproc)xsim_allocate, REALnoImplementation, "Allocate(bytes as Integer)"},
-    {(REALproc)xsim_addText, REALnoImplementation, "AddText(length as Integer, text as String)"},
-    {(REALproc)xsim_appendText, REALnoImplementation, "AppendText(length as Integer, text as String)"},
-    {(REALproc)xsim_insertText, REALnoImplementation, "InsertText(pos as Integer, text as String)"},
-    {(REALproc)xsim_clearAll, REALnoImplementation, "ClearAll()"},
-    {(REALproc)xsim_deleteRange, REALnoImplementation, "DeleteRange(start as Integer, lengthDelete as Integer)"},
-    {(REALproc)xsim_clearDocumentStyle, REALnoImplementation, "ClearDocumentStyle()"},
-    {(REALproc)xsim_getCharAt, REALnoImplementation, "GetCharAt(pos as Integer) as String"},
-    {(REALproc)xsim_getStyleAt, REALnoImplementation, "GetStyleAt(pos as Integer) as Integer"},
-    {(REALproc)xsim_releaseAllExtendedStyles, REALnoImplementation, "ReleaseAllExtendedStyle()"},
-    {(REALproc)xsim_allocateExtendedStyles, REALnoImplementation,
-     "AllocateExtendedStyles(numberStyles as Integer) as Integer"},
-    {(REALproc)xsim_getTextRange, REALnoImplementation, "TextRange(startPos as Integer, endPos as Integer) as String"},
-    {(REALproc)xsim_targetAsUtf8, REALnoImplementation, "TargetAsUTF8() as String"},
-    {(REALproc)xsim_encodeFromUtf8, REALnoImplementation,
-     "EncodeFromUTF8(length as Integer, utf8 as String) as String"},
-    {(REALproc)xsim_addStyledText, REALnoImplementation, "AddStyledText(length as Integer, styled_text as String)"},
-    {(REALproc)xsim_getStyledText, REALnoImplementation,
-     "GetStyledText(startPos as Integer, endPos as Integer) as String"},
-    {(REALproc)xsim_changeInsertion, REALnoImplementation, "ChangeInsertion(length as Integer, text as String)"},
+    //+++++++++++++++++++++++++++++++++
+    // Computed Properties
+    //+++++++++++++++++++++++++++++++++
+    /*
+     *  Text API
+     ====================*/
+    {(REALproc)api_setText, REALnoImplementation, "Text(assigns value as String)"},
+    {(REALproc)api_getText, REALnoImplementation, "Text() as String"},
+    {(REALproc)api_setReadonly, REALnoImplementation, "Readonly(assigns value as Boolean)"},
+    {(REALproc)api_getReadonly, REALnoImplementation, "ReadOnly() as Boolean"},
 
-    /*+++++++++++++++++++++++++
-     * selection-method.h
-     +++++++++++++++++++++++++*/
-    {(REALproc)xsim_setSel, REALnoImplementation, "SetSel(anchor as Integer, caret as Integer)"},
-    {(REALproc)xsim_gotoPos, REALnoImplementation, "GotoPos(caret as Integer)"},
-    {(REALproc)xsim_gotoLine, REALnoImplementation, "GotoLine(line as Integer)"},
-    {(REALproc)xsim_setEmptySelection, REALnoImplementation, "SetEmptySelection(caret as Integer)"},
-    {(REALproc)xsim_selectAll, REALnoImplementation, "SelectAll()"},
-    {(REALproc)xsim_lineFromPosition, REALnoImplementation, "LineFromPosition(pos as Integer) as Integer"},
-    {(REALproc)xsim_positionFromLine, REALnoImplementation, "PositionFromLine(line as Integer) as Integer"},
-    {(REALproc)xsim_getLineEndPosition, REALnoImplementation, "GetLineEndPosition(line as Integer) as Integer"},
-    {(REALproc)xsim_lineLength, REALnoImplementation, "LineLength(line as Integer) as Integer"},
-    {(REALproc)xsim_getColumn, REALnoImplementation, "GetColumn(pos as Integer) as Integer"},
-    {(REALproc)xsim_findColumn, REALnoImplementation, "FindColumn(line as Integer, column as Integer) as Integer "},
-    {(REALproc)xsim_positionFromPoint, REALnoImplementation,
-     "PositionFromPoint(x as Integer, y as Integer) as Integer"},
-    {(REALproc)xsim_positionFromPointClose, REALnoImplementation,
+    /*
+     *  Error API
+     ====================*/
+    {(REALproc)api_setStatus, REALnoImplementation, "Status(assigns value as Integer)"},
+    {(REALproc)api_getStatus, REALnoImplementation, "Status() as Integer"},
+
+    /*
+     *  Event API
+     ====================*/
+    {(REALproc)api_setModeEventMask, REALnoImplementation, "ModeEventMask(assigns eventMask as Integer)"},
+    {(REALproc)api_getModeEventMask, REALnoImplementation, "ModeEventMask() as Integer"},
+    {(REALproc)api_setMouseDwellTime, REALnoImplementation, "MouseDwellTime(assigns period as Integer)"},
+    {(REALproc)api_getMouseDwellTime, REALnoImplementation, "MouseDwellTime() as Integer"},
+    {(REALproc)api_setIdentifier, REALnoImplementation, "Identifier(assigns value as Integer)"},
+    {(REALproc)api_getIdentifier, REALnoImplementation, "Identifier() as Integer"},
+
+    /*
+     *  Selection API
+     ====================*/
+    {(REALproc)api_setCurrentPos, REALnoImplementation, "CurrentPos(assigns caret as Integer)"},
+    {(REALproc)api_getCurrentPos, REALnoImplementation, "CurrentPos() as Integer"},
+    {(REALproc)api_setAnchor, REALnoImplementation, "Anchor(assigns value as Integer)"},
+    {(REALproc)api_getAnchor, REALnoImplementation, "Anchor() as Integer"},
+    {(REALproc)api_setSelectionStart, REALnoImplementation, "SelectionStart(assigns anchor as Integer)"},
+    {(REALproc)api_getSelectionStart, REALnoImplementation, "SelectionStart() as Integer"},
+    {(REALproc)api_setSelectionEnd, REALnoImplementation, "SelectionEnd(assigns caret as Integer)"},
+    {(REALproc)api_getSelectionEnd, REALnoImplementation, "SelectionEnd() as Integer"},
+    {(REALproc)api_setSelectionMode, REALnoImplementation, "SelectionMode(assigns mode as Integer)"},
+    {(REALproc)api_getSelectionMode, REALnoImplementation, "SelectionMode() as Integer"},
+    {(REALproc)api_setMouseSelectionRectangularSwitch, REALnoImplementation,
+     "MouseSelectionRectangularSwitch(assigns mouseSwitch as Integer)"},
+    {(REALproc)api_getMouseSelectionRectangularSwitch, REALnoImplementation,
+     "MouseSelectionRectangularSwitch() as Integer"},
+
+    /*
+     *  Styling API
+     ====================*/
+    {(REALproc)api_setIdleStyling, REALnoImplementation, "IdleStyling(assigns value as Integer)"},
+    {(REALproc)api_getIdleStyling, REALnoImplementation, "IdleStyling() as Integer"},
+    {(REALproc)api_setLineState, REALnoImplementation, "LineState(line as Integer, assigns state as Integer)"},
+    {(REALproc)api_getLineState, REALnoImplementation, "LineState(line as Integer) as Integer"},
+
+    /*
+     *  Style API
+     ====================*/
+    {(REALproc)api_styleSetFont, REALnoImplementation, "StyleFont(style as Integer, assigns fontName as String)"},
+    {(REALproc)api_styleGetFont, REALnoImplementation, "StyleFont(style as Integer) as String"},
+    {(REALproc)api_styleSetSize, REALnoImplementation, "StyleSize(style as Integer, assigns sizePoints as Integer)"},
+    {(REALproc)api_styleGetSize, REALnoImplementation, "StyleSize(style as Integer) as Integer"},
+    {(REALproc)api_styleSetWeight, REALnoImplementation, "StyleWeight(style as Integer, assigns weight as Integer)"},
+    {(REALproc)api_styleGetWeight, REALnoImplementation, "StyleWeight(style as Integer) as Integer"},
+    {(REALproc)api_styleSetFore, REALnoImplementation, "StyleFore(style as Integer, assigns fore as Color)"},
+    {(REALproc)api_styleGetFore, REALnoImplementation, "StyleFore(style as Integer) as Color"},
+    {(REALproc)api_styleSetBack, REALnoImplementation, "StyleBack(style as Integer, assigns back as Color)"},
+    {(REALproc)api_styleGetBack, REALnoImplementation, "StyleBack(style as Integer) as Color"},
+    {(REALproc)api_styleSetVisible, REALnoImplementation, "StyleVisible(style as Integer, assigns visible as Boolean)"},
+    {(REALproc)api_styleGetVisible, REALnoImplementation, "StyleVisible(style as Integer) as Boolean"},
+    {(REALproc)api_styleSetSizeFractional, REALnoImplementation,
+     "StyleSizeFractional(style as Integer, assigns size as Integer)"},
+    {(REALproc)api_styleGetSizeFractional, REALnoImplementation, "StyleSizeFractional(style as Integer) as Integer"},
+    {(REALproc)api_styleSetBold, REALnoImplementation, "StyleBold(style as Integer, assigns bold as Boolean)"},
+    {(REALproc)api_styleGetBold, REALnoImplementation, "StyleBold(style as Integer) as Boolean"},
+    {(REALproc)api_styleSetItalic, REALnoImplementation, "StyleItalic(style as Integer, assigns italic as Boolean)"},
+    {(REALproc)api_styleGetItalic, REALnoImplementation, "StyleItalic(style as Integer) as Boolean"},
+    {(REALproc)api_styleSetUnderline, REALnoImplementation,
+     "StyleUnderline(style as Integer, assigns underline as Boolean)"},
+    {(REALproc)api_styleGetUnderline, REALnoImplementation, "StyleUnderline(style as Integer) as Boolean"},
+    {(REALproc)api_styleSetEOLFilled, REALnoImplementation,
+     "StyleEOLFilled(style as Integer, assigns eolFilled as Boolean)"},
+    {(REALproc)api_styleGetEOLFilled, REALnoImplementation, "StyleEOLFilled(style as Integer) as Boolean"},
+    {(REALproc)api_styleSetCharacterSet, REALnoImplementation,
+     "StyleCharacterSet(style as Integer, assigns charSet as Integer)"},
+    {(REALproc)api_styleGetCharacterSet, REALnoImplementation, "StyleCharacterSet(style as Integer) as Integer"},
+    {(REALproc)api_styleSetCase, REALnoImplementation, "StyleCase(style as Integer, assigns caseVisible as Integer)"},
+    {(REALproc)api_styleGetCase, REALnoImplementation, "StyleCase(style as Integer) as Integer"},
+    {(REALproc)api_styleSetChangeable, REALnoImplementation,
+     "StyleChangeable(style as Integer, assigns change as Boolean)"},
+    {(REALproc)api_styleGetChangeable, REALnoImplementation, "StyleChangeable(style as Integer) as Boolean"},
+    {(REALproc)api_styleSetHotspot, REALnoImplementation, "StyleHotspot(style as Integer, assigns hotspot as Boolean)"},
+    {(REALproc)api_styleGetHotspot, REALnoImplementation, "StyleHotspot(style as Integer) as Boolean"},
+
+    /*
+     *  Margin API
+     ====================*/
+    {(REALproc)api_setMarginLeft, REALnoImplementation, "MarginLeft(assigns pixelWidth as Integer)"},
+    {(REALproc)api_getMarginLeft, REALnoImplementation, "MarginLeft() as Integer"},
+    {(REALproc)api_setMarginRight, REALnoImplementation, "MarginRight(assigns pixelWidth as Integer)"},
+    {(REALproc)api_getMarginRight, REALnoImplementation, "MarginRight() as Integer"},
+    {(REALproc)api_marginSetStyleOffset, REALnoImplementation, "MarginStyleOffset(assigns style as Integer)"},
+    {(REALproc)api_marginGetStyleOffset, REALnoImplementation, "MarginStyleOffset() as Integer"},
+    {(REALproc)api_setMarginOptions, REALnoImplementation, "MarginOptions(assigns options as Integer)"},
+    {(REALproc)api_getMarginOptions, REALnoImplementation, "MarginOptions() as Integer"},
+    {(REALproc)api_setMarginTypeN, REALnoImplementation, "MarginTypeN(margin as  Integer, assigns type as Integer)"},
+    {(REALproc)api_getMarginTypeN, REALnoImplementation, "MarginTypeN(margin as  Integer) as Integer"},
+    {(REALproc)api_setMarginWidthN, REALnoImplementation, "MarginWidthN(margin as  Integer, assigns pixel as Integer)"},
+    {(REALproc)api_getMarginWidthN, REALnoImplementation, "MarginWidthN(margin as  Integer) as Integer"},
+    {(REALproc)api_setMarginBackN, REALnoImplementation, "MarginBackN(margin as  Integer, assigns back as Color)"},
+    {(REALproc)api_getMarginBackN, REALnoImplementation, "MarginBackN(margin as  Integer) as Color"},
+    {(REALproc)api_setMarginMaskN, REALnoImplementation, "MarginMaskN(margin as  Integer, assigns mask as Integer)"},
+    {(REALproc)api_getMarginMaskN, REALnoImplementation, "MarginMaskN(margin as  Integer) as Integer"},
+    {(REALproc)api_setMarginSensitiveN, REALnoImplementation,
+     "MarginSensitiveN(margin as  Integer, assigns sensitive as Boolean)"},
+    {(REALproc)api_getMarginSensitiveN, REALnoImplementation, "MarginSensitiveN(margin as  Integer) as Boolean"},
+    {(REALproc)api_setMarginCursorN, REALnoImplementation,
+     "MarginCursorN(margin as  Integer, assigns cursor as Integer)"},
+    {(REALproc)api_getMarginCursorN, REALnoImplementation, "MarginCursorN(margin as  Integer) as Integer"},
+    {(REALproc)api_marginSetText, REALnoImplementation, "MarginText(line as Integer, assigns text as String)"},
+    {(REALproc)api_marginGetText, REALnoImplementation, "MarginText(line as Integer) as String"},
+    {(REALproc)api_marginSetStyle, REALnoImplementation, "MarginStyle(line as Integer, assigns style as Integer)"},
+    {(REALproc)api_marginGetStyle, REALnoImplementation, "MarginStyle(line as Integer) as Integer"},
+    {(REALproc)api_marginSetStyles, REALnoImplementation,
+     "MarginStyleString(line as Integer, assigns styles as String)"},
+    {(REALproc)api_marginGetStyles, REALnoImplementation, "MarginStyleString(line as Integer) as String"},
+
+    /*
+     *  Lexer API
+     ====================*/
+    {(REALproc)api_setLexer, REALnoImplementation, "Lexer(assigns value as Integer)"},
+    {(REALproc)api_getLexer, REALnoImplementation, "Lexer() as Integer"},
+    {(REALproc)api_setLexerLanguage, REALnoImplementation, "LexerLanguage(assigns language as String)"},
+    {(REALproc)api_getLexerLanguage, REALnoImplementation, "LexerLanguage() as String"},
+
+    //+++++++++++++++++++++++++++++++++
+    // Methods
+    //+++++++++++++++++++++++++++++++++
+    /*
+     *  Text API
+     ============*/
+    {(REALproc)api_setSavePoint, REALnoImplementation, "SetSavePoint()"},
+    {(REALproc)api_getLine, REALnoImplementation, "GetLine(lineNum as Integer) as String"},
+    {(REALproc)api_replaceSel, REALnoImplementation, "ReplaceSel(text as String)"},
+    {(REALproc)api_allocate, REALnoImplementation, "Allocate(bytes as Integer)"},
+    {(REALproc)api_addText, REALnoImplementation, "AddText(length as Integer, text as String)"},
+    {(REALproc)api_appendText, REALnoImplementation, "AppendText(length as Integer, text as String)"},
+    {(REALproc)api_insertText, REALnoImplementation, "InsertText(pos as Integer, text as String)"},
+    {(REALproc)api_clearAll, REALnoImplementation, "ClearAll()"},
+    {(REALproc)api_deleteRange, REALnoImplementation, "DeleteRange(start as Integer, lengthDelete as Integer)"},
+    {(REALproc)api_clearDocumentStyle, REALnoImplementation, "ClearDocumentStyle()"},
+    {(REALproc)api_getCharAt, REALnoImplementation, "GetCharAt(pos as Integer) as String"},
+    {(REALproc)api_getStyleAt, REALnoImplementation, "GetStyleAt(pos as Integer) as Integer"},
+    {(REALproc)api_releaseAllExtendedStyles, REALnoImplementation, "ReleaseAllExtendedStyle()"},
+    {(REALproc)api_allocateExtendedStyles, REALnoImplementation,
+     "AllocateExtendedStyles(numberStyles as Integer) as Integer"},
+    {(REALproc)api_getTextRange, REALnoImplementation, "TextRange(startPos as Integer, endPos as Integer) as String"},
+    {(REALproc)api_targetAsUtf8, REALnoImplementation, "TargetAsUTF8() as String"},
+    {(REALproc)api_encodeFromUtf8, REALnoImplementation, "EncodeFromUTF8(length as Integer, utf8 as String) as String"},
+    {(REALproc)api_addStyledText, REALnoImplementation, "AddStyledText(length as Integer, styled_text as String)"},
+    {(REALproc)api_getStyledText, REALnoImplementation,
+     "GetStyledText(startPos as Integer, endPos as Integer) as String"},
+    {(REALproc)api_changeInsertion, REALnoImplementation, "ChangeInsertion(length as Integer, text as String)"},
+
+    /*
+     *  Selection API
+     ====================*/
+    {(REALproc)api_getTextLength, REALnoImplementation, "GetTextLength() as Integer"},
+    {(REALproc)api_getLength, REALnoImplementation, "GetLength() as Integer"},
+    {(REALproc)api_getLineCount, REALnoImplementation, "GetLineCount() as Integer"},
+    {(REALproc)api_lineOnScreen, REALnoImplementation, "LineOnScreen() as Integer"},
+    {(REALproc)api_getModify, REALnoImplementation, "GetModify() as Boolean"},
+    {(REALproc)api_hideSelection, REALnoImplementation, "HideSelection(hide as Integer)"},
+    {(REALproc)api_getSeltext, REALnoImplementation, "GetSelText() as String"},
+    {(REALproc)api_selectionIsRectangle, REALnoImplementation, "SelectionIsRectangle() as Boolean"},
+    {(REALproc)api_setSel, REALnoImplementation, "SetSel(anchor as Integer, caret as Integer)"},
+    {(REALproc)api_gotoPos, REALnoImplementation, "GotoPos(caret as Integer)"},
+    {(REALproc)api_gotoLine, REALnoImplementation, "GotoLine(line as Integer)"},
+    {(REALproc)api_setEmptySelection, REALnoImplementation, "SetEmptySelection(caret as Integer)"},
+    {(REALproc)api_selectAll, REALnoImplementation, "SelectAll()"},
+    {(REALproc)api_lineFromPosition, REALnoImplementation, "LineFromPosition(pos as Integer) as Integer"},
+    {(REALproc)api_positionFromLine, REALnoImplementation, "PositionFromLine(line as Integer) as Integer"},
+    {(REALproc)api_getLineEndPosition, REALnoImplementation, "GetLineEndPosition(line as Integer) as Integer"},
+    {(REALproc)api_lineLength, REALnoImplementation, "LineLength(line as Integer) as Integer"},
+    {(REALproc)api_getColumn, REALnoImplementation, "GetColumn(pos as Integer) as Integer"},
+    {(REALproc)api_findColumn, REALnoImplementation, "FindColumn(line as Integer, column as Integer) as Integer "},
+    {(REALproc)api_positionFromPoint, REALnoImplementation, "PositionFromPoint(x as Integer, y as Integer) as Integer"},
+    {(REALproc)api_positionFromPointClose, REALnoImplementation,
      "PositionFromPointClose(x as Integer, y as Integer) as Integer"},
-    {(REALproc)xsim_charPositionFromPoint, REALnoImplementation,
+    {(REALproc)api_charPositionFromPoint, REALnoImplementation,
      "CharPositionFromPoint(x as Integer, y as Integer) as Integer"},
-    {(REALproc)xsim_charPositionFromPointClose, REALnoImplementation,
+    {(REALproc)api_charPositionFromPointClose, REALnoImplementation,
      "CharPositionFromPointClose(x as Integer, y as Integer) as Integer"},
-    {(REALproc)xsim_pointXFromPosition, REALnoImplementation, "PointXFromPosition(pos as Integer) as Integer"},
-    {(REALproc)xsim_pointYFromPosition, REALnoImplementation, "PointYFromPosition(pos as Integer) as Integer"},
-    {(REALproc)xsim_getCurLine, REALnoImplementation, "GetCurLine() as String"},
-    {(REALproc)xsim_getLineSelStartPosition, REALnoImplementation,
+    {(REALproc)api_pointXFromPosition, REALnoImplementation, "PointXFromPosition(pos as Integer) as Integer"},
+    {(REALproc)api_pointYFromPosition, REALnoImplementation, "PointYFromPosition(pos as Integer) as Integer"},
+    {(REALproc)api_getCurLine, REALnoImplementation, "GetCurLine() as String"},
+    {(REALproc)api_getLineSelStartPosition, REALnoImplementation,
      "GetLineSelStartPosition(line as Integer) as Integer"},
-    {(REALproc)xsim_getLineSelEndPosition, REALnoImplementation, "GetLineSelEndPosition(line as Integer) as Integer "},
-    {(REALproc)xsim_moveCaretInsideView, REALnoImplementation, "MoveCaretInsideView()"},
-    {(REALproc)xsim_positionBefore, REALnoImplementation, "PositionBefore(pos as Integer) as Integer"},
-    {(REALproc)xsim_positionAfter, REALnoImplementation, "PositionAfter(pos as Integer) as Integer"},
-    {(REALproc)xsim_positionRelative, REALnoImplementation,
+    {(REALproc)api_getLineSelEndPosition, REALnoImplementation, "GetLineSelEndPosition(line as Integer) as Integer "},
+    {(REALproc)api_moveCaretInsideView, REALnoImplementation, "MoveCaretInsideView()"},
+    {(REALproc)api_positionBefore, REALnoImplementation, "PositionBefore(pos as Integer) as Integer"},
+    {(REALproc)api_positionAfter, REALnoImplementation, "PositionAfter(pos as Integer) as Integer"},
+    {(REALproc)api_positionRelative, REALnoImplementation,
      "PositionRelative(pos as Integer, relative as Integer) as Integer"},
-    {(REALproc)xsim_countCharacters, REALnoImplementation,
+    {(REALproc)api_countCharacters, REALnoImplementation,
      "CountCharacters(posStart as Integer, posEnd as Integer) as Integer"},
-    {(REALproc)xsim_textWidth, REALnoImplementation, "TextWidth(style as Integer, text as String) as Integer"},
-    {(REALproc)xsim_textHeight, REALnoImplementation, "TextHeight(line as Integer) as Integer"},
-    {(REALproc)xsim_chooseCaretX, REALnoImplementation, "ChooseCaretX()"},
-    {(REALproc)xsim_moveSelectedLinesUp, REALnoImplementation, "MoveSelectedLinesUp()"},
-    {(REALproc)xsim_moveSelectedLinesDown, REALnoImplementation, "MoveSelectedLinesDown()"},
+    {(REALproc)api_textWidth, REALnoImplementation, "TextWidth(style as Integer, text as String) as Integer"},
+    {(REALproc)api_textHeight, REALnoImplementation, "TextHeight(line as Integer) as Integer"},
+    {(REALproc)api_chooseCaretX, REALnoImplementation, "ChooseCaretX()"},
+    {(REALproc)api_moveSelectedLinesUp, REALnoImplementation, "MoveSelectedLinesUp()"},
+    {(REALproc)api_moveSelectedLinesDown, REALnoImplementation, "MoveSelectedLinesDown()"},
+
+    /*
+     *  Styling API
+     ====================*/
+    {(REALproc)api_getEndStyled, REALnoImplementation, "GetEndStyled() as Integer"},
+    {(REALproc)api_startStyling, REALnoImplementation, "StartStyling(start as Integer)"},
+    {(REALproc)api_setStyling, REALnoImplementation, "SetStyling(start as Integer, style as Integer)"},
+    {(REALproc)api_setStylingEx, REALnoImplementation, "SetStylingEx(length as Integer, styles as String)"},
+    {(REALproc)api_getMaxLineState, REALnoImplementation, "GetMaxLineState() as Integer"},
+
+    /*
+     *  Style API
+     ====================*/
+    {(REALproc)api_styleResetDefault, REALnoImplementation, "StyleResetDefault()"},
+    {(REALproc)api_styleClearAll, REALnoImplementation, "StyleClearAll()"},
+
+    /*
+     *  Margin API
+     ====================*/
+    {(REALproc)api_setMargins, REALnoImplementation, "SetMargins(margins as Integer)"},
+    {(REALproc)api_getMargins, REALnoImplementation, "GetMargins() as Integer"},
+    {(REALproc)api_marginTextClearAll, REALnoImplementation, "MarginTextClearAll"},
+    {(REALproc)api_setFoldMarginColour, REALnoImplementation, "MarginFoldColour(useSetting as Boolean, back as Color)"},
+    {(REALproc)api_setFoldMarginHiColour, REALnoImplementation,
+     "MarginFoldHiColour(useSetting as Boolean, fore as Color)"},
+
+    /*
+     *  Lexer API
+     ====================*/
+    {(REALproc)api_colourise, REALnoImplementation, "Colourise(posStart as Integer, posEnd as Integer)"},
+    {(REALproc)api_changeLexerState, REALnoImplementation, "ChangeLexerState(posStart as Integer, posEnd as Integer)"},
+    {(REALproc)api_describeKeywordSets, REALnoImplementation, "DescribeKeywordSets() as String"},
+    {(REALproc)api_setKeywords, REALnoImplementation, "SetKeywords(keywordSet as Integer, keywords as String)"},
+    {(REALproc)api_setProperty, REALnoImplementation, "SetProperty(key as String, value as String)"},
+    {(REALproc)api_getProperty, REALnoImplementation, "GetProperty(key as String) as String"},
+    {(REALproc)api_loadLexerLibrary, REALnoImplementation, "LoadLexerLibrary(path as String)"},
+    {(REALproc)api_propertyNames, REALnoImplementation, "PropertyNames() as String"},
+    {(REALproc)api_propertyType, REALnoImplementation, "PropertyType(name as String) as Integer"},
+    {(REALproc)api_describeProperty, REALnoImplementation, "DescribeProperty(name as String) as String"},
+    {(REALproc)api_getPropertyExpanded, REALnoImplementation, "GetPropertyExpanded(key as String, value as String)"},
+    {(REALproc)api_getPropertyInt, REALnoImplementation, "GetPropertyInt(key as String, defaultValue as Integer)"},
+    {(REALproc)api_getSubstyleBases, REALnoImplementation, "GetSubstyleBases() as String"},
+    {(REALproc)api_distanceToSecondaryStyles, REALnoImplementation, "DistanceToSecondaryStyles() as Integer"},
+    {(REALproc)api_allocateSubstyles, REALnoImplementation,
+     "AllocateSubstyles(styleBase as Integer, numberStyles as Integer)"},
+    {(REALproc)api_freeSubstyles, REALnoImplementation, "FreeSubstyles()"},
+    {(REALproc)api_getSubstylesStart, REALnoImplementation, "GetSubstylesStart(styleBase as Integer) as Integer"},
+    {(REALproc)api_getSubstylesLength, REALnoImplementation, "GetSubstylesLength(styleBase as Integer) as Integer"},
+    {(REALproc)api_getStyleFromSubstyle, REALnoImplementation, "GetStyleFromSubstyle(subStyle as Integer) as Integer"},
+    {(REALproc)api_getPrimaryStyleFromStyle, REALnoImplementation,
+     "GetPrimaryStyleFromStyle(style as Integer) as Integer"},
+    {(REALproc)api_setIdentifiers, REALnoImplementation, "SetIdentifiers(style as Integer, identifiers as String)"},
+    {(REALproc)api_privateLexerCall, REALnoImplementation,
+     "PrivateLexerCall(operation as Integer, pointer as Integer)"},
 
     //
     //    /*+++++++++++++++++++++++++
@@ -247,7 +393,7 @@ REALevent xsiEvents[] = {
     {"CharAdded(ch as Integer)"},
     {"SavePointReached()"},
     {"SavePointLeft()"},
-    {"ModifyAttempt()"},
+    {"ModifyAttemptReadonly()"},
     {"ScnKey(ch as Integer)"},
     {"DoubleClick(position as Integer, modifiers as Integer)"},
     {"UpdateUI(updated as Integer)"},
@@ -292,7 +438,7 @@ REALcontrolBehaviour xsiBehavior = {
     NULL,                  // lostFocusFunction
     OnKeyDownFunction,     // keyDownFunction
     OnOpen,                // openFunction
-    OnClose,               // closeFunction
+    NULL,                  // closeFunction
     NULL,                  // backgroundIdleFunction
     OnDrawOffscreen,       // drawOffscreenFunction
     NULL,                  // setSpecialBackground

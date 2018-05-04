@@ -1,6 +1,0 @@
-#ifndef CLASSES_STYLEDEF_DEFINITION_H
-#define CLASSES_STYLEDEF_DEFINITION_H
-
-void registerClassStyledef(void);
-
-#endif  // CLASSES_STYLEDEF_DEFINITION_H

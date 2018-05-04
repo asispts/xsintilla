@@ -4,11 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// classes
-#include "lexer.h"
-#include "margin.h"
-#include "style.h"
-
 typedef RBBoolean (*fpMouseDown)(REALcontrolInstance, int, int);
 
 // gtk event to fix position bug inside TabPanel or PagePanel on Linux
@@ -53,33 +48,16 @@ void Constructor(REALcontrolInstance ctl)
     scintilla_set_id(data->sci, 0);
 
     // init margin class
-    data->margin = REALnewInstanceWithClass(REALGetClassRef(xsiMarginDef.name));
-    margin_setcontrol(data->margin, ctl);
-
-    // init lexer class
-    data->lexer = REALnewInstanceWithClass(REALGetClassRef(xsiLexerDef.name));
-    lexer_setcontrol(data->lexer, ctl);
-
-    // init styledef class
-    data->style = REALnewInstanceWithClass(REALGetClassRef(xsiStyleDef.name));
-    style_setcontrol(data->style, ctl);
-
-    g_signal_connect(data->sci, SCINTILLA_NOTIFY, G_CALLBACK(sci_eventHandler), ctl);
-    g_signal_connect(G_OBJECT(data->editor), "button-press-event", G_CALLBACK(SciEventButtonPress), ctl);
-}
-
-void OnClose(REALcontrolInstance ctl)
-{
-    xsiControlData* data = xsi_getControlData(ctl);
-
-    free(data->margin);
-    free(data->style);
-    free(data->lexer);
+    // data->margin = REALnewInstanceWithClass(REALGetClassRef(xsiMarginDef.name));
+    // margin_setcontrol(data->margin, ctl);
 }
 
 void OnOpen(REALcontrolInstance ctl)
 {
     xsiControlData* data = xsi_getControlData(ctl);
+
+    g_signal_connect(data->sci, SCINTILLA_NOTIFY, G_CALLBACK(sci_eventHandler), ctl);
+    g_signal_connect(G_OBJECT(data->editor), "button-press-event", G_CALLBACK(SciEventButtonPress), ctl);
 
     // xsi_registerEventFunction(ctl);
     xsi_ssm(data->sci, SCI_STYLECLEARALL, 0, 0);

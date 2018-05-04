@@ -1,19 +1,15 @@
 VPATH 				= $(BUILDDIR)
-vpath %.c $(SRCROOT) $(LIBXOJO) $(CONTROLDIR) $(PROPERTIESDIR) $(METHODDIR) $(CLASSESDIR) $(CONSTANTSDIR)
+vpath %.c $(SRCROOT) $(LIBXOJO) $(CONTROLDIR) $(APIDIR) $(CONSTANTSDIR)
 vpath %.cpp $(SDKGLUECODEDIR)
 
 
 OBJNAME 			= 	PluginMain.o main.o XojoGraphics.o \
 						xsintilla.o behaviour.o event.o definition.o \
-						text-properties.o text-method.o \
-						error-properties.o event-properties.o \
-						selection-properties.o selection-method.o \
-						margin-definition.o margin.o \
-						lexer-definition.o lexer.o \
-						style-definition.o style.o \
-						style-html-def.o \
+						api_error.o api_event.o api_lexer.o api_margin.o \
+						api_selection.o api_style.o api_styling.o api_text.o \
+						lexerconst.o lexhtmlconst.o \
 
-INCLUDES 			= -include $(PREFIXHEADER) -I$(SDKINCLUDEDIR) -I$(LIBXOJO) -I$(CONTROLDIR) -I$(PROPERTIESDIR) -I$(METHODDIR) -I$(CLASSESDIR) -I$(CONSTANTSDIR)
+INCLUDES 			= -include $(PREFIXHEADER) -I$(SDKINCLUDEDIR) -I$(LIBXOJO) -I$(CONTROLDIR) -I$(APIDIR) -I$(CONSTANTSDIR)
 DEBUGGING_FLAGS		= -g -O0
 ifdef PLUGIN_ARCH64
 ARCH_FLAGS 			= -m64
