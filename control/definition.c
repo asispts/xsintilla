@@ -15,57 +15,6 @@
 #include "api_text.h"
 
 //+++++++++++++++++++++++++++++++++
-// Properties
-//+++++++++++++++++++++++++++++++++
-REALproperty xsiProperties[] = {
-    // group, name, type, flags, getter, setter, param, editor, enumCount, enumEntries, attributeCount, attributes
-
-    //    /*+++++++++++++++++++++++++
-    //     * sci-marker.h
-    //     +++++++++++++++++++++++++*/
-    //    {"", "rgbaImageSetWidth", "Integer", REALpropRuntimeOnly, REALnoImplementation,
-    //     (REALproc)xsip_rgbaImageSetWidth},
-    //    {"", "rgbaImageSetHeight", "Integer", REALpropRuntimeOnly, REALnoImplementation,
-    //     (REALproc)xsip_rgbaImageSetHeight},
-    //    {"", "rgbaImageSetScale", "Integer", REALpropRuntimeOnly, REALnoImplementation,
-    //     (REALproc)xsip_rgbaImageSetScale},
-    //    {"", "markerEnableHighlight", "Boolean", REALpropRuntimeOnly, REALnoImplementation,
-    //     (REALproc)xsip_markerEnableHighlight},
-    //
-    //    /*+++++++++++++++++++++++++
-    //     * sci-autoc.h
-    //     +++++++++++++++++++++++++*/
-    //    {"", "autocIgnoreCase", "Boolean", REALpropRuntimeOnly, (REALproc)xsip_autocGetIgnoreCase,
-    //     (REALproc)xsip_autocSetIgnoreCase},
-    //    {"", "autocSeparator", "Integer", REALpropRuntimeOnly, (REALproc)xsip_autocGetSeparator,
-    //     (REALproc)xsip_autocSetSeparator},
-    //    {"", "autocCancelAtStart", "Boolean", REALpropRuntimeOnly,
-    //    (REALproc)xsip_autocGetCancelAtStart,
-    //     (REALproc)xsip_autocSetCancelAtStart},
-    //    {"", "autocChooseSingle", "Boolean", REALpropRuntimeOnly,
-    //    (REALproc)xsip_autocGetChooseSingle,
-    //     (REALproc)xsip_autocSetChooseSingle},
-    //    {"", "autocCaseInsensitiveBehaviour", "Integer", REALpropRuntimeOnly,
-    //     (REALproc)xsip_autocGetCaseInsensitiveBehaviour, (REALproc)xsip_autocSetCaseInsensitiveBehaviour},
-    //    {"", "autocMulti", "Integer", REALpropRuntimeOnly, (REALproc)xsip_autocGetMulti,
-    //     (REALproc)xsip_autocSetMulti},
-    //    {"", "autocOrder", "Integer", REALpropRuntimeOnly, (REALproc)xsip_autocGetOrder,
-    //     (REALproc)xsip_autocSetOrder},
-    //    {"", "autocAutoHide", "Boolean", REALpropRuntimeOnly, (REALproc)xsip_autocGetAutoHide,
-    //     (REALproc)xsip_autocSetAutoHide},
-    //    {"", "autocDropRestOfWord", "Boolean", REALpropRuntimeOnly,
-    //    (REALproc)xsip_autocGetDropRestOfWord,
-    //     (REALproc)xsip_autocSetDropRestOfWord},
-    //    {"", "autocTypeSeparator", "Integer", REALpropRuntimeOnly,
-    //    (REALproc)xsip_autocGetTypeSeparator,
-    //     (REALproc)xsip_autocSetTypeSeparator},
-    //    {"", "autocMaxHeight", "Integer", REALpropRuntimeOnly, (REALproc)xsip_autocGetMaxHeight,
-    //     (REALproc)xsip_autocSetMaxHeight},
-    //    {"", "autocMaxWidth", "Integer", REALpropRuntimeOnly, (REALproc)xsip_autocGetMaxWidth,
-    //     (REALproc)xsip_autocSetMaxWidth},
-};
-
-//+++++++++++++++++++++++++++++++++
 // Methods
 //+++++++++++++++++++++++++++++++++
 REALmethodDefinition xsiMethods[] = {
@@ -467,24 +416,420 @@ REALcontrolBehaviour xsiBehavior = {
 // Constants
 //+++++++++++++++++++++++++++++++++
 REALconstant xsiConstant[] = {
-    {"StyleMax as Integer = 255"},          // STYLE_MAX 255
-    {"MarkerMax as Integer = 31"},          // MARKER_MAX 31
-    {"MaskFolder as Integer = &hFE000000"}, // SC_MASK_FOLDERS 0xFE000000
-};
+    {"kSTYLE_MAX as Integer = 255"},            // STYLE_MAX 255
+    {"kMARKER_MAX as Integer = 31"},            // MARKER_MAX 31
+    {"kMAX_MARGIN as Integer = 4"},             // SC_MAX_MARGIN 4
+    {"kKEYWORDSET_MAX as Integer = 8"},         // KEYWORDSET_MAX 8
+    {"kCP_UTF8 as Integer = 65001"},            // SC_CP_UTF8 65001
+    {"kTIME_FOREVER as Integer = 10000000"},    // SC_TIME_FOREVER 10000000
+    {"kFONT_SIZE_MULTIPLIER as Integer = 100"}, // SC_FONT_SIZE_MULTIPLIER 100
+    {"kUNDO_MAY_COALESCE as Integer = 1"},      // UNDO_MAY_COALESCE 1
 
-//+++++++++++++++++++++++++++++++++
-// Enumerations
-//+++++++++++++++++++++++++++++++++
-static const char* enumSelection[] = {
-    "STREAM = 0",    // SC_SEL_STREAM=0
-    "RECTANGLE = 1", // SC_SEL_RECTANGLE=1
-    "LINES = 2",     // SC_SEL_LINES=2
-    "THIN = 3",      // SC_SEL_THIN=3
-};
+    // Style definition
+    {"kSTYLE_DEFAULT as Integer = 32"},         // STYLE_DEFAULT 32
+    {"kSTYLE_LINENUMBER as Integer = 33"},      // STYLE_LINENUMBER 33
+    {"kSTYLE_BRACELIGHT as Integer = 34"},      // STYLE_BRACELIGHT 34
+    {"kSTYLE_BRACEBAD as Integer = 35"},        // STYLE_BRACEBAD 35
+    {"kSTYLE_CONTROLCHAR as Integer = 36"},     // STYLE_CONTROLCHAR 36
+    {"kSTYLE_INDENTGUIDE as Integer = 37"},     // STYLE_INDENTGUIDE 37
+    {"kSTYLE_CALLTIP as Integer = 38"},         // STYLE_CALLTIP 38
+    {"kSTYLE_FOLDDISPLAYTEXT as Integer = 39"}, // STYLE_FOLDDISPLAYTEXT 39
+    {"kSTYLE_LASTPREDEFINED as Integer = 39"},  // STYLE_LASTPREDEFINED 39
 
-REALenum EnumDef[] = {
-    // name, type, mFlags, fields, numFields, attributeCount, attributes
-    {"eSelection", "Int8", REALScopePublic, enumSelection, 4},
+    // used in SCI_PROPERTYTYPE
+    {"kTYPE_BOOLEAN as Integer = 0"}, // SC_TYPE_BOOLEAN 0
+    {"kTYPE_INTEGER as Integer = 1"}, // SC_TYPE_INTEGER 1
+    {"kTYPE_STRING as Integer = 2"},  // SC_TYPE_STRING 2
+
+    // used in SCI_SETMARGINTYPEN
+    {"kMARGIN_SYMBOL as Integer = 0"}, // SC_MARGIN_SYMBOL 0
+    {"kMARGIN_NUMBER as Integer = 1"}, // SC_MARGIN_NUMBER 1
+    {"kMARGIN_BACK as Integer = 2"},   // SC_MARGIN_BACK 2
+    {"kMARGIN_FORE as Integer = 3"},   // SC_MARGIN_FORE 3
+    {"kMARGIN_TEXT as Integer = 4"},   // SC_MARGIN_TEXT 4
+    {"kMARGIN_RTEXT as Integer = 5"},  // SC_MARGIN_RTEXT 5
+    {"kMARGIN_COLOUR as Integer = 6"}, // SC_MARGIN_COLOUR 6
+
+    // used in SCI_SETMARGINOPTIONS
+    {"kMARGINOPTION_NONE as Integer = 0"},          // SC_MARGINOPTION_NONE 0
+    {"kMARGINOPTION_SUBLINESELECT as Integer = 1"}, // SC_MARGINOPTION_SUBLINESELECT 1
+
+    // used in SCI_MARKERDEFINE
+    {"kMARK_CIRCLE as Integer = 0"},                // SC_MARK_CIRCLE 0
+    {"kMARK_ROUNDRECT as Integer = 1"},             // SC_MARK_ROUNDRECT 1
+    {"kMARK_ARROW as Integer = 2"},                 // SC_MARK_ARROW 2
+    {"kMARK_SMALLRECT as Integer = 3"},             // SC_MARK_SMALLRECT 3
+    {"kMARK_SHORTARROW as Integer = 4"},            // SC_MARK_SHORTARROW 4
+    {"kMARK_EMPTY as Integer = 5"},                 // SC_MARK_EMPTY 5
+    {"kMARK_ARROWDOWN as Integer = 6"},             // SC_MARK_ARROWDOWN 6
+    {"kMARK_MINUS as Integer = 7"},                 // SC_MARK_MINUS 7
+    {"kMARK_PLUS as Integer = 8"},                  // SC_MARK_PLUS 8
+    {"kMARK_VLINE as Integer = 9"},                 // SC_MARK_VLINE 9
+    {"kMARK_LCORNER as Integer = 10"},              // SC_MARK_LCORNER 10
+    {"kMARK_TCORNER as Integer = 11"},              // SC_MARK_TCORNER 11
+    {"kMARK_BOXPLUS as Integer = 12"},              // SC_MARK_BOXPLUS 12
+    {"kMARK_BOXPLUSCONNECTED as Integer = 13"},     // SC_MARK_BOXPLUSCONNECTED 13
+    {"kMARK_BOXMINUS as Integer = 14"},             // SC_MARK_BOXMINUS 14
+    {"kMARK_BOXMINUSCONNECTED as Integer = 15"},    // SC_MARK_BOXMINUSCONNECTED 15
+    {"kMARK_LCORNERCURVE as Integer = 16"},         // SC_MARK_LCORNERCURVE 16
+    {"kMARK_TCORNERCURVE as Integer = 17"},         // SC_MARK_TCORNERCURVE 17
+    {"kMARK_CIRCLEPLUS as Integer = 18"},           // SC_MARK_CIRCLEPLUS 18
+    {"kMARK_CIRCLEPLUSCONNECTED as Integer = 19"},  // SC_MARK_CIRCLEPLUSCONNECTED 19
+    {"kMARK_CIRCLEMINUS as Integer = 20"},          // SC_MARK_CIRCLEMINUS 20
+    {"kMARK_CIRCLEMINUSCONNECTED as Integer = 21"}, // SC_MARK_CIRCLEMINUSCONNECTED 21
+    {"kMARK_BACKGROUND as Integer = 22"},           // SC_MARK_BACKGROUND 22
+    {"kMARK_DOTDOTDOT as Integer = 23"},            // SC_MARK_DOTDOTDOT 23
+    {"kMARK_ARROWS as Integer = 24"},               // SC_MARK_ARROWS 24
+    {"kMARK_PIXMAP as Integer = 25"},               // SC_MARK_PIXMAP 25
+    {"kMARK_FULLRECT as Integer = 26"},             // SC_MARK_FULLRECT 26
+    {"kMARK_LEFTRECT as Integer = 27"},             // SC_MARK_LEFTRECT 27
+    {"kMARK_AVAILABLE as Integer = 28"},            // SC_MARK_AVAILABLE 28
+    {"kMARK_UNDERLINE as Integer = 29"},            // SC_MARK_UNDERLINE 29
+    {"kMARK_RGBAIMAGE as Integer = 30"},            // SC_MARK_RGBAIMAGE 30
+    {"kMARK_BOOKMARK as Integer = 31"},             // SC_MARK_BOOKMARK 31
+    {"kMARK_CHARACTER as Integer = 10000"},         // SC_MARK_CHARACTER 10000
+    {"kMARKNUM_FOLDEREND as Integer = 25"},         // SC_MARKNUM_FOLDEREND 25
+    {"kMARKNUM_FOLDEROPENMID as Integer = 26"},     // SC_MARKNUM_FOLDEROPENMID 26
+    {"kMARKNUM_FOLDERMIDTAIL as Integer = 27"},     // SC_MARKNUM_FOLDERMIDTAIL 27
+    {"kMARKNUM_FOLDERTAIL as Integer = 28"},        // SC_MARKNUM_FOLDERTAIL 28
+    {"kMARKNUM_FOLDERSUB as Integer = 29"},         // SC_MARKNUM_FOLDERSUB 29
+    {"kMARKNUM_FOLDER as Integer = 30"},            // SC_MARKNUM_FOLDER 30
+    {"kMARKNUM_FOLDEROPEN as Integer = 31"},        // SC_MARKNUM_FOLDEROPEN 31
+    {"kMASK_FOLDERS as Integer = &hFE000000"},      // SC_MASK_FOLDERS 0xFE000000
+
+    // used in SCI_SETSTATUS
+    {"kSTATUS_OK as Integer = 0"},         // SC_STATUS_OK 0
+    {"kSTATUS_FAILURE as Integer = 1"},    // SC_STATUS_FAILURE 1
+    {"kSTATUS_BADALLOC as Integer = 2"},   // SC_STATUS_BADALLOC 2
+    {"kSTATUS_WARN_START as Integer = 3"}, // SC_STATUS_WARN_START 1000
+    {"kSTATUS_WARN_REGEX as Integer = 4"}, // SC_STATUS_WARN_REGEX 1001
+
+    // used in SCI_SETSELECTIONMODE
+    {"kSEL_STREAM as Integer = 0"},    // SC_SEL_STREAM 0
+    {"kSEL_RECTANGLE as Integer = 1"}, // SC_SEL_RECTANGLE 1
+    {"kSEL_LINES as Integer = 2"},     // SC_SEL_LINES 2
+    {"kSEL_THIN as Integer = 3"},      // SC_SEL_THIN 3
+
+    // used in SCI_SETIDLESTYLING
+    {"kIDLESTYLING_NONE as Integer = 0"},         // SC_IDLESTYLING_NONE 0
+    {"kIDLESTYLING_TOVISIBLE as Integer = 1"},    // SC_IDLESTYLING_TOVISIBLE 1
+    {"kIDLESTYLING_AFTERVISIBLE as Integer = 2"}, // SC_IDLESTYLING_AFTERVISIBLE 2
+    {"kIDLESTYLING_ALL as Integer = 3"},          // SC_IDLESTYLING_ALL 3
+
+    // used in SCI_SETFOLDLEVEL
+    {"kFOLDLEVEL_BASE as Integer = &h400"},        // SC_FOLDLEVELBASE 0x400
+    {"kFOLDLEVEL_WHITEFLAG as Integer = &h1000"},  // SC_FOLDLEVELWHITEFLAG 0x1000
+    {"kFOLDLEVEL_HEADERFLAG as Integer = &h2000"}, // SC_FOLDLEVELHEADERFLAG 0x2000
+    {"kFOLDLEVEL_NUMBERMASK as Integer = &h0FFF"}, // SC_FOLDLEVELNUMBERMASK 0x0FFF
+
+    // used in SCI_FOLDLINE
+    {"kFOLDACTION_CONTRACT as Integer = 0"}, // SC_FOLDACTION_CONTRACT 0
+    {"kFOLDACTION_EXPAND as Integer = 1"},   // SC_FOLDACTION_EXPAND 1
+    {"kFOLDACTION_TOGGLE as Integer = 2"},   // SC_FOLDACTION_TOGGLE 2
+
+    // used in SCI_SETAUTOMATICFOLD
+    {"kAUTOMATICFOLD_SHOW as Integer = &h0001"},   // SC_AUTOMATICFOLD_SHOW 0x0001
+    {"kAUTOMATICFOLD_CLICK as Integer = &h0002"},  // SC_AUTOMATICFOLD_CLICK 0x0002
+    {"kAUTOMATICFOLD_CHANGE as Integer = &h0004"}, // SC_AUTOMATICFOLD_CHANGE 0x0004
+
+    // used in SCI_SETFOLDFLAGS
+    {"kFOLDFLAG_LINEBEFORE_EXPANDED as Integer = &h0002"},   // SC_FOLDFLAG_LINEBEFORE_EXPANDED 0x0002
+    {"kFOLDFLAG_LINEBEFORE_CONTRACTED as Integer = &h0004"}, // SC_FOLDFLAG_LINEBEFORE_CONTRACTED 0x0004
+    {"kFOLDFLAG_LINEAFTER_EXPANDED as Integer = &h0008"},    // SC_FOLDFLAG_LINEAFTER_EXPANDED 0x0008
+    {"kFOLDFLAG_LINEAFTER_CONTRACTED as Integer = &h0010"},  // SC_FOLDFLAG_LINEAFTER_CONTRACTED 0x0010
+    {"kFOLDFLAG_LEVELNUMBERS as Integer = &h0040"},          // SC_FOLDFLAG_LEVELNUMBERS 0x0040
+    {"kFOLDFLAG_LINESTATE as Integer = &h0080"},             // SC_FOLDFLAG_LINESTATE 0x0080
+
+    // used in SCI_SETCURSOR & SCI_SETMARGINCURSORN
+    {"kCURSOR_NORMAL as Integer = -1"},       // SC_CURSORNORMAL -1
+    {"kCURSOR_ARROW as Integer = 2"},         // SC_CURSORARROW 2
+    {"kCURSOR_WAIT as Integer = 4"},          // SC_CURSORWAIT 4
+    {"kCURSOR_REVERSE_ARROW as Integer = 7"}, // SC_CURSORREVERSEARROW 7
+
+    // used in SCI_SETVIEWWS
+    {"kWS_INVISIBLE as Integer = 0"},           // SCWS_INVISIBLE 0
+    {"kWS_VISIBLEALWAYS as Integer = 1"},       // SCWS_VISIBLEALWAYS 1
+    {"kWS_VISIBLEAFTERINDENT as Integer = 2"},  // SCWS_VISIBLEAFTERINDENT 2
+    {"kWS_VISIBLEONLYININDENT as Integer = 3"}, // SCWS_VISIBLEONLYININDENT 3
+
+    // used in SCI_SETTABDRAWMODE
+    {"kTAB_LONGARROW as Integer = 0"}, // SCTD_LONGARROW 0
+    {"kTAB_STRIKEOUT as Integer = 1"}, // SCTD_STRIKEOUT 1
+
+    // used in SCI_SETEOLMODE
+    {"kEOL_CRLF as Integer = 0"}, // SC_EOL_CRLF 0
+    {"kEOL_CR as Integer = 1"},   // SC_EOL_CR 1
+    {"kEOL_LF as Integer = 2"},   // SC_EOL_LF 2
+
+    // used in SCI_SETIMEINTERACTION
+    {"kIME_WINDOWED as Integer = 0"}, // SC_IME_WINDOWED 0
+    {"kIME_INLINE as Integer = 1"},   // SC_IME_INLINE 1
+
+    // used in SCI_STYLESETCHARACTERSET
+    {"kCHARSET_ANSI as Integer = 0"},          // SC_CHARSET_ANSI 0
+    {"kCHARSET_DEFAULT as Integer = 1"},       // SC_CHARSET_DEFAULT 1
+    {"kCHARSET_BALTIC as Integer = 186"},      // SC_CHARSET_BALTIC 186
+    {"kCHARSET_CHINESEBIG5 as Integer = 136"}, // SC_CHARSET_CHINESEBIG5 136
+    {"kCHARSET_EASTEUROPE as Integer = 238"},  // SC_CHARSET_EASTEUROPE 238
+    {"kCHARSET_GB2312 as Integer = 134"},      // SC_CHARSET_GB2312 134
+    {"kCHARSET_GREEK as Integer = 161"},       // SC_CHARSET_GREEK 161
+    {"kCHARSET_HANGUL as Integer = 129"},      // SC_CHARSET_HANGUL 129
+    {"kCHARSET_MAC as Integer = 77"},          // SC_CHARSET_MAC 77
+    {"kCHARSET_OEM as Integer = 255"},         // SC_CHARSET_OEM 255
+    {"kCHARSET_RUSSIAN as Integer = 204"},     // SC_CHARSET_RUSSIAN 204
+    {"kCHARSET_OEM866 as Integer = 866"},      // SC_CHARSET_OEM866 866
+    {"kCHARSET_CYRILLIC as Integer = 1251"},   // SC_CHARSET_CYRILLIC 1251
+    {"kCHARSET_SHIFTJIS as Integer = 128"},    // SC_CHARSET_SHIFTJIS 128
+    {"kCHARSET_SYMBOL as Integer = 2"},        // SC_CHARSET_SYMBOL 2
+    {"kCHARSET_TURKISH as Integer = 162"},     // SC_CHARSET_TURKISH 162
+    {"kCHARSET_JOHAB as Integer = 130"},       // SC_CHARSET_JOHAB 130
+    {"kCHARSET_HEBREW as Integer = 177"},      // SC_CHARSET_HEBREW 177
+    {"kCHARSET_ARABIC as Integer = 178"},      // SC_CHARSET_ARABIC 178
+    {"kCHARSET_VIETNAMESE as Integer = 163"},  // SC_CHARSET_VIETNAMESE 163
+    {"kCHARSET_THAI as Integer = 222"},        // SC_CHARSET_THAI 222
+    {"kCHARSET_8859_15 as Integer = 1000"},    // SC_CHARSET_8859_15 1000
+
+    // used in SCI_STYLESETCASE
+    {"kCASE_MIXED as Integer = 0"}, // SC_CASE_MIXED 0
+    {"kCASE_UPPER as Integer = 1"}, // SC_CASE_UPPER 1
+    {"kCASE_LOWER as Integer = 2"}, // SC_CASE_LOWER 2
+    {"kCASE_CAMEL as Integer = 3"}, // SC_CASE_CAMEL 3
+
+    // used in SCI_STYLESETWEIGHT
+    {"kWEIGHT_NORMAL as Integer = 400"},   // SC_WEIGHT_NORMAL 400
+    {"kWEIGHT_SEMIBOLD as Integer = 600"}, // SC_WEIGHT_SEMIBOLD 600
+    {"kWEIGHT_BOLD as Integer = 700"},     // SC_WEIGHT_BOLD 700
+
+    // used in SCI_INDICSETSTYLE
+    {"kINDIC_PLAIN as Integer = 0"},             // INDIC_PLAIN 0
+    {"kINDIC_SQUIGGLE as Integer = 1"},          // INDIC_SQUIGGLE 1
+    {"kINDIC_TT as Integer = 2"},                // INDIC_TT 2
+    {"kINDIC_DIAGONAL as Integer = 3"},          // INDIC_DIAGONAL 3
+    {"kINDIC_STRIKE as Integer = 4"},            // INDIC_STRIKE 4
+    {"kINDIC_HIDDEN as Integer = 5"},            // INDIC_HIDDEN 5
+    {"kINDIC_BOX as Integer = 6"},               // INDIC_BOX 6
+    {"kINDIC_ROUNDBOX as Integer = 7"},          // INDIC_ROUNDBOX 7
+    {"kINDIC_STRAIGHTBOX as Integer = 8"},       // INDIC_STRAIGHTBOX 8
+    {"kINDIC_DASH as Integer = 9"},              // INDIC_DASH 9
+    {"kINDIC_DOTS as Integer = 10"},             // INDIC_DOTS 10
+    {"kINDIC_SQUIGGLELOW as Integer = 11"},      // INDIC_SQUIGGLELOW 11
+    {"kINDIC_DOTBOX as Integer = 12"},           // INDIC_DOTBOX 12
+    {"kINDIC_SQUIGGLEPIXMAP as Integer = 13"},   // INDIC_SQUIGGLEPIXMAP 13
+    {"kINDIC_COMPOSITIONTHICK as Integer = 14"}, // INDIC_COMPOSITIONTHICK 14
+    {"kINDIC_COMPOSITIONTHIN as Integer = 15"},  // INDIC_COMPOSITIONTHIN 15
+    {"kINDIC_FULLBOX as Integer = 16"},          // INDIC_FULLBOX 16
+    {"kINDIC_TEXTFORE as Integer = 17"},         // INDIC_TEXTFORE 17
+    {"kINDIC_POINT as Integer = 18"},            // INDIC_POINT 18
+    {"kINDIC_POINTCHARACTER as Integer = 19"},   // INDIC_POINTCHARACTER 19
+    {"kINDIC_IME as Integer = 32"},              // INDIC_IME 32
+    {"kINDIC_IME_MAX as Integer = 35"},          // INDIC_IME_MAX 35
+    {"kINDIC_MAX as Integer = 35"},              // INDIC_MAX 35
+    {"kINDIC_CONTAINER as Integer = 8"},         // INDIC_CONTAINER 8
+
+    // used in SCI_INDICSETFLAGS
+    {"kINDICVALUE_BIT as Integer = &h1000000"}, // SC_INDICVALUEBIT 0x1000000
+    {"kINDICVALUE_MASK as Integer = &hFFFFFF"}, // SC_INDICVALUEMASK 0xFFFFFF
+    {"kINDICFLAG_VALUEFORE as Integer = 1"},    // SC_INDICFLAG_VALUEFORE 1
+
+    // used in SCI_SETINDENTATIONGUIDES
+    {"kINDENT_NONE as Integer = 0"},        // SC_IV_NONE 0
+    {"kINDENT_REAL as Integer = 1"},        // SC_IV_REAL 1
+    {"kINDENT_LOOKFORWARD as Integer = 2"}, // SC_IV_LOOKFORWARD 2
+    {"kINDENT_LOOKBOTH as Integer = 3"},    // SC_IV_LOOKBOTH 3
+
+    // used in SCI_SETPRINTCOLOURMODE
+    {"kPRINT_NORMAL as Integer = 0"},                 // SC_PRINT_NORMAL 0
+    {"kPRINT_INVERTLIGHT as Integer = 1"},            // SC_PRINT_INVERTLIGHT 1
+    {"kPRINT_BLACKONWHITE as Integer = 2"},           // SC_PRINT_BLACKONWHITE 2
+    {"kPRINT_COLOURONWHITE as Integer = 3"},          // SC_PRINT_COLOURONWHITE 3
+    {"kPRINT_COLOURONWHITEDEFAULTBG as Integer = 4"}, // SC_PRINT_COLOURONWHITEDEFAULTBG 4
+
+    // used in SCI_SETSEARCHFLAGS
+    {"kFIND_WHOLEWORD as Integer = &h2"},         // SCFIND_WHOLEWORD 0x2
+    {"kFIND_MATCHCASE as Integer = &h4"},         // SCFIND_MATCHCASE 0x4
+    {"kFIND_WORDSTART as Integer = &h00100000"},  // SCFIND_WORDSTART 0x00100000
+    {"kFIND_REGEXP as Integer = &h00200000"},     // SCFIND_REGEXP 0x00200000
+    {"kFIND_POSIX as Integer = &h00400000"},      // SCFIND_POSIX 0x00400000
+    {"kFIND_CXX11REGEX as Integer = &h00800000"}, // SCFIND_CXX11REGEX 0x00800000
+
+    // used in SCI_SETPRINTWRAPMODE
+    {"kWRAP_NONE as Integer = 0"},       // SC_WRAP_NONE 0
+    {"kWRAP_WORD as Integer = 1"},       // SC_WRAP_WORD 1
+    {"kWRAP_CHAR as Integer = 2"},       // SC_WRAP_CHAR 2
+    {"kWRAP_WHITESPACE as Integer = 3"}, // SC_WRAP_WHITESPACE 3
+
+    // used in SCI_SETWRAPVISUALFLAGS
+    {"kWRAPVISUALFLAG_NONE as Integer = &h0000"},   // SC_WRAPVISUALFLAG_NONE 0x0000
+    {"kWRAPVISUALFLAG_END as Integer = &h0001"},    // SC_WRAPVISUALFLAG_END 0x0001
+    {"kWRAPVISUALFLAG_START as Integer = &h0002"},  // SC_WRAPVISUALFLAG_START 0x0002
+    {"kWRAPVISUALFLAG_MARGIN as Integer = &h0004"}, // SC_WRAPVISUALFLAG_MARGIN 0x0004
+
+    // used in SCI_SETWRAPVISUALFLAGSLOCATION
+    {"kWRAPVISUALFLAGLOC_DEFAULT as Integer = &h0000"},       // SC_WRAPVISUALFLAGLOC_DEFAULT 0x0000
+    {"kWRAPVISUALFLAGLOC_END_BY_TEXT as Integer = &h0001"},   // SC_WRAPVISUALFLAGLOC_END_BY_TEXT 0x0001
+    {"kWRAPVISUALFLAGLOC_START_BY_TEXT as Integer = &h0002"}, // SC_WRAPVISUALFLAGLOC_START_BY_TEXT 0x0002
+
+    // used in SCI_SETWRAPINDENTMODE
+    {"kWRAPINDENT_FIXED as Integer = 0"},  // SC_WRAPINDENT_FIXED 0
+    {"kWRAPINDENT_SAME as Integer = 1"},   // SC_WRAPINDENT_SAME 1
+    {"kWRAPINDENT_INDENT as Integer = 2"}, // SC_WRAPINDENT_INDENT 2
+
+    // used in SCI_SETLAYOUTCACHE
+    {"kCACHE_NONE as Integer = 0"},     // SC_CACHE_NONE 0
+    {"kCACHE_CARET as Integer = 1"},    // SC_CACHE_CARET 1
+    {"kCACHE_PAGE as Integer = 2"},     // SC_CACHE_PAGE 2
+    {"kCACHE_DOCUMENT as Integer = 3"}, // SC_CACHE_DOCUMENT 3
+
+    // used in SCI_SETTWOPHASEDRAW
+    {"kPHASES_ONE as Integer = 0"},      // SC_PHASES_ONE 0
+    {"kPHASES_TWO as Integer = 1"},      // SC_PHASES_TWO 1
+    {"kPHASES_MULTIPLE as Integer = 2"}, // SC_PHASES_MULTIPLE 2
+
+    // used in SCI_SETFONTQUALITY
+    {"kFONT_QUALITY_MASK as Integer = &hf"},        // SC_EFF_QUALITY_MASK 0xF
+    {"kFONT_QUALITY_DEFAULT as Integer = 0"},       // SC_EFF_QUALITY_DEFAULT 0
+    {"kFONT_QUALITY_ANTIALIASED as Integer = 1"},   // SC_EFF_QUALITY_NON_ANTIALIASED 1
+    {"kFONT_QUALITY_ANTIALIASED as Integer = 2"},   // SC_EFF_QUALITY_ANTIALIASED 2
+    {"kFONT_QUALITY_LCD_OPTIMIZED as Integer = 3"}, // SC_EFF_QUALITY_LCD_OPTIMIZED 3
+
+    // used in SCI_SETMULTIPASTE
+    {"kMULTIPASTE_ONCE as Integer = 0"}, // SC_MULTIPASTE_ONCE 0
+    {"kMULTIPASTE_EACH as Integer = 1"}, // SC_MULTIPASTE_EACH 1
+
+    // used in SCI_SETACCESSIBILITY
+    {"kACCESSIBILITY_DISABLED as Integer = 0"}, // SC_ACCESSIBILITY_DISABLED 0
+    {"kACCESSIBILITY_ENABLED as Integer = 1"},  // SC_ACCESSIBILITY_ENABLED 1
+
+    // used in SCI_SETEDGEMODE
+    {"kEDGE_NONE as Integer = 0"},       // EDGE_NONE 0
+    {"kEDGE_LINE as Integer = 1"},       // EDGE_LINE 1
+    {"kEDGE_BACKGROUND as Integer = 2"}, // EDGE_BACKGROUND 2
+    {"kEDGE_MULTILINE as Integer = 3"},  // EDGE_MULTILINE 3
+
+    // used in SCI_USEPOPUP
+    {"kPOPUP_NEVER as Integer = 0"}, // SC_POPUP_NEVER 0
+    {"kPOPUP_ALL as Integer = 1"},   // SC_POPUP_ALL 1
+    {"kPOPUP_TEXT as Integer = 2"},  // SC_POPUP_TEXT 2
+
+    // used in SCI_SETVISIBLEPOLICY
+    {"kVISIBLE_SLOP as Integer = &h01"},   // VISIBLE_SLOP 0x01
+    {"kVISIBLE_STRICT as Integer = &h04"}, // VISIBLE_STRICT 0x04
+
+    // used in SCI_SETXCARETPOLICY
+    {"kCARET_SLOP as Integer = &h01"},   // CARET_SLOP 0x01
+    {"kCARET_STRICT as Integer = &h04"}, // CARET_STRICT 0x04
+    {"kCARET_JUMPS as Integer = &h10"},  // CARET_JUMPS 0x10
+    {"kCARET_EVEN as Integer = &h08"},   // CARET_EVEN 0x08
+
+    // used in SCI_AUTOCSETCASEINSENSITIVEBEHAVIOUR
+    {"kCASEINSENSITIVEBEHAVIOUR_RESPECTCASE as Integer = 0"}, // SC_CASEINSENSITIVEBEHAVIOUR_RESPECTCASE 0
+    {"kCASEINSENSITIVEBEHAVIOUR_IGNORECASE as Integer = 1"},  // SC_CASEINSENSITIVEBEHAVIOUR_IGNORECASE 1
+
+    // used in SCI_AUTOCSETMULTI
+    {"kMULTIAUTOC_ONCE as Integer = 0"}, // SC_MULTIAUTOC_ONCE 0
+    {"kMULTIAUTOC_EACH as Integer = 1"}, // SC_MULTIAUTOC_EACH 1
+
+    // used in SCI_AUTOCSETORDER
+    {"kORDER_PRESORTED as Integer = 0"},   // SC_ORDER_PRESORTED 0
+    {"kORDER_PERFORMSORT as Integer = 1"}, // SC_ORDER_PERFORMSORT 1
+    {"kORDER_CUSTOM as Integer = 2"},      // SC_ORDER_CUSTOM 2
+
+    // used in SCI_SETADDITIONALSELALPHA(alpha alpha)
+    {"kALPHA_TRANSPARENT as Integer = 0"}, // SC_ALPHA_TRANSPARENT 0
+    {"kALPHA_OPAQUE as Integer = 255"},    // SC_ALPHA_OPAQUE 255
+    {"kALPHA_NOALPHA as Integer = 256"},   // SC_ALPHA_NOALPHA 256
+
+    // used in SCI_SETCARETSTYLE
+    {"kCARETSTYLE_LINE as Integer = 1"},  // CARETSTYLE_LINE 1
+    {"kCARETSTYLE_BLOCK as Integer = 2"}, // CARETSTYLE_BLOCK 2
+
+    // used in SCI_ANNOTATIONSETVISIBLE
+    {"kANNOTATION_HIDDEN as Integer = 0"},   // ANNOTATION_HIDDEN 0
+    {"kANNOTATION_STANDARD as Integer = 1"}, // ANNOTATION_STANDARD 1
+    {"kANNOTATION_BOXED as Integer = 2"},    // ANNOTATION_BOXED 2
+    {"kANNOTATION_INDENTED as Integer = 3"}, // ANNOTATION_INDENTED 3
+
+    // used in SCI_SETVIRTUALSPACEOPTIONS
+    {"kVIRTUAL_NONE as Integer = 0"},                 // SCVS_NONE 0
+    {"kVIRTUAL_RECTANGULARSELECTION as Integer = 1"}, // SCVS_RECTANGULARSELECTION 1
+    {"kVIRTUAL_USERACCESSIBLE as Integer = 2"},       // SCVS_USERACCESSIBLE 2
+    {"kVIRTUAL_NOWRAPLINESTART as Integer = 4"},      // SCVS_NOWRAPLINESTART 4
+
+    // used in SCI_SETTECHNOLOGY
+    {"kTECHNOLOGY_DEFAULT as Integer = 0"},           // SC_TECHNOLOGY_DEFAULT 0
+    {"kTECHNOLOGY_DIRECTWRITE as Integer = 1"},       // SC_TECHNOLOGY_DIRECTWRITE 1
+    {"kTECHNOLOGY_DIRECTWRITERETAIN as Integer = 2"}, // SC_TECHNOLOGY_DIRECTWRITERETAIN 2
+    {"kTECHNOLOGY_DIRECTWRITEDC as Integer = 3"},     // SC_TECHNOLOGY_DIRECTWRITEDC 3
+
+    // used in SCI_GETLINEENDTYPESSUPPORTED
+    {"kLINE_END_TYPE_DEFAULT as Integer = 0"}, // SC_LINE_END_TYPE_DEFAULT 0
+    {"kLINE_END_TYPE_UNICODE as Integer = 1"}, // SC_LINE_END_TYPE_UNICODE 1
+
+    // Value of SCNotification.modificationType
+    {"kMOD_INSERTTEXT as Integer = &h1"},           // SC_MOD_INSERTTEXT 0x1
+    {"kMOD_DELETETEXT as Integer = &h2"},           // SC_MOD_DELETETEXT 0x2
+    {"kMOD_CHANGESTYLE as Integer = &h4"},          // SC_MOD_CHANGESTYLE 0x4
+    {"kMOD_CHANGEFOLD as Integer = &h8"},           // SC_MOD_CHANGEFOLD 0x8
+    {"kMOD_PERFORMED_USER as Integer = &h10"},      // SC_PERFORMED_USER 0x10
+    {"kMOD_PERFORMED_UNDO as Integer = &h20"},      // SC_PERFORMED_UNDO 0x20
+    {"kMOD_PERFORMED_REDO as Integer = &h40"},      // SC_PERFORMED_REDO 0x40
+    {"kMOD_MULTISTEPUNDOREDO as Integer = &h80"},   // SC_MULTISTEPUNDOREDO 0x80
+    {"kMOD_LASTSTEPINUNDOREDO as Integer = &h100"}, // SC_LASTSTEPINUNDOREDO 0x100
+    {"kMOD_CHANGEMARKER as Integer = &h200"},       // SC_MOD_CHANGEMARKER 0x200
+    {"kMOD_BEFOREINSERT as Integer = &h400"},       // SC_MOD_BEFOREINSERT 0x400
+    {"kMOD_BEFOREDELETE  as Integer = &h800"},      // SC_MOD_BEFOREDELETE 0x800
+    {"kMOD_MULTILINEUNDOREDO as Integer = &h1000"}, // SC_MULTILINEUNDOREDO 0x1000
+    {"kMOD_STARTACTION as Integer = &h2000"},       // SC_STARTACTION 0x2000
+    {"kMOD_CHANGEINDICATOR as Integer = &h4000"},   // SC_MOD_CHANGEINDICATOR 0x4000
+    {"kMOD_CHANGELINESTATE as Integer = &h8000"},   // SC_MOD_CHANGELINESTATE 0x8000
+    {"kMOD_CHANGEMARGIN as Integer = &h10000"},     // SC_MOD_CHANGEMARGIN 0x10000
+    {"kMOD_CHANGEANNOTATION as Integer = &h20000"}, // SC_MOD_CHANGEANNOTATION 0x20000
+    {"kMOD_CONTAINER as Integer = &h40000"},        // SC_MOD_CONTAINER 0x40000
+    {"kMOD_LEXERSTATE as Integer = &h80000"},       // SC_MOD_LEXERSTATE 0x80000
+    {"kMOD_INSERTCHECK as Integer = &h100000"},     // SC_MOD_INSERTCHECK 0x100000
+    {"kMOD_CHANGETABSTOPS as Integer = &h200000"},  // SC_MOD_CHANGETABSTOPS 0x200000
+    {"kMOD_EVENTMASKALL as Integer = &h3FFFFF"},    // SC_MODEVENTMASKALL 0x3FFFFF
+
+    // used in SCN_UPDATEUI
+    {"kUPDATE_CONTENT as Integer = &h1"},   // SC_UPDATE_CONTENT 0x1
+    {"kUPDATE_SELECTION as Integer = &h2"}, // SC_UPDATE_SELECTION 0x2
+    {"kUPDATE_V_SCROLL as Integer = &h4"},  // SC_UPDATE_V_SCROLL 0x4
+    {"kUPDATE_H_SCROLL as Integer = &h8"},  // SC_UPDATE_H_SCROLL 0x8
+
+    // keyDefinition
+    {"SCK_DOWN as Integer = 300"},     // SCK_DOWN 300
+    {"SCK_UP as Integer = 301"},       // SCK_UP 301
+    {"SCK_LEFT as Integer = 302"},     // SCK_LEFT 302
+    {"SCK_RIGHT as Integer = 303"},    // SCK_RIGHT 303
+    {"SCK_HOME as Integer = 304"},     // SCK_HOME 304
+    {"SCK_END as Integer = 305"},      // SCK_END 305
+    {"SCK_PRIOR as Integer = 306"},    // SCK_PRIOR 306
+    {"SCK_NEXT as Integer = 307"},     // SCK_NEXT 307
+    {"SCK_DELETE as Integer = 308"},   // SCK_DELETE 308
+    {"SCK_INSERT as Integer = 309"},   // SCK_INSERT 309
+    {"SCK_ESCAPE as Integer = 7"},     // SCK_ESCAPE 7
+    {"SCK_BACK as Integer = 8"},       // SCK_BACK 8
+    {"SCK_TAB as Integer = 9"},        // SCK_TAB 9
+    {"SCK_RETURN as Integer = 13"},    // SCK_RETURN 13
+    {"SCK_ADD as Integer = 310"},      // SCK_ADD 310
+    {"SCK_SUBTRACT as Integer = 311"}, // SCK_SUBTRACT 311
+    {"SCK_DIVIDE as Integer = 312"},   // SCK_DIVIDE 312
+    {"SCK_WIN as Integer = 313"},      // SCK_WIN 313
+    {"SCK_RWIN as Integer = 314"},     // SCK_RWIN 314
+    {"SCK_MENU as Integer = 315"},     // SCK_MENU 315
+    {"SCMOD_NORM as Integer = 0"},     // SCMOD_NORM 0
+    {"SCMOD_SHIFT as Integer = 1"},    // SCMOD_SHIFT 1
+    {"SCMOD_CTRL as Integer = 2"},     // SCMOD_CTRL 2
+    {"SCMOD_ALT as Integer = 4"},      // SCMOD_ALT 4
+    {"SCMOD_SUPER as Integer = 8"},    // SCMOD_SUPER 8
+    {"SCMOD_META as Integer = 16"},    // SCMOD_META 16
+
+    // used in SCN_AUTOCSELECTION
+    {"kAC_FILLUP as Integer = 1"},      // SC_AC_FILLUP 1
+    {"kAC_DOUBLECLICK as Integer = 2"}, // SC_AC_DOUBLECLICK 2
+    {"kAC_TAB as Integer = 3"},         // SC_AC_TAB 3
+    {"kAC_NEWLINE as Integer = 4"},     // SC_AC_NEWLINE 4
+    {"kAC_COMMAND as Integer = 5"},     // SC_AC_COMMAND 5
 };
 
 //+++++++++++++++++++++++++++++++++
@@ -499,8 +844,8 @@ REALcontrol xsiControl = {
     128,                                               // toolbarDownPICT
     100,                                               // defaultWidth
     100,                                               // defaultHeight
-    xsiProperties,                                     // properties
-    sizeof(xsiProperties) / sizeof(REALproperty),      // propertyCount
+    NULL,                                              // properties
+    0,                                                 // propertyCount
     xsiMethods,                                        // methods
     sizeof(xsiMethods) / sizeof(REALmethodDefinition), // methodCount
     xsiEvents,                                         // events
@@ -521,8 +866,8 @@ REALcontrol xsiControl = {
     0,                                                 // sharedMethodCount
     NULL,                                              // delegates
     0,                                                 // delegateCount
-    EnumDef,                                           // enums
-    sizeof(EnumDef) / sizeof(REALenum),                // enumCount
+    NULL,                                              // enums
+    0,                                                 // enumCount
 #endif
     // end of structure
 };
