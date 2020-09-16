@@ -1,10 +1,13 @@
-# xsintilla
+# xsintilla - Xojo Plugin
 
-Scintilla plugin for Xojo
+**xsintilla** is a text editor control based on [Scintilla](https://www.scintilla.org/) for [Xojo](https://xojo.com/) programming environment.
+The control is developed by using Xojo Plugins SDK v13 and Scintilla v3.7.6
 
+## How to build
+In order to build the control, simply run `make` at the command line in the repository root directory.
 
 ## License
-Released under [Apache-2.0 License](https://opensource.org/licenses/Apache-2.0). See [LICENSE](https://github.com/pattisahusiwa/dicontainer/blob/master/LICENSE) file for more details.
+Released under [Apache-2.0 License](https://opensource.org/licenses/Apache-2.0). See [LICENSE](https://github.com/pattisahusiwa/xsintilla/blob/master/LICENSE) file for more details.
 
 ````
    Copyright 2016 Asis Pattisahusiwa
