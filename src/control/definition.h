@@ -3,4 +3,4 @@
 
 void registerPlugin(void);
 
-#endif  // CONTROL_DEFINITION_H
+#endif // CONTROL_DEFINITION_H

@@ -1,38 +1,27 @@
 export MAKEFLAGS 	   += --silent
-export SCIVERSION 		= 371
+export SCI_VERSION 		= 371
 export APPNAME 			= xsintilla
 
-export ROOTDIR 			= .
-export SCIDIR 			= $(ROOTDIR)/scintilla
-export BUILDROOT 		= $(ROOTDIR)/build
-export LIBROOT 			= $(ROOTDIR)/build-output
-export SRCROOT 			= $(ROOTDIR)/src
-export LIBXOJO 			= $(ROOTDIR)/libxojo
-export CONTROLDIR		= $(ROOTDIR)/control
-export APIDIR			= $(ROOTDIR)/api
-export CONSTANTSDIR		= $(ROOTDIR)/constants
+export BUILD_ROOT		= ./build
+export OUTPUT_DIR		= ./dist
 
-#export LIBXSINTILLA 	= $(ROOTDIR)/libxsintilla
-#export MODULES 			= $(ROOTDIR)/modules
+export SRC_DIR			= ./src
+export VENDOR_DIR		= ./vendor
+export SCINTILLA_SRC	= $(VENDOR_DIR)/scintilla
 
-##
-# plugin directories definition
-export PLUGINSDKDIR 	= $(ROOTDIR)/PluginsSDK
-export SDKGLUECODEDIR 	= $(PLUGINSDKDIR)/GlueCode
-export SDKINCLUDEDIR 	= $(PLUGINSDKDIR)/Includes
-export PREFIXHEADER 	= $(SDKINCLUDEDIR)/LinuxHeader.h
 
 all: makedir
-	$(MAKE) -f linux32.mk
+	$(MAKE) -f scripts/linux32.mk
 	@echo "******"
 	@echo "******"
-#	$(MAKE) -f linux64.mk
+	$(MAKE) -f scripts/linux64.mk
 	@echo "******"
 	@echo "DONE."
+
 makedir:
-	mkdir -p $(BUILDROOT)
-	mkdir -p $(LIBROOT)
+	mkdir -p $(BUILD_ROOT)
+	mkdir -p $(OUTPUT_DIR)
 
 clean:
-	$(MAKE) -f linux32.mk clean
-	$(MAKE) -f linux64.mk clean
+	$(MAKE) -f scripts/linux32.mk clean
+	$(MAKE) -f scripts/linux64.mk clean
