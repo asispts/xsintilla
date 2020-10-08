@@ -1,5 +1,7 @@
 # xsintilla - Xojo Plugin
 
+[![license](https://img.shields.io/github/license/pattisahusiwa/xsintilla)](https://github.com/pattisahusiwa/xsintilla/blob/master/LICENSE)
+[![release](https://img.shields.io/github/v/release/pattisahusiwa/xsintilla)](https://github.com/pattisahusiwa/xsintilla/releases)
 
 - [xsintilla - Xojo Plugin](#xsintilla---xojo-plugin)
   - [Screenshot](#screenshot)
