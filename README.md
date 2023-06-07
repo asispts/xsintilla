@@ -3,31 +3,27 @@
 [![license](https://img.shields.io/github/license/pattisahusiwa/xsintilla)](https://github.com/pattisahusiwa/xsintilla/blob/master/LICENSE)
 [![release](https://img.shields.io/github/v/release/pattisahusiwa/xsintilla)](https://github.com/pattisahusiwa/xsintilla/releases)
 
-- [xsintilla - Xojo Plugin](#xsintilla---xojo-plugin)
-  - [Screenshot](#screenshot)
-  - [How to build](#how-to-build)
-    - [On Linux](#on-linux)
-    - [On Windows and Mac OS](#on-windows-and-mac-os)
-  - [License](#license)
 
-**xsintilla** is a text editor control based on [Scintilla](https://www.scintilla.org/) for [Xojo](https://xojo.com/) programming environment.
-Developed by using Xojo Plugins SDK v13 and Scintilla v3.7.6
+`xsintilla` is a text editor control based on [Scintilla](https://www.scintilla.org/) for [Xojo](https://xojo.com/) programming environment. It is developed using Xojo Plugins SDK v13 and Scintilla v3.7.6.
 
 
 ## Screenshot
-Example of `xsintilla` control in an application
+Example of the `xsintilla` control in an application.
 ![screenshot](./screenshot.png)
+
 
 ## How to build
 ### On Linux
-  Run `make` to build the control.
+To build the control, run the following command:
+```bash
+make
+```
 
 ### On Windows and Mac OS
-  Please create build script for your OS based on `makefile` in this repository.
-  A PR is welcome.
+Please create a build script for your operating system based on `makefile` in this repository. PRs are welcome.
 
 ## License
-Released under [Apache-2.0 License](https://opensource.org/licenses/Apache-2.0). See [LICENSE](https://github.com/pattisahusiwa/xsintilla/blob/master/LICENSE) file for more details.
+Released under [Apache-2.0 License](https://opensource.org/licenses/Apache-2.0). See [LICENSE](./LICENSE) file for more details.
 
 ````
    Copyright 2016 Asis Pattisahusiwa
